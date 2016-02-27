@@ -1,0 +1,10 @@
+
+<h1> facebook 로그인 </h1>
+<%= link_to image_tag('http://www.codenameone.com/img/blog/facebook-login-blue.png'), '/auth/facebook' %> 
+
+
+
+<h1>가입된 사람 리스트 </h1>
+<% @users.each do |user| %>
+	<img src="<%= user.image_url %>">(<%= user.name %>),
+<% end %>

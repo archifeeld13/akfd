@@ -1,0 +1,15 @@
+--- !ruby/hash:OmniAuth::AuthHash
+
+provider: facebook
+uid: '1675285069419038'
+info: !ruby/hash:OmniAuth::AuthHash::InfoHash
+name: 송제인
+image: http://graph.facebook.com/1675285069419038/picture
+credentials: !ruby/hash:OmniAuth::AuthHash
+token: CAAFhNXJyJyoBAJP5lXpfRTXtZBGOsLEYVaCZC7vZASZAt0MJ8CnNQxJFdZC0C9JsFIyz0EJgA0YatwhTod4IU19rmJZBrvkZA9DKvZCvx42dDrtvTEZCMwYQvUn4TkCneoZAEiHm35BTUBnSwdE5mEkXzZA51yis9yecIZCcz9a46wiNSCWnU3sMRM49lNrVQPF71ZAZC7v6VMEET0GQZDZD
+expires_at: 1461772719
+expires: true
+extra: !ruby/hash:OmniAuth::AuthHash
+raw_info: !ruby/hash:OmniAuth::AuthHash
+name: 송제인
+id: '1675285069419038'
