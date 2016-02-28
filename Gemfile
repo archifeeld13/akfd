@@ -29,6 +29,15 @@ gem 'simple_form', '3.1.0'
 # http://www.sitepoint.com/rails-authentication-oauth-2-0-omniauth/
 gem 'omniauth-facebook'
 
+
+#https://github.com/svenfuchs/rails-i18n
+gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'rails-4-x' # For 4.x
+
+# image uploading
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'mini_magick'
+gem 'fog-aws'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
