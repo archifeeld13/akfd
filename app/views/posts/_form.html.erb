@@ -20,8 +20,8 @@
     <%= f.text_area :content %>
   </div>
   <div class="field">
-    <%= f.label :image %><br>
-    <%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
+    <%= f.label :images %><br>
+    <%= f.file_field :images, multiple: true,  accept: 'image/png,image/gif,image/jpeg' %>
   </div>
   <div class="actions">
     <%= f.submit %>

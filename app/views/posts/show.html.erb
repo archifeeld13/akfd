@@ -11,7 +11,9 @@
 </p>
 <p>
   <strong>사진:</strong>
-  <%= image_tag("#{@post.image}") %>
+	<% @post.images.each do |image| %>
+		<%= image_tag(image.thumb) %>
+	<% end %>
 </p>
 
 <%= link_to 'back', posts_path %>

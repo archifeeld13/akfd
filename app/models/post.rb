@@ -1,3 +1,4 @@
 class Post < ActiveRecord::Base
-	mount_uploader :image, S3Uploader
+	mount_uploaders :images, S3Uploader
+	serialize :images, Array
 end
