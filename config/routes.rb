@@ -1,14 +1,10 @@
 Rails.application.routes.draw do
-  get 'posts/index'
 
-  get 'posts/new'
+	root 'posts#index'
 
   get 'welcome/index'
 
 	resources :posts
-	root 'posts#index'
-
-  get 'posts/index'
 
 	get '/auth/:provider/callback' => 'sessions#create'
 

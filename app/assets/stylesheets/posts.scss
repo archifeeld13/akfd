@@ -1,3 +1,31 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.posts-column{
+	width:19%; float:left; margin-left:0.5%; margin-right:0.5%
+}
+.posts-item{
+	background:white; width:100%; margin-top:10px;
+}
+.posts-item-img{
+	width: 100%;
+}
+.posts-item-writer img{
+	width:20px; margin:5px
+}
+.posts-item-info{
+	font-size:0.9em; padding:5%;
+}
+.posts-item-counts{
+	color:gray; margin-top:4%;
+	span{
+		white-space: nowrap;
+	}
+}
+
+.posts-item-hashtags{
+	color:gray; margin-top: 4%;
+	span{
+		white-space: nowrap;
+	}
+}
