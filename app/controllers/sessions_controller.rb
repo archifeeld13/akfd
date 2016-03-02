@@ -8,8 +8,16 @@ class SessionsController < ApplicationController
 			flash[:warning] = "There was an error while trying to authenticate you..."
 		end
 		#redirect_to root_path
-		redirect_to '/welcome/index' 
+		redirect_to root_path 
 		#render text: request.env['omniauth.auth']['info']['image']
+	end
+
+	def destroy
+		if current_user
+			session.delete(:user_id)
+			flash[:success] = 'See you!'
+		end
+		redirect_to root_path
 	end
 
 end

@@ -12,6 +12,10 @@
   <% end %>
 
   <div class="field">
+    <span style='color:red'>글쓴이:</span> 
+    <%= current_user.name %>
+  </div>
+  <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>

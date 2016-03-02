@@ -1,0 +1,58 @@
+// This is a manifest file that'll be compiled into application.js, which will include all the files
+// listed below.
+//
+// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
+// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
+//
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// compiled file.
+//
+// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
+// about supported directives.
+//
+//= require jquery
+//= require jquery_ujs
+//= require bootstrap
+//= require turbolinks
+//= require_tree .
+//
+
+
+
+$(function(){
+	// feeldup 버튼 누르고 배경 흐려졌을 때,
+	// 메뉴들이 스크롤할 때마다 따라오게끔..
+	$(window).scroll(function(){
+		if (isClickedFeeldup){
+			$('#option_container')
+			.css('top', $(window).height()/2 - 50)
+		}
+	})
+
+	// window 사이즈 변경 시 재호출
+	// window resize
+	// window resize
+	$( window ).resize(function() {
+		if (isClickedFeeldup){
+			$('#feeldup').click()
+		}
+		// right fix menu 위치 업데이트 
+		// 960 이하에서는 5컬럼을 유지하기 힘들어서 막아놓음.
+		// 960 이하에서는 4컬럼으로 바뀌었으면 좋겠음..
+		if ($(window).width() > 960){
+			$('#right_fixed_menu').css('width', '15%').css('left', $(window).width() * 0.825 )
+
+			// 보드에 관한 부분이다. 위에도 있다.
+			$('#feeldup_text_type_board').css('width','800px').css('margin-left', ($(window).width() -  $('#feeldup_text_type_board').width())/2)
+		}
+		else {
+
+			// 스크린이 한없이 작아질 때, 보드가 납작해지니까.. 50%이상으로 해주자.
+			$('#feeldup_text_type_board').css('width','700px').css('margin-left', ($(window).width() -  $('#feeldup_text_type_board').width())/2)
+		}
+	});
+	// window resize end
+	// window resize end
+
+
+})

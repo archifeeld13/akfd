@@ -27,4 +27,80 @@ $navbar-default-link-hover-bg: black;
 @import 'bootstrap';
 @import 'turn_off_responsive';
 
+// layout 에 적용되는 스타일들  
+// layout 에 적용되는 스타일들  
 
+@import url(http://api.mobilis.co.kr/webfonts/css/?fontface=NanumGothicWeb); 
+* { font-family: 'NanumGothic', '나눔고딕','NanumGothicWeb', '맑은 고딕', 'Malgun Gothic', Dotum; }
+/*
+	for non-responsiveness  
+	http://getbootstrap.com/getting-started/#disable-responsive
+*/ 
+
+body{
+	margin-top: 60px;
+	background: #F0F0F0;
+}
+
+a {
+	text-decoration: none !important;
+}
+
+.container{
+	max-width: none !important;
+	width:970px !important;
+}
+
+#brand-image{
+	height:40px;
+	margin:5px;
+}
+
+.navbar-brand{
+	padding:0;
+}
+
+.nav-icon{
+	height:36px;
+	margin:7px;
+}
+
+// 필드업 클릭시 흐린 배경
+#feeldup_option_bg{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100px;
+	height: 775px;
+	z-index: 5000;
+	background: rgba(34,34,34,0.75);
+	
+}
+
+
+.option_item{
+	width:150px;
+	height:150px;
+}
+
+#feeldup_board{
+	position:fixed;
+	background: white;
+	/*width:50%;*/
+	margin-top:100px;
+	/*height:600px;*/
+	height: 450px;
+	border-radius: 10px;
+	z-index: 6000;
+}
+
+
+#search_info_panel{
+	background:white;
+	width:99%;
+	margin: 0 0.5%;
+	border-radius:5px;
+	padding:5px;
+}
+// layout 에 적용되는 스타일들  
+// layout 에 적용되는 스타일들  

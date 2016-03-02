@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+	# 보여주기 용으로 해논거임
+	before_action :set_posts_users
+	
   def index
 		@posts = Post.all
   end
@@ -8,7 +11,16 @@ class PostsController < ApplicationController
 	end
 
   def new
-		@post = Post.new		
+		#@post = Post.new
+		respond_to do |format|
+			format.html { render :action => "new" }
+			modal_type = params[:type]
+			case modal_type	
+				when 'text' then format.js { render :file => "posts/textup.js.erb" }
+				when 'link' then format.js { render :file => "posts/linkup.js.erb" }
+				when 'photo' then format.js { render :file => "posts/photoup.js.erb" }
+			end
+		end
   end
 
 	def create
@@ -30,4 +42,9 @@ class PostsController < ApplicationController
 		def post_params
 			params.require(:post).permit(:title, :content, {images: []})
 		end
+		def set_posts_users
+			@posts = Post.all
+			@users = User.all
+		end
+
 end

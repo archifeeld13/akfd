@@ -12,258 +12,33 @@
 	<%= stylesheet_link_tag 'searchbox.css' %>
 	
 	<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-	<%# javascript_include_tag "https://code.jquery.com/jquery-1.12.0.js" %>
-	<%# javascript_include_tag "https://code.jquery.com/ui/1.11.4/jquery-ui.js" %>
+	<%= javascript_include_tag "https://code.jquery.com/jquery-1.12.0.js" %>
+	<%= javascript_include_tag "https://code.jquery.com/ui/1.11.4/jquery-ui.js" %>
 	<%# javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js" %>
 
   <%= csrf_meta_tags %>
 </head>
 
-<style>
-	@import url(http://api.mobilis.co.kr/webfonts/css/?fontface=NanumGothicWeb); 
-	* { font-family: 'NanumGothic', '나눔고딕','NanumGothicWeb', '맑은 고딕', 'Malgun Gothic', Dotum; }
-	/*
-		for non-responsiveness  
-		http://getbootstrap.com/getting-started/#disable-responsive
-	*/ 
-	.container{
-		max-width: none !important;
-		width:970px !important;
-	}
-
-	#brand-image{
-		height:40px;
-		margin:5px;
-	}
-
-	.navbar-brand{
-		padding:0;
-	}
-
-	body{
-		margin-top: 60px;
-		background: #F0F0F0;
-	}
-
-	.nav-icon{
-		height:36px;
-		margin:7px;
-	}
-
-	#write_option_bg{
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100px;
-		height: 775px;
-		z-index: 5000;
-		background: rgba(34,34,34,0.75);
-		
-	}
-
-
-	#option_container{
-		position: absolute;
-		
-	}
-
-	.option_item{
-		width:150px;
-		height:150px;
-	}
-
-	#feeldup_text_type_board{
-		position:fixed;
-		background: white;
-		/*width:50%;*/
-		margin-top:100px;
-		/*height:600px;*/
-		height: 450px;
-		border-radius: 10px;
-		z-index: 6000;
-	}
-
-	a {
-			text-decoration: none !important;
-	}
-	#search_info_panel{
-		background:white;
-		width:99%;
-		margin: 0 0.5%;
-		border-radius:5px;
-		padding:5px;
-	}
-</style>
-
-<!-- 필드업 버튼 눌렀다가 화면 크기 변경하면 버그 -->
-<script>
-// init
-$(function(){
-	$('#write_option_bg').hide()
-	$('#feeldup_text_type_board').hide()
-})
-
-
-$(function(){
-	prev = ""
-	$( "#navbar a img, #feeldup img" ).hover(
-		function() {
-			prev = $(this).attr('src')
-			prev_split = prev.split(".")
-			$( this ).attr('src',  prev_split[0] + "rev" + ".png")
-		}, function() {
-			$( this ).attr('src', prev)
-		}
-	);
-
-
-	// feeldup 버튼 누르면 나오는 옵션 눌렀을 때 부모로 클릭 이벤트 전달 막으려고
-	$('#feeldup_text_type_board').click(function(){
-		return false;
-	})
-
-
-	// 현재 mouseEnterFlag를 둔 이유는
-	// 뭔가 여러번 튀기는 버그가 있어서, 한번 튀기기 시작하면 끝날 때까지 다시 튀기지 않게 막으려한건데
-	// 없어도 될것 같고, 왜 여러번 튀기는지 알것 같다.
-	// 즉 하나로 묶어도 될 수도 있다..
-	// 그런데 테스트 해보니, 한번에 묶어서 처리했을 때 더 버그가 자주 일어나는 것 같아서.. 일단 이거 유지한다.
-	mouseEnterFlag = [false, false, false];
-	$('.option_item').eq(0).click(function(){
-		//$('#feeldup_text_type_board').fadeIn()
-		return false;
-	}).mouseenter(function(){
-			if (!mouseEnterFlag[0]){
-				mouseEnterFlag[0] = true
-				$(this).effect("bounce", {times: 1}, 150, function(){
-					mouseEnterFlag[0] = false	
-				})
-			}
-	})
-
-	
-	$('.option_item').eq(1).click(function(){
-		$('#feeldup_text_type_board').fadeIn()
-		// 이것도 윈도우 사이즈 변경시 재호출
-		// 왜 여기서 설정하냐면, 보드가 뜨지 않은 상태에서 호출하면 넓이가 작은 상태에서 구해지기 때문이다.
-		$('#feeldup_text_type_board').css('width','800px').css('margin-left', ($(window).width() -  $('#feeldup_text_type_board').width())/2)
-		return false;
-	}).mouseenter(function(){
-			if (!mouseEnterFlag[1]){
-				mouseEnterFlag[1] = true
-				$(this).effect("bounce", {times: 1}, 150, function(){
-					mouseEnterFlag[1] = false	
-				})
-			}
-	})
-
-	$('.option_item').eq(2).click(function(){
-		//$('#feeldup_text_type_board').fadeIn()
-		return false;
-	}).mouseenter(function(){
-			if (!mouseEnterFlag[2]){
-				mouseEnterFlag[2] = true
-				$(this).effect("bounce", {times: 1}, 150, function(){
-					mouseEnterFlag[2] = false	
-				})
-			}
-	})
-
-	
-	// 이것도 윈도우 사이즈 변경시 재호출
-	$('#right_fixed_menu').css('width', '15%').css('left', $(window).width() * 0.825 )
-
-	// 필드업 버튼 클릭시 이벤트
-	// isClickedFeeldup 변수는 화면 사이즈 조정시 요소의 사이즈를 다시 구하기 위해서
-	// window resize이벤트가 발생할 때마다 feeldup버튼을 다시 클릭을 해줌으로써
-	// 요소의 사이즈를 재정비 하려고 했지만, 버튼을 클릭하지 않은 상태에서도 resize이벤트에 걸려서
-	// 버튼을 누르지 않았음에도 이벤트가 발생해 이 문제를 해결하고자 추가했다.
-	isClickedFeeldup = false;
-	// #feeldup click
-	// #feeldup click
-	$('#feeldup').click(function(){
-		isClickedFeeldup = true;
-
-		// 스크롤링 막기 http://stackoverflow.com/questions/11185522/prevent-scroll-event-in-jquery
-		//$('body').css('overflow', 'hidden')
-		$('#write_option_bg')
-			.css('height', $(document).height())
-			.css('width', $(document).width())
-			.fadeIn()/*show()*/
-
-		// 이부분에서 만약 유저가 스크롤을 내리면 옵션 메뉴가 따라 내려가야 하므로,
-		// 스크롤 이벤트에 이걸 반복시켜야 한다.
-		// 아니다, fix시키면 된다.
-		// 반드시 #write_option_bg가 show되고 나서 와야한다.
-		$('#option_container')
-		.css('position', 'fixed')
-		.css('top', $(window).height()/2 - 50)
-		.css('margin-left', ($(window).width() - $('#option_container').width())/2 )
-
-	})
-	// #feeldup click end
-	// #feeldup click end
-
-	$(window).scroll(function(){
-		if (isClickedFeeldup){
-			$('#option_container')
-			.css('top', $(window).height()/2 - 50)
-		}
-	})
-	
-	// window 사이즈 변경 시 재호출
-	// window resize
-	// window resize
-	$( window ).resize(function() {
-		if (isClickedFeeldup){
-			$('#feeldup').click()
-		}
-		// right fix menu 위치 업데이트 
-		// 960 이하에서는 5컬럼을 유지하기 힘들어서 막아놓음.
-		// 960 이하에서는 4컬럼으로 바뀌었으면 좋겠음..
-		if ($(window).width() > 960){
-			$('#right_fixed_menu').css('width', '15%').css('left', $(window).width() * 0.825 )
-
-			// 보드에 관한 부분이다. 위에도 있다.
-			$('#feeldup_text_type_board').css('width','800px').css('margin-left', ($(window).width() -  $('#feeldup_text_type_board').width())/2)
-		}
-		else {
-			// 스크린이 한없이 작아질 때, 보드가 납작해지니까.. 50%이상으로 해주자.
-			$('#feeldup_text_type_board').css('width','700px').css('margin-left', ($(window).width() -  $('#feeldup_text_type_board').width())/2)
-		}
-	});
-	// window resize end
-	// window resize end
-
-	$('#write_option_bg').click(function(){
-		isClickedFeeldup = false
-		$('#write_option_bg').fadeOut()/*hide()*/
-		$('#feeldup_text_type_board').fadeOut()
-		// 스크롤링 활성화
-		//$('body').css('overflow', 'scroll')
-	})
-})
-
-</script>
 <body>
 	<!-- 필드업 버튼 눌렀을 때 나오는 배경 및 옵션-->
-	<div id="write_option_bg">
+	<div id="feeldup_option_bg">
 		<div id="option_container">
 			<table >
 				<tr>
 				<td style="padding: 5px">
-					<img src="/images/txtbtn.png" class="option_item">
+				<!-- link로 바꾸어야한다-->	
+					<%= link_to image_tag('/images/txtbtn.png', class: 'option_item'), '/posts/new?type=text', remote: true %>
 				</td>
 				<td style="padding: 5px">
-					<img src="/images/linkbtn.png" class="option_item">
+					<%= link_to image_tag('/images/linkbtn.png', class: 'option_item'), '/posts/new?type=link', remote: true %>
 				</td>
 				<td style="padding: 5px">
-					<img src="/images/photobtn.png" class="option_item">
+					<%= link_to image_tag('/images/photobtn.png', class: 'option_item'), '/posts/new?type=photo', remote: true %>
 				</td>
 			</table>
 		</div>
-		<div id="feeldup_text_type_board">
-			<%= render :partial => 'posts/text_type_board' %>
+		<div id="feeldup_board">
+			<%# render :partial => 'posts/text_type_board' %>
 		</div>
 	</div>	
 	<!-- 필드업 버튼 눌렀을 때 나오는 뱅경 및 옵션 끝 -->
@@ -274,21 +49,22 @@ $(function(){
 
 	<!-- 오른쪽 고정 메뉴이다 -->
 	<!-- right sidebar http://www.bootply.com/101100 -->
+	
 	<div id="right_fixed_menu" style="position:fixed;">
-		<a id="feeldup" href="#"><img style="width:100%" src="/images/feeldup.png"></a>
+		<% if current_user %>
+			<a id="feeldup" href="#"><img style="width:100%" src="/images/feeldup.png"></a>
+		<% end %>
 		<div style="background:white; margin-top: 5px; border-radius: 5px; ">
 			<span style="font-weight:bold; font-size:1.2em">인기 필드업</span><br>
-			<span style="color:grey">라랄라라로...</span><br>
-			<span style="color:grey">라랄라라로로...</span><br>
-			<span style="color:grey">라랄라...</span><br>
-			<span style="color:grey">라랄라라로...</span><br>
-			<span style="color:grey">라랄라라로로...</span><br>
-			<span style="color:grey">라랄라라로로f...</span><br>
+			<% @posts.reverse.each do |post| %>
+				<a href="posts/<%=post.id%>"><span style="color:grey"><%= post.title %></span></a><br>
+			<% end %>
 		</div>
 		<div style="background:white; margin-top: 10px; border-radius: 5px">
 			<span style="font-weight:bold; font-size:1.2em">추천 마이필드</span><br>
-			<span style="color:grey">신동윤...</span><br>
-			<span style="color:grey">송제인...</span><br>
+			<% @users.each do |user| %>
+				<span style="color:grey"><%=user.name%></span><br>
+			<% end %>
 		</div>
 	</div>
 	<!-- 오른쪽 고정 메뉴이다 끝 -->
@@ -297,7 +73,12 @@ $(function(){
 	<!-- contents container -->
 	<div style="margin-top: 5px">
 		<div style="width:80%; margin-left:2%">
-			<div id="search_info_panel"> #abc #bbc #ccc</div>
+			<div id="search_info_panel">
+				#abc #bbc #ccc
+				#<%= link_to 'link', '/posts/new?type=link', remote: true %>
+				#<%= link_to 'text', '/posts/new?type=text', remote: true %>
+				#<%= link_to 'photo', '/posts/new?type=photo', remote: true %>
+			</div>
 			<%= yield %>
 		</div>
 	</div>
