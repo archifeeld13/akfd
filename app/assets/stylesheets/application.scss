@@ -47,8 +47,15 @@ a {
 }
 
 .container{
+	// ?? 머하는 것들이었지 
 	max-width: none !important;
 	width:970px !important;
+}
+
+// width 15설정을 안해주고 jquery만으로 15%설정하면 
+// 로고 버튼눌러서 새로고침했을 때 적용이 안된다..
+#right_fixed_menu{
+	position:fixed; width:15%;  right:2.5%;
 }
 
 #brand-image{
@@ -70,13 +77,16 @@ a {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100px;
-	height: 775px;
 	z-index: 5000;
 	background: rgba(34,34,34,0.75);
 	
 }
 
+// 이걸 안해주고 jquery만으로 hide해버리면 로고 눌러서 새로고침했을 때, 
+// 보인다. (버그)
+#option_container {
+	display: none;
+}
 
 .option_item{
 	width:150px;
@@ -86,10 +96,6 @@ a {
 #feeldup_board{
 	position:fixed;
 	background: white;
-	/*width:50%;*/
-	margin-top:100px;
-	/*height:600px;*/
-	height: 450px;
 	border-radius: 10px;
 	z-index: 6000;
 }

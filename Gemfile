@@ -38,6 +38,10 @@ gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick'
 gem 'fog-aws'
 
+# javascript refresh http://stackoverflow.com/questions/17317816/rails-javascript-only-works-after-reloado
+gem 'jquery-turbolinks'
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

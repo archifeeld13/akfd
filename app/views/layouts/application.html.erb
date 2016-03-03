@@ -2,8 +2,7 @@
 <html>
 <head>
   <title>Archifeeld</title>
-	
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
 	<!-- 합쳐지고 최소화된 최신 CSS -->
@@ -49,8 +48,9 @@
 
 	<!-- 오른쪽 고정 메뉴이다 -->
 	<!-- right sidebar http://www.bootply.com/101100 -->
-	
-	<div id="right_fixed_menu" style="position:fixed;">
+	<!-- right fixed menu에 jquery만으로 15% 너비 설정하는걸 주면, 로고 버튼 눌렀을 때
+			그 초기 설정이 다시 실행 안되는것 같다. 따라서 css자체에 15%를 주었다.??-->
+	<div id="right_fixed_menu" >
 		<% if current_user %>
 			<a id="feeldup" href="#"><img style="width:100%" src="/images/feeldup.png"></a>
 		<% end %>

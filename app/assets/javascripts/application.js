@@ -11,13 +11,12 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
 //
-
-
 
 $(function(){
 
@@ -26,6 +25,7 @@ $(function(){
 
 	// feeldup 눌렀을 때 나오는 배경 및 필드업 보드  숨겨놓기
 	$('#feeldup_option_bg').hide()
+	$('#option_container').hide()
 	$('#feeldup_board').hide()
 
 	// icon hover
@@ -39,33 +39,8 @@ $(function(){
 			$( this ).attr('src', prev)
 		}
 	);
-
 	
-	// feeldup option 클릭 
-	$('.option_item').click(function(){
-		// feeldup 보드를 띄운 후, 사이즈를 조정한다 (윈도우 리사이즈 이벤트일 때 다시 구해야한다)
-		$('#feeldup_board').fadeIn()
-		// 보드가 뜨지 않은 상태에서 호출하면 넓이가 작은 상태에서 구해지기 때문이다.
-		$('#feeldup_board').css('width','800px').css('margin-left', ($(window).width() -  $('#feeldup_board').width())/2)
-		// 일단 보드를 띄우면 ajax 통신에 의해서 내용이 채워지게 끔 구성하자
-		return false;
-	})
 	
-	/*
-	mouseEnterFlag = [false, false, false];
-	$('.option_item').eq(2).click(function(){
-		//$('#feeldup_board').fadeIn()
-		return false;
-	}).mouseenter(function(){
-			if (!mouseEnterFlag[2]){
-				mouseEnterFlag[2] = true
-				$(this).effect("bounce", {times: 1}, 150, function(){
-					mouseEnterFlag[2] = false	
-				})
-			}
-	})
-	*/
-
 	// '필드업 버튼' 클릭시 이벤트
 	// isClickedFeeldup 변수는 화면 사이즈 조정시 요소의 사이즈를 다시 구하기 위해서
 	// window resize이벤트가 발생할 때마다 feeldup버튼을 다시 클릭을 해줌으로써
@@ -88,30 +63,51 @@ $(function(){
 		// + 반드시 #feeldup_option_bg가 show되고 나서 와야한다.
 		$('#option_container')
 			.css('position', 'fixed')
-			.css('top', $(window).height()/2 - 50)
+			.css('top', $(window).height()/2 - 75)
 			.css('margin-left', ($(window).width() - $('#option_container').width())/2 )
+			.fadeIn()
+
 
 	})
 	// #feeldup click end
+
+	// feeldup option 클릭 
+	$('.option_item').click(function(){
+		// feeldup 보드를 띄운 후, 사이즈를 조정한다 (윈도우 리사이즈 이벤트일 때 다시 구해야한다)
+		$('#feeldup_board').fadeIn()
+		// 보드가 뜨지 않은 상태에서 호출하면 넓이가 작은 상태에서 구해지기 때문이다.
+		$('#feeldup_board')
+			.css('width','800px')
+			.css('height', '450px')
+			.css('margin-left', ($(window).width() -  $('#feeldup_board').width())/2)
+			.css('position', 'fixed')
+			.css('top', $(window).height()/4 )
+			//.css('height', $(window).height()/2)
+		// 일단 보드를 띄우면 ajax 통신에 의해서 내용이 채워지게 끔 구성하자
+		
+		return false;
+	})
+	
+
+	// feeldup 버튼 누르면 나오는 옵션 눌렀을 때 부모로 클릭 이벤트 전달 막으려고
+	// feeldup 보드의 부분을 클릭하면 부모로 이벤트 전달 막기
+	$('#feeldup_board').click(function(){
+		return false;
+	})		
 
 
 	// #feeldup_option_bg click
 	// #feeldup_option_bg click
 	$('#feeldup_option_bg').click(function(){
 		isClickedFeeldup = false
+
 		$('#feeldup_option_bg').fadeOut()/*hide()*/
 		$('#feeldup_board').fadeOut()
-		// 스크롤링 활성화
-		//$('body').css('overflow', 'scroll')
+
+		// 그외 변수 및 폼 초기화가 필요할 것 같다.
+		$('#feeldup_board').html("")
 	})
 	// #feeldup_option_bg click end
-
-
-	// feeldup 버튼 누르면 나오는 옵션 눌렀을 때 부모로 클릭 이벤트 전달 막으려고
-	// feeldup 보드의 부분을 클릭하면 부모로 이벤트 전달 막기
-	$('#feeldup_board').click(function(){
-		return false;
-	})
 
 
 	// window resize
@@ -130,13 +126,22 @@ $(function(){
 			$('#feeldup_board').css('width','800px').css('margin-left', ($(window).width() -  $('#feeldup_board').width())/2)
 		}
 		else {
-
 			// 스크린이 한없이 작아질 때, 보드가 납작해지니까.. 50%이상으로 해주자.
 			$('#feeldup_board').css('width','700px').css('margin-left', ($(window).width() -  $('#feeldup_board').width())/2)
+		}
+
+		if ($(window).height() > 600){
+			$('#feeldup_board')
+				.css('height', '450px')
+				.css('top', $(window).height()/4 )
+				//.css('height', $(window).height()/2)
+		} else {
+			$('#feeldup_board')
+				.css('height', '450px')
+				.css('top', '50px' )
 		}
 	});
 	// window resize end
 	// window resize end
-
 
 })
