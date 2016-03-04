@@ -54,16 +54,20 @@
 		<% if current_user %>
 			<a id="feeldup" href="#"><img style="width:100%" src="/images/feeldup.png"></a>
 		<% end %>
-		<div style="background:white; margin-top: 5px; border-radius: 5px; ">
+		<div style="background:white; margin-top: 5px; border-radius: 5px; padding: 3%">
 			<span style="font-weight:bold; font-size:1.2em">인기 필드업</span><br>
 			<% @posts.reverse.each do |post| %>
-				<a href="posts/<%=post.id%>"><span style="color:grey"><%= post.title %></span></a><br>
+				<%= link_to post.title, post %></br>
 			<% end %>
 		</div>
-		<div style="background:white; margin-top: 10px; border-radius: 5px">
-			<span style="font-weight:bold; font-size:1.2em">추천 마이필드</span><br>
+		<div style="background:white; margin-top: 10px; border-radius: 5px; padding: 3%" >
+			<span style="font-weight:bold; font-size:1.2em;">추천 마이필드</span><br>
 			<% @users.each do |user| %>
-				<span style="color:grey"><%=user.name%></span><br>
+				<span class="reco-myfeeld-item">
+					<%= image_tag(user.image_url, class: "reco-myfeeld-img") %> 
+					<%=user.name%>
+				</span>
+				<a>+</a> <br>
 			<% end %>
 		</div>
 	</div>
@@ -72,7 +76,7 @@
 
 	<!-- contents container -->
 	<div style="margin-top: 5px">
-		<div style="width:80%; margin-left:2%">
+		<div id="post-container" >
 			<div id="search_info_panel">
 				#abc #bbc #ccc
 				#<%= link_to 'link', '/posts/new?type=link', remote: true %>

@@ -52,6 +52,10 @@ a {
 	width:970px !important;
 }
 
+#post-container {
+	width:80%; margin-left:2%
+}
+
 // width 15설정을 안해주고 jquery만으로 15%설정하면 
 // 로고 버튼눌러서 새로고침했을 때 적용이 안된다..
 #right_fixed_menu{
@@ -108,5 +112,14 @@ a {
 	border-radius:5px;
 	padding:5px;
 }
+
+.reco-myfeeld-item{	
+	color: grey;
+}
+.reco-myfeeld-img{	
+	width: 25px;
+	height: 25px;
+}
+
 // layout 에 적용되는 스타일들  
 // layout 에 적용되는 스타일들  

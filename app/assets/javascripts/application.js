@@ -18,15 +18,64 @@
 //= require_tree .
 //
 
-$(function(){
+// post-container와 right_fixed_menu는 상호작용한다. 	
+function changeWidthPCandRFM(){
+	// 컬럼 4개
+	// 여기 안먹히는데?
+	if ($(window).width() > 1300){
+		$('#post-container').css('width', '85%')
+		//$('#right_fixed_menu').css('width', '15%').css('left', $(window).width() * 0.825 ).show()
+		$('#right_fixed_menu').css('width', '10%').css('right', '2.5%')
+	}
+	// 컬럼 3개
+	if ($(window).width() > 1000){
+		$('#post-container').css('width', '74%') // 여러번 테스트해본결과 적정한 수치
+		$('#right_fixed_menu').css('width', '20%').css('right', '2.5%')
+	}
+	// 컬럼 2개
+	else if ($(window).width() > 480){
+		$('#post-container').css('width', '67%') // 원래는 양쪽 합이 95% 였는데 이게 더 자연스러워서..
+		$('#right_fixed_menu').css('width', '25%').css('right', '2.5%')
+	}
+}
 
-	// 오른쪽 고정 메뉴 크기설정 윈도우 사이즈 변경시 재호출
-	$('#right_fixed_menu').css('width', '15%').css('left', $(window).width() * 0.825 )
+// change width and height of feeldup board
+function changeWidthHeightFUBoard(){
+	if ($(window).width() > 1024){
+		// 필드업 보드에 관한 부분이다. 위에도 있다.
+		$('#feeldup_board').css('width','800px').css('margin-left', ($(window).width() -  $('#feeldup_board').width())/2)
+	}
+	else {
+		// 스크린이 한없이 작아질 때, 필드업 보드가 납작해지니까.. 50%이상으로 해주자.
+		$('#feeldup_board').css('width','700px').css('margin-left', ($(window).width() -  $('#feeldup_board').width())/2)
+	}
 
-	// feeldup 눌렀을 때 나오는 배경 및 필드업 보드  숨겨놓기
+	// 필드업 보드의 높이를 조정
+	if ($(window).height() > 600){
+		$('#feeldup_board')
+			.css('height', '450px')
+			.css('top', $(window).height()/4 )
+			//.css('height', $(window).height()/2)
+	} else {
+		$('#feeldup_board')
+			.css('height', '450px')
+			.css('top', '50px' )
+	}
+}
+
+
+// feeldup 눌렀을 때 나오는 배경 및 필드업 보드  숨겨놓기
+function hideFeeldupBG(){
 	$('#feeldup_option_bg').hide()
 	$('#option_container').hide()
 	$('#feeldup_board').hide()
+}
+
+$(function(){
+
+	changeWidthPCandRFM();
+
+	hideFeeldupBG();
 
 	// icon hover
 	prev = ""
@@ -72,17 +121,17 @@ $(function(){
 	// #feeldup click end
 
 	// feeldup option 클릭 
+	// feeldup option 클릭 
 	$('.option_item').click(function(){
 		// feeldup 보드를 띄운 후, 사이즈를 조정한다 (윈도우 리사이즈 이벤트일 때 다시 구해야한다)
 		$('#feeldup_board').fadeIn()
+
 		// 보드가 뜨지 않은 상태에서 호출하면 넓이가 작은 상태에서 구해지기 때문이다.
+		// changeWidthHeightFUBoard ( window resize시 변경) 함수와 연관이 있는 부분이다.
 		$('#feeldup_board')
-			.css('width','800px')
-			.css('height', '450px')
 			.css('margin-left', ($(window).width() -  $('#feeldup_board').width())/2)
 			.css('position', 'fixed')
-			.css('top', $(window).height()/4 )
-			//.css('height', $(window).height()/2)
+		changeWidthHeightFUBoard();
 		// 일단 보드를 띄우면 ajax 통신에 의해서 내용이 채워지게 끔 구성하자
 		
 		return false;
@@ -113,33 +162,13 @@ $(function(){
 	// window resize
 	// window resize
 	$( window ).resize(function() {
+		// feeldup 클릭 후 리사이즈 할 때 유지하기 위해서
 		if (isClickedFeeldup){
 			$('#feeldup').click()
 		}
-		// right fix menu 위치 업데이트 
-		// 960 이하에서는 5컬럼을 유지하기 힘들어서 막아놓음.
-		// 960 이하에서는 4컬럼으로 바뀌었으면 좋겠음..
-		if ($(window).width() > 960){
-			$('#right_fixed_menu').css('width', '15%').css('left', $(window).width() * 0.825 )
 
-			// 보드에 관한 부분이다. 위에도 있다.
-			$('#feeldup_board').css('width','800px').css('margin-left', ($(window).width() -  $('#feeldup_board').width())/2)
-		}
-		else {
-			// 스크린이 한없이 작아질 때, 보드가 납작해지니까.. 50%이상으로 해주자.
-			$('#feeldup_board').css('width','700px').css('margin-left', ($(window).width() -  $('#feeldup_board').width())/2)
-		}
-
-		if ($(window).height() > 600){
-			$('#feeldup_board')
-				.css('height', '450px')
-				.css('top', $(window).height()/4 )
-				//.css('height', $(window).height()/2)
-		} else {
-			$('#feeldup_board')
-				.css('height', '450px')
-				.css('top', '50px' )
-		}
+		changeWidthPCandRFM();
+		changeWidthHeightFUBoard();
 	});
 	// window resize end
 	// window resize end

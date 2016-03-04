@@ -1,7 +1,7 @@
 <div class="posts-item">
 	<span class="posts-item-writer"><img src="/images/logo.png" >아키필드<%= link_to "x", post, method: :delete, data: { confirm:	"Are you sure?" } %> </span>
 	<% if post.images.size > 0 %>
-		<img class="posts-item-img" src="<%=post.images[0].url%>" >
+    <%= link_to image_tag(post.images[0].url, class: 'posts-item-img'), post %></td>
 	<% end %>
 	<div class="posts-item-info">
 		<span class="posts-item-title" ><%=post.title%></span><br>
