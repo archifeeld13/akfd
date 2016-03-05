@@ -14,9 +14,9 @@ function postsColumnResize(){
 	}
 	// 컬럼 3개
 	else if ($(window).width() > 1000){
-		$('.posts-item').css('width', '31.3%')
+		$('.posts-item').css('width', '31.3%').css('height', '320px')
 	}
-	// 컬럼 2개 스마트폰 980px
+	// 컬럼 1개 스마트폰 980px
 	else if ($(window).width() > 480){
 		$('.posts-item').css('width', '48%')
 	}

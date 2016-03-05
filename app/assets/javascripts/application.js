@@ -34,33 +34,21 @@ function changeWidthPCandRFM(){
 	}
 	// 컬럼 2개
 	else if ($(window).width() > 480){
-		$('#post-container').css('width', '67%') // 원래는 양쪽 합이 95% 였는데 이게 더 자연스러워서..
-		$('#right_fixed_menu').css('width', '25%').css('right', '2.5%')
+		$('#post-container').css('width', '65%') // 원래는 양쪽 합이 95% 였는데 이게 더 자연스러워서..
+		$('#right_fixed_menu').css('width', '30%').css('right', '2.5%')
 	}
 }
 
 // change width and height of feeldup board
 function changeWidthHeightFUBoard(){
-	if ($(window).width() > 1024){
-		// 필드업 보드에 관한 부분이다. 위에도 있다.
-		$('#feeldup_board').css('width','800px').css('margin-left', ($(window).width() -  $('#feeldup_board').width())/2)
-	}
-	else {
-		// 스크린이 한없이 작아질 때, 필드업 보드가 납작해지니까.. 50%이상으로 해주자.
-		$('#feeldup_board').css('width','700px').css('margin-left', ($(window).width() -  $('#feeldup_board').width())/2)
-	}
+
+	// 스크린이 한없이 작아질 때, 필드업 보드가 납작해지니까.. 50%이상으로 해주자.
+	$('#feeldup_board').css('width','700px').css('margin-left', ($(window).width() -  $('#feeldup_board').width())/2)
 
 	// 필드업 보드의 높이를 조정
-	if ($(window).height() > 600){
-		$('#feeldup_board')
-			.css('height', '450px')
-			.css('top', $(window).height()/4 )
-			//.css('height', $(window).height()/2)
-	} else {
-		$('#feeldup_board')
-			.css('height', '450px')
-			.css('top', '50px' )
-	}
+	$('#feeldup_board')
+		.css('height', $(window).height() * 0.8)
+		.css('top', $(window).height() * 0.10 )
 }
 
 

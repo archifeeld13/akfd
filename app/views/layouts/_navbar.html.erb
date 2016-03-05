@@ -16,9 +16,7 @@
 
 		<% if current_user %>
 		<div id="navbar" class="navbar-right" style="margin-right: 1%">
-			<a href="#home">
-				<img class="nav-icon" src="/images/home.png">
-			</a>
+			<%= link_to image_tag('/images/home.png', class: "nav-icon"), posts_path  %>
 			<a href="#profile">
 				<img class="nav-icon" src="/images/my.png">
 			</a>
