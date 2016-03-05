@@ -26,7 +26,18 @@ $(function(){
 	postsColumnResize();
 
 	$('.posts-item-img').click(function(){
-				
+		// feeldup 버튼 눌렀을 때의 액션 중 option 띄우는거 제외하고 
+		isClickedFeeldup = true;
+
+		// 흐린 배경 표시
+		$('#feeldup_bg')
+			.css('height', $(document).height())
+			.css('width', $(document).width())
+			.fadeIn()/*show()*/
+
+		// application.js 에 정의됨
+		showFeeldupBoard();
+
 	})
 })
 

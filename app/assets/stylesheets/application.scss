@@ -77,7 +77,7 @@ a {
 }
 
 // 필드업 클릭시 흐린 배경
-#feeldup_option_bg{
+#feeldup_bg{
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -99,9 +99,10 @@ a {
 
 #feeldup_board{
 	position:fixed;
-	background: white;
 	border-radius: 10px;
 	z-index: 6000;
+	overflow: auto;
+	background: #F0F0F0;
 }
 
 

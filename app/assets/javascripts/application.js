@@ -51,13 +51,23 @@ function changeWidthHeightFUBoard(){
 		.css('top', $(window).height() * 0.10 )
 }
 
+function showFeeldupBoard(){
+	// feeldup 보드를 띄운 후, 사이즈를 조정한다 (윈도우 리사이즈 이벤트일 때 다시 구해야한다)
+	$('#feeldup_board').fadeIn()
+
+	// 보드가 뜨지 않은 상태에서 호출하면 넓이가 작은 상태에서 구해지기 때문이다.
+	// changeWidthHeightFUBoard ( window resize시 변경) 함수와 연관이 있는 부분이다.
+	$('#feeldup_board').css('position', 'fixed')
+	changeWidthHeightFUBoard();
+}
 
 // feeldup 눌렀을 때 나오는 배경 및 필드업 보드  숨겨놓기
 function hideFeeldupBG(){
-	$('#feeldup_option_bg').hide()
+	$('#feeldup_bg').hide()
 	$('#option_container').hide()
 	$('#feeldup_board').hide()
 }
+
 
 $(function(){
 
@@ -90,14 +100,14 @@ $(function(){
 	$('#feeldup').click(function(){
 		isClickedFeeldup = true;
 
-		// 흐린 배경 표시
-		$('#feeldup_option_bg')
+		// 흐린 배경 표시 -> 이 액션은 posts.js에서도 post item 클릭시 취한다
+		$('#feeldup_bg')
 			.css('height', $(document).height())
 			.css('width', $(document).width())
 			.fadeIn()/*show()*/
 
 		// fix시키면 된다. (fix하지 않으면 $(window).scroll이벤트에 위치 설정을 반복해야한다)
-		// + 반드시 #feeldup_option_bg가 show되고 나서 와야한다.
+		// + 반드시 #feeldup_bg가 show되고 나서 와야한다.
 		$('#option_container')
 			.css('position', 'fixed')
 			.css('top', $(window).height()/2 - 75)
@@ -108,18 +118,11 @@ $(function(){
 	})
 	// #feeldup click end
 
+
 	// feeldup option 클릭 
 	// feeldup option 클릭 
 	$('.option_item').click(function(){
-		// feeldup 보드를 띄운 후, 사이즈를 조정한다 (윈도우 리사이즈 이벤트일 때 다시 구해야한다)
-		$('#feeldup_board').fadeIn()
-
-		// 보드가 뜨지 않은 상태에서 호출하면 넓이가 작은 상태에서 구해지기 때문이다.
-		// changeWidthHeightFUBoard ( window resize시 변경) 함수와 연관이 있는 부분이다.
-		$('#feeldup_board')
-			.css('margin-left', ($(window).width() -  $('#feeldup_board').width())/2)
-			.css('position', 'fixed')
-		changeWidthHeightFUBoard();
+		showFeeldupBoard()
 		// 일단 보드를 띄우면 ajax 통신에 의해서 내용이 채워지게 끔 구성하자
 		
 		return false;
@@ -133,18 +136,20 @@ $(function(){
 	})		
 
 
-	// #feeldup_option_bg click
-	// #feeldup_option_bg click
-	$('#feeldup_option_bg').click(function(){
+	// #feeldup_bg click
+	// #feeldup_bg click
+	$('#feeldup_bg').click(function(){
 		isClickedFeeldup = false
 
-		$('#feeldup_option_bg').fadeOut()/*hide()*/
+		// 세가지는 세트다
+		$('#feeldup_bg').fadeOut()/*hide()*/
+		$('#option_container').fadeOut()
 		$('#feeldup_board').fadeOut()
 
 		// 그외 변수 및 폼 초기화가 필요할 것 같다.
 		$('#feeldup_board').html("")
 	})
-	// #feeldup_option_bg click end
+	// #feeldup_bg click end
 
 
 	// window resize

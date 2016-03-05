@@ -1,0 +1,9 @@
+<div id="show-post-header">
+	<%= @post.title %>
+</div>
+<% @post.images.each do |image| %>
+	<%= image_tag(image.url, class: 'show-post-img') %>
+<% end %>
+<div id="show-post-content">
+	<%= @post.content %>
+</div>
