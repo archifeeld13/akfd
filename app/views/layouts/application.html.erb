@@ -54,7 +54,7 @@
 		<% if current_user %>
 			<a id="feeldup" href="#"><img style="width:100%" src="/images/feeldup.png"></a>
 		<% end %>
-		<div style="background:white; margin-top: 5px; border-radius: 5px; padding: 3%">
+		<div style="background:white; margin-top: 10px; border-radius: 5px; padding: 3%">
 			<span style="font-weight:bold; font-size:1.2em">인기 필드업</span><br>
 			<% @posts.reverse.each do |post| %>
 				<%= link_to post.title, post %></br>

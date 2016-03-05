@@ -16,7 +16,7 @@ function postsColumnResize(){
 	else if ($(window).width() > 1000){
 		$('.posts-item').css('width', '31.3%')
 	}
-	// 컬럼 2개
+	// 컬럼 2개 스마트폰 980px
 	else if ($(window).width() > 480){
 		$('.posts-item').css('width', '48%')
 	}
@@ -24,6 +24,10 @@ function postsColumnResize(){
 // 초기 너비 설정
 $(function(){
 	postsColumnResize();
+
+	$('.posts-item-img').click(function(){
+				
+	})
 })
 
 //# window resize

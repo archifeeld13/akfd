@@ -19,16 +19,16 @@
 //
 
 // post-container와 right_fixed_menu는 상호작용한다. 	
+// posts.js 와 큰 연관 관계를 가지고 있다.
 function changeWidthPCandRFM(){
-	// 컬럼 4개
-	// 여기 안먹히는데?
+	// 컬럼 4개 여기 안먹히는데? 일단 걍 살려두자
 	if ($(window).width() > 1300){
-		$('#post-container').css('width', '85%')
+		$('#post-container').css('width', '80%')
 		//$('#right_fixed_menu').css('width', '15%').css('left', $(window).width() * 0.825 ).show()
-		$('#right_fixed_menu').css('width', '10%').css('right', '2.5%')
+		$('#right_fixed_menu').css('width', '15%').css('right', '2.5%')
 	}
 	// 컬럼 3개
-	if ($(window).width() > 1000){
+	else if ($(window).width() > 1000){
 		$('#post-container').css('width', '74%') // 여러번 테스트해본결과 적정한 수치
 		$('#right_fixed_menu').css('width', '20%').css('right', '2.5%')
 	}
