@@ -8,6 +8,7 @@ class PostsController < ApplicationController
 
 	def show
 		@post = Post.find(params[:id])
+		@comment = Comment.new # 이거 안적으니까 남은 시간구하는거에서 에러나
 		respond_to do |format|
 			format.html { render :action => "show" }
 			format.js { render :file => "posts/show.js.erb" }

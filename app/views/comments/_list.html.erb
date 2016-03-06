@@ -1,0 +1,6 @@
+<ul id="comments_list">
+	<%# size로 하면 에러나 %>
+	<% if @post.comments.count> 0 %>
+		<%= render @post.comments %>
+	<% end %>
+</ul>

@@ -16,4 +16,9 @@
 	<% end %>
 </p>
 
+<%= link_to 'link', '/posts/new?type=link', remote: true %>
+
+<%= render "comments/comments" %>
+
 <%= link_to 'back', posts_path %>
+

@@ -36,10 +36,10 @@
 				</td>
 			</table>
 		</div>
-		<div id="feeldup_board">
-			<%# render :partial => 'posts/text_type_board' %>
-		</div>
 	</div>	
+	<div id="feeldup_board">
+			<%# render :partial => 'posts/text_type_board' %>
+	</div>
 	<!-- 필드업 버튼 눌렀을 때 나오는 뱅경 및 옵션 끝 -->
 
 	<!-- nav bar : 사이즈 키워야됨. http://bootsnipp.com/snippets/featured/advanced-dropdown-search-->
@@ -79,9 +79,6 @@
 		<div id="post-container" >
 			<div id="search_info_panel">
 				#abc #bbc #ccc
-				#<%= link_to 'link', '/posts/new?type=link', remote: true %>
-				#<%= link_to 'text', '/posts/new?type=text', remote: true %>
-				#<%= link_to 'photo', '/posts/new?type=photo', remote: true %>
 			</div>
 			<%= yield %>
 		</div>

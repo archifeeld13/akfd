@@ -43,12 +43,13 @@ function changeWidthPCandRFM(){
 function changeWidthHeightFUBoard(){
 
 	// 스크린이 한없이 작아질 때, 필드업 보드가 납작해지니까.. 50%이상으로 해주자.
-	$('#feeldup_board').css('width','700px').css('margin-left', ($(window).width() -  $('#feeldup_board').width())/2)
+	$('#feeldup_board').css('width','700px').css('right', ($(window).width() -  $('#feeldup_board').width())/2)
 
 	// 필드업 보드의 높이를 조정
 	$('#feeldup_board')
 		.css('height', $(window).height() * 0.8)
 		.css('top', $(window).height() * 0.10 )
+
 }
 
 function showFeeldupBoard(){
@@ -58,6 +59,7 @@ function showFeeldupBoard(){
 	// 보드가 뜨지 않은 상태에서 호출하면 넓이가 작은 상태에서 구해지기 때문이다.
 	// changeWidthHeightFUBoard ( window resize시 변경) 함수와 연관이 있는 부분이다.
 	$('#feeldup_board').css('position', 'fixed')
+
 	changeWidthHeightFUBoard();
 }
 
@@ -124,16 +126,18 @@ $(function(){
 	$('.option_item').click(function(){
 		showFeeldupBoard()
 		// 일단 보드를 띄우면 ajax 통신에 의해서 내용이 채워지게 끔 구성하자
-		
 		return false;
 	})
 	
 
 	// feeldup 버튼 누르면 나오는 옵션 눌렀을 때 부모로 클릭 이벤트 전달 막으려고
 	// feeldup 보드의 부분을 클릭하면 부모로 이벤트 전달 막기
+	// -> 이렇게하니까 form제출이나 link클릭도 안되는 치명적인 버그가 있었다.
+	/*
 	$('#feeldup_board').click(function(){
 		return false;
 	})		
+	*/
 
 
 	// #feeldup_bg click
@@ -144,9 +148,8 @@ $(function(){
 		// 세가지는 세트다
 		$('#feeldup_bg').fadeOut()/*hide()*/
 		$('#option_container').fadeOut()
-		$('#feeldup_board').fadeOut()
 
-		// 그외 변수 및 폼 초기화가 필요할 것 같다.
+		$('#feeldup_board').fadeOut()
 		$('#feeldup_board').html("")
 	})
 	// #feeldup_bg click end

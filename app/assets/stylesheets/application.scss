@@ -27,6 +27,8 @@ $navbar-default-link-hover-bg: black;
 @import 'bootstrap';
 @import 'turn_off_responsive';
 
+@import 'comments';
+
 // layout 에 적용되는 스타일들  
 // layout 에 적용되는 스타일들  
 
@@ -99,12 +101,20 @@ a {
 
 #feeldup_board{
 	position:fixed;
-	border-radius: 10px;
+	//border-radius: 10px;
 	z-index: 6000;
-	overflow: auto;
-	background: #F0F0F0;
+	overflow-y: auto;
+	//background: #F0F0F0;
+	background: white;
 }
 
+#feeldup_board_close{
+	width:50px;
+	height:50px;
+	background:#CBFF33;
+	position:fixed;
+	z-index: 6001;
+}
 
 #search_info_panel{
 	background:white;

@@ -1,0 +1,6 @@
+<li id="comment_<%=comment.id %>">
+	<%= image_tag(comment.user.image_url) %>
+	<%= comment.body %>,
+	<%= time_ago_in_words(comment.created_at) %> 전에
+	<%= link_to "X", [comment.post, comment], method: :delete, remote: true, data: { confirm: "Are you sure?" } %>
+</li>
