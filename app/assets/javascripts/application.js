@@ -47,8 +47,8 @@ function changeWidthHeightFUBoard(){
 
 	// 필드업 보드의 높이를 조정
 	$('#feeldup_board')
-		.css('height', $(window).height() * 0.8)
-		.css('top', $(window).height() * 0.10 )
+		.css('height', $(window).height() * 0.95)
+		.css('top', $(window).height() * 0.025 )
 
 }
 

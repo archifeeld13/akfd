@@ -1,5 +1,8 @@
 <div id="show-post-header">
 	<%= @post.title %>
+	<% if current_user %>
+		<%= link_to "좋아요", post_likes_path(@post.id), method: :post, remote: true %>
+	<% end %>
 </div>
 <% @post.images.each do |image| %>
 	<%= image_tag(image.url, class: 'show-post-img') %>

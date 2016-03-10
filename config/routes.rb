@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
-
 	root 'posts#index'
 
   get 'welcome/index'
 
+
 	resources :posts do
 		resources :comments, only: [:create, :destroy]
+		resources :likes, only: [:create]
 	end
 
 	get '/auth/:provider/callback' => 'sessions#create'

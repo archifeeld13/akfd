@@ -1,6 +1,6 @@
 <% if @comment.errors.size == 0 %>
 	$('<%=j render @comment %>').appendTo($("#comments_list")).hide().fadeIn('fast')
-	$('@comments_form form')[0].reset();
+	$('#comments_form form')[0].reset();
 <% else %>
 	alert('댓글을 작성해 주세요')
 <% end %>

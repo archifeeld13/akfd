@@ -1,7 +1,9 @@
 <div class="comments">
-	<div class="comment_form">
-		<%= render "comments/form" %>	
-	</div>
+	<% if current_user %>
+		<div class="comment_form">
+			<%= render "comments/form" %>
+		</div>
+	<% end %>
 	<div class="comments_list">
 		<%= render "comments/list" %>
 	</div>
