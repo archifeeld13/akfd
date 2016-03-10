@@ -3,13 +3,7 @@ class PostsController < ApplicationController
 	before_action :set_posts_users
 	
   def index
-		
 		@posts = Post.all.reverse
-		@fav_posts = @posts.clone
-		@fav_posts = @fav_posts.to_a
-		
-		@fav_posts.sort! {|x, y| y.likes.count <=> x.likes.count}
-
   end
 
 	def show
