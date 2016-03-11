@@ -78,15 +78,7 @@ a {
 	margin:7px;
 }
 
-// 필드업 클릭시 흐린 배경
-#feeldup_bg{
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 5000;
-	background: rgba(34,34,34,0.75);
-	
-}
+
 
 // 이걸 안해주고 jquery만으로 hide해버리면 로고 눌러서 새로고침했을 때, 
 // 보인다. (버그)
@@ -99,7 +91,7 @@ a {
 	height:150px;
 }
 
-#feeldup_board{
+#modal_board{
 	position:fixed;
 	//border-radius: 10px;
 	z-index: 6000;
@@ -108,12 +100,14 @@ a {
 	background: white;
 }
 
-#feeldup_board_close{
-	width:50px;
-	height:50px;
-	background:#CBFF33;
-	position:fixed;
-	z-index: 6001;
+// 필드업 클릭시 흐린 배경
+#modal_bg{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 5000;
+	background: rgba(34,34,34,0.75);
+	
 }
 
 #search_info_panel{

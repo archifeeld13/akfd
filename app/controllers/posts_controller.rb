@@ -3,12 +3,13 @@ class PostsController < ApplicationController
 	before_action :set_posts_users
 	
   def index
+		# 이부분은 나중에 바뀔 수가 있다.
 		@posts = Post.all.reverse
   end
 
 	def show
 		@post = Post.find(params[:id])
-		@comment = Comment.new # 이거 안적으니까 남은 시간구하는거에서 에러나
+		@comment = Comment.new # 이거 안적으니까 지난 시간 구하는거에서 에러나
 		respond_to do |format|
 			format.html { render :action => "show" }
 			format.js { render :file => "posts/show.js.erb" }

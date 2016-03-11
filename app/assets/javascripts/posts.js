@@ -3,6 +3,8 @@
 //# You can use CoffeeScript in this file: http://coffeescript.org/
 
 
+// 이 파일은 posts를 뿌려주는 페이지에 관한 코드다
+
 function postsColumnResize(){
 	// 컬럼 4개
 	if ($(window).width() > 1600){
@@ -21,22 +23,25 @@ function postsColumnResize(){
 		$('.posts-item').css('width', '48%')
 	}
 }
+
 // 초기 너비 설정
 $(function(){
 	postsColumnResize();
 
+	// 조회 기능
 	$('.posts-item-img').click(function(){
 		// feeldup 버튼 눌렀을 때의 액션 중 option 띄우는거 제외하고 
 		isClickedFeeldup = true;
 
 		// 흐린 배경 표시
-		$('#feeldup_bg')
+		$('#modal_bg')
 			.css('height', $(document).height())
 			.css('width', $(document).width())
 			.fadeIn()/*show()*/
 
 		// application.js 에 정의됨
-		showFeeldupBoard();
+		showModalBoard();
+		// ajax에 의해 이 보드가 채워진다
 
 	})
 })
@@ -46,7 +51,6 @@ $(function(){
 $( window ).resize(function() {
 	postsColumnResize();
 });
-//# window resize end
 //# window resize end
 
 
