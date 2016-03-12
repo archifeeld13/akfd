@@ -6,6 +6,16 @@ class PostsController < ApplicationController
 		# 이부분은 나중에 바뀔 수가 있다.
 		@posts = Post.all.reverse
   end
+  
+	def my_feeld
+		@posts = Post.where(user_id: current_user.id).reverse
+		# user.shares, post.shares
+		# share_object.user, share_object.post
+		@shares = []
+		current_user.shares.each do |share|
+			@shares.push(share.post)
+		end
+	end
 
 	def show
 		@post = Post.find(params[:id])

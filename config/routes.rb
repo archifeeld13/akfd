@@ -8,7 +8,10 @@ Rails.application.routes.draw do
 	resources :posts do
 		resources :comments, only: [:create, :destroy]
 		resources :likes, only: [:create]
+		resources :shares, only: [:create]
 	end
+	get '/my_feeld' => 'posts#my_feeld'
+
 
 	get '/auth/:provider/callback' => 'sessions#create'
 	delete '/logout', to: 'sessions#destroy'

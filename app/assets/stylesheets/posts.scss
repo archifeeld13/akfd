@@ -2,6 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#user_info_panel{
+	background:white;
+	width:98%;
+	margin: 0 1%;
+	border-radius:5px;
+	padding:0.5%;
+}
+
 .posts-item{
 	width:23%; height:320px; float:left; margin-left:1%; margin-right:1%;
 	background:white; margin-top:2%;

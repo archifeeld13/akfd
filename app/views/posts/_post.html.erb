@@ -1,12 +1,15 @@
 <div class="posts-item">
-	<span class="posts-item-writer"><%= image_tag(post.user.image_url) %><%= post.user.name %><%= link_to "x", post, method: :delete, data: { confirm:	"Are you sure?" } %> </span>
+	<span class="posts-item-writer">
+		<%= image_tag(post.user.image_url) %>
+		<%= post.user.name %><%= link_to "x", post, method: :delete, data: { confirm:	"Are you sure?" } %>
+	</span>
 	<% if post.images.size > 0 %>
     <%= link_to image_tag(post.images[0].url, class: 'posts-item-img'), post, remote:true %></td>
 	<% end %>
 	<div class="posts-item-info">
 		<span class="posts-item-title" ><%=post.title%></span><br>
 		<div class="posts-item-counts">
-			<span>좋아요 <%= post.likes.count%></span>, <span>댓글 <%= post.comments.count %></span>, <span>공유 xx</span>
+			<span>좋아요 <%= post.likes.count %></span>, <span>댓글 <%= post.comments.count %></span>, <span>공유 <%= post.shares.count %></span>
 		</div>
 		<div class="posts-item-hashtags"><span>#홍익대</span> <span>#모형</span></div>
 	</div>

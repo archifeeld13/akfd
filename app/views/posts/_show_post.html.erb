@@ -2,6 +2,7 @@
 	<%= @post.title %>
 	<% if current_user %>
 		<%= link_to "좋아요", post_likes_path(@post.id), method: :post, remote: true %>
+		<%= link_to "필드인", post_shares_path(@post.id), method: :post, remote: true %>
 	<% end %>
 </div>
 <% @post.images.each do |image| %>

@@ -48,8 +48,8 @@ function changeWidthHeightModalBoard(){
 	// 필드업 보드의 높이를 조정
 	$('#modal_board')
 		.css('position', 'fixed')
-		.css('height', 700)
-		.css('top', ($(window).height() - 700)/2 )
+		.css('height', 550)
+		.css('top', ($(window).height() - 550)/2 )
 		//.css('height', $(window).height() * 0.95)
 		//.css('top', $(window).height() * 0.025 )
 
