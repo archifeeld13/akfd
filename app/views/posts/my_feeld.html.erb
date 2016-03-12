@@ -1,7 +1,47 @@
-
 <div id="user_info_panel">
-	마이페이지
-</div>
+	<%# http://stackoverflow.com/questions/2821061/facebook-api-how-do-i-get-a-facebook-users-profile-image-through-the-facebook %>
+	<%= image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130") %>
+
+	<div id="user_info_name_dept">
+		<span style="font-weight: bold; font-size: 2em;">
+			<%= @user.name %>
+		</span>
+		<span style="color:gray; font-size: 1.2em; white-space: nowrap">
+			<%= "@ 아키필드" %>
+		</span><br>
+		<% if @user.id == current_user.id %>
+			<a style="color:#B1DB4E; font-size: 1.5em; font-weight:bold" href="#">프로필 편집</a><br>
+		<% else %>
+			<a style="color:#FF85FF; font-size: 1.5em; font-weight:bold" href="#">팔로우 하기</a><br>
+		<% end %>
+	</div>
+
+	<div id="user_info_counts">
+			<span style="color:gray; font-size: 1.2em; margin-right:15%;">
+				게시글
+			</span>
+			<span style="font-size: 2em; font-weight:bold">
+				<%= @user.posts.count %>	
+			</span><br>
+
+			<span style="color:gray;  font-size: 1.2em; margin-right:15%;">
+				팔로우	
+			</span>
+			<span style="font-size: 2em; font-weight:bold">
+				<%= @user.posts.count %>	
+			</span><br>
+
+			<span style="color:gray; font-size: 1.2em; margin-right:15%;">
+				팔로워
+			</span>
+			<span style="font-size: 2em; font-weight:bold">
+				<%= @user.posts.count %>	
+			</span><br>
+
+
+		</div>
+	</div>
+
 <%= render @posts %>
 <%= render @shares%>
 

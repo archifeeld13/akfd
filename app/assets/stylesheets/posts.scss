@@ -2,14 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#user_info_panel{
-	background:white;
-	width:98%;
-	margin: 0 1%;
-	border-radius:5px;
-	padding:0.5%;
-}
 
+// index.html.erb
 .posts-item{
 	width:23%; height:320px; float:left; margin-left:1%; margin-right:1%;
 	background:white; margin-top:2%;
@@ -18,8 +12,13 @@
 	height: 60%;
 	width: 100%;
 }
-.posts-item-writer img{
-	width:20px; margin:5px
+.posts-item-writer{
+	a{
+		color: black;	
+	}
+	img{
+		width:20px; margin:5px
+	}
 }
 .posts-item-info{
 	font-size:0.9em; padding:5%;
@@ -53,3 +52,29 @@
 	width: 100%;
 	margin: 0.5% 0;
 }
+
+
+// my_feeld.html.erb
+#user_info_panel{
+	background:white;
+	width:98%;
+	height: 200px;
+	margin: 0 1%;
+	border-radius:5px;
+	padding:3%;
+	img {
+		border-radius:5px;
+		float:left;
+		margin-right: 3%;
+	}
+	#user_info_name_dept{
+		float: left;
+		width: 250px;
+	}
+	#user_info_counts{
+		float: right;
+		width: 200px;
+	}
+}
+
+

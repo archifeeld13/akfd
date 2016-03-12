@@ -42,6 +42,7 @@ $navbar-default-link-hover-bg: black;
 body{
 	margin-top: 60px;
 	background: #F0F0F0;
+	overflow-y: scroll;
 }
 
 a {
@@ -62,6 +63,34 @@ a {
 // 로고 버튼눌러서 새로고침했을 때 적용이 안된다..
 #right_fixed_menu{
 	position:fixed; width:15%;  right:2.5%;
+
+	.RFMPanel{
+		background:white; margin-top: 10px; border-radius: 5px; padding: 5%;
+		.RFMPanelTitle{
+			font-weight:bold; font-size:1.2em; margin-bottom: 3%;
+		}
+	}
+
+	.RFMPanelItem{
+		margin-bottom: 3%;
+		margin-left: 3%;
+		a{
+			color: grey;
+		}
+		.reco_myfeeld_img{	
+			width: 40px;
+			height: 40px;
+			border-radius: 3px;
+		}
+		.reco_myfeeld_plustbtn{
+			width: 20px;	
+			height: 20px;
+			margin-top: 8px;
+			margin-right: 3px;
+			float: right;
+		}
+	}
+	
 }
 
 #brand-image{
@@ -118,13 +147,7 @@ a {
 	padding:0.5%;
 }
 
-.reco-myfeeld-item{	
-	color: grey;
-}
-.reco-myfeeld-img{	
-	width: 25px;
-	height: 25px;
-}
+
 
 // layout 에 적용되는 스타일들  
 // layout 에 적용되는 스타일들  

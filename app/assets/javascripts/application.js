@@ -28,8 +28,8 @@ function changeWidthPCandRFM(){
 	}
 	// 컬럼 3개
 	else if ($(window).width() > 1000){
-		$('#post-container').css('width', '76%') // 여러번 테스트해본결과 적정한 수치
-		$('#right_fixed_menu').css('width', '18%').css('right', '2.5%')
+		$('#post-container').css('width', '74%') // 여러번 테스트해본결과 적정한 수치
+		$('#right_fixed_menu').css('width', '20%').css('right', '2.5%')
 	}
 	// 컬럼 2개
 	else if ($(window).width() > 480){

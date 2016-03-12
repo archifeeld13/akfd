@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 		resources :likes, only: [:create]
 		resources :shares, only: [:create]
 	end
+	# /posts를 앞에 붙이면 위에거랑 겹쳐서 문제가 되어 /my_feeld로 독립시켰다
 	get '/my_feeld' => 'posts#my_feeld'
+	get '/my_feeld/:user_id' => 'posts#my_feeld'
 
 
 	get '/auth/:provider/callback' => 'sessions#create'

@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Archifeeld</title>
+	<link rel="icon" type="image/png" href="/images/favicon.png">
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
@@ -60,20 +61,22 @@
 		<% if current_user %>
 			<a id="feeldup" href="#"><img style="width:100%" src="/images/feeldup.png"></a>
 		<% end %>
-		<div style="background:white; margin-top: 10px; border-radius: 5px; padding: 3%">
-			<span style="font-weight:bold; font-size:1.2em">인기 필드업</span><br>
+		<div class="RFMPanel">
+			<div class="RFMPanelTitle">인기 필드업</div>
 			<% @fav_posts[0,10].each do |post| %>
-				<%= link_to post.title, post %></br>
+				<div class="RFMPanelItem">
+					<%= link_to post.title, post %></br>
+				</div>
 			<% end %>
 		</div>
-		<div style="background:white; margin-top: 10px; border-radius: 5px; padding: 3%" >
-			<span style="font-weight:bold; font-size:1.2em;">추천 마이필드</span><br>
-			<% @users.each do |user| %>
-				<span class="reco-myfeeld-item">
-					<%= image_tag(user.image_url, class: "reco-myfeeld-img") %> 
-					<%=user.name%>
-				</span>
-				<a>+</a> <br>
+		<div class="RFMPanel">
+			<div class="RFMPanelTitle">추천 마이필드</div>
+			<% @users.shuffle[0,3].each do |user| %>
+				<div class="RFMPanelItem" >
+					<%= link_to image_tag(user.image_url, class: "reco_myfeeld_img"), "/my_feeld?user_id=#{user.id}" %> 
+					<%= link_to user.name, "/my_feeld?user_id=#{user.id}"%>
+					<%= link_to image_tag('/images/plusbtn.png', class: "reco_myfeeld_plustbtn"), "#" %>
+				</div> 
 			<% end %>
 		</div>
 	</div>

@@ -8,12 +8,24 @@ class PostsController < ApplicationController
   end
   
 	def my_feeld
-		@posts = Post.where(user_id: current_user.id).reverse
-		# user.shares, post.shares
-		# share_object.user, share_object.post
-		@shares = []
-		current_user.shares.each do |share|
-			@shares.push(share.post)
+		# 회원 이름을 클릭해서 들어오면 /my_feeld?user_id=유저아이디
+		# 형식으로 날라온다
+		if params[:user_id]
+			@user = User.find(params[:user_id])
+			@posts = Post.where(user_id: params[:user_id]).reverse
+			# 쿼리상에서 애초에 공유한것까지 같이 가져오는 방법은 없나?
+			@shares = []
+			@user.shares.each do |share|
+				@shares.push(share.post)
+			end
+		# 마이필드 버튼을 클릭해서 /my_feeld로 접속했을 때 실행되는 부분 
+		else 
+			@user = User.find(current_user.id)
+			@posts = Post.where(user_id: @user.id).reverse
+			@shares = []
+			@user.shares.each do |share|
+				@shares.push(share.post)
+			end
 		end
 	end
 
