@@ -17,30 +17,38 @@
 	</div>
 
 	<div id="user_info_counts">
-			<span style="color:gray; font-size: 1.2em; margin-right:15%;">
-				게시글
-			</span>
-			<span style="font-size: 2em; font-weight:bold">
-				<%= @user.posts.count %>	
-			</span><br>
+		<span style="color:gray; font-size: 1.2em; margin-right:15%;">
+			게시글
+		</span>
+		<span style="font-size: 2em; font-weight:bold">
+			<%= @user.posts.count %>	
+		</span><br>
 
-			<span style="color:gray;  font-size: 1.2em; margin-right:15%;">
-				팔로우	
-			</span>
-			<span style="font-size: 2em; font-weight:bold">
-				<%= @user.posts.count %>	
-			</span><br>
+		<span style="color:gray;  font-size: 1.2em; margin-right:15%;">
+			팔로우	
+		</span>
+		<span style="font-size: 2em; font-weight:bold">
+			<%= @user.posts.count %>	
+		</span><br>
 
-			<span style="color:gray; font-size: 1.2em; margin-right:15%;">
-				팔로워
-			</span>
-			<span style="font-size: 2em; font-weight:bold">
-				<%= @user.posts.count %>	
-			</span><br>
-
-
-		</div>
+		<span style="color:gray; font-size: 1.2em; margin-right:15%;">
+			팔로워
+		</span>
+		<span style="font-size: 2em; font-weight:bold">
+			<%= @user.posts.count %>	
+		</span><br>
 	</div>
+</div>
+<% if current_user.id == @user.id %>
+<div id="my_feeld_menu">
+	<div id="archive">필드 아카이브</div>	
+	<div id="archive_hover">
+		<div id="archive_mine">내 것만 보기</div>	
+		<div id="archive_share">필드인 목록</div>	
+	</div>	
+	<div id="project_list">프로젝트 관리</div>	
+</div>
+<% end %>
 
 <%= render @posts %>
 <%= render @shares%>

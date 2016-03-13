@@ -28,6 +28,9 @@ function postsColumnResize(){
 $(function(){
 	postsColumnResize();
 
+	// 처음엔 숨겨놓기
+	$('#archive_hover').hide();
+
 	// 조회 기능
 	$('.posts-item-img').click(function(){
 		// feeldup 버튼 눌렀을 때의 액션 중 option 띄우는거 제외하고 
@@ -44,6 +47,61 @@ $(function(){
 		// ajax에 의해 이 보드가 채워진다
 
 	})
+	
+	// 필드 아카이브에 hover했을 때
+	$("#archive").hover(
+		function() {
+			$(this).hide()
+			$('#archive_hover').show();
+			// 이 둘의 배경이 제대로 설정되지 않는 버그가 있어서 직접 설정함
+			$('#archive_mine').css('background', '#D9E5FF');	
+			$('#archive_share').css('background', '#DAD9FF');	
+		},
+		function(){
+			$(this).css('background', '#CFCFCF');
+		}
+	);
+
+	$("#project_list").hover(
+		function() {
+			$(this).css('background', 'white');
+		},
+		function(){
+			$(this).css('background', '#CFCFCF');
+		}
+	);
+	
+	var hoverCheck = [false, false];
+	$('#archive_mine').hover(
+		function(){
+			hoverCheck[0] = true;
+			$(this).css('background', 'white');	
+		},
+		function(){
+			// 0.000000001초 사이에 #archive가 보이는 버그를 해결하기위해!
+			setTimeout(function(){ hoverCheck[0] = false; }, 10);
+			$(this).css('background', '#D9E5FF');	
+			if ( !hoverCheck[0] && !hoverCheck[1]){
+				$('#archive_hover').hide();
+				$('#archive').show();
+			}
+		}
+	);
+	$('#archive_share').hover(
+		function(){
+			hoverCheck[1] = true;
+			$(this).css('background', 'white');	
+		},
+		function(){
+			setTimeout(function(){ hoverCheck[1] = false; }, 10);
+			$(this).css('background', '#DAD9FF');	
+			if ( !hoverCheck[0] && !hoverCheck[1]){
+				$('#archive_hover').hide();
+				$('#archive').show();
+			}
+		}
+	);
+
 })
 
 //# window resize

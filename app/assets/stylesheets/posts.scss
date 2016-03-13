@@ -60,6 +60,7 @@
 	width:98%;
 	height: 200px;
 	margin: 0 1%;
+	margin-bottom: 1%;
 	border-radius:5px;
 	padding:3%;
 	img {
@@ -77,4 +78,50 @@
 	}
 }
 
+#my_feeld_menu{
+	width:98%;
+	margin: 0 1%;
+	padding: 0;
+	font-size: 1.2em;
+	text-align: center;
+
+	#archive {
+		float: left;
+		background: #CFCFCF;
+		width:49.5%;
+		border-radius: 5px;
+		margin-right: 0.5%;
+		padding: 1%;
+	}
+	#archive_hover{
+		float: left;
+		width:49.5%;
+		margin-right: 0.5%;
+		padding: 0;
+		#archive_mine{
+			float: left;
+			background: #DAD9FF;
+			width:50%;
+			border-top-left-radius: 5px;
+			border-bottom-left-radius: 5px;
+			padding: 2%;
+		}
+		#archive_share{
+			float: left;
+			background:#D9E5FF;
+			width:50%;
+			border-top-right-radius: 5px;
+			border-bottom-right-radius: 5px;
+			padding: 2%;
+		}
+	}
+	#project_list {
+		float: left;
+		background: #CFCFCF;
+		width:49.5%;
+		border-radius: 5px;
+		margin-left: 0.5%;
+		padding: 1%;
+	}
+}
 
