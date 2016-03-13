@@ -79,7 +79,13 @@ $(function(){
 		},
 		function(){
 			// 0.000000001초 사이에 #archive가 보이는 버그를 해결하기위해!
-			setTimeout(function(){ hoverCheck[0] = false; }, 10);
+			setTimeout(function(){
+				hoverCheck[0] = false;
+				if ( !hoverCheck[0] && !hoverCheck[1]){
+					$('#archive_hover').hide();
+					$('#archive').show();
+				}
+			}, 10);
 			$(this).css('background', '#D9E5FF');	
 			if ( !hoverCheck[0] && !hoverCheck[1]){
 				$('#archive_hover').hide();
@@ -93,12 +99,15 @@ $(function(){
 			$(this).css('background', 'white');	
 		},
 		function(){
-			setTimeout(function(){ hoverCheck[1] = false; }, 10);
+			setTimeout(function(){
+				hoverCheck[1] = false;
+				if ( !hoverCheck[0] && !hoverCheck[1]){
+					$('#archive_hover').hide();
+					$('#archive').show();
+				}
+			}, 10);
 			$(this).css('background', '#DAD9FF');	
-			if ( !hoverCheck[0] && !hoverCheck[1]){
-				$('#archive_hover').hide();
-				$('#archive').show();
-			}
+			
 		}
 	);
 
