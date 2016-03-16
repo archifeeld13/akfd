@@ -1,11 +1,29 @@
-<div id="comments_form">
+<div id="comments_form" class="col-md-12">
 	<%= simple_form_for([@post, @comment], remote: true) do |f| %>
-		<%= image_tag(current_user.image_url) %>
-		<div class="form-inputs">
-			<%= f.input :body, label: false, placeholder: "댓글을 입력하세요"%>
-		</div>
-		<div class="form-actions">
-			<%= f.button :submit, "작성" %>
-		</div>
+	<section class="comment-list" id="comments_list"
+	<article class="row">
+			<div class="col-md-2 col-sm-2 hidden-xs">
+				<figure class="thumbnail">
+					<img class="img-responsive" src="<%=current_user.image_url%>" />
+					<figcaption class="text-center"><%= current_user.name %></figcaption>
+				</figure>
+			</div>
+			<div class="col-md-10 col-sm-10">
+				<div class="panel panel-default arrow left">
+					<div class="panel-body panel-body-form">
+						<div class="comment-post">
+							<div class="form-inputs, col-md-10">
+								<%= f.input :body, label: false, placeholder: "댓글을 입력하세요", input_html: {rows: "3"}%>
+							</div>
+							<div class="form-actions, col-md-2">
+								<%= f.button :submit, class: "hidden", id: "comment-submit" %>
+								<%= link_to raw("<i class='fa fa-pencil fa-2x'></i>"), "#", :onclick=>"$('#comment-submit').click()" %> 
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
+	</section>
 	<% end %>
 </div>

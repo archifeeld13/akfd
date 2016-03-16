@@ -1,6 +1,62 @@
-<li id="comment_<%=comment.id %>">
-	<%= image_tag(comment.user.image_url) %>
-	<%= comment.body %>,
-	<%= time_ago_in_words(comment.created_at) %> 전에
-	<%= link_to "X", [comment.post, comment], method: :delete, remote: true, data: { confirm: "Are you sure?" } %>
-</li>
+<% if comment.post.user.id != comment.user.id %>
+	<!-- First Comment -->
+	<article id="comment_<%=comment.id %>" class="row">
+		<div class="col-md-2 col-sm-2 hidden-xs">
+			<figure class="thumbnail">
+				<img class="img-responsive" src="<%=comment.user.image_url%>" />
+				<figcaption class="text-center"><%= comment.user.name %></figcaption>
+			</figure>
+		</div>
+		<div class="col-md-10 col-sm-10">
+			<div class="panel panel-default arrow left">
+				<div class="panel-body">
+					<header class="text-left">
+						<time class="comment-date">
+							<i class="fa fa-clock-o"></i>&nbsp;
+							<span style="color:gray; font-size:0.9em;"><%= time_ago_in_words(comment.created_at) %> 전에</span>
+						</time>
+					</header>
+					<div class="comment-post">
+						<p class="text-left">
+							<%= comment.body %>
+						</p>
+					</div>
+					<p class="text-right">
+						<%= link_to "x", [comment.post, comment], method: :delete, remote: true, data: { confirm: "Are you sure?" } %>
+					</p>
+				</div>
+			</div>
+		</div>
+	</article>
+<% else %>
+	<!-- Third Comment -->
+	<article class="row">
+		<div class="col-md-10 col-sm-10">
+			<div class="panel panel-default arrow right">
+				<div class="panel-body">
+					<header class="text-right">
+						<time class="comment-date">
+							<i class="fa fa-clock-o"></i>&nbsp;
+							<span style="color:gray; font-size:0.9em;"><%= time_ago_in_words(comment.created_at) %> 전에</span>
+						</time>
+					</header>
+					<div class="comment-post">
+						<p class="text-right">
+							<%= comment.body %>
+						</p>
+					</div>
+					<p class="text-left">
+						<%= link_to "x", [comment.post, comment], method: :delete, remote: true, data: { confirm: "Are you sure?" } %>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-2 hidden-xs">
+			<figure class="thumbnail">
+				<img class="img-responsive" src="<%=comment.user.image_url%>" />
+				<figcaption class="text-center"><%= comment.user.name %></figcaption>
+			</figure>
+		</div>
+	</article>
+<% end %>
+

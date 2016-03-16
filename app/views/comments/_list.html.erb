@@ -1,6 +1,14 @@
-<ul id="comments_list">
+<div class="col-md-12">
 	<%# size로 하면 에러나 %>
-	<% if @post.comments.count> 0 %>
-		<%= render @post.comments %>
-	<% end %>
-</ul>
+
+	<div class="row">
+		<div class="col-md-12">
+				<section class="comment-list" id="comments_list">
+					<% if @post.comments.count> 0 %>
+						<%= render @post.comments %>
+					<% end %>
+				</section>
+		</div>
+	</div>
+</div>
+
