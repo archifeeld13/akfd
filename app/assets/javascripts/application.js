@@ -59,6 +59,7 @@ function changeWidthHeightModalBoard(){
 function showModalBoard(){
 	// modal 보드를 띄운다 
 	$('#modal_board').fadeIn()
+	
 
 	// modal 보드의 사이즈를 조절한다 (resize시 재 호출)
 	// 참고: 보드가 뜨지 않은 상태에서 호출하면 넓이가 작은 상태에서
@@ -136,12 +137,11 @@ $(function(){
 	// feeldup option 클릭 
 	$('.option_item').click(function(){
 		showModalBoard();
-
-		return false;
 	})
 	// feeldup option 클릭 end
 	
 
+	
 	// #modal_bg click
 	// #modal_bg click
 	$('#modal_bg').click(function(){

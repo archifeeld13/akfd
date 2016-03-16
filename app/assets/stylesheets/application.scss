@@ -54,6 +54,9 @@ textarea{
 	background-color: transparent !important;
 	border: none !important;
 }
+input{
+	border: none !important;
+}
 
 .container{
 	// ?? 머하는 것들이었지 
@@ -119,6 +122,7 @@ textarea{
 // 보인다. (버그)
 #option_container {
 	display: none;
+	z-index:5500;
 }
 
 .option_item{

@@ -31,6 +31,9 @@ $(function(){
 	// 처음엔 숨겨놓기
 	$('#archive_hover').hide();
 
+	
+	// index
+	// index
 	// 조회 기능
 	$('.posts-item-img').click(function(){
 		// feeldup 버튼 눌렀을 때의 액션 중 option 띄우는거 제외하고 
@@ -48,6 +51,8 @@ $(function(){
 
 	})
 	
+	// my_feeld
+	// my_feeld
 	// 필드 아카이브에 hover했을 때
 	$("#archive").hover(
 		function() {
