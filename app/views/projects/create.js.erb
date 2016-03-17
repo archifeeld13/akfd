@@ -1,0 +1,6 @@
+<% if @project.errors.size == 0 %>
+	$('<%=j render 'project', project:@project%>').appendTo($("#project_radio_container")).hide().fadeIn('slow')
+	$('#project_form form')[0].reset();
+<% else %>
+	alert('프로젝트 이름을 작성해 주세요')
+<% end %>

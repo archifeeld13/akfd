@@ -1,59 +1,52 @@
-<%= form_for :post ,url: posts_path do |f| %>
-<div id="leftPanel" style="float:left; width:75%; height:550; ">
-
-	<div style="float:left; width:100%; height:75px; background:#F2F2F2; padding:2%;">
-		<img src="<%= current_user.image_url%>" style="width:8%" class="img-rounded">&nbsp; 
-		<span style="color:#4C5249; font-size:1.5em"><%= current_user.name %></span>
-		<img class="modal_close" style="width:20px; height:20px;" align="right" src="/images/xbtn.png">
-	</div>
-
-	<div style="float:left; width:100%; height:400px; background:#E9E9E9; padding:2%">
-		<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
-		<div style="margin-bottom: 1%"></div>
-		<%= f.text_area :content, :id => 'input_post_content', :class => 'form-control', :rows => '13', :placeholder => '이곳에 굴을 작성해 주세요' %>
-		<div style="margin-bottom: 1%"></div>
-		<input type="text" class="form-control" placeholder="#태그(#태그는 쉼표로 구분해주세요! #태그1,#태그2)">
-		<div class="has-error">
-			<div class="checkbox disabled">
-				<label style="margin-left: 1%;">
-					<input type="checkbox" value="secret" disabled>
-					비밀글로 작성합니다
-				</label>
-			</div>
-		</div>
-	</div>
-
-	<div style="float:left; width:100%; height:75px; background:#F2F2F2;">
-	</div>
-
+<div style="float:left; width:75%; height:75px; background:#F2F2F2; padding:2%;">
+	<img src="<%= current_user.image_url%>" style="width:8%" class="img-rounded">&nbsp; 
+	<span style="color:#4C5249; font-size:1.5em"><%= current_user.name %></span>
+	<img class="modal_close" style="width:20px; height:20px;" align="right" src="/images/xbtn.png">
 </div>
 
-<div id="rightPanel" style="float:left; width:25%; height:550px;">
-	<div align="center" style="float:left; width:100%; height:75px; background:white; padding:2%;">
-		<div style="color:#BBBBBB; font-size:1.3em; margin-top:4%;">마이필드<br> 프로젝트 관리</div>
-	</div>
-	<div style="float:left; width:100%; height:400px; background:#F2F2F2; padding:5%">
-		<div id="proj_list">
-			<div class="radio">
-				<label><input type="radio" name="optradio">Option 1</label>
-			</div>
-			<div class="radio">
-				<label><input type="radio" name="optradio">Option 2</label>
-			</div>
-			<div class="radio">
-				<label><input type="radio" name="optradio">Option 3</label>
-			</div>
+<div align="center" style="float:left; width:25%; height:75px; background:white; padding:2%;">
+	<div style="color:#BBBBBB; font-size:1.3em;">마이필드<br> 프로젝트 관리</div>
+</div>
+
+<%= form_for :post ,url: posts_path do |f| %>
+<div style="float:left; width:75%; height:400px; background:#E9E9E9; padding:2%">
+	<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
+	<div style="margin-bottom: 1%"></div>
+	<%= f.text_area :content, :id => 'input_post_content', :class => 'form-control', :rows => '13', :placeholder => '이곳에 글을 작성해 주세요' %>
+	<div style="margin-bottom: 1%"></div>
+	<input type="text" class="form-control" placeholder="#태그(#태그는 쉼표로 구분해주세요! #태그1,#태그2)">
+	<div class="has-error">
+		<div class="checkbox disabled">
+			<label style="margin-left: 1%;">
+				<input type="checkbox" value="secret" disabled>
+				비밀글로 작성합니다
+			</label>
 		</div>
-		<input type="text" class="form-control" placeholder="최대 10글자">
-		<label style="color:#4E4C4C; ">
-			<a href="#">
-				<img style="width:20px; height:20px;" align="left" src="/images/plusbtn.png">
-			</a>&nbsp; 프로젝트 추가하기
-		</label>
 	</div>
-	<div align="center" style="float:left; width:100%; height:75px; background:white; padding:5px;">
-		<input width="100%"id="do_feeldup" type="image" style="margin-top: 4%" onclick="this.form.submit()" src="/images/feeldup.png" name="submit" alt="">
+</div>
+
+<div style="float:left; width:25%; height:323px; background:#F2F2F2; padding:1%; overflow-y: scroll">
+	<div id="project_radio_container">
+		<div>
+			<input type="radio"  name="post[project_id]" value="" checked>
+			&nbsp;선택 안함
+		</div>
+		<% current_user.projects.each do |project| %>
+			<%= render 'projects/project', project: project %>
+		<% end %>
 	</div>
+</div>
+
+<%= f.button :submit, class: "hidden", id: "feeldup-submit" %>
+<% end %>
+
+<%= render "projects/form" %>
+
+<div style="float:left; width:75%; height:75px; background:#F2F2F2;">
+</div>
+
+
+<div align="center" style="float:left; width:25%; height:75px; background:white; padding:5px;">
+	<%= link_to image_tag('/images/feeldup.png'), "#", :onclick=>"$('#feeldup-submit').click()", id: "feeldup-submit-link" %> 
 </div>
 <!--</form>-->
-<% end %>

@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
 	has_many :comments, dependent: :destroy
 	has_many :posts, dependent: :destroy
+	has_many :projects, dependent: :destroy
 
 	has_many :likes, dependent: :destroy
 	has_many :shares, dependent: :destroy
+
 
 class << self
 	def from_omniauth(auth_hash)

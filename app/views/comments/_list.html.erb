@@ -5,7 +5,7 @@
 		<div class="col-md-12">
 				<section class="comment-list" id="comments_list">
 					<% if @post.comments.count> 0 %>
-						<%= render @post.comments %>
+						<%= render @post.comments.reverse %>
 					<% end %>
 				</section>
 		</div>

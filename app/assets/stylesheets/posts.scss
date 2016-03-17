@@ -2,6 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// feeldup modal board
+#feeldup-submit-link img{
+	margin-top: 4%;
+	width: 100%;
+}
+
+#project-submit-btn {
+	width: 20px;
+	height: 20px;
+}
+
 
 // index.html.erb
 .posts-item{
@@ -35,6 +46,7 @@
 		white-space: nowrap;
 	}
 }
+
 
 
 // show.js.erb

@@ -65,7 +65,7 @@
 			<div class="RFMPanelTitle">인기 필드업</div>
 			<% @fav_posts[0,10].each do |post| %>
 				<div class="RFMPanelItem">
-					<%= link_to post.title, post %></br>
+					<%= link_to truncate(post.title, length:12, separater: ' '), post %></br>
 				</div>
 			<% end %>
 		</div>
