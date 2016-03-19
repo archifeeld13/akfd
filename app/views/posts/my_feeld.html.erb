@@ -12,7 +12,7 @@
 		<% if @user.id == current_user.id %>
 			<a style="color:#B1DB4E; font-size: 1.5em; font-weight:bold" href="#">프로필 편집</a><br>
 		<% else %>
-			<a style="color:#FF85FF; font-size: 1.5em; font-weight:bold" href="#">팔로우 하기</a><br>
+			<%= link_to "팔로우 하기", friendships_path(:friend_id => @user.id), :method => :post %>
 		<% end %>
 	</div>
 
@@ -28,14 +28,14 @@
 			팔로우	
 		</span>
 		<span style="font-size: 2em; font-weight:bold">
-			<%= @user.posts.count %>	
+			<%= link_to @user.friendships.count, "/friendships/#{@user.id}/follow", remote: true %>
 		</span><br>
 
 		<span style="color:gray; font-size: 1.2em; margin-right:15%;">
 			팔로워
 		</span>
 		<span style="font-size: 2em; font-weight:bold">
-			<%= @user.posts.count %>	
+			<%= link_to @user.inverse_friends.count, "/friendships/#{@user.id}/follower", remote: true %>
 		</span><br>
 	</div>
 </div>

@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
-
-  get 'projects/create'
-
-  get 'projects/destroy'
-
 	root 'posts#index'
 
   get 'welcome/index'
+
+	resources :friendships, only: [:create, :destroy]
+	get 'friendships/:id/:type' => 'friendships#show'
 
 	resources :users do
 		resources :projects, only: [:create, :destroy]	

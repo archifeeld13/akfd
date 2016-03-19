@@ -12,6 +12,7 @@
 
 // index.html.erb
 .posts-item{
+	// 어차피 포스트 아이템의 너비는 자꾸 변경되
 	width:23%; height:320px; float:left; margin-left:1%; margin-right:1%;
 	background:white; margin-top:2%;
 }
@@ -19,6 +20,19 @@
 	height: 60%;
 	width: 100%;
 }
+
+.posts-item-text{
+	height: 60%;
+	width: 100%;
+	background: lightgray;
+	margin: 0;
+	padding: 2%;
+	vertical-align: middle;
+	a{
+		color: black;
+	}
+}
+
 .posts-item-writer{
 	a{
 		color: black;	

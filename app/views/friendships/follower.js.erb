@@ -1,0 +1,6 @@
+f_list = ""
+<% @user.inverse_friends.each do |f| %>
+	f_list += "<%= f.name %>, "
+<% end %>
+
+alert(f_list)

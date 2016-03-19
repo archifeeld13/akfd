@@ -1,0 +1,6 @@
+f_list = ""
+<% @user.friendships.each do |f| %>
+	f_list += "<%= f.friend.name %>, "
+<% end %>
+
+alert(f_list)
