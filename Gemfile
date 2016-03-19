@@ -42,6 +42,9 @@ gem 'fog-aws'
 gem 'jquery-turbolinks'
 
 
+# taggable
+gem 'acts-as-taggable-on'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

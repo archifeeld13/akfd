@@ -19,6 +19,10 @@
 		<div class="posts-item-counts">
 			<span>좋아요 <%= post.likes.count %></span>, <span>댓글 <%= post.comments.count %></span>, <span>공유 <%= post.shares.count %></span>
 		</div>
-		<div class="posts-item-hashtags"><span>#홍익대</span> <span>#모형</span></div>
+		<div class="posts-item-hashtags">
+			<% if post.tag_list.size > 0 %>	
+				<div class='tag_list'><%= tag_icons(post.tag_list) %> </div>
+			<% end %>
+		</div>
 	</div>
 </div>

@@ -8,6 +8,18 @@
 	width: 100%;
 }
 
+a.tag {
+	border:1px solid #eaeaea;
+	border-radius:3px;
+	background-color: #f4f4f4;
+	padding:.1em .2em;
+	&:hover {
+		text-decoration: none;
+		color: black;
+		background-color: #C5F033;
+		border:1px solid black;
+	}	
+}
 
 
 // index.html.erb
@@ -24,13 +36,12 @@
 .posts-item-text{
 	height: 60%;
 	width: 100%;
-	background: lightgray;
+	background: #E1E1E1;
 	margin: 0;
 	padding: 2%;
 	vertical-align: middle;
-	a{
-		color: black;
-	}
+	color: black;
+	
 }
 
 .posts-item-writer{
@@ -63,6 +74,7 @@
 #show-post-header {
 	font-size: 1.5em;
 	padding: 1.5%
+
 }
 #show-post-content{
 	width : 100%;

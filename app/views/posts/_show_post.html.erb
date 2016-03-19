@@ -1,15 +1,16 @@
 <div id="show-post-header">
 	<%= @post.title %>
-	<% if current_user %>
-		<%= link_to "좋아요", post_likes_path(@post.id), method: :post, remote: true %>
-		<%= link_to "필드인", post_shares_path(@post.id), method: :post, remote: true %>
-	<% end %>
 	<img class="modal_close" style="width:20px; height:20px;" align="right" src="/images/xbtn.png">
+	<div class='tag_list' style="font-size:0.7em; margin-top:2%;"><%= tag_icons(@post.tag_list) %> </div>
 </div>
 <% @post.images.each do |image| %>
 	<%= image_tag(image.url, class: 'show-post-img') %>
 <% end %>
 <div id="show-post-content">
-	<%= @post.content %>
+	<div style="background:#F3F3F3"><%= @post.content %></div>
+	<br>
+	<%= link_to "좋아요", post_likes_path(@post.id), method: :post, remote: true %>
+	&nbsp;
+	<%= link_to "필드인", post_shares_path(@post.id), method: :post, remote: true %>
 </div>
 <%= render "comments/comments" %>

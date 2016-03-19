@@ -3,8 +3,13 @@ class PostsController < ApplicationController
 	before_action :set_posts_users
 	
   def index
-		# 이부분은 나중에 바뀔 수가 있다.
-		@posts = Post.all.reverse
+		if params[:tag]
+			# 태그 검색시 실행 부분
+			@posts = Post.tagged_with(params[:tag])
+		else
+			# 기본 메인 페이지
+			@posts = Post.all.reverse
+		end
   end
   
 	def my_feeld
@@ -55,7 +60,8 @@ class PostsController < ApplicationController
 		@post = Post.new(post_params)
 		@post.user_id = current_user.id
 		if @post.save
-			redirect_to @post, notice: 'Post was successfully created'
+			redirect_to posts_path, notice: 'Post was successfully created'
+			#redirect_to @post, notice: 'Post was successfully created'
 		else
 			render 'new'
 		end
@@ -69,7 +75,7 @@ class PostsController < ApplicationController
 	
 	private
 		def post_params
-			params.require(:post).permit(:title, :content, {images: []})
+			params.require(:post).permit(:title, :content, {images: []}, :tag_list)
 		end
 		def set_posts_users
 			@posts = Post.all
