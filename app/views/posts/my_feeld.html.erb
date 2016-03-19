@@ -1,3 +1,9 @@
+<script>
+	$(function(){
+		$('#user_info_panel').hide().slideDown()	
+	})
+</script>
+
 <div id="user_info_panel">
 	<%# http://stackoverflow.com/questions/2821061/facebook-api-how-do-i-get-a-facebook-users-profile-image-through-the-facebook %>
 	<%= image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130") %>

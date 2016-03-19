@@ -1,40 +1,38 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="navbar-header" style="margin-left: 2.5%">
-			<%= link_to image_tag('/images/logo.png', id: "brand-image"), posts_path , class: "navbar-brand", id: 'navbar-brand-link'%>
+<nav class="navbar navbar-default navbar-fixed-top" style="padding: 2px">
+	<div class="navbar-header" style="margin-left: 2.5%">
+		<%= link_to image_tag('/images/logo.png', id: "brand-image"), posts_path , class: "navbar-brand", id: 'navbar-brand-link'%>
+	</div>
+
+	<form class="navbar-form" style="width:550px" role="search">
+		<div class="form-group" style="width:450px">
+			<input type="text" class="form-control" style="width:450px" placeholder="해쉬태그 검색" />
 		</div>
+		<button type="button" class="btn btn-primary" style="background:#333333; border-color:#333333">
+			<span style="color:#CBFD34" class="fa fa-search" aria-hidden="true"></span>
+		</button>
+	</form>
 
-		<form class="navbar-form navbar-left" role="search">
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Search for snippets" />
-				<div class="input-group-btn">
-						<div class="btn-group" role="group">
-								<button type="button" class="btn btn-primary" style="background:#333333; border-color:#333333"><span style="color:#CBFD34" class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-						</div>
-				</div>
-			</div>
-		</form>
+	<% if current_user %>
+	<div id="navbar" class="navbar-right" style="margin-right: 1%">
+		<img id="profile_img" class="nav-icon" src="<%= current_user.image_url%>">
+		<%= link_to image_tag('/images/home.png', class: "nav-icon"), posts_path  %>
+		<a href=my_feeld>
+			<img class="nav-icon" src="/images/my.png">
+		</a>
+		<a href="#message">
+			<img id="msg_icon" class="nav-icon" src="/images/msg.png">
+		</a>
+		<a href="#setting"><img class="nav-icon" src="/images/setting.png"></a>
+		<%= link_to 'Log out', logout_path, method: :delete %>
+	</div><!--/.nav-collapse -->
+	<% else %>
+		 <a href="/welcome/index">
+			로그인
+			<%# <img class="nav-icon" src="https://seoularchifeeld.s3.amazonaws.com/uploads/post/images/14/thumb_%EB%A1%9C%EA%B7%B8%EC%9D%B8.png"> %>
+		</a>
+		<a href="welcome/index">
+			회원가입 
+		</a>
 
-		<% if current_user %>
-		<div id="navbar" class="navbar-right" style="margin-right: 1%">
-			<img id="profile_img" class="nav-icon" src="<%= current_user.image_url%>">
-			<%= link_to image_tag('/images/home.png', class: "nav-icon"), posts_path  %>
-			<a href=my_feeld>
-				<img class="nav-icon" src="/images/my.png">
-			</a>
-			<a href="#message">
-				<img id="msg_icon" class="nav-icon" src="/images/msg.png">
-			</a>
-			<a href="#setting"><img class="nav-icon" src="/images/setting.png"></a>
-			<%= link_to 'Log out', logout_path, method: :delete %>
-		</div><!--/.nav-collapse -->
-		<% else %>
-			 <a href="/welcome/index">
-				로그인
-				<%# <img class="nav-icon" src="https://seoularchifeeld.s3.amazonaws.com/uploads/post/images/14/thumb_%EB%A1%9C%EA%B7%B8%EC%9D%B8.png"> %>
-			</a>
-			<a href="welcome/index">
-				회원가입 
-			</a>
-
-		<% end %>
-	</nav>
+	<% end %>
+</nav>

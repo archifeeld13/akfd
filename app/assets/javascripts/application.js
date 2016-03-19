@@ -18,6 +18,10 @@
 //= require_tree .
 //
 
+if ($(window).width() < 1000){
+	alert('아키필드는 현재 PC환경에 최적화 되어있습니다.\n 모바일 환경을 위한 서비스는 추후 개발 예정입니다.\n 감사합니다^^');
+}
+
 // post-container와 right_fixed_menu는 상호작용한다. 	
 // posts.js 와 큰 연관 관계를 가지고 있다.
 function changeWidthPCandRFM(){

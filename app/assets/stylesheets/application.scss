@@ -25,6 +25,7 @@ $navbar-default-link-hover-bg: black;
 */
 
 @import 'bootstrap';
+// 이걸 지우면 부트스트랩이 우리의 유아이를 맘대로 변경시켜버린다(화면 크기 조절시)
 @import 'turn_off_responsive';
 
 @import 'comments';
@@ -35,13 +36,9 @@ $navbar-default-link-hover-bg: black;
 
 @import url(http://api.mobilis.co.kr/webfonts/css/?fontface=NanumGothicWeb); 
 * { font-family: 'NanumGothic', '나눔고딕','NanumGothicWeb', '맑은 고딕', 'Malgun Gothic', Dotum; }
-/*
-	for non-responsiveness  
-	http://getbootstrap.com/getting-started/#disable-responsive
-*/ 
 
 body{
-	margin-top: 60px;
+	margin-top: 64px;
 	background: #F0F0F0;
 	overflow-y: scroll;
 }
@@ -59,18 +56,14 @@ input{
 	border: none !important;
 }
 
-.container{
-	// ?? 머하는 것들이었지 
-	max-width: none !important;
-	width:970px !important;
-}
-
+// PC로 축약해 부를 것이다
 #post-container {
 	width:80%; margin-left:2%
 }
 
 // width 15설정을 안해주고 jquery만으로 15%설정하면 
-// 로고 버튼눌러서 새로고침했을 때 적용이 안된다..
+// 로고 버튼눌러서 새로고침했을 때 적용이 안된다.
+// 자바스크립트에서 RFM으로 축약해 부를것이다
 #right_fixed_menu{
 	position:fixed; width:15%;  right:2.5%;
 
@@ -150,13 +143,7 @@ input{
 	
 }
 
-#search_info_panel{
-	background:white;
-	width:98%;
-	margin: 0 1%;
-	border-radius:5px;
-	padding:0.5%;
-}
+
 
 
 
