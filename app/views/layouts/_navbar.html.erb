@@ -23,16 +23,16 @@
 			<img id="msg_icon" class="nav-icon" src="/images/msg.png">
 		</a>
 		<a href="#setting"><img class="nav-icon" src="/images/setting.png"></a>
-		<%= link_to 'Log out', logout_path, method: :delete %>
+		<%= link_to image_tag('/images/logout.png', class: "nav-icon"), logout_path, method: :delete  %>
 	</div><!--/.nav-collapse -->
 	<% else %>
+	<div id="navbar" class="navbar-right" style="margin-right: 1%">
 		 <a href="/welcome/index">
-			로그인
-			<%# <img class="nav-icon" src="https://seoularchifeeld.s3.amazonaws.com/uploads/post/images/14/thumb_%EB%A1%9C%EA%B7%B8%EC%9D%B8.png"> %>
+		 	<%= image_tag "/images/navlogin.png", class: "nav-icon" %>
 		</a>
 		<a href="welcome/index">
-			회원가입 
+		 	<%= image_tag "/images/navregister.png", class: "nav-icon" %>
 		</a>
-
+	</div>
 	<% end %>
 </nav>
