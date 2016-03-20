@@ -7,10 +7,19 @@
 		<div class="form-group" style="width:450px">
 			<input id="nav_search_input" type="text" class="form-control" style="width:450px; background-color:rgba(104,104,104,0.3)" placeholder="태그 검색" />
 		</div>
-		<button type="button" class="btn btn-primary" style="background:#333333; border-color:#333333">
-			<span style="color:#CBFD34" class="fa fa-search" aria-hidden="true"></span>
-		</button>
+		<a id="nav_search_submit" href='#'>
+			<button type="button" class="btn btn-primary" style="background:#333333; border-color:#333333">
+					<span style="color:#CBFD34" class="fa fa-search" aria-hidden="true"></span>
+			</button>
+		</a>
 	</form>
+	<script>
+		$(function(){
+			$('#nav_search_submit').click(function(){
+				$('#nav_search_submit').attr('href', '/posts?tag=' + escape('#') + $("#nav_search_input").val())
+			})	
+		})
+	</script>
 
 	<% if current_user %>
 	<div id="navbar" class="navbar-right" style="margin-right: 1%">
