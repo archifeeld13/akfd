@@ -28,7 +28,8 @@ $(function(){
 	// 조회 기능
 	$('.posts-item-img, .posts-item-text').click(function(){
 		// feeldup 버튼 눌렀을 때의 액션 중 option 띄우는거 제외하고 
-		isClickedFeeldup = true;
+		isModalBgShowed = true;
+		isPostItemClicked = true;
 
 		// 흐린 배경 표시
 		$('#modal_bg')
