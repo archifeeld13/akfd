@@ -58,14 +58,14 @@ input{
 
 // PC로 축약해 부를 것이다
 #post-container {
-	width:80%; margin-left:2%
+	margin-left: 25px;
 }
 
 // width 15설정을 안해주고 jquery만으로 15%설정하면 
 // 로고 버튼눌러서 새로고침했을 때 적용이 안된다.
 // 자바스크립트에서 RFM으로 축약해 부를것이다
 #right_fixed_menu{
-	position:fixed; width:15%;  right:2.5%;
+	position:fixed; width:250px;  right:25px;
 
 	.RFMPanel{
 		background:white; margin-top: 10px; border-radius: 5px; padding: 5%;

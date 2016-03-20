@@ -6,22 +6,11 @@
 // 이 파일은 posts를 뿌려주는 페이지에 관한 코드다
 
 function postsColumnResize(){
-	// 컬럼 4개
-	if ($(window).width() > 1600){
-		$('.posts-item').css('width', '23%').css('height', '400px')
-	}
-	// 컬럼 4개
-	else if ($(window).width() > 1300){
-		$('.posts-item').css('width', '23%').css('height', '320px')
-	}
-	// 컬럼 3개
-	else if ($(window).width() > 1000){
-		$('.posts-item').css('width', '31.3%').css('height', '320px')
-	}
-	// 컬럼 1개 스마트폰 980px
-	else if ($(window).width() > 480){
-		$('.posts-item').css('width', '48%')
-	}
+	var pWidth = $('.posts-item').width()
+	var rWidth = $('#right_fixed_menu').width()
+	var except_RFM = $(window).width() - (rWidth + 25) // 25 : RFM의 오른쪽 마진
+	$('#post-container').css('width', except_RFM - (except_RFM % (pWidth + 10)) ) // 각 포스트 아이템 마진 사방으로 5px임
+											.css('margin-left', (except_RFM - ('#post-container').width())/2)
 }
 
 // 초기 너비 설정

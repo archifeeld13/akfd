@@ -26,17 +26,16 @@ a.tag {
 
 #search_info_panel{
 	background:white;
-	width:98%;
-	margin: 0 1%;
+	width:99%;
+	margin: 0.5%;
 	border-radius:5px;
 	padding:0.5%;
 }
 
 .posts-item{
-	// 어차피 포스트 아이템의 너비는 자꾸 변경되
-	width:23%; height:320px; float:left; margin-left:1%; margin-right:1%;
-	background:white; margin-bottom:2%;
-	margin: 1%;
+	width:280px; height:350px; float:left; 
+	background:white; 
+	margin: 5px;
 }
 .posts-item-img{
 	height: 60%;

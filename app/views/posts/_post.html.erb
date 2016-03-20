@@ -10,7 +10,7 @@
 	<% else %>
 		<%= link_to(post, remote: true) do %>
 			<p class="posts-item-text">
-				<%= truncate(post.content, length: 170) %>
+				<%= truncate(post.content, length: 100) %>
 			</p>
 		<% end %>
 	<% end %>

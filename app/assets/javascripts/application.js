@@ -22,26 +22,6 @@ if ($(window).width() < 1000){
 	alert('아키필드는 현재 PC환경에 최적화 되어있습니다.\n 모바일 환경을 위한 서비스는 추후 개발 예정입니다.\n 감사합니다^^');
 }
 
-// post-container와 right_fixed_menu는 상호작용한다. 	
-// posts.js 와 큰 연관 관계를 가지고 있다.
-function changeWidthPCandRFM(){
-	// 컬럼 4개 여기 안먹히는데? 일단 걍 살려두자
-	if ($(window).width() > 1300){
-		$('#post-container').css('width', '80%')
-		$('#right_fixed_menu').css('width', '15%').css('right', '2.5%')
-	}
-	// 컬럼 3개
-	else if ($(window).width() > 1000){
-		$('#post-container').css('width', '74%') // 여러번 테스트해본결과 적정한 수치
-		$('#right_fixed_menu').css('width', '20%').css('right', '2.5%')
-	}
-	// 컬럼 2개
-	else if ($(window).width() > 480){
-		$('#post-container').css('width', '70%') // 원래는 양쪽 합이 95% 였는데 이게 더 자연스러워서..
-		$('#right_fixed_menu').css('width', '25%').css('right', '2.5%')
-	}
-}
-
 // change width and height of modal board
 // 필드업을 눌러서, 옵션을 선택했을 때 나오는 보드의 크기를 조정한다.
 function changeWidthHeightModalBoard(){
@@ -88,8 +68,12 @@ function hideModalBG(){
 
 
 $(function(){
-	// post container와 right fixed menue의 크기를 설정
-	changeWidthPCandRFM();
+	// 네브바 서치 인풋태그 배경 토글
+	$('#nav_search_input').bind('focus', function(){
+		$(this).css('background-color', 'white')
+	}).bind('blur', function(){
+		$(this).css('background-color', 'rgba(104,104,104,0.3)')
+	})
 
 	//	feeldup Background를일단 숨겨놓음 
 	hideModalBG();
@@ -164,7 +148,6 @@ $(function(){
 			$('#feeldup').click()
 		}
 
-		changeWidthPCandRFM();
 		changeWidthHeightModalBoard();
 	});
 	// window resize end
