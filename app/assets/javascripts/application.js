@@ -18,9 +18,11 @@
 //= require_tree .
 //
 
+/*
 if ($(window).width() < 1000){
 	alert('아키필드는 현재 PC환경에 최적화 되어있습니다.\n 모바일 환경을 위한 서비스는 추후 개발 예정입니다.\n 감사합니다^^');
 }
+*/
 
 // change width and height of modal board
 // 필드업을 눌러서, 옵션을 선택했을 때 나오는 보드의 크기를 조정한다.
@@ -124,7 +126,10 @@ $(function(){
 	// feeldup option 클릭 
 	// feeldup option 클릭 
 	$('.option_item').click(function(){
-		showModalBoard();
+		// 버그 때문에 추가한 조건문
+		// 배경 눌러서 엎어지는 찰나에 옵션 누르는게 가능한  버그
+		if (isClickedFeeldup)
+			showModalBoard();
 	})
 	// feeldup option 클릭 end
 	

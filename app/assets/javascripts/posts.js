@@ -9,8 +9,10 @@ function postsColumnResize(){
 	var pWidth = $('.posts-item').width()
 	var rWidth = $('#right_fixed_menu').width()
 	var except_RFM = $(window).width() - (rWidth + 25) // 25 : RFM의 오른쪽 마진
-	$('#post-container').css('width', except_RFM - (except_RFM % (pWidth + 10)) ) // 각 포스트 아이템 마진 사방으로 5px임
-											.css('margin-left', (except_RFM - ('#post-container').width())/2)
+	if ($(window).width() > 900){
+		$('#post-container').css('width', except_RFM - (except_RFM % (pWidth + 10)) ) // 각 포스트 아이템 마진 사방으로 5px임
+											.css('margin-left', (except_RFM - $('#post-container').width())/2)
+	}
 }
 
 // 초기 너비 설정
@@ -48,8 +50,8 @@ $(function(){
 			$(this).hide()
 			$('#archive_hover').show();
 			// 이 둘의 배경이 제대로 설정되지 않는 버그가 있어서 직접 설정함
-			$('#archive_mine').css('background', '#D9E5FF');	
-			$('#archive_share').css('background', '#DAD9FF');	
+			$('#archive_mine').css('background', '#CBFE33');
+			$('#archive_share').css('background', '#CBFE33');	
 		},
 		function(){
 			$(this).css('background', '#CFCFCF');
@@ -80,7 +82,7 @@ $(function(){
 					$('#archive').show();
 				}
 			}, 10);
-			$(this).css('background', '#D9E5FF');	
+			$(this).css('background', '#CBFE33');	
 			if ( !hoverCheck[0] && !hoverCheck[1]){
 				$('#archive_hover').hide();
 				$('#archive').show();
@@ -100,7 +102,7 @@ $(function(){
 					$('#archive').show();
 				}
 			}, 10);
-			$(this).css('background', '#DAD9FF');	
+			$(this).css('background', '#CBFE33');	
 			
 		}
 	);

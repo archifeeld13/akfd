@@ -100,10 +100,9 @@ a.tag {
 // my_feeld.html.erb
 #user_info_panel{
 	background:white;
-	width:98%;
+	width:99%;
 	height: 200px;
-	margin: 0 1%;
-	margin-bottom: 1%;
+	margin: 0.5%;
 	border-radius:5px;
 	padding:3%;
 	img {
@@ -113,58 +112,73 @@ a.tag {
 	}
 	#user_info_name_dept{
 		float: left;
-		width: 250px;
+		width: 200px;
 	}
 	#user_info_counts{
 		float: right;
-		width: 200px;
+		width: 180px;
 	}
 }
 
 #my_feeld_menu{
-	width:98%;
-	margin: 0 1%;
+	width:99%;
+	height: 50px;
+
+	margin: 10px 0.5%;
+	margin-bottom: 5px;
 	padding: 0;
 	font-size: 1.2em;
+	font-weight: bold;
 	text-align: center;
 
 	#archive {
+		height:100%;
 		float: left;
+
 		background: #CFCFCF;
 		width:49.5%;
 		border-radius: 5px;
 		margin-right: 0.5%;
-		padding: 1%;
+		padding-top: 13px;
 	}
 	#archive_hover{
+		height:100%;
 		float: left;
+
 		width:49.5%;
 		margin-right: 0.5%;
 		padding: 0;
+
 		#archive_mine{
+			height:100%;
 			float: left;
-			background: #DAD9FF;
+
+			background: #CBFE33;
 			width:50%;
 			border-top-left-radius: 5px;
 			border-bottom-left-radius: 5px;
-			padding: 2%;
+			padding-top: 13px;
 		}
 		#archive_share{
+			height:100%;
 			float: left;
-			background:#D9E5FF;
+
+			background:#CBFE33;
 			width:50%;
 			border-top-right-radius: 5px;
 			border-bottom-right-radius: 5px;
-			padding: 2%;
+			padding-top: 13px;
 		}
 	}
 	#project_list {
+		height:100%;
 		float: left;
+
 		background: #CFCFCF;
 		width:49.5%;
 		border-radius: 5px;
 		margin-left: 0.5%;
-		padding: 1%;
+		padding-top: 13px;
 	}
 }
 
