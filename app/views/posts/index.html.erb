@@ -1,6 +1,10 @@
 
 <div id="search_info_panel">
-	아키필드에 오신 것을 환영합니다!
+	<% if flash[:search_info] %>
+		<span class="text-info"><%= flash[:search_info].html_safe %></span>
+	<% else %>
+		아키필드에 오신 것을 환영합니다!
+	<% end %>
 </div>
 
 <%= render @posts %>

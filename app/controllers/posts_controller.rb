@@ -6,6 +6,7 @@ class PostsController < ApplicationController
 		if params[:tag]
 			# 태그 검색시 실행 부분
 			@posts = Post.tagged_with(params[:tag])
+			flash[:search_info] = "<strong class='text-danger'>#{params[:tag]}</strong> 에 대한 검색결과 입니다."
 		else
 			# 기본 메인 페이지
 			@posts = Post.all.reverse
