@@ -75,7 +75,7 @@
 				<div class="RFMPanelItem" >
 					<%= link_to image_tag(user.image_url, class: "reco_myfeeld_img"), "/my_feeld?user_id=#{user.id}" %> 
 					<%= link_to user.name, "/my_feeld?user_id=#{user.id}"%>
-					<%= link_to image_tag('/images/plusbtn.png', class: "reco_myfeeld_plustbtn"), "#" %>
+					<%= link_to image_tag('/images/plusbtn.png', class: "reco_myfeeld_plustbtn"), friendships_path(:friend_id => user.id), :method => :post %>
 				</div> 
 			<% end %>
 		</div>
