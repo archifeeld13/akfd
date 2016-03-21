@@ -5,11 +5,10 @@ class WelcomeController < ApplicationController
   end
 
 	def test
-		friendships = Friendship.all
-		friendships.each do |f|
-			f.destroy
+		shares = Share.all
+		shares.each do |s|
+			s.destroy	
 		end
-
 		redirect_to root_path
 	end
 end

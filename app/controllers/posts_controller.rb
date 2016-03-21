@@ -10,7 +10,7 @@ class PostsController < ApplicationController
 		else
 			# 기본 메인 페이지
 			@posts = Post.all.reverse
-			flash[:notice] = "아키필드에 오신 것을 환영합니다!"
+			flash[:notice] = "아키필드에 오신 것을 환영합니다!<span style='color:red'>♥</span>"
 		end
   end
   
@@ -32,21 +32,35 @@ class PostsController < ApplicationController
 	# in my_feeld
 	# 
 	def archive_mine
-		@posts = Post.where(user_id: current_user.id).reverse
+		if params[:user_id]
+			@posts = Post.where(user_id: User.find(params[:user_id]).id).reverse
+		else
+			@posts = Post.where(user_id: current_user.id).reverse
+		end
 	end
 
 	def archive_share
-		# shared post
+		# shared post -> 최효성님이 조언주신대로 바꾸기
 		@posts = []
-		current_user.shares.each do |share|
-			@posts.push(share.post)	
+		if params[:user_id]
+			User.find(params[:user_id]).shares.each do |share|
+				@posts.push(share.post)	
+			end
+		else
+			current_user.shares.each do |share|
+				@posts.push(share.post)	
+			end
 		end
 		@posts.reverse!
 	end
 
 	def project_list
 		# 여기 같은경우 프로젝트를 클릭하면 거기에 속하는 포스트 갖고오게끔 해야함
-		@projects = Project.where(user_id: current_user.id).reverse
+		if params[:user_id]
+			@projects = Project.where(user_id: User.find(params[:user_id]).id).reverse
+		else
+			@projects = Project.where(user_id: current_user.id).reverse
+		end
 	end
 	#
 	# archive_mine, archive_share, project_list -> ajax

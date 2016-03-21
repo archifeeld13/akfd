@@ -20,6 +20,8 @@
 				<strong style="color:aqua"> 초밥왕지원짱</strong>
 			<% elsif @user.id == 1 %>
 				<strong style="color:green"> 오하시송</strong>
+			<% elsif @user.id == 4 %>
+				<strong style="color:purple">대장</strong>
 			<% end %>
 		</span><br>
 		<% if current_user %>
@@ -58,16 +60,22 @@
 		</span><br>
 	</div>
 </div>
-<% if current_user and current_user.id == @user.id %>
 <div id="my_feeld_menu">
 	<div id="archive">필드 아카이브</div>	
-	<div id="archive_hover">
-		<%= link_to raw('<div id="archive_mine">내 것만 보기</div>'), "/archive_mine", remote: true %>
-		<%= link_to raw('<div id="archive_share">필드인 목록</div>'), "/archive_share", remote: true %>
-	</div>	
-	<%= link_to raw('<div id="project_list">프로젝트 관리</div>'), "/project_list", remote: true %>
+	<% if current_user.id == @user.id %>
+		<div id="archive_hover">
+			<%= link_to raw('<div id="archive_mine">내 것만 보기</div>'), "/archive_mine", remote: true %>
+			<%= link_to raw('<div id="archive_share">필드인 목록</div>'), "/archive_share", remote: true %>
+		</div>	
+		<%= link_to raw('<div id="project_list">프로젝트 관리</div>'), "/project_list", remote: true %>
+	<% else %>
+		<div id="archive_hover">
+			<%= link_to raw('<div id="archive_mine">내 것만 보기</div>'), "/archive_mine?user_id=#{@user.id}", remote: true %>
+			<%= link_to raw('<div id="archive_share">필드인 목록</div>'), "/archive_share?user_id=#{@user.id}", remote: true %>
+		</div>	
+		<%= link_to raw('<div id="project_list">프로젝트 관리</div>'), "/project_list?user_id=#{@user.id}", remote: true %>
+	<% end %>
 </div>
-<% end %>
 
 <div id="posts-container">
 	<%= render @posts %>
