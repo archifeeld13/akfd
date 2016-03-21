@@ -3,7 +3,7 @@
 		<%= link_to image_tag('/images/logo.png', id: "brand-image"), posts_path , class: "navbar-brand", id: 'navbar-brand-link'%>
 	</div>
 
-	<form class="navbar-form" style="width:550px" role="search">
+	<form class="navbar-form" onsubmit="return false;"style="width:550px" role="search">
 		<div class="form-group" style="width:450px">
 			<input id="nav_search_input" type="text" class="form-control" style="width:450px; background-color:rgba(104,104,104,0.3)" placeholder="태그 검색" />
 		</div>
@@ -19,6 +19,12 @@
 				// 일단 #제거, 태그엔 특수문자 허용하지 말까?
 				$('#nav_search_submit').attr('href', '/posts?tag=' + $("#nav_search_input").val())
 			})	
+
+			$('#nav_search_input').keyup(function(e){
+				if (e.keyCode == 13){
+					window.location = '/posts?tag=' + $("#nav_search_input").val();
+				}	
+			})
 		})
 	</script>
 
