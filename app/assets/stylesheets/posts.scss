@@ -26,9 +26,7 @@ a.tag {
 
 #search_info_panel{
 	background:white;
-	width:99%;
-	margin: 0.5%;
-	border-radius:5px;
+	margin: 5px;
 	padding:0.5%;
 }
 
@@ -186,6 +184,10 @@ a.tag {
 		border-radius: 5px;
 		margin-left: 0.5%;
 		padding-top: 13px;
+	}
+
+	a{
+		color: black	
 	}
 }
 

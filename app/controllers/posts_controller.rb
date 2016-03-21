@@ -6,10 +6,11 @@ class PostsController < ApplicationController
 		if params[:tag]
 			# 태그 검색시 실행 부분
 			@posts = Post.tagged_with(params[:tag])
-			flash[:search_info] = "<strong class='text-danger'>#{params[:tag]}</strong> 에 대한 검색결과 입니다."
+			flash[:notice] = "<strong class='text-danger'>#{params[:tag]}</strong> 에 대한 검색결과 입니다."
 		else
 			# 기본 메인 페이지
 			@posts = Post.all.reverse
+			flash[:notice] = "아키필드에 오신 것을 환영합니다!"
 		end
   end
   
@@ -31,7 +32,7 @@ class PostsController < ApplicationController
 	# in my_feeld
 	# 
 	def archive_mine
-		@posts = Post.where(user_id: current_user.id)
+		@posts = Post.where(user_id: current_user.id).reverse
 	end
 
 	def archive_share
@@ -40,11 +41,12 @@ class PostsController < ApplicationController
 		current_user.shares.each do |share|
 			@posts.push(share.post)	
 		end
+		@posts.reverse!
 	end
 
 	def project_list
 		# 여기 같은경우 프로젝트를 클릭하면 거기에 속하는 포스트 갖고오게끔 해야함
-		@projects = Project.where(user_id: current_user.id)
+		@projects = Project.where(user_id: current_user.id).reverse
 	end
 	#
 	# archive_mine, archive_share, project_list -> ajax

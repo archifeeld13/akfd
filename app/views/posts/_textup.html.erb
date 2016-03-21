@@ -14,7 +14,7 @@
 	<div style="margin-bottom: 1%"></div>
 	<%= f.text_area :content, :id => 'input_post_content', :class => 'form-control', :rows => '13', :placeholder => '이곳에 글을 작성해 주세요' %>
 	<div style="margin-bottom: 1%"></div>
-	<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그 (태그는 쉼표로 구분해주세요! 태그1, 태그2)" %>
+	<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그 (태그는 쉼표로 구분해주세요! ex) 태그1, 태그2)" %>
 	<div class="has-error">
 		<div class="checkbox disabled">
 			<label style="margin-left: 1%;">
@@ -32,7 +32,7 @@
 			&nbsp;선택 안함
 		</div>
 		<% current_user.projects.each do |project| %>
-			<%= render 'projects/project', project: project %>
+			<%= render 'projects/project_radio', project: project, f: f %>
 		<% end %>
 	</div>
 </div>
