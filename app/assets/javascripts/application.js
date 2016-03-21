@@ -97,7 +97,7 @@ $(function(){
 
 	// icon hover
 	prev = ""
-	$( "#navbar a img, #feeldup img" ).hover(
+	$( ".nav-icon, #feeldup img" ).hover(
 		function() {
 			prev = $(this).attr('src')
 			prev_split = prev.split(".")

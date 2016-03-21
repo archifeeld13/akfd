@@ -63,6 +63,7 @@
 		<% end %>
 		<div class="RFMPanel">
 			<div class="RFMPanelTitle">인기 필드업</div>
+			<hr style="margin:5px 0">
 			<% @fav_posts[0,10].each do |post| %>
 				<div class="RFMPanelItem">
 					<%= link_to truncate(post.title, length:12, separater: ' '), post %></br>
@@ -71,6 +72,7 @@
 		</div>
 		<div class="RFMPanel">
 			<div class="RFMPanelTitle">추천 마이필드</div>
+			<hr style="margin:5px 0">
 			<% @users.shuffle[0,3].each do |user| %>
 				<div class="RFMPanelItem" >
 					<%= link_to image_tag(user.image_url, class: "reco_myfeeld_img"), "/my_feeld?user_id=#{user.id}" %> 

@@ -15,7 +15,7 @@
 		<% end %>
 	<% end %>
 	<div class="posts-item-info">
-		<span class="posts-item-title" ><%= truncate(post.title, length: 15, separater: ' ')%></span><br>
+		<strong class="posts-item-title" ><%= truncate(post.title, length: 15, separater: ' ')%></strong><br>
 		<div class="posts-item-counts">
 			<span><i class="fa fa-heart"></i> <%= post.likes.count %></span>, &nbsp;<span><i class="fa fa-comment"></i> <%= post.comments.count %></span>, &nbsp;<span><i class="fa fa-share-alt"></i> <%= post.shares.count %></span>
 		</div>
