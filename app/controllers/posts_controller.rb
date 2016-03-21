@@ -76,7 +76,7 @@ class PostsController < ApplicationController
 	
 	private
 		def post_params
-			params.require(:post).permit(:title, :content, {images: []}, :tag_list)
+			params.require(:post).permit(:title, :content, :project_id, {images: []}, :tag_list)
 		end
 		def set_posts_users
 			@posts = Post.all

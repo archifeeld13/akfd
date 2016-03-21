@@ -18,7 +18,7 @@
 				<strong style="color:red">똥쟁이</strong>
 			<%end %>
 		</span><br>
-		<% if @user.id == current_user.id %>
+		<% if current_user and @user.id == current_user.id %>
 			<a style="color:#B1DB4E; font-size: 1.5em; font-weight:bold" href="#">프로필 편집</a><br>
 		<% else %>
 			<%= link_to "팔로우 하기", friendships_path(:friend_id => @user.id), :method => :post %>
@@ -48,7 +48,7 @@
 		</span><br>
 	</div>
 </div>
-<% if current_user.id == @user.id %>
+<% if current_user and current_user.id == @user.id %>
 <div id="my_feeld_menu">
 	<div id="archive">필드 아카이브</div>	
 	<div id="archive_hover">

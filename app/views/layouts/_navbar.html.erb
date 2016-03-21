@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default navbar-fixed-top" style="padding: 2px">
-	<div class="navbar-header" style="margin-left: 2.5%">
+	<div class="navbar-header" style="margin-left: 2%">
 		<%= link_to image_tag('/images/logo.png', id: "brand-image"), posts_path , class: "navbar-brand", id: 'navbar-brand-link'%>
 	</div>
 
@@ -16,7 +16,8 @@
 	<script>
 		$(function(){
 			$('#nav_search_submit').click(function(){
-				$('#nav_search_submit').attr('href', '/posts?tag=' + escape('#') + $("#nav_search_input").val())
+				// 일단 #제거, 태그엔 특수문자 허용하지 말까?
+				$('#nav_search_submit').attr('href', '/posts?tag=' + $("#nav_search_input").val())
 			})	
 		})
 	</script>

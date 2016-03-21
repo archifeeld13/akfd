@@ -9,8 +9,10 @@
 <div id="show-post-content">
 	<div style="background:#F3F3F3"><%= @post.content %></div>
 	<br>
-	<%= link_to "좋아요", post_likes_path(@post.id), method: :post, remote: true %>
-	&nbsp;
-	<%= link_to "필드인", post_shares_path(@post.id), method: :post, remote: true %>
+	<% if current_user %>
+		<%= link_to "좋아요", post_likes_path(@post.id), method: :post, remote: true %>
+		&nbsp;
+		<%= link_to "필드인", post_shares_path(@post.id), method: :post, remote: true %>
+	<% end %>
 </div>
 <%= render "comments/comments" %>

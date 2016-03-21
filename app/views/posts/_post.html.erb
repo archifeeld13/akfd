@@ -1,10 +1,10 @@
 <div class="posts-item">
-	<span class="posts-item-writer">
+	<div class="posts-item-writer">
 		<%= image_tag(post.user.image_url) %>
 		<%= link_to post.user.name, "/my_feeld?user_id=#{post.user.id}"%>
 		&nbsp;
 		<%= link_to "x", post, method: :delete, data: { confirm:	"Are you sure?" } %>
-	</span>
+	</div>
 	<% if post.images.size > 0 %>
     <%= link_to image_tag(post.images[0].url, class: 'posts-item-img'), post, remote:true %></td>
 	<% else %>
@@ -15,9 +15,11 @@
 		<% end %>
 	<% end %>
 	<div class="posts-item-info">
-		<strong class="posts-item-title" ><%= truncate(post.title, length: 15, separater: ' ')%></strong><br>
+		<div class="posts-item-title" ><%= truncate(post.title, length: 15, separater: ' ')%></div>
 		<div class="posts-item-counts">
-			<span><i class="fa fa-heart"></i> <%= post.likes.count %></span>, &nbsp;<span><i class="fa fa-comment"></i> <%= post.comments.count %></span>, &nbsp;<span><i class="fa fa-share-alt"></i> <%= post.shares.count %></span>
+			<span><i class="fa fa-heart"></i> <%= post.likes.count %></span>, &nbsp;
+			<span><i class="fa fa-comment"></i> <%= post.comments.count %></span>, &nbsp;
+			<span><i class="fa fa-share-alt"></i> <%= post.shares.count %></span>
 		</div>
 		<div class="posts-item-hashtags">
 			<% if post.tag_list.size > 0 %>	
