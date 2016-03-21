@@ -50,6 +50,7 @@ a.tag {
 	.posts-item-img{
 		height: 60%;
 		width: 100%;
+		object-fit: cover;
 	}
 	.posts-item-text{
 		height: 60%;
@@ -64,7 +65,7 @@ a.tag {
 		.posts-item-title{
 			margin: 2% 0 ;	
 			font-size:1.2em;
-			color: #22222;
+			color: #444444;
 			font-weight:bold;
 		}
 		.posts-item-counts{

@@ -34,8 +34,9 @@ $navbar-default-link-hover-bg: black;
 // layout 에 적용되는 스타일들  
 // layout 에 적용되는 스타일들  
 
-@import url(http://api.mobilis.co.kr/webfonts/css/?fontface=NanumGothicWeb); 
-* { font-family: 'NanumGothic', '나눔고딕','NanumGothicWeb', '맑은 고딕', 'Malgun Gothic', Dotum; }
+// http://ichbintaeeun.tistory.com/30
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+* { font-family: 'Noto Sans KR', serif; }
 
 body{
 	margin-top: 64px;

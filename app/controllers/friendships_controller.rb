@@ -2,11 +2,10 @@ class FriendshipsController < ApplicationController
 	def create
 		@friendship = current_user.friendships.find_or_create_by(:friend_id => params[:friend_id])
 		if @friendship.save
-			flash[:notice] = "Added friend."
-			#redirect_to(:back)
-			redirect_to '/my_feeld'
+			#flash[:notice] = "Added friend."
+			redirect_to("/my_feeld?user_id=#{params[:friend_id]}")
 		else
-			flash[:error] = "Unable to add friend."
+			#flash[:error] = "Unable to add friend."
 			redirect_to(:back)
 		end
 	end

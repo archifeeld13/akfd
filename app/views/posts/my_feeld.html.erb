@@ -21,7 +21,11 @@
 		<% if current_user and @user.id == current_user.id %>
 			<a style="color:#B1DB4E; font-size: 1.5em; font-weight:bold" href="#">프로필 편집</a><br>
 		<% else %>
-			<%= link_to "팔로우 하기", friendships_path(:friend_id => @user.id), :method => :post %>
+			<% if @user.inverse_friends.include? current_user %>
+				<%= link_to "팔로우 끊기", friendship_path(Friendship.find_by(friend_id: @user.id)), :method => :delete%>
+			<% else %>
+				<%= link_to "팔로우 하기", friendships_path(:friend_id => @user.id), :method => :post %>
+			<% end %>
 		<% end %>
 	</div>
 
