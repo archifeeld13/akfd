@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 	get '/auth/:provider/callback' => 'sessions#create'
 	delete '/logout', to: 'sessions#destroy'
 
+	get 'welcome/test/930911' => 'welcome#test'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

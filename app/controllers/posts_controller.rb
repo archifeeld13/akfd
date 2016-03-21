@@ -19,21 +19,37 @@ class PostsController < ApplicationController
 		if params[:user_id]
 			@user = User.find(params[:user_id])
 			@posts = Post.where(user_id: params[:user_id]).reverse
-			# 쿼리상에서 애초에 공유한것까지 같이 가져오는 방법은 없나?
-			@shares = []
-			@user.shares.each do |share|
-				@shares.push(share.post)
-			end
 		# 마이필드 버튼을 클릭해서 /my_feeld로 접속했을 때 실행되는 부분 
 		else 
 			@user = User.find(current_user.id)
 			@posts = Post.where(user_id: @user.id).reverse
-			@shares = []
-			@user.shares.each do |share|
-				@shares.push(share.post)
-			end
 		end
 	end
+
+	#
+	# archive_mine, archive_share, project_list -> ajax
+	# in my_feeld
+	# 
+	def archive_mine
+		@posts = Post.where(user_id: current_user.id)
+	end
+
+	def archive_share
+		# shared post
+		@posts = []
+		current_user.shares.each do |share|
+			@posts.push(share.post)	
+		end
+	end
+
+	def project_list
+		# 여기 같은경우 프로젝트를 클릭하면 거기에 속하는 포스트 갖고오게끔 해야함
+		@projects = Project.where(user_id: current_user.id)
+	end
+	#
+	# archive_mine, archive_share, project_list -> ajax
+	# in my_feeld
+	# 
 
 	def show
 		@post = Post.find(params[:id])
