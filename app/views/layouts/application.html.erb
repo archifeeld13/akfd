@@ -66,7 +66,7 @@
 			<hr style="margin:5px 0">
 			<% @fav_posts[0,10].each do |post| %>
 				<div class="RFMPanelItem">
-					<%= link_to truncate(post.title, length:12, separater: ' '), post %></br>
+					<%= link_to truncate(post.title, length:12, separater: ' '), post, remote:true, class: 'fav-posts' %></br>
 				</div>
 			<% end %>
 		</div>

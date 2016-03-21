@@ -4,7 +4,7 @@
 		<div class="col-md-2 col-sm-2 col-xs-2">
 			<figure class="thumbnail">
 				<img class="img-responsive" src="<%=comment.user.image_url%>" />
-				<figcaption class="text-center"><%= comment.user.name %></figcaption>
+				<figcaption class="text-center"><%= link_to comment.user.name, "/my_feeld?user_id=#{comment.user.id}"%></figcaption>
 			</figure>
 		</div>
 		<div class="col-md-10 col-sm-10 col-xs-10">
@@ -54,7 +54,7 @@
 		<div class="col-md-2 col-sm-2 col-xs-2">
 			<figure class="thumbnail">
 				<img class="img-responsive" src="<%=comment.user.image_url%>" />
-				<figcaption class="text-center"><%= comment.user.name %></figcaption>
+				<figcaption class="text-center"><%= link_to comment.user.name, "/my_feeld?user_id=#{comment.user.id}"%></figcaption>
 			</figure>
 		</div>
 	</article>

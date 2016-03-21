@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 	# 보여주기 용으로 해논거임
 	before_action :set_posts_users
-	
+
   def index
 		if params[:tag]
 			# 태그 검색시 실행 부분
@@ -61,7 +61,7 @@ class PostsController < ApplicationController
 	end
 
   def new
-		#@post = Post.new
+		@post = Post.new
 		respond_to do |format|
 			format.html { render :action => "new" }
 			modal_type = params[:type]
@@ -72,6 +72,11 @@ class PostsController < ApplicationController
 			end
 		end
   end
+
+	def edit
+		@post = Post.find(params[:id])	
+		# textup타입만 됨
+	end
 
 	def create
 		@post = Post.new(post_params)
@@ -84,6 +89,12 @@ class PostsController < ApplicationController
 		end
 	end
 
+	def update
+		@post = Post.find(params[:id])
+		@post.update(post_params)
+		redirect_to posts_path
+	end
+
 	def destroy
 		@post = Post.find(params[:id])	
 		@post.destroy
@@ -92,7 +103,7 @@ class PostsController < ApplicationController
 	
 	private
 		def post_params
-			params.require(:post).permit(:title, :content, :project_id, {images: []}, :tag_list)
+			params.require(:post).permit(:title, :content, :project_id, {images: []}, :tag_list_fixed)
 		end
 		def set_posts_users
 			@posts = Post.all

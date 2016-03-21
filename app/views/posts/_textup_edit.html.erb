@@ -8,7 +8,7 @@
 	<div style="color:#BBBBBB; font-size:1.3em;">마이필드<br> 프로젝트 관리</div>
 </div>
 
-<%= form_for @post, posts_path  do |f| %>
+<%= form_for @post, url:{action: 'update', params: {id: @post.id}} do |f| %>
 <div style="float:left; width:75%; height:400px; background:#E9E9E9; padding:2%">
 	<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
 	<div style="margin-bottom: 1%"></div>
