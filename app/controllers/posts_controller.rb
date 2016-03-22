@@ -55,12 +55,19 @@ class PostsController < ApplicationController
 	end
 
 	def project_list
-		# 여기 같은경우 프로젝트를 클릭하면 거기에 속하는 포스트 갖고오게끔 해야함
 		if params[:user_id]
 			@projects = Project.where(user_id: User.find(params[:user_id]).id).reverse
 		else
 			@projects = Project.where(user_id: current_user.id).reverse
 		end
+	end
+
+	def project_list_in
+		project = Project.find(params[:project_id])
+		@posts = project.posts
+		@projects = [project] 
+		# 1개짜리 배열, projects/_project.html.erb 재활용위해..
+		# 그 안에서 @projects에 대해 each문 돌림
 	end
 	#
 	# archive_mine, archive_share, project_list -> ajax

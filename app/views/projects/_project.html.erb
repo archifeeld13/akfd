@@ -3,7 +3,7 @@
 	<div class="posts-item-writer">
 	</div>
 	<p class="posts-item-text" style="font-size:3.5em" align="center">
-		<%= project.name %>
+		<%= link_to project.name, "/project_list_in?project_id=#{project.id}", remote: true %>
 	</p>
 	<div class="posts-item-info">
 		<div class="posts-item-title" align="center" style="color:green"><%= time_ago_in_words(project.created_at) %> 전에 생성</div>

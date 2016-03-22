@@ -13,12 +13,7 @@
 		<%= link_to "좋아요", post_likes_path(@post.id), method: :post, remote: true %>
 		&nbsp;
 		<% if current_user.id != @post.user.id %>
-			<% if current_user.shares.include? @post %>
-				<%= link_to "필드인취소", post_shares_path(@post.id), method: :post, remote: true %>
-			<% else %>
-				<%= link_to "필드인", post_shares_path(@post.id), method: :post, remote: true %>
-				<%# 나중엔 여기 ajax로바로바로  텍스트가 바뀌게끔.. %>
-			<% end %>
+			<%= link_to "필드인", post_shares_path(@post.id), method: :post, remote: true %>
 		<% else %>
 			<%= link_to "수정하기", edit_post_path(@post.id), remote: true %>
 		<% end %>
