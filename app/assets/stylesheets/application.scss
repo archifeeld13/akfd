@@ -38,6 +38,17 @@ $navbar-default-link-hover-bg: black;
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 * { font-family: 'Noto Sans KR', serif; }
 
+// summernote 추가하면서 모달창이 백드롭에 가려지는 이슈 해결 도중 추가
+// -> 결국 link 추가하기 안쓰기로함-> 색,폰트사이즈 조절하는 것과 충돌
+// https://github.com/summernote/summernote/issues/978
+.navbar-fixed-top{
+	z-index: 500 !important;
+}
+//.modal-backdrop, .modal-backdrop.in{
+//  display: none;
+//}
+// 여기까지 summernote 이슈 + 기존의 z-index 숫자 단위 600/700으로 낮춤
+
 body{
 	margin-top: 64px;
 	background: #F0F0F0;
@@ -121,7 +132,7 @@ input{
 // 보인다. (버그)
 #option_container {
 	display: none;
-	z-index:5500;
+	z-index:600;
 }
 
 .option_item{
@@ -133,7 +144,7 @@ input{
 	position:fixed;
 	//border-radius: 10px;
 	width: 700px;
-	z-index: 6000;
+	z-index: 700;
 	overflow-y: auto;
 	//background: #F0F0F0;
 	background: white;
@@ -144,7 +155,7 @@ input{
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 5000;
+	z-index: 600;
 	background: rgba(34,34,34,0.75);
 	
 }

@@ -7,7 +7,7 @@
 	<%= image_tag(image.url, class: 'show-post-img') %>
 <% end %>
 <div id="show-post-content">
-	<div style="background:#F3F3F3"><%= @post.content %></div>
+	<div ><%= @post.content.html_safe %></div>
 	<br>
 	<% if current_user %>
 		<%= link_to "좋아요", post_likes_path(@post.id), method: :post, remote: true %>

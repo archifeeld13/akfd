@@ -6,15 +6,16 @@
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
-	<!-- 합쳐지고 최소화된 최신 CSS -->
-	<%# stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" %>
 	<%= stylesheet_link_tag 'navbarcolor.css' %>
 	<%= stylesheet_link_tag 'searchbox.css' %>
 	
 	<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 	<%= javascript_include_tag "https://code.jquery.com/jquery-1.12.0.js" %>
 	<%= javascript_include_tag "https://code.jquery.com/ui/1.11.4/jquery-ui.js" %>
-	<%# javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js" %>
+
+	<!-- include summernote css/js-->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"></script>
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
 
   <%= csrf_meta_tags %>
 </head>

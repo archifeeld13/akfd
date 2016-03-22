@@ -10,3 +10,21 @@ $('.modal_close').click(function(){
 // modal close button click end
 
 changeWidthHeightModalBoard();
+
+$('#modal_board').append('<script src="/javascripts/summernote-ko-KR.js"></script>')
+
+$('#input_post_content').summernote({
+	height: 200,
+	minHeight: null,
+	maxHeight: 200,
+	toolbar:[
+		['style', ['bold', 'underline', 'clear']],
+		['font', ['strikethrough']],
+    ['color', ['color']],
+		['para', ['ul', 'ol', 'paragraph']],
+    ['fontsize', ['fontsize']],
+	],
+	lang: 'ko-KR',
+	placeholder: '이곳에 글을 작성해 주세요' 
+});
+

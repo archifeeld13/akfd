@@ -3,15 +3,18 @@
 		<%= image_tag(post.user.image_url) %>
 		<%= link_to post.user.name, "/my_feeld?user_id=#{post.user.id}"%>
 		&nbsp;
-		<%= link_to "x", post, method: :delete, data: { confirm:	"Are you sure?" } %>
+		<% if current_user and current_user.id == 1 %>
+			<%= link_to "x", post, method: :delete, data: { confirm:	"Are you sure?" } %>
+		<% end %>
 	</div>
 	<% if post.images.size > 0 %>
     <%= link_to image_tag(post.images[0].url, class: 'posts-item-img'), post, remote:true %></td>
 	<% else %>
 		<%= link_to(post, remote: true) do %>
-			<p class="posts-item-text">
-				<%= truncate(post.content, length: 100) %>
-			</p>
+			<div class="posts-item-text">
+				<%#= truncate(post.content, length: 100) %>
+				<%= post.content.html_safe%>
+			</div>
 		<% end %>
 	<% end %>
 	<div class="posts-item-info">
