@@ -38,34 +38,40 @@ function changeWidthHeightModalBoard(){
 
 	// 필드업 보드의 높이를 조정
 	if (!isPostItemClicked){
+		// 필드업 했다면
 		$('#modal_board')
 			.css('position', 'fixed')
 			.css('height', 550)
-			.css('top', ($(window).height() - 550)/2 )
+			.css('top', $(window).height() * 0.1 )
+			//.css('top', ($(window).height() - 550)/2 )
 	}
 	else {
 		$('#modal_board')
 			.css('position', 'fixed')
-			.css('top', $(window).height() * 0.05 )
+			.css('top', $(window).height() * 0.1 )
 
 		if ($('#modal_board').height() >  ($(window).height() - 100)){
-			$('#modal_board').css('height', $(window).height() * 0.9)
-			.css('top', $(window).height() * 0.05 )
+			$('#modal_board').css('height', $(window).height() * 0.8)
+			.css('top', $(window).height() * 0.1 )
 		}
 	}
 
-}
+}					
 
 // modal board를 보여준다.
 function showModalBoard(){
 	// modal 보드를 띄운다 
 	$('#modal_board').fadeIn()
-	
+	// 모달창의 높이를 초기상태로 돌려준다 
+	// edit 할 땐 따로 호출해줬다. edit.js.erb에서
+ 	$('#modal_board').css('height', 'auto')
 
 	// modal 보드의 사이즈를 조절한다 (resize시 재 호출)
 	// 참고: 보드가 뜨지 않은 상태에서 호출하면 넓이가 작은 상태에서
 	// 구해지므로 반드시 fadeIn 이후에 나와야한다.
 	//changeWidthHeightModalBoard();
+	// 이걸 여기서 하면안되는 이유는, 내용이 다 로드 된다음 판단을 해야 하기 때문!!!
+	// post item클릭했을 경우, 내용의 높이와 윈도우를 비교하는 부분이 있기 때문에!
 }
 
 // modal board를 숨긴다. background 클릭시 호출한다
@@ -155,11 +161,6 @@ $(function(){
 	$('#modal_bg').click(function(){
 		isModalBgShowed = false;
 		isPostItemClicked = false;
-
-		// 모달창의 높이를 초기상태로 돌려준다
-		// http://stackoverflow.com/questions/20267675/div-height-doesnt-adjust-to-fit-content
-		// changeWidthHeightModalBoard 함수와 연관지어 져잇는 분
-		$('#modal_board').css('height', 'auto')
 
 		hideModalBoard();
 	})

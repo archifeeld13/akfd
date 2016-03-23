@@ -11,6 +11,10 @@ $('.modal_close').click(function(){
 
 changeWidthHeightModalBoard();
 
+// 모달창의 높이를 초기상태로 돌려준다
+// show modal이 길 때, edit모드로 전환하면 긴 부분이 남아있는 현상 해결
+$('#modal_board').css('height', 'auto')
+
 $('#modal_board').append('<script src="/javascripts/summernote-ko-KR.js"></script>')
 
 $('#input_post_content').summernote({
