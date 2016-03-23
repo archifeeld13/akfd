@@ -14,6 +14,14 @@ class PostsController < ApplicationController
 		end
   end
   
+
+=begin
+	my_feeld 에 속하는 기능들
+		- message_box
+		- archive_mine
+		- archive_share
+		- project_list
+=end
 	def my_feeld
 		# 회원 이름을 클릭해서 들어오면 /my_feeld?user_id=유저아이디
 		# 형식으로 날라온다
@@ -30,6 +38,7 @@ class PostsController < ApplicationController
 	def message_box
 		# 나중에 메시지 보내는 용도로 쓸 것임
 	end
+
 
 	#
 	# archive_mine, archive_share, project_list -> ajax
@@ -73,10 +82,10 @@ class PostsController < ApplicationController
 		# 1개짜리 배열, projects/_project.html.erb 재활용위해..
 		# 그 안에서 @projects에 대해 each문 돌림
 	end
-	#
-	# archive_mine, archive_share, project_list -> ajax
-	# in my_feeld
-	# 
+=begin	
+	 in my_feeld
+	 end 
+=end
 
 	def show
 		@post = Post.find(params[:id])

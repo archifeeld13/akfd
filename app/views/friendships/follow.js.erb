@@ -1,6 +1,5 @@
-f_list = ""
-<% @user.friendships.each do |f| %>
-	f_list += "<%= f.friend.name %>, "
-<% end %>
+show_modal_bg_board();
 
-alert(f_list)
+$('<%=j render 'follow' %>').appendTo('#modal_board')
+
+changeWidthHeightModalBoard();

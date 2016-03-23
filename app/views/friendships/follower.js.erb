@@ -1,6 +1,5 @@
-f_list = ""
-<% @user.inverse_friends.each do |f| %>
-	f_list += "<%= f.name %>, "
-<% end %>
+show_modal_bg_board();
 
-alert(f_list)
+$('<%=j render 'follower' %>').appendTo('#modal_board')
+
+changeWidthHeightModalBoard();

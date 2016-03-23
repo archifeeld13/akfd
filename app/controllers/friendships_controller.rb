@@ -13,7 +13,7 @@ class FriendshipsController < ApplicationController
 	def show
 		show_type = params[:type]
 		@user = User.find(params[:id])
-
+		
 		respond_to do |format|
 			#format.html { render :action => "new" }
 			case show_type 
