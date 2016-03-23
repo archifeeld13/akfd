@@ -103,14 +103,16 @@
 				</form>
 			</div>
 			<div>
+				<%= link_to image_tag('/images/register.png', class: "login_btns"), '/register'%> 
+			</div>
+			<div style="margin-top: 1%">
 				<%= link_to image_tag('/images/login.png', class: "login_btns"), '#' %> 
 			</div>
 			<div style="margin-top: 1%">
 				<%= link_to image_tag('/images/facebooklogin.png', class: "login_btns"), '/auth/facebook'%> 
 			</div>
 				<div style="margin-top: 20px">
-				<p style="color:white; "><a href="/posts" style="color:white"> 비회원 입장 </a>  | 
-				<a href="/register" style="color:white"> 회원가입 </a></p>
+				<a href="/posts" style="color:white"> 비회원 입장 </a> 
 			</div>
 		</div>
 	</center>

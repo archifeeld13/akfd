@@ -24,6 +24,18 @@ if ($(window).width() < 1000){
 }
 */
 
+function imgIconHover(selector){
+	prev = ""
+	$( selector ).hover(
+		function() {
+			prev = $(this).attr('src')
+			prev_split = prev.split(".")
+			$( this ).attr('src',  prev_split[0] + "rev" + ".png")
+		}, function() {
+			$( this ).attr('src', prev)
+		}
+	);
+}
 // change width and height of modal board
 // 필드업을 눌러서, 옵션을 선택했을 때 나오는 보드의 크기를 조정한다.
 // 다음 변수를 통해 판단한다
@@ -154,17 +166,8 @@ $(function(){
 	//	feeldup Background를일단 숨겨놓음 
 	hideModalBG();
 
-	// icon hover
-	prev = ""
-	$( ".nav-icon, #feeldup img" ).hover(
-		function() {
-			prev = $(this).attr('src')
-			prev_split = prev.split(".")
-			$( this ).attr('src',  prev_split[0] + "rev" + ".png")
-		}, function() {
-			$( this ).attr('src', prev)
-		}
-	);
+	imgIconHover(".nav-icon");
+	imgIconHover("#feeldup img");
 	
 	
 	// #feeldup click

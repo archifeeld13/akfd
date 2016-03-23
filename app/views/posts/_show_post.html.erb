@@ -10,10 +10,15 @@
 	<div ><%= @post.content.html_safe %></div>
 	<br>
 	<% if current_user %>
-		<%= link_to "좋아요", post_likes_path(@post.id), method: :post, remote: true %>
+		<% if Like.find_by(post_id: @post.id, user_id: current_user.id) %>
+			<%= link_to image_tag('/images/feeldrev.png'), post_likes_path(@post.id), id: "feeld" ,method: :post, remote: true %>
+		<% else %>
+			<%= link_to image_tag('/images/feeld.png'), post_likes_path(@post.id), id: "feeld" ,method: :post, remote: true %>
+
+		<% end %>
 		&nbsp;
 		<% if current_user.id != @post.user.id %>
-			<%= link_to "필드인", post_shares_path(@post.id), method: :post, remote: true %>
+			<%= link_to image_tag('/images/feeldin.png'),  post_shares_path(@post.id), id: "feeldin", method: :post, remote: true %>
 		<% else %>
 			<%= link_to "수정하기", edit_post_path(@post.id), remote: true %>
 		<% end %>
@@ -21,3 +26,4 @@
 	<!-- 삭제하기 추가 필요 -->
 </div>
 <%= render "comments/comments" %>
+

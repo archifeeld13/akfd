@@ -1,1 +1,5 @@
-alert ("<%= @post.likes.count %>")
+<% if Like.find_by(post_id: @post.id, user_id: current_user.id) %>
+	$('#feeld img').attr('src', '/images/feeldrev.png')
+<% else %>
+	$('#feeld img').attr('src', '/images/feeld.png')
+<% end %>
