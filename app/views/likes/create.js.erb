@@ -3,3 +3,4 @@
 <% else %>
 	$('#feeld img').attr('src', '/images/feeld.png')
 <% end %>
+$('#feeldcnt').html("<%=@post.likes.count%>")

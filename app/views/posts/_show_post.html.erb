@@ -14,11 +14,12 @@
 			<%= link_to image_tag('/images/feeldrev.png'), post_likes_path(@post.id), id: "feeld" ,method: :post, remote: true %>
 		<% else %>
 			<%= link_to image_tag('/images/feeld.png'), post_likes_path(@post.id), id: "feeld" ,method: :post, remote: true %>
-
+			x <strong id="feeldcnt"><%=@post.likes.count%></strong>
 		<% end %>
 		&nbsp;
 		<% if current_user.id != @post.user.id %>
 			<%= link_to image_tag('/images/feeldin.png'),  post_shares_path(@post.id), id: "feeldin", method: :post, remote: true %>
+			x <strong id="feeldincnt"><%=@post.shares.count%></strong>
 		<% else %>
 			<%= link_to "수정하기", edit_post_path(@post.id), remote: true %>
 		<% end %>
