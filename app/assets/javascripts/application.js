@@ -27,10 +27,10 @@ if ($(window).width() < 1000){
 // change width and height of modal board
 // 필드업을 눌러서, 옵션을 선택했을 때 나오는 보드의 크기를 조정한다.
 // 다음 변수를 통해 판단한다
-var isPostItemClicked = false
+var isFeeldupClicked = false
 
 
-// modal bg를 클릭햇을 때
+// modal bg를 클릭했을 때
 // 여기서 변경하는 modal 의 height를 auto로 초기화해줘야한다.
 // http://stackoverflow.com/questions/20267675/div-height-doesnt-adjust-to-fit-content
 // show_modal_bg_board 호출 이후에 불리는 함수이다
@@ -40,7 +40,7 @@ function changeWidthHeightModalBoard(){
 	$('#modal_board').css('left', ($(window).width() -  $('#modal_board').width())/2)
 
 	// 필드업 보드의 높이를 조정
-	if (!isPostItemClicked){
+	if (isFeeldupClicked){
 		// 필드업 했다면
 		$('#modal_board')
 			.css('position', 'fixed')
@@ -49,10 +49,12 @@ function changeWidthHeightModalBoard(){
 			//.css('top', ($(window).height() - 550)/2 )
 	}
 	else {
+		// 기본은 height : auto에 의해 내용에 의존해 늘어나게
 		$('#modal_board')
 			.css('position', 'fixed')
 			.css('top', $(window).height() * 0.1 )
 
+		// 만약 내용이 윈도우 높이보다 넘친다면 높이를 할당
 		if ($('#modal_board').height() >  ($(window).height() - 100)){
 			$('#modal_board').css('height', $(window).height() * 0.8)
 			.css('top', $(window).height() * 0.1 )
@@ -169,6 +171,8 @@ $(function(){
 	// #feeldup click
 	$('#feeldup').click(function(){
 
+		isFeeldupClicked = true;
+
 		showModalBG();
 
 		showOptionContainer();
@@ -197,7 +201,7 @@ $(function(){
 	// #modal_bg click
 	$('#modal_bg').click(function(){
 		isModalBgShowed = false;
-		isPostItemClicked = false;
+		isFeeldupClicked = false;
 
 		hideModalBoard();
 	})
