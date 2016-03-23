@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 	# /posts를 앞에 붙이면 위에거랑 겹쳐서 문제가 되어 /my_feeld로 독립시켰다
 	get '/my_feeld' => 'posts#my_feeld'
 	get '/my_feeld/:user_id' => 'posts#my_feeld'
+	get '/message_box/:user_id' => 'posts#message_box'
 	get '/archive_mine' => 'posts#archive_mine'
 	get '/archive_share' => 'posts#archive_share'
 	get '/project_list' => 'posts#project_list'

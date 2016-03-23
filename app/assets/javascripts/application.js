@@ -29,9 +29,12 @@ if ($(window).width() < 1000){
 // 다음 변수를 통해 판단한다
 var isPostItemClicked = false
 
+
 // modal bg를 클릭햇을 때
 // 여기서 변경하는 modal 의 height를 auto로 초기화해줘야한다.
 // http://stackoverflow.com/questions/20267675/div-height-doesnt-adjust-to-fit-content
+// show_modal_bg_board 호출 이후에 불리는 함수이다
+// show_modal_bg_board 호출 이후에 불리는 함수이다
 function changeWidthHeightModalBoard(){
 	// 스크린이 한없이 작아질 때, 필드업 보드가 납작해지니까.. 50%이상으로 해주자.
 	$('#modal_board').css('left', ($(window).width() -  $('#modal_board').width())/2)
@@ -74,6 +77,50 @@ function showModalBoard(){
 	// post item클릭했을 경우, 내용의 높이와 윈도우를 비교하는 부분이 있기 때문에!
 }
 
+// showModalBoard와 showModalBG사이에 불릴 가능성이 있는 함수이다
+// ex) feeldup click 후 option click
+function showOptionContainer(){
+	// fix시키면 된다. (fix하지 않으면 $(window).scroll이벤트에 위치 설정을 반복해야한다)
+	// + 반드시 #modal_bg가 show되고 나서 와야한다.
+	$('#option_container')
+		.css('position', 'fixed')
+		.css('top', $(window).height()/2 - 75)
+		.css('margin-left', ($(window).width() - $('#option_container').width())/2 )
+		.fadeIn()
+}
+
+// isModalBgShowed 변수는 화면 사이즈 조정시 요소의 사이즈를 다시 구하기 위해서
+// window resize이벤트가 발생할 때마다 feeldup버튼을 다시 클릭을 해줌으로써
+// 요소의 사이즈를 재정비 하려고 했지만, 버튼을 클릭하지 않은 상태에서도 resize이벤트에 걸려서
+// 버튼을 누르지 않았음에도 이벤트가 발생해 이 문제를 해결하고자 추가했다.
+isModalBgShowed = false;
+// modal board 의 배경을 보여준다
+// showModalBoard와 분리한 이유는 showModalBG와 showModalBoard 사이에 선택적으로
+// 옵션을 보여줄 수도 있고 없기도 하기 때문이다
+// 필드업을 눌렀을 때에는 모달을 띄우기 전에 옵션을 보여줘야 하지만
+// 포스트 아이템을 눌렀을 때에는 옵션을 보여줄 필요가 없다.
+function showModalBG(){
+	isModalBgShowed = true;
+
+	// 흐린 배경 표시 -> 이 액션은 posts.js에서도 post item 클릭시 취한다
+	$('#modal_bg')
+		.css('height', $(document).height())
+		.css('width', $(document).width())
+		.fadeIn()/*show()*/
+}
+
+// 동적으로 모달 배경과 모달 창을 보여주는 부분으로
+// 여러 곳에서 호출할 수 있다
+// 호출 후에 반드시 changeWidthHeightModalBoard 함수를 호출해줌으로써 모달보드를 조정해줘야한다
+function show_modal_bg_board(){
+
+	showModalBG();
+	showModalBoard();
+	// ajax에 의해 이 보드가 채워진다
+	// 호출 이후 내용을 채우고 나서
+	// 반드시 changeWidthHeightModalBoard를 호출해서 모달보드의 너비를 보정한다
+}
+
 // modal board를 숨긴다. background 클릭시 호출한다
 function hideModalBoard(){
 	$('#modal_bg').fadeOut()/*hide()*/
@@ -82,6 +129,7 @@ function hideModalBoard(){
 }
 
 // feeldup 눌렀을 때 나오는 배경 및 필드업 보드  숨겨놓기
+// 맨첨에만 불린다
 // 사실 hideModalBoard와 비슷하다
 function hideModalBG(){
 	$('#modal_bg').hide()
@@ -90,6 +138,9 @@ function hideModalBG(){
 }
 
 
+
+// 문서가 다 로드 되면 해야 할 작업들
+// 문서가 다 로드 되면 해야 할 작업들
 $(function(){
 	// 네브바 서치 인풋태그 배경 토글
 	$('#nav_search_input').bind('focus', function(){
@@ -114,31 +165,16 @@ $(function(){
 	);
 	
 	
-	// isModalBgShowed 변수는 화면 사이즈 조정시 요소의 사이즈를 다시 구하기 위해서
-	// window resize이벤트가 발생할 때마다 feeldup버튼을 다시 클릭을 해줌으로써
-	// 요소의 사이즈를 재정비 하려고 했지만, 버튼을 클릭하지 않은 상태에서도 resize이벤트에 걸려서
-	// 버튼을 누르지 않았음에도 이벤트가 발생해 이 문제를 해결하고자 추가했다.
-	isModalBgShowed = false;
-
 	// #feeldup click
 	// #feeldup click
 	$('#feeldup').click(function(){
-		isModalBgShowed = true;
 
-		// 흐린 배경 표시 -> 이 액션은 posts.js에서도 post item 클릭시 취한다
-		$('#modal_bg')
-			.css('height', $(document).height())
-			.css('width', $(document).width())
-			.fadeIn()/*show()*/
+		showModalBG();
 
-		// fix시키면 된다. (fix하지 않으면 $(window).scroll이벤트에 위치 설정을 반복해야한다)
-		// + 반드시 #modal_bg가 show되고 나서 와야한다.
-		$('#option_container')
-			.css('position', 'fixed')
-			.css('top', $(window).height()/2 - 75)
-			.css('margin-left', ($(window).width() - $('#option_container').width())/2 )
-			.fadeIn()
+		showOptionContainer();
 
+		// modal board는
+		// option_item이 클릭 되었을 때 띄운다
 
 	})
 	// #feeldup click end
@@ -147,13 +183,14 @@ $(function(){
 	// feeldup option 클릭 
 	// feeldup option 클릭 
 	$('.option_item').click(function(){
-		// 버그 때문에 추가한 조건문
-		// 배경 눌러서 엎어지는 찰나에 옵션 누르는게 가능한  버그
+		// 옵션들 지워주자, 화면 리사이즈 할 때 옵션들이 움직이면서 거슬리는 경우가 있다
+		$('#option_container').hide()
+		
+		// 배경 눌러서 없어지는 찰나에 옵션 누르는게 가능한  버그 해결
 		if (isModalBgShowed)
 			showModalBoard();
 	})
 	// feeldup option 클릭 end
-	
 
 	
 	// #modal_bg click
@@ -170,9 +207,10 @@ $(function(){
 	// window resize
 	// window resize
 	$( window ).resize(function() {
-		// feeldup 클릭 후 리사이즈 할 때 유지하기 위해서
+		// 모달 보드를 띄운 후 리사이즈 할 때 
+		// 다시 호출해 줌으로써 위치를 조정한다(배경과 보드의)
 		if (isModalBgShowed){
-			$('#feeldup').click()
+			show_modal_bg_board();
 		}
 
 		changeWidthHeightModalBoard();

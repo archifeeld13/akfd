@@ -27,6 +27,10 @@ class PostsController < ApplicationController
 		end
 	end
 
+	def message_box
+		# 나중에 메시지 보내는 용도로 쓸 것임
+	end
+
 	#
 	# archive_mine, archive_share, project_list -> ajax
 	# in my_feeld

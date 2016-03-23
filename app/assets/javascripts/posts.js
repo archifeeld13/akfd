@@ -3,8 +3,6 @@
 //# You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-// 이 파일은 posts를 뿌려주는 페이지에 관한 코드다
-
 function postsColumnResize(){
 	var pWidth = $('.posts-item').width()
 	var rWidth = $('#right_fixed_menu').width()
@@ -15,21 +13,6 @@ function postsColumnResize(){
 	}
 }
 
-// 동적으로 모달 배경과 모달 창을 보여주는 부분으로
-// 여러 곳에서 호출할 수 있다
-function show_modal_bg_board(){
-	isModalBgShowed = true;
-
-	// 흐린 배경 표시
-	$('#modal_bg')
-		.css('height', $(document).height())
-		.css('width', $(document).width())
-		.fadeIn()/*show()*/
-
-	// application.js 에 정의됨
-	showModalBoard();
-	// ajax에 의해 이 보드가 채워진다
-}
 
 // post 아이템을 클릭하면 
 // post 아이템을 클릭하면 
@@ -37,14 +20,6 @@ function show_post_item_event(){
 	$('.posts-item-img, .posts-item-text, .fav-posts').click(function(){
 		// feeldup 버튼 눌렀을 때의 액션 중 option 띄우는거 제외하고 
 		isPostItemClicked = true;
-		show_modal_bg_board();
-	})
-}
-
-// my_feeld에서 유저의 사진을 클릭하면.. 메시지 박스를 보여줄거다
-// my_feeld에서 유저의 사진을 클릭하면.. 메시지 박스를 보여줄거다
-function message_box_click_event(){
-	$('#message_box').click(function(){
 		show_modal_bg_board();
 	})
 }
@@ -118,12 +93,10 @@ function my_feeld_menu_event(){
 }
 
 
-
-// 초기 너비 설정
 $(function(){
 	postsColumnResize();
 
-	// 처음엔 숨겨놓기
+	// 처음엔 숨겨 놔야만 함
 	$('#archive_hover').hide();
 	
 	// index
@@ -135,8 +108,6 @@ $(function(){
 	// my_feeld
 	// 메뉴 이벤트
 	my_feeld_menu_event();
-	// 프사 클릭 이벤트 (message 보내기)
-	message_box_click_event()
 })
 
 //# window resize
