@@ -1,3 +1,4 @@
+
 <% if comment.post.user.id != comment.user.id %>
 	<!-- First Comment -->
 	<article id="comment_<%=comment.id %>" class="row">
@@ -18,12 +19,14 @@
 					</header>
 					<div class="comment-post">
 						<p class="text-left">
-							<%= comment.body %>
+							<%= comment.body.gsub(/\n/, '<br/>').html_safe %>
 						</p>
 					</div>
-					<p class="text-right">
-						<%= link_to "댓글삭제", [comment.post, comment], method: :delete, remote: true, data: { confirm: "Are you sure?" }, class: "comment-delete" %>
-					</p>
+					<% if current_user and current_user.id == comment.user.id  %>
+						<p class="text-right">
+							<%= link_to "댓글삭제", [comment.post, comment], method: :delete, remote: true, data: { confirm: "Are you sure?" }, class: "comment-delete" %>
+						</p>
+					<% end %>
 				</div>
 			</div>
 		</div>
@@ -42,12 +45,14 @@
 					</header>
 					<div class="comment-post">
 						<p class="text-right">
-							<%= comment.body %>
+							<%= comment.body.gsub(/\n/, '<br/>').html_safe %>
 						</p>
 					</div>
-					<p class="text-left">
-						<%= link_to "댓글삭제", [comment.post, comment], method: :delete, remote: true, data: { confirm: "Are you sure?" }, class: "comment-delete" %>
-					</p>
+					<% if current_user and current_user.id == comment.user.id %>
+						<p class="text-left">
+							<%= link_to "댓글삭제", [comment.post, comment], method: :delete, remote: true, data: { confirm: "Are you sure?" }, class: "comment-delete" %>
+						</p>
+					<% end %>
 				</div>
 			</div>
 		</div>

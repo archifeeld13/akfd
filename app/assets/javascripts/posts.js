@@ -15,41 +15,44 @@ function postsColumnResize(){
 	}
 }
 
+// 동적으로 모달 배경과 모달 창을 보여주는 부분으로
+// 여러 곳에서 호출할 수 있다
+function show_modal_bg_board(){
+	isModalBgShowed = true;
 
+	// 흐린 배경 표시
+	$('#modal_bg')
+		.css('height', $(document).height())
+		.css('width', $(document).width())
+		.fadeIn()/*show()*/
+
+	// application.js 에 정의됨
+	showModalBoard();
+	// ajax에 의해 이 보드가 채워진다
+}
+
+// post 아이템을 클릭하면 
+// post 아이템을 클릭하면 
 function show_post_item_event(){
 	$('.posts-item-img, .posts-item-text, .fav-posts').click(function(){
 		// feeldup 버튼 눌렀을 때의 액션 중 option 띄우는거 제외하고 
-		isModalBgShowed = true;
 		isPostItemClicked = true;
-
-		// 흐린 배경 표시
-		$('#modal_bg')
-			.css('height', $(document).height())
-			.css('width', $(document).width())
-			.fadeIn()/*show()*/
-
-		// application.js 에 정의됨
-		showModalBoard();
-		// ajax에 의해 이 보드가 채워진다
-
+		show_modal_bg_board();
 	})
 }
 
-// 초기 너비 설정
-$(function(){
-	postsColumnResize();
+// my_feeld에서 유저의 사진을 클릭하면.. 메시지 박스를 보여줄거다
+// my_feeld에서 유저의 사진을 클릭하면.. 메시지 박스를 보여줄거다
+function message_box_click_event(){
+	$('#message_box').click(function(){
+		show_modal_bg_board();
+	})
+}
 
-	// 처음엔 숨겨놓기
-	$('#archive_hover').hide();
 
-	
-	// index
-	// index
-	// 조회 기능
-	show_post_item_event();
-	
-	// my_feeld
-	// my_feeld
+// my_feeld의 메뉴들에 대한 이벤트를 정의한다
+// my_feeld의 메뉴들에 대한 이벤트를 정의한다
+function my_feeld_menu_event(){
 	// 필드 아카이브에 hover했을 때
 	$("#archive").hover(
 		function() {
@@ -112,7 +115,28 @@ $(function(){
 			
 		}
 	);
+}
 
+
+
+// 초기 너비 설정
+$(function(){
+	postsColumnResize();
+
+	// 처음엔 숨겨놓기
+	$('#archive_hover').hide();
+	
+	// index
+	// index
+	// 조회 기능
+	show_post_item_event();
+	
+	// my_feeld
+	// my_feeld
+	// 메뉴 이벤트
+	my_feeld_menu_event();
+	// 프사 클릭 이벤트 (message 보내기)
+	message_box_click_event()
 })
 
 //# window resize

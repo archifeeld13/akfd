@@ -4,6 +4,14 @@ class WelcomeController < ApplicationController
 		@users = User.all
   end
 
+	def login
+		render "welcome/login", :layout => false
+	end
+
+	def register
+		render "welcome/register", :layout => false
+	end
+
 	def test
 		shares = Share.all
 		shares.each do |s|

@@ -8,3 +8,11 @@
 		<%= render "comments/list" %>
 	</div>
 </div>
+
+<script>
+	$('#comment_body').keyup(function(e){
+		if (e.keyCode == 13){
+			if (!e.shiftKey) $('#comment-submit').click()
+		}	
+	})
+</script>
