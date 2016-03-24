@@ -14,11 +14,33 @@ changeWidthHeightModalBoard();
 // 이미지가 로드 될 때마다 modal_board의 크기가 달라서
 var ccc = 0;
 $('.show-post-img').each(function(){
+	
+	// 이미지 로드 이벤트	
 	this.onload = function(){
 		ccc ++;
+		// 맨 마지막에 실행되는 부분
 		if ($('.show-post-img').size() ==  ccc){
 			// 내용을 채우고나선 반드시 이 함수를 호출해줘야한다
 			changeWidthHeightModalBoard();
+
+			// 아니 이부분을 루프 바깥에 놧는데 아직 이미지가 로드가 안되서? 등록이안되네 ㅅㅂ!
+			$('.show-post-img').click(function(){
+				current_id = Number( $(this).attr('id').split('-')[3])
+				// https://github.com/flesler/jquery.scrollTo
+				nextID = '#show-post-img-' + (current_id + 1)
+				if ($(nextID).length){
+					$('#modal_board').scrollTo(nextID, {
+						offset: -50	,
+						duration: 200 ,
+					})
+				}
+				else {
+					$('#modal_board').scrollTo("#show-post-content", {
+						offset: -50	,
+						duration: 200 ,
+					})
+				}
+			})
 		}
 	}
 })

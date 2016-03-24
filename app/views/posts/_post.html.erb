@@ -18,12 +18,14 @@
 		<% end %>
 	<% end %>
 	<div class="posts-item-info">
-		<div class="posts-item-title" ><%= truncate(post.title, length: 15, separater: ' ')%></div>
+		<div class="posts-item-title" ><%= truncate(post.title, length: 20, separater: ' ')%></div>
+		<div style="height:8px;"></div>
 		<div class="posts-item-counts">
 			<span><i class="fa fa-heart"></i> <%= post.likes.count %></span>, &nbsp;
 			<span><i class="fa fa-comment"></i> <%= post.comments.count %></span>, &nbsp;
 			<span><i class="fa fa-share-alt"></i> <%= post.shares.count %></span>
 		</div>
+		<div style="height:10px;"></div>
 		<div class="posts-item-hashtags">
 			<% if post.tag_list.size > 0 %>	
 				<div class='tag_list'><%= tag_icons(post.tag_list) %> </div>

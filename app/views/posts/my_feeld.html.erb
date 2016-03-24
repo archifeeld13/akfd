@@ -29,9 +29,9 @@
 				<a style="color:#B1DB4E; font-size: 1.5em; font-weight:bold" href="#">프로필 편집</a><br>
 			<% else %>
 				<% if @user.inverse_friends.include? current_user %>
-					<%= link_to "팔로우 끊기", friendship_path(Friendship.find_by(user_id: current_user.id, friend_id: @user.id)), :method => :delete%>
+					<%= link_to "팔로우 끊기", friendship_path(Friendship.find_by(user_id: current_user.id, friend_id: @user.id)), :method => :delete, class: "follow-link"%>
 				<% else %>
-					<%= link_to "팔로우 하기", friendships_path(friend_id: @user.id), :method => :post %>
+					<%= link_to "팔로우 하기", friendships_path(friend_id: @user.id), :method => :post, class: "follow-link" %>
 				<% end %>
 			<% end %>
 		<% end %>
