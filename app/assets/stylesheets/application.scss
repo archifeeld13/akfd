@@ -152,14 +152,18 @@ input{
 	height:150px;
 }
 
-#modal_board{
+#modal_board_wrapper{
 	position:fixed;
 	//border-radius: 10px;
 	width: 700px;
 	z-index: 700;
-	overflow-y: auto;
+	overflow: hidden;
 	//background: #F0F0F0;
 	background: white;
+	#modal_board{
+		width: 718px;	
+		overflow-y: scroll;
+	}
 }
 
 // 필드업 클릭시 흐린 배경

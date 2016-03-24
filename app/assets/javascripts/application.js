@@ -48,13 +48,12 @@ var isFeeldupClicked = false
 // show_modal_bg_board 호출 이후에 불리는 함수이다
 // show_modal_bg_board 호출 이후에 불리는 함수이다
 function changeWidthHeightModalBoard(){
-	// 스크린이 한없이 작아질 때, 필드업 보드가 납작해지니까.. 50%이상으로 해주자.
-	$('#modal_board').css('left', ($(window).width() -  $('#modal_board').width())/2)
+	$('#modal_board_wrapper').css('left', ($(window).width() -  $('#modal_board_wrapper').width())/2)
 
 	// 필드업 보드의 높이를 조정
 	if (isFeeldupClicked){
 		// 필드업 했다면
-		$('#modal_board')
+		$('#modal_board_wrapper')
 			.css('position', 'fixed')
 			.css('height', 550)
 			.css('top', $(window).height() * 0.1 )
@@ -62,15 +61,24 @@ function changeWidthHeightModalBoard(){
 	}
 	else {
 		// 기본은 height : auto에 의해 내용에 의존해 늘어나게
-		$('#modal_board')
+		$('#modal_board_wrapper')
 			.css('position', 'fixed')
 			.css('top', $(window).height() * 0.1 )
 
 		// 만약 내용이 윈도우 높이보다 넘친다면 높이를 할당
-		if ($('#modal_board').height() >  ($(window).height() - 100)){
-			$('#modal_board').css('height', $(window).height() * 0.8)
-			.css('top', $(window).height() * 0.1 )
-		}
+		// 납득이 안가는게 이 함수 자체가 엘리먼트들 로드 다 된 이후에 불려야 되는데,
+		// 다 로드되고 나서의 높이가 얻어지는게 아니네..
+		// modal board에 내용이 추가되는데에 시간 차가 있다...
+		//alert($(window).height() + " , " + $('#modal_board').height())
+		setTimeout(function(){
+			//alert($(window).height() + " , " + $('#modal_board').height())
+			if ($('#modal_board').height() >  ($(window).height() - 100)){
+				$('#modal_board_wrapper').css('height', $(window).height() * 0.8)
+													.css('top', $(window).height() * 0.1 )
+				// modal_board는 height auto로 되어있는데이걸 wrapper랑 일치 시켜주지 않으면 스크롤이 안되지
+				$('#modal_board').css('height', $(window).height() * 0.8)
+			}
+		}, 100);
 	}
 
 }					
@@ -78,9 +86,10 @@ function changeWidthHeightModalBoard(){
 // modal board를 보여준다.
 function showModalBoard(){
 	// modal 보드를 띄운다 
-	$('#modal_board').fadeIn()
+	$('#modal_board_wrapper').fadeIn()
 	// 모달창의 높이를 초기상태로 돌려준다 
 	// edit 할 땐 따로 호출해줬다. edit.js.erb에서
+ 	$('#modal_board_wrapper').css('height', 'auto')
  	$('#modal_board').css('height', 'auto')
 
 	// modal 보드의 사이즈를 조절한다 (resize시 재 호출)
@@ -139,7 +148,8 @@ function show_modal_bg_board(){
 function hideModalBoard(){
 	$('#modal_bg').fadeOut()/*hide()*/
 	$('#option_container').fadeOut()
-	$('#modal_board').html("").fadeOut()
+	$('#modal_board').html("")
+	$('#modal_board_wrapper').fadeOut()
 }
 
 // feeldup 눌렀을 때 나오는 배경 및 필드업 보드  숨겨놓기
@@ -148,7 +158,7 @@ function hideModalBoard(){
 function hideModalBG(){
 	$('#modal_bg').hide()
 	$('#option_container').hide()
-	$('#modal_board').hide()
+	$('#modal_board_wrapper').hide()
 }
 
 

@@ -14,8 +14,8 @@
 			<%= link_to image_tag('/images/feeldrev.png'), post_likes_path(@post.id), id: "feeld" ,method: :post, remote: true %>
 		<% else %>
 			<%= link_to image_tag('/images/feeld.png'), post_likes_path(@post.id), id: "feeld" ,method: :post, remote: true %>
-			x <strong id="feeldcnt"><%=@post.likes.count%></strong>
 		<% end %>
+		x <strong id="feeldcnt"><%=@post.likes.count%></strong>
 		&nbsp;
 		<% if current_user.id != @post.user.id %>
 			<%= link_to image_tag('/images/feeldin.png'),  post_shares_path(@post.id), id: "feeldin", method: :post, remote: true %>

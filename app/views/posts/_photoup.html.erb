@@ -74,27 +74,29 @@ function previewFiles(){
 </div>
 
 <%= form_for @post do |f| %>
-<div style="float:left; width:75%; height:400px; background:#E9E9E9; padding:2%; overflow-y:scroll">
-	<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
+<div style="float:left; width:525px; height:400px; background:#E9E9E9; overflow:hidden">
+		<div style="height: 400px; width: 543px; overflow-y: scroll; padding: 2%;"> 
+		<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
 
-	<div style="margin-bottom: 1%"></div>
-	<div class="inputWrapper">
-		<%= f.file_field :images, multiple: true,  accept: 'image/png,image/gif,image/jpeg', class: "fileInput", onchange: "previewFiles()" %>
-	</div>
+		<div style="margin-bottom: 1%"></div>
+		<div class="inputWrapper">
+			<%= f.file_field :images, multiple: true,  accept: 'image/png,image/gif,image/jpeg', class: "fileInput", onchange: "previewFiles()" %>
+		</div>
 
-	<div style="margin-bottom: 1%"></div>
-	<div id="preview"></div>
+		<div style="margin-bottom: 1%"></div>
+		<center><div id="preview"></div></center>
 
-	<div style="margin-bottom: 1%"></div>
-	<%= f.text_area :content, :id => 'input_post_content', :class => 'form-control', :rows => '5', placeholder: "이미지에 캡션을 다는 방법! \n #1# 기말 마감 첫번째 작품 \n #2# 기말 마감 두번째 작품\n 위와 같이 이미지의 번호(n번째)를 #로 감싸서, \n캡션을 붙일 수 있습니다.. (설명 수정) "%>
-	<div style="margin-bottom: 1%"></div>
-	<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그 (태그는 쉼표로 구분해주세요! ex) 태그1, 태그2)" %>
-	<div class="has-error">
-		<div class="checkbox disabled">
-			<label style="margin-left: 1%;">
-				<input type="checkbox" value="secret" disabled>
-				비밀글로 작성합니다
-			</label>
+		<div style="margin-bottom: 1%"></div>
+		<%= f.text_area :content, :id => 'input_post_content', :class => 'form-control', :rows => '5', placeholder: "이미지에 캡션을 다는 방법! \n #1# 기말 마감 첫번째 작품 \n #2# 기말 마감 두번째 작품\n 위와 같이 이미지의 번호(n번째)를 #로 감싸서, \n캡션을 붙일 수 있습니다.. (설명 수정) "%>
+		<div style="margin-bottom: 1%"></div>
+		<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그 (태그는 쉼표로 구분해주세요! ex) 태그1, 태그2)" %>
+		<div class="has-error">
+			<div class="checkbox disabled">
+				<label style="margin-left: 1%;">
+					<input type="checkbox" value="secret" disabled>
+					비밀글로 작성합니다
+				</label>
+			</div>
 		</div>
 	</div>
 </div>
