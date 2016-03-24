@@ -77,7 +77,7 @@ class PostsController < ApplicationController
 
 	def project_list_in
 		project = Project.find(params[:project_id])
-		@posts = project.posts
+		@posts = project.posts.reverse
 		@projects = [project] 
 		# 1개짜리 배열, projects/_project.html.erb 재활용위해..
 		# 그 안에서 @projects에 대해 each문 돌림

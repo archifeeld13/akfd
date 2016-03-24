@@ -3,8 +3,9 @@
     show only button of file input
 */
 .inputWrapper {
+		margin: 3%;
 		height: 70px;
-    width: 100%;;
+    width: 90%;;
     overflow: hidden;
     position: relative;
     cursor: pointer;
@@ -61,6 +62,9 @@ function previewFiles(){
     if (global_files){
         [].forEach.call(files, readAndPreview);
     }
+			
+	// application.js
+	prevetScrollPropFrom('#form_container')
 }
 </script>
 <div style="float:left; width:75%; height:75px; background:#F2F2F2; padding:2%;">
@@ -75,13 +79,15 @@ function previewFiles(){
 
 <%= form_for @post do |f| %>
 <div style="float:left; width:525px; height:400px; background:#E9E9E9; overflow:hidden">
-		<div style="height: 400px; width: 543px; overflow-y: scroll; padding: 2%;"> 
+		<div id="form_container" style="height: 400px; width: 543px; overflow-y: scroll; padding: 2%;"> 
 		<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
 
 		<div style="margin-bottom: 1%"></div>
-		<div class="inputWrapper">
-			<%= f.file_field :images, multiple: true,  accept: 'image/png,image/gif,image/jpeg', class: "fileInput", onchange: "previewFiles()" %>
-		</div>
+		<center>
+			<div class="inputWrapper">
+				<%= f.file_field :images, multiple: true,  accept: 'image/png,image/gif,image/jpeg', class: "fileInput", onchange: "previewFiles()" %>
+			</div>
+		</center>
 
 		<div style="margin-bottom: 1%"></div>
 		<center><div id="preview"></div></center>

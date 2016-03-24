@@ -36,6 +36,18 @@ function imgIconHover(selector){
 		}
 	);
 }
+
+function prevetScrollPropFrom(target){
+	$( target ).on( 'mousewheel', function ( e ) {
+		var speed = 50;
+		var event = e.originalEvent,
+				d = event.wheelDelta || -event.detail;
+		
+		this.scrollTop += ( d < 0 ? 1 : -1 ) * speed;
+		e.preventDefault();
+	});
+}
+
 // change width and height of modal board
 // 필드업을 눌러서, 옵션을 선택했을 때 나오는 보드의 크기를 조정한다.
 // 다음 변수를 통해 판단한다
