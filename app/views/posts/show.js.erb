@@ -8,5 +8,18 @@ $('.modal_close').click(function(){
 // modal close button click end
 
 
-// 내용을 채우고나선 반드시 이 함수를 호출해줘야한다
+// 한번 불러주고 이미지 로드 다되면 다시부른다
 changeWidthHeightModalBoard();
+
+// 이미지가 로드 될 때마다 modal_board의 크기가 달라서
+var ccc = 0;
+$('.show-post-img').each(function(){
+	this.onload = function(){
+		ccc ++;
+		if ($('.show-post-img').size() ==  ccc){
+			// 내용을 채우고나선 반드시 이 함수를 호출해줘야한다
+			changeWidthHeightModalBoard();
+		}
+	}
+})
+

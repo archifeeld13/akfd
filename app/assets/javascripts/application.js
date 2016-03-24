@@ -69,16 +69,14 @@ function changeWidthHeightModalBoard(){
 		// 납득이 안가는게 이 함수 자체가 엘리먼트들 로드 다 된 이후에 불려야 되는데,
 		// 다 로드되고 나서의 높이가 얻어지는게 아니네..
 		// modal board에 내용이 추가되는데에 시간 차가 있다...
-		//alert($(window).height() + " , " + $('#modal_board').height())
-		setTimeout(function(){
-			//alert($(window).height() + " , " + $('#modal_board').height())
-			if ($('#modal_board').height() >  ($(window).height() - 100)){
-				$('#modal_board_wrapper').css('height', $(window).height() * 0.8)
-													.css('top', $(window).height() * 0.1 )
-				// modal_board는 height auto로 되어있는데이걸 wrapper랑 일치 시켜주지 않으면 스크롤이 안되지
-				$('#modal_board').css('height', $(window).height() * 0.8)
-			}
-		}, 100);
+		// 처음엔 setTimeout을 걸어서 0.1초정도 if의 판단을 지연시켰찌만, 인터넷이 느린 환경에선 해결책이 될 수 없다
+		// show.js.erb 에서 각 이미지가 로드 될 때마다 changeWidthHeightModalBoard를 호출함으로 써 2차적으로 해결했따.
+		if ($('#modal_board').height() >  ($(window).height() - 100)){
+			$('#modal_board_wrapper').css('height', $(window).height() * 0.8)
+												.css('top', $(window).height() * 0.1 )
+			// modal_board는 height auto로 되어있는데이걸 wrapper랑 일치 시켜주지 않으면 스크롤이 안되지
+			$('#modal_board').css('height', $(window).height() * 0.8)
+		}
 	}
 
 }					
