@@ -3,7 +3,7 @@
 	<img class="modal_close" style="width:20px; height:20px;" align="right" src="/images/xbtn.png">
 	<div class='tag_list' style="font-size:0.7em; margin-top:2%;"><%= tag_icons(@post.tag_list) %> </div>
 	<% if @post.images.count > 0 %>
-		<div style="color:gray; font-size:0.6em; float:right;">사진을 클릭하면 다음 사진으로 쉽게 넘어갈 수 있습니다 ;D</div>
+		<div style="color:gray; font-size:0.6em; float:right;">사진을 <span style="color:red">클릭</span>하면 다음 사진으로 쉽게 넘어갈 수 있습니다 <span style="color:orange">;D</span></div>
 	<% end %>
 </div>
 <% @post.images.each_with_index do |image, idx| %>
