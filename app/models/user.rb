@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
 	has_many :likes, dependent: :destroy
 	has_many :shares, dependent: :destroy
+	has_many :shared_posts, class_name: 'Post', through: :shares, source: :post
 
 	has_many :friendships
 	has_many :friends, :through => :friendships

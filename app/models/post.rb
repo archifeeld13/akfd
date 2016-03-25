@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
 	has_many :comments, dependent: :destroy
 	has_many :likes, dependent: :destroy
 	has_many :shares, dependent: :destroy
+	has_many :shared_users, class_name: 'User', through: :shares, source: :user
 
 	belongs_to :user
 	belongs_to :project

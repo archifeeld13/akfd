@@ -10,7 +10,7 @@ class PostsController < ApplicationController
 		else
 			# 기본 메인 페이지
 			@posts = Post.all.reverse
-			flash[:notice] = "아키필드에 오신 것을 환영합니다!<span style='color:red'>♥</span>"
+			flash[:notice] = "아키필드에 오신 것을 환영합니다! <span style='color:red'>;D</span>"
 		end
   end
   
@@ -53,18 +53,11 @@ class PostsController < ApplicationController
 	end
 
 	def archive_share
-		# shared post -> 최효성님이 조언주신대로 바꾸기
-		@posts = []
 		if params[:user_id]
-			User.find(params[:user_id]).shares.each do |share|
-				@posts.push(share.post)	
-			end
+			@posts = User.find(params[:user_id]).shared_posts.reverse
 		else
-			current_user.shares.each do |share|
-				@posts.push(share.post)	
-			end
+			@posts = User.find(current_user.id).shared_posts.reverse
 		end
-		@posts.reverse!
 	end
 
 	def project_list

@@ -2,6 +2,10 @@
 	<%= @post.title %>
 	<img class="modal_close" style="width:20px; height:20px;" align="right" src="/images/xbtn.png">
 	<div class='tag_list' style="font-size:0.7em; margin-top:2%;"><%= tag_icons(@post.tag_list) %> </div>
+	<div style="float:right; font-size:0.6em;">
+		<a href="#" id="down_btn">맨밑으로</a>
+	</div>
+	<br />
 	<% if @post.images.count > 0 %>
 		<div style="color:gray; font-size:0.6em; float:right;">사진을 <span style="color:red">클릭</span>하면 다음 사진으로 쉽게 넘어갈 수 있습니다 <span style="color:orange">;D</span></div>
 	<% end %>
@@ -28,6 +32,24 @@
 		<% end %>
 	<% end %>
 	<!-- 삭제하기 추가 필요 -->
+	<div style="float:right; font-size:0.8em;">
+		<a href="#" id="top_btn">맨 위로</a>
+	</div>
 </div>
 <%= render "comments/comments" %>
 
+<script>
+	$('#top_btn').click(function(){	
+		$('#modal_board').scrollTo("#show-post-header", {
+			offset: -50	,
+			duration: 200 ,
+		})
+	})
+
+	$('#down_btn').click(function(){	
+		$('#modal_board').scrollTo("#show-post-content", {
+			offset: -50	,
+			duration: 200 ,
+		})
+	})
+</script>
