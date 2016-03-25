@@ -3,7 +3,7 @@
 	<img class="modal_close" style="width:20px; height:20px;" align="right" src="/images/xbtn.png">
 	<div class='tag_list' style="font-size:0.7em; margin-top:2%;"><%= tag_icons(@post.tag_list) %> </div>
 	<div style="float:right; font-size:0.6em;">
-		<a href="#" id="down_btn">맨밑으로</a>
+		<a href="#" id="down_btn">맨 밑으로</a>
 	</div>
 	<br />
 	<% if @post.images.count > 0 %>
@@ -18,17 +18,17 @@
 	<br>
 	<% if current_user %>
 		<% if Like.find_by(post_id: @post.id, user_id: current_user.id) %>
-			<%= link_to image_tag('/images/feeldrev.png'), post_likes_path(@post.id), id: "feeld" ,method: :post, remote: true %>
+			<%= link_to image_tag('/assets/feeldrev.png'), post_likes_path(@post.id), id: "feeld" ,method: :post, remote: true %>
 		<% else %>
-			<%= link_to image_tag('/images/feeld.png'), post_likes_path(@post.id), id: "feeld" ,method: :post, remote: true %>
+			<%= link_to image_tag('/assets/feeld.png'), post_likes_path(@post.id), id: "feeld" ,method: :post, remote: true %>
 		<% end %>
 		x <strong id="feeldcnt"><%=@post.likes.count%></strong>
 		&nbsp;
 		<% if current_user.id != @post.user.id %>
-			<%= link_to image_tag('/images/feeldin.png'),  post_shares_path(@post.id), id: "feeldin", method: :post, remote: true %>
+			<%= link_to image_tag('/assets/feeldin.png'),  post_shares_path(@post.id), id: "feeldin", method: :post, remote: true %>
 			x <strong id="feeldincnt"><%=@post.shares.count%></strong>
 		<% else %>
-			<%= link_to image_tag('/images/edit.png'), edit_post_path(@post.id), id:"edit", remote: true %>
+			<%= link_to image_tag('/assets/edit.png'), edit_post_path(@post.id), id:"edit", remote: true %>
 		<% end %>
 	<% end %>
 	<!-- 삭제하기 추가 필요 -->

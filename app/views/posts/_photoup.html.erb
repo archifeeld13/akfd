@@ -10,7 +10,7 @@
     position: relative;
     cursor: pointer;
     /*Using a background color, but you can use a background image to represent a button*/
-    background: url(http://archifeeld.net:3000/images/fileupload.png) no-repeat;
+    background: url(/assets/fileupload.png) no-repeat;
 		background-size: 100%;
 }
 #preview{
@@ -128,6 +128,6 @@ function previewFiles(){
 
 
 <div align="center" style="float:left; width:25%; height:75px; background:white; padding:5px;">
-	<%= link_to image_tag('/images/feeldup_write.png'), "#", :onclick=>"$('#feeldup-submit').click()", id: "feeldup-submit-link" %> 
+	<%= link_to image_tag('/assets/feeldup_write.png'), "#", :onclick=>"$('#feeldup-submit').click()", id: "feeldup-submit-link" %> 
 </div>
 <!--</form>-->

@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Archifeeld</title>
-	<link rel="icon" type="image/png" href="/images/favicon.png">
+	<link rel="icon" type="image/png" href="favicon.png">
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
@@ -31,17 +31,17 @@
 		<table >
 			<tr>
 			<td style="padding: 5px">
-				<%= link_to image_tag('/images/txtbtn.png', class: 'option_item'), '/posts/new?type=text', remote: true %>
+				<%= link_to image_tag('/assets/txtbtn.png', class: 'option_item'), '/posts/new?type=text', remote: true %>
 				<br>
 				<center style="color:white">텍스트</center>
 			</td>
 			<td style="padding: 5px">
-				<%= link_to image_tag('/images/photobtn.png', class: 'option_item'), '/posts/new?type=photo', remote: true %>
+				<%= link_to image_tag('/assets/photobtn.png', class: 'option_item'), '/posts/new?type=photo', remote: true %>
 				<br>
 				<center style="color:white">사진</center>
 			</td>
 			<td style="padding: 5px">
-				<%= link_to image_tag('/images/linkbtn.png', class: 'option_item'), '/posts/new?type=link', remote: true %>
+				<%= link_to image_tag('/assets/linkbtn.png', class: 'option_item'), '/posts/new?type=link', remote: true %>
 				<br>
 				<center style="color:white">링크</center>
 			</td>
@@ -64,7 +64,7 @@
 			그 초기 설정이 다시 실행 안되는것 같다. 따라서 css자체에 15%를 주었다.??-->
 	<div id="right_fixed_menu" >
 		<% if current_user %>
-			<a id="feeldup" href="#"><img style="width:100%" src="/images/feeldup.png"></a>
+			<a id="feeldup" href="#"><img style="width:100%" src="/assets/feeldup.png"></a>
 		<% end %>
 		<div class="RFMPanel">
 			<div class="RFMPanelTitle">인기 필드업</div>
@@ -82,13 +82,20 @@
 				<div class="RFMPanelItem" >
 					<%= link_to image_tag(user.image_url, class: "reco_myfeeld_img"), "/my_feeld?user_id=#{user.id}" %> 
 					<%= link_to user.name, "/my_feeld?user_id=#{user.id}"%>
-					<%= link_to image_tag('/images/plusbtn.png', class: "reco_myfeeld_plustbtn"), friendships_path(:friend_id => user.id), :method => :post %>
+					<%= link_to image_tag('/assets/plusbtn.png', class: "reco_myfeeld_plustbtn"), friendships_path(:friend_id => user.id), :method => :post %>
 				</div> 
 			<% end %>
 		</div>
+		<div class="RFMPanel">
+			<div class="RFMPanelItem">
+				<form>
+					<input type="text" class="form-control" placeholder="유저 검색" style="width:200px">	
+				</form>
+			</div>
+		</div>
+
 	</div>
 	<!-- 오른쪽 고정 메뉴이다 끝 -->
-
 
 	<!-- contents container -->
 	<div id="contents-container" >

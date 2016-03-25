@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
 	has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
 	has_many :inverse_friends, :through => :inverse_friendships, :source => :user	
 
+	mount_uploader :photo, S3Uploader
+
 class << self
 	def from_omniauth(auth_hash)
 		user = find_or_create_by(uid: auth_hash['uid'])

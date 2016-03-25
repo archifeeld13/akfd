@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
+
 	root 'posts#index'
 
-  get 'welcome/index'
+	resources :users
 	get '/login' => "welcome#login"
-	get '/register' => "welcome#register"
 
 	resources :friendships, only: [:create, :destroy]
 	get 'friendships/:id/:type' => 'friendships#show'

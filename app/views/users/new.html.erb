@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Archifeeld</title>
-	<link rel="icon" type="image/png" href="/images/favicon.png">
+	<link rel="icon" type="image/png" href="favicon.png">
 
 	<%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" %>
 	<%= stylesheet_link_tag 'navbarcolor.css' %>
@@ -17,13 +17,13 @@
   <%= csrf_meta_tags %>
 
 	<style>
-	.form-signin
+	form
 	{
 			max-width: 300px;
 			/*padding: 15px; */
 			margin: 0 auto;
 	}
-	.form-signin .form-control
+	form .form-control
 	{
 			position: relative;
 			font-size: 16px;
@@ -33,15 +33,15 @@
 			-moz-box-sizing: border-box;
 			box-sizing: border-box;
 	}
-	.form-signin .form-control:focus
+	form .form-control:focus
 	{
 			z-index: 2;
 	}
-	.form-signin input[type="text"]
+	form input[type="text"]
 	{
 			margin-bottom: -1px;
 	}
-	.form-signin input[type="password"]
+	form input[type="password"]
 	{
 			margin-bottom: 0;
 	}
@@ -49,7 +49,7 @@
 	body {
 		background-color: #fff;
 		color: white;
-		background: url('/images/loginbg.jpg');
+		background: url('<%= image_url('loginbg.jpg') %>');
 		background-size: 100%;
 	}
 	#loginP {
@@ -71,6 +71,10 @@
 	.login_btns{
 		width: 300px;
 	}
+
+	.reg_cancel{
+		color: white;	
+	}
 	</style>
 	<script>
 		$(function(){
@@ -87,21 +91,25 @@
 <div class="bgalpha"> 
 	<center>
 		<div id="loginP" align="center">	
-			<img id="img_size" src="/images/loginlogo.png">
+			<img id="img_size" src="<%= image_url('loginlogo.png') %>">
 			<div>
-				<form class="form-signin" action="" method="">
-					<input type="text" class="form-control" placeholder="이메일 주소(ID)" required autofocus>
-					<input type="text" class="form-control" placeholder="별명" required autofocus>
-          <input type="password" class="form-control" placeholder="비밀번호" required>
-          <input type="password" class="form-control" placeholder="비밀번호 확인" required>
-          <!-- <input type="submit" class="btn btn-lg btn-default btn-block" value="Sign In" /> -->
-				</form>
+			<%= form_for(@user) do |f| %>
+				<div class="form-inputs">
+					<%= f.text_field :email, placeholder: "이메일 주소" , class: "form-control"%>
+					<%= f.text_field :name, placeholder: "이름", class: "form-control" %>
+					<%= f.password_field :password, placeholder: "비밀번호", required: true, class: "form-control" %>
+					<%= f.password_field :password_confirmation, placeholder: "비밀번호 확인", required: true, class: "form-control" %>
+				</div>
+				<div class="form-actions">
+					<%= f.submit :submit, class: "hidden" %>
+				</div>
+			<% end %>
 			</div>
 			<div style="margin-top: 10px">
-				<%= link_to image_tag('/images/registered.png', class: "login_btns"), '#' %> 
+				<%= link_to image_tag('registered.png', class: "login_btns"), '#' %> 
 			</div>
-				<div style="margin-top: 20px">
-				<a href="/login"><p style="color:white; "> 취소 </p></a>
+			<div style="margin-top: 20px">
+				<%= link_to '취소', url_for(:back), class: "reg_cancel" %>
 			</div>
 		</div>
 	</center>

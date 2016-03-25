@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html> <head>
   <title>Archifeeld</title>
-	<link rel="icon" type="image/png" href="/images/favicon.png">
+	<link rel="icon" type="image/png" href="favicon.png">
 
 	<%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" %>
 	<%= stylesheet_link_tag 'navbarcolor.css' %>
@@ -52,7 +52,7 @@
 	body {
 		background-color: #fff;
 		color: white;
-		background: url('/images/loginbg.jpg');
+		background: url('<%= image_url('loginbg.jpg') %>');
 		background-size: 100%;
 	}
 	#loginP {
@@ -90,22 +90,22 @@
 <div class="bgalpha"> 
 	<center>
 		<div id="loginP" align="center">	
-			<img id="img_size" src="/images/loginlogo.png">
+			<img id="img_size" src="<%=image_url('loginlogo.png')%>">
 			<div>
 				<form class="form-signin" action="" method="">
 					<input type="text" class="form-control" placeholder="Username" required autofocus>
-           <input type="password" class="form-control" placeholder="Password" required>
+          <input type="password" class="form-control" placeholder="Password" required>
           <!-- <input type="submit" class="btn btn-lg btn-default btn-block" value="Sign In" /> -->
 				</form>
 			</div>
 			<div>
-				<%= link_to image_tag('/images/register.png', class: "login_btns"), '/register'%> 
+				<%= link_to image_tag('register.png', class: "login_btns"), new_user_path %> 
 			</div>
 			<div style="margin-top: 1%">
-				<%= link_to image_tag('/images/login.png', class: "login_btns"), '#' %> 
+				<%= link_to image_tag('login.png', class: "login_btns"), '#' %> 
 			</div>
 			<div style="margin-top: 1%">
-				<%= link_to image_tag('/images/facebooklogin.png', class: "login_btns"), '/auth/facebook'%> 
+				<%= link_to image_tag('facebooklogin.png', class: "login_btns"), '/auth/facebook'%> 
 			</div>
 				<div style="margin-top: 20px">
 				<a href="/posts" style="color:white"> 비회원 입장 </a> 
