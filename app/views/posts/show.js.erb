@@ -11,10 +11,13 @@ $('.modal_close').click(function(){
 // 한번 불러주고 이미지 로드 다되면 다시부른다
 changeWidthHeightModalBoard();
 
+//$('#modal_board').mCustomScrollbar({
+//	theme: 'minimal'
+//})
+
 // 이미지가 로드 될 때마다 modal_board의 크기가 달라서
 var ccc = 0;
 $('.show-post-img').each(function(){
-	
 	// 이미지 로드 이벤트	
 	this.onload = function(){
 		ccc ++;
@@ -48,3 +51,5 @@ $('.show-post-img').each(function(){
 // 추가적으로
 // 안에서의 스크롤이 부모로 전달 되지 않게
 prevetScrollPropFrom('#modal_board')
+
+

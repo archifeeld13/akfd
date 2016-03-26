@@ -117,7 +117,7 @@ a.tag {
 
 	#fav_feeldup_content{
 		overflow: hidden;	
-		height: 105px; // <-> 220
+		height: 105px; // <-> 350
 	}
 
 	.RFMPanel{
@@ -181,18 +181,14 @@ a.tag {
 	height:150px;
 }
 
-#modal_board_wrapper{
+#modal_board{
 	position:fixed;
-	//border-radius: 10px;
 	width: 700px;
 	z-index: 700;
-	overflow: hidden;
+	overflow-y: scroll;
 	//background: #F0F0F0;
 	background: white;
-	#modal_board{
-		width: 718px;	
-		overflow-y: scroll;
-	}
+	border-radius: 5px;
 }
 
 // 필드업 클릭시 흐린 배경

@@ -1,39 +1,3 @@
-<style>
-/*http://stackoverflow.com/questions/1084925/input-type-file-show-only-button
-    show only button of file input
-*/
-.inputWrapper {
-		margin: 3%;
-		height: 70px;
-    width: 90%;;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    /*Using a background color, but you can use a background image to represent a button*/
-    background: url(/assets/fileupload.png) no-repeat;
-		background-size: 100%;
-}
-#preview{
-	width: 100%;
-}
-#preview img{
-	margin: 1%;
-}
-.fileInput {
-    cursor: pointer;
-    height: 100%;
-    position:absolute;
-    top: 0;
-    right: 0;
-    z-index: 99;
-    /*This makes the button huge. If you want a bigger button, increase the font size*/
-    font-size:50px;
-    /*Opacity settings for all browsers*/
-    opacity: 0;
-    -moz-opacity: 0;
-    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0)
-}
-</style>
 <script>
 function previewFiles(){
     var preview = document.querySelector("#preview");
@@ -46,16 +10,16 @@ function previewFiles(){
         // Make sure  'file.name' matches our extensions cirteria
         //if (/\.(jpe?g|png|gif)$/i.text(file.name)){
         //if (file.name){
-            var reader = new FileReader();
-            reader.addEventListener("load", function(){
-                var image = new Image();
-                image.height = 100;
-                image.width= 100;
-                image.title = file.name;
-                image.src = this.result;
-                preview.appendChild(image);
-            }, false);
-            reader.readAsDataURL(file);
+				var reader = new FileReader();
+				reader.addEventListener("load", function(){
+						var image = new Image();
+						image.height = 150;
+						image.width= 220;
+						image.title = file.name;
+						image.src = this.result;
+						preview.appendChild(image);
+				}, false);
+				reader.readAsDataURL(file);
         //}
     }
 
@@ -64,8 +28,11 @@ function previewFiles(){
     }
 			
 	// application.js
-	prevetScrollPropFrom('#form_container')
+	prevetScrollPropFrom('#preview')
+
+	//alert($('#preview img').size())
 }
+
 </script>
 <div style="float:left; width:75%; height:75px; background:#F2F2F2; padding:2%;">
 	<img src="<%= current_user.image_url%>" style="width:8%" class="img-rounded">&nbsp; 
@@ -78,31 +45,30 @@ function previewFiles(){
 </div>
 
 <%= form_for @post do |f| %>
-<div style="float:left; width:525px; height:400px; background:#E9E9E9; overflow:hidden">
-		<div id="form_container" style="height: 400px; width: 543px; overflow-y: scroll; padding: 2%;"> 
-		<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
+<div id="form_container" style="float:left; height: 400px; width: 525px; background:#E9E9E9; padding: 10px;"> 
+	<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
 
-		<div style="margin-bottom: 1%"></div>
-		<center>
-			<div class="inputWrapper">
-				<%= f.file_field :images, multiple: true,  accept: 'image/png,image/gif,image/jpeg', class: "fileInput", onchange: "previewFiles()" %>
-			</div>
-		</center>
+	
+	<div style="margin-bottom: 1%"></div>
 
-		<div style="margin-bottom: 1%"></div>
-		<center><div id="preview"></div></center>
+	<div id="preview"></div>
 
-		<div style="margin-bottom: 1%"></div>
-		<%= f.text_area :content, :id => 'input_post_content', :class => 'form-control', :rows => '5', placeholder: "이미지에 캡션을 다는 방법! \n #1# 기말 마감 첫번째 작품 \n #2# 기말 마감 두번째 작품\n 위와 같이 이미지의 번호(n번째)를 #로 감싸서, \n캡션을 붙일 수 있습니다.. (설명 수정) "%>
-		<div style="margin-bottom: 1%"></div>
-		<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그 (태그는 쉼표로 구분해주세요! ex) 태그1, 태그2)" %>
-		<div class="has-error">
-			<div class="checkbox disabled">
-				<label style="margin-left: 1%;">
-					<input type="checkbox" value="secret" disabled>
-					비밀글로 작성합니다
-				</label>
-			</div>
+	<%= f.text_area :content, :id => 'input_post_content', :class => 'form-control', placeholder: "각 이미지에 캡션을 붙일 수 있게 기능 수정중입니다 "%>
+
+
+	<div class="inputWrapper">
+		<%= f.file_field :images, multiple: true,  accept: 'image/png,image/gif,image/jpeg', class: "fileInput", onchange: "previewFiles()" %>
+	</div>
+
+	<div style="margin-bottom: 1%"></div>
+
+	<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그 (태그는 쉼표로 구분해주세요! ex) 태그1, 태그2)" %>
+	<div class="has-error">
+		<div class="checkbox disabled">
+			<label style="margin-left: 1%;">
+				<input type="checkbox" value="secret" disabled>
+				비밀글로 작성합니다
+			</label>
 		</div>
 	</div>
 </div>

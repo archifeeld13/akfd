@@ -8,7 +8,8 @@
 
 	<%= stylesheet_link_tag 'navbarcolor.css' %>
 	<%= stylesheet_link_tag 'searchbox.css' %>
-	
+	<%# stylesheet_link_tag 'jquery.mCustomScrollbar.css' %>
+
 	<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 	<%= javascript_include_tag "https://code.jquery.com/jquery-1.12.0.js" %>
 	<%= javascript_include_tag "https://code.jquery.com/ui/1.11.4/jquery-ui.js" %>
@@ -18,8 +19,8 @@
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
 
 	<!-- scroll to jquery plugin https://github.com/flesler/jquery.scrollTo-->
+	<%# javascript_include_tag 'jquery.mCustomScrollbar.concat.min.js' %>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"></script>
-	<%= javascript_include_tag 'bootstrap-popover.js' %>
 	<%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js" %>
 
   <%= csrf_meta_tags %>
@@ -49,11 +50,11 @@
 			</td>
 		</table>
 	</div>
-	<div id="modal_board_wrapper">
-		<div id="modal_board">
+	<%#<div id="modal_board_wrapper"> %>
+	<div id="modal_board">
 			<%# render :partial => 'posts/text_type_board' %>
-		</div>
 	</div>
+	<%# </div> %>
 	<!-- 필드업 버튼 눌렀을 때 나오는 뱅경 및 옵션 끝 -->
 
 	<!-- nav bar : 사이즈 키워야됨. http://bootsnipp.com/snippets/featured/advanced-dropdown-search-->
@@ -72,7 +73,7 @@
 			<div class="RFMPanelTitle">인기 필드업 &nbsp;<span id="fav_feeldup" style="color:darkgray; font-size:0.7em;">더보기</span></div>
 			<hr style="margin:5px 0">
 			<div id="fav_feeldup_content">
-				<% @fav_posts[0,10].each do |post| %>
+				<% @fav_posts[0,15].each do |post| %>
 					<div class="RFMPanelItem">
 						<%= link_to truncate(post.title, length:20, separater: ' '), post, remote:true, class: 'fav-posts' %></br>
 					</div>
