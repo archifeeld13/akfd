@@ -19,6 +19,5 @@
 
 *.swp
 /public
-/config/initializers/omniauth.rb 
-/config/initializers/fog.rb 
 
+/.env

@@ -2,8 +2,8 @@
 	<%= @post.title %>
 	<img class="modal_close" style="width:20px; height:20px;" align="right" src="/assets/xbtn.png">
 	<div class='tag_list' style="font-size:0.7em; margin-top:2%;"><%= tag_icons(@post.tag_list) %> </div>
-	<div style="float:right; font-size:0.6em; width:130px;">
-		<a href="#" id="expand_modal" style="float: left;color:green">화면크기조정</a><a href="#" id="down_btn" style="float:right">맨 밑으로</a>
+	<div style="float:right; font-size:0.6em; width:130px; ">
+		<a href="#" id="expand_modal" style="float: left; color:gray">화면크기조정</a><a href="#" id="down_btn" style="float:right; color:darkgray">맨 밑으로</a>
 	</div>
 	<br />
 	<% if @post.images.count > 0 %>
@@ -33,7 +33,7 @@
 	<% end %>
 	<!-- 삭제하기 추가 필요 -->
 	<div style="float:right; font-size:0.8em;">
-		<a href="#" id="top_btn">맨 위로</a>
+		<a href="#" id="top_btn" style="color:darkgray">맨 위로</a>
 	</div>
 </div>
 <%= render "comments/comments" %>
