@@ -37,12 +37,14 @@
 			<img class="nav-icon icon-hover" src="/assets/my.png">
 		</a>
 
-		<a href="#message" rel="popover" data-placement="bottom" data-content="메세지창">
+		<a href="#message" id='msg_btn' rel="popover" data-placement="bottom" data-content="메세지창">
 			<img id="msg_icon" class="nav-icon" src="/assets/msg.png">
 		</a>
 
-    <script>
-			$('#message').popover({html: true});
+		<script>
+			$(document).ready(function(){
+				$('#msg_btn').popover({html: true});
+			});
 		</script>
 
 		<a href="#setting"><img class="nav-icon" src="/assets/setting.png"></a>

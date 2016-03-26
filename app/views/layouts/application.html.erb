@@ -19,6 +19,8 @@
 
 	<!-- scroll to jquery plugin https://github.com/flesler/jquery.scrollTo-->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"></script>
+	<%= javascript_include_tag 'bootstrap-popover.js' %>
+	<%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js" %>
 
   <%= csrf_meta_tags %>
 </head>
@@ -76,6 +78,14 @@
 			<% end %>
 		</div>
 		<div class="RFMPanel">
+			<div class="RFMPanelTitle">인기 태그</div>
+			<hr style="margin:5px 0">
+			<% (1..10).each do |user| %>
+				태그,
+				<%#<a href='/posts?tag=#{CGI::escape(tag)}' class='tag'>태그</a> %>
+			<% end %>
+		</div>
+		<div class="RFMPanel">
 			<div class="RFMPanelTitle">추천 마이필드</div>
 			<hr style="margin:5px 0">
 			<% @users.shuffle[0,3].each do |user| %>
@@ -86,6 +96,7 @@
 				</div> 
 			<% end %>
 		</div>
+		
 
 	</div>
 	<!-- 오른쪽 고정 메뉴이다 끝 -->
