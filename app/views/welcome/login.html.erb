@@ -1,119 +1,19 @@
-<!DOCTYPE html>
-<html> <head>
-  <title>Archifeeld</title>
-	<link rel="icon" type="image/png" href="favicon.png">
-
-	<%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" %>
-	<%= stylesheet_link_tag 'navbarcolor.css' %>
-	<%= stylesheet_link_tag 'searchbox.css' %>
-
-	<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-	<%= javascript_include_tag "https://code.jquery.com/jquery-1.12.0.js" %>
-	<%= javascript_include_tag "https://code.jquery.com/ui/1.11.4/jquery-ui.js" %>
-
-	<%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js" %>
-
-  <%= csrf_meta_tags %>
-
-	<style>
-	.form-signin
-	{
-			max-width: 300px;
-			/*padding: 15px; */
-			margin: 0 auto;
-	}
-	.form-signin .form-control
-	{
-			position: relative;
-			font-size: 16px;
-			height: auto;
-			padding: 10px;
-			-webkit-box-sizing: border-box;
-			-moz-box-sizing: border-box;
-			box-sizing: border-box;
-	}
-	.form-signin .form-control:focus
-	{
-			z-index: 2;
-	}
-	.form-signin input[type="text"]
-	{
-			margin-bottom: -1px;
-			border-bottom-left-radius: 0;
-			border-bottom-right-radius: 0;
-	}
-	.form-signin input[type="password"]
-	{
-			margin-bottom: 10px;
-			border-top-left-radius: 0;
-			border-top-right-radius: 0;
-	}
-
-	body {
-		background-color: #fff;
-		color: white;
-		background: url('<%= image_url('loginbg.jpg') %>');
-		background-size: 100%;
-	}
-	#loginP {
-		margin-top: 50px;
-		width: 55%;
-	}
-	.bgalpha {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width:100%;
-		background: rgba(0,0,0,0.4);
-	}
-
-	#img_size {
-		width: 30%;
-	}
-
-	.login_btns{
-		width: 300px;
-	}
-	</style>
-	<script>
-		$(function(){
-			$('.bgalpha').css('height', $(window).height());
-
-			$(window).resize(function(){
-				$('.bgalpha').css('height', $(window).height());
-			})
-		})	
-	</script>
-</head>
-
-<body>
-<div class="bgalpha"> 
-	<center>
-		<div id="loginP" align="center">	
-			<img id="img_size" src="<%=image_url('loginlogo.png')%>">
-			<div>
-				<form class="form-signin" action="" method="">
-					<input type="text" class="form-control" placeholder="Username" required autofocus>
-          <input type="password" class="form-control" placeholder="Password" required>
-          <!-- <input type="submit" class="btn btn-lg btn-default btn-block" value="Sign In" /> -->
-				</form>
-			</div>
-			<div>
-				<%= link_to image_tag('register.png', class: "login_btns"), new_user_path %> 
-			</div>
-			<div style="margin-top: 1%">
-				<%= link_to image_tag('login.png', class: "login_btns"), '#' %> 
-			</div>
-			<div style="margin-top: 1%">
-				<%= link_to image_tag('facebooklogin.png', class: "login_btns"), '/auth/facebook'%> 
-			</div>
-				<div style="margin-top: 20px">
-				<a href="/posts" style="color:white"> 비회원 입장 </a> 
-			</div>
-		</div>
-	</center>
-	<div style="position:fixed; right:10px; bottom: 10px; color:white">
-		가천대 서범진 학생의 작품
-	</div>
+<div>
+	<form class="form-signin" action="" method="">
+		<input type="text" class="form-control" placeholder="Username" required autofocus>
+		<input type="password" class="form-control" placeholder="Password" required>
+		<!-- <input type="submit" class="btn btn-lg btn-default btn-block" value="Sign In" /> -->
+	</form>
 </div>
-</body>
+<div>
+	<%= link_to image_tag('login.png', class: "login_btns"), '#' %> 
+</div>
+<div style="margin-top: 1%">
+	<%= link_to image_tag('facebooklogin.png', class: "login_btns"), '/auth/facebook'%> 
+</div>
+<div style="margin-top: 1%">
+	<%= link_to image_tag('register.png', class: "login_btns"), new_user_path %> 
+</div>
+<div style="margin-top: 20px">
+	<a href="/posts" style="color:white"> 비회원 입장 </a> 
+</div>

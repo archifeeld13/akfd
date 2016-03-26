@@ -5,7 +5,7 @@ class WelcomeController < ApplicationController
   end
 
 	def login
-		render "welcome/login", :layout => false
+		render "welcome/login", :layout => 'front' 
 	end
 
 	def test
