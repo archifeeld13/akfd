@@ -7,6 +7,17 @@ class PostsController < ApplicationController
 			# 태그 검색시 실행 부분
 			@posts = Post.tagged_with(params[:tag])
 			flash[:notice] = "<strong class='text-danger'>#{params[:tag]}</strong> 에 대한 검색결과 입니다."
+		elsif params[:type]
+			if params[:type] == "txt"
+				post_type = 0
+				flash[:notice] = "<strong class='text-danger'>텍스트</strong> 필터링 결과 입니다."
+			elsif params[:type] == "img"
+				post_type = 1
+				flash[:notice] = "<strong class='text-danger'>이미지</strong> 필터링 결과 입니다."
+			else
+				# link..
+			end
+			@posts = Post.where(post_type: post_type)
 		else
 			# 기본 메인 페이지
 			@posts = Post.all.reverse

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 	before_action :set_fav_posts
+	before_action :set_fav_tags
 
 	# http://www.sitepoint.com/rails-authentication-oauth-2-0-omniauth/
 	private
@@ -19,4 +20,8 @@ class ApplicationController < ActionController::Base
 			@fav_posts = @fav_posts.to_a
 			@fav_posts.sort! {|x, y| y.likes.count <=> x.likes.count}
 		end	
+
+		def set_fav_tags
+			@fav_tags = ActsAsTaggableOn::Tag.most_used(50)
+		end
 end

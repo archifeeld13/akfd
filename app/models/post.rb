@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+	# post_type 0 : text, 1: image , 2: link
 	has_many :comments, dependent: :destroy
 	has_many :likes, dependent: :destroy
 	has_many :shares, dependent: :destroy

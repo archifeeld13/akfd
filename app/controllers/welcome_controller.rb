@@ -9,10 +9,15 @@ class WelcomeController < ApplicationController
 	end
 
 	def test
-		shares = Share.all
-		shares.each do |s|
-			s.destroy	
+		posts = Post.all
+		posts.each do |p|
+			if p.images.size > 0
+				p.post_type = 1
+			else 
+				p.post_type = 0
+			end
+			p.save
 		end
-		redirect_to root_path
+		render text: "성공;D"
 	end
 end

@@ -69,23 +69,27 @@
 			<a id="feeldup" href="#"><img style="width:100%" src="/assets/feeldup.png"></a>
 		<% end %>
 		<div class="RFMPanel">
-			<div class="RFMPanelTitle">인기 필드업</div>
+			<div class="RFMPanelTitle">인기 필드업 &nbsp;<span id="fav_feeldup" style="color:darkgray; font-size:0.7em;">더보기</span></div>
 			<hr style="margin:5px 0">
-			<% @fav_posts[0,10].each do |post| %>
-				<div class="RFMPanelItem">
-					<%= link_to truncate(post.title, length:20, separater: ' '), post, remote:true, class: 'fav-posts' %></br>
-				</div>
-			<% end %>
+			<div id="fav_feeldup_content">
+				<% @fav_posts[0,10].each do |post| %>
+					<div class="RFMPanelItem">
+						<%= link_to truncate(post.title, length:20, separater: ' '), post, remote:true, class: 'fav-posts' %></br>
+					</div>
+				<% end %>
+			</div>
 		</div>
-		<div class="RFMPanel">
+		<div class="RFMPanel" style="float:left">
 			<div class="RFMPanelTitle">인기 태그</div>
 			<hr style="margin:5px 0">
-			<% (1..10).each do |user| %>
-				태그,
-				<%#<a href='/posts?tag=#{CGI::escape(tag)}' class='tag'>태그</a> %>
+			<% @fav_tags[0..10].shuffle.each do |tag| %>
+				<div class="tag_div"><a href='/posts?tag=<%= tag %>' class='tag'><%= tag %></a></div>
 			<% end %>
 		</div>
-		<div class="RFMPanel">
+
+		<div style="clear:both"></div>
+
+		<div class="RFMPanel" >
 			<div class="RFMPanelTitle">추천 마이필드</div>
 			<hr style="margin:5px 0">
 			<% @users.shuffle[0,3].each do |user| %>

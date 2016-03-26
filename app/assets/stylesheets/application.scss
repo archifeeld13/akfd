@@ -59,6 +59,28 @@ input{
 	border: none !important;
 }
 
+
+.tag_div{
+	float: left;
+	margin: 2.5% 0.5%;
+}
+
+a.tag {
+	border:1px solid #eaeaea;
+	border-radius:3px;
+	background-color: #f4f4f4;
+	padding:.1em .2em;
+	margin-top: 10px;
+	white-space:nowrap;
+	&:hover {
+		text-decoration: none;
+		color: black;
+		background-color: #C5F033;
+		border:1px solid black;
+	}	
+}
+
+
 #feeld{
 	img{
 		height: 30px;
@@ -92,6 +114,11 @@ input{
 // 자바스크립트에서 RFM으로 축약해 부를것이다
 #right_fixed_menu{
 	position:fixed; width:250px;  right:25px;
+
+	#fav_feeldup_content{
+		overflow: hidden;	
+		height: 105px; // <-> 220
+	}
 
 	.RFMPanel{
 		background:white; margin-top: 10px; border-radius: 5px; padding: 5%;

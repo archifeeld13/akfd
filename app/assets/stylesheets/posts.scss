@@ -8,19 +8,6 @@
 	width: 100%;
 }
 
-a.tag {
-	border:1px solid #eaeaea;
-	border-radius:3px;
-	background-color: #f4f4f4;
-	padding:.1em .2em;
-	&:hover {
-		text-decoration: none;
-		color: black;
-		background-color: #C5F033;
-		border:1px solid black;
-	}	
-}
-
 
 // index.html.erb
 #search_info_panel{
