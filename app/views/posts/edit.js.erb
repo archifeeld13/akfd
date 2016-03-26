@@ -1,3 +1,4 @@
+<% if @post.post_type == 0 %>
 $('#modal_board').html("")
 
 $('<%=j render 'textup' %>').appendTo($('#modal_board'))
@@ -37,3 +38,6 @@ $('#input_post_content').summernote({
 // show.js.erb실행 시킨 이후에
 // 서머노트 내부에서 스크롤 안되는 경우 
 prevetScrollPropFrom('.note-editable')
+<% elsif @post.post_type == 1 %>
+	alert('죄송합니다! 이미지 타입의 게시글에 대한 수정 기능은 개발중입니다 :\'(')	
+<% end %>

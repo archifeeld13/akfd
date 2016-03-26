@@ -62,7 +62,8 @@ var want_expand_modal = false
 // show_modal_bg_board 호출 이후에 불리는 함수이다
 // show_modal_bg_board 호출 이후에 불리는 함수이다
 function changeWidthHeightModalBoard(){
-	if (want_expand_modal){
+	// feeldup 눌렀을 때는 키우면 안됌
+	if (!isFeeldupClicked && want_expand_modal){
 		$('#modal_board').css('width', '1000')
 	}
 	else {

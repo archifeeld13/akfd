@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   def index
 		if params[:tag]
 			# 태그 검색시 실행 부분
-			@posts = Post.tagged_with(params[:tag])
+			@posts = Post.tagged_with(params[:tag]).reverse
 			flash[:notice] = "<strong class='text-danger'>#{params[:tag]}</strong> 에 대한 검색결과 입니다."
 		elsif params[:type]
 			if params[:type] == "txt"
@@ -17,7 +17,7 @@ class PostsController < ApplicationController
 			else
 				# link..
 			end
-			@posts = Post.where(post_type: post_type)
+			@posts = Post.where(post_type: post_type).reverse
 		else
 			# 기본 메인 페이지
 			@posts = Post.all.reverse
@@ -115,10 +115,12 @@ class PostsController < ApplicationController
 
 	def edit
 		@post = Post.find(params[:id])	
-		# textup타입만 됨
 	end
 
 	def create
+		# 
+		# post_type // 0:text, 1:img, 2:link
+		#
 		@post = Post.new(post_params)
 		@post.user_id = current_user.id
 		if @post.save
@@ -142,7 +144,7 @@ class PostsController < ApplicationController
 	
 	private
 		def post_params
-			params.require(:post).permit(:title, :content, :project_id, {images: []}, :tag_list_fixed)
+			params.require(:post).permit(:title, :content, :post_type, :img_order, :project_id, {images: []}, :tag_list_fixed)
 		end
 		def set_posts_users
 			@posts = Post.all

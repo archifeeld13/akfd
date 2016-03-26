@@ -5,7 +5,9 @@ function previewFiles(){
     console.log(files)
     preview.innerHTML = "";
     global_files = files;
-
+		
+		var fileCount = 0;
+		var captions = {};
     function readAndPreview(file){
         // Make sure  'file.name' matches our extensions cirteria
         //if (/\.(jpe?g|png|gif)$/i.text(file.name)){
@@ -17,6 +19,39 @@ function previewFiles(){
 						image.width= 220;
 						image.title = file.name;
 						image.src = this.result;
+						image.onload = function(){
+							//alert($('#preview img').size())
+							fileCount ++;
+							// complte load 이벤트
+							if (fileCount == global_files.length){
+								
+								$('#preview').sortable()
+
+								$('#preview img').each(function(index){
+									$(this).draggable({
+										connectToSortable: "#preview"	,
+										revert: "invalid"
+									}).click(function(){
+										// 이 이후에 텍스트에리아에 작성하는 것에 대해 어디에 기록함
+										// 배열 만들어서 넣어놓고 꺼네고(클릭하면 꺼네고) 작성 이벤트잇으면 넣고
+										var key = $(this).attr('title')
+										if (captions[key] == null){
+											// 안내 메시지
+											$('#input_post_content').attr("placeholder", (index + 1) + " 번째 사진\
+											["+ $(this).attr('title')+"]\
+											에 대한 캡션을 작성해주세요;D" )
+
+											captions[key] = ""
+
+										} else {
+											// 키에 어떤 값이 들어갔을 때
+											// 플레그 true만들고 다른건 다 false만들어서 뒤에 textarea에서
+											// 식별한 후 특정 captions key에 접근할 수 있게
+										}
+									})	
+								})
+							}
+						}
 						preview.appendChild(image);
 				}, false);
 				reader.readAsDataURL(file);
@@ -30,7 +65,21 @@ function previewFiles(){
 	// application.js
 	prevetScrollPropFrom('#preview')
 
-	//alert($('#preview img').size())
+	$('#feeldup-submit-link').click(function(){
+		fileTitleOrder = [] 
+
+		$('#preview img').each(function(index){
+			fileTitleOrder.push($(this).attr('title')	)
+		})
+
+		$('#post_img_order').val(fileTitleOrder.join(','))
+
+		$('#feeldup-submit').click();
+	})
+
+	$('#input_post_content').keyup(function(){
+			$('#input_post_content').val()
+	})
 }
 
 </script>
@@ -45,7 +94,7 @@ function previewFiles(){
 </div>
 
 <%= form_for @post do |f| %>
-<div id="form_container" style="float:left; height: 400px; width: 525px; background:#E9E9E9; padding: 10px;"> 
+<div id="form_container" style="float:left; height: 400px; width: 75%; background:#E9E9E9; padding: 10px;"> 
 	<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
 
 	
@@ -53,7 +102,10 @@ function previewFiles(){
 
 	<div id="preview"></div>
 
-	<%= f.text_area :content, :id => 'input_post_content', :class => 'form-control', placeholder: "각 이미지에 캡션을 붙일 수 있게 기능 수정중입니다 "%>
+	<textarea id="input_post_content" class="form-control" placeholder="파일 업로드 후,
+이미지를 클릭하면 캡션을 달 수 있습니다.
+이미지를 드래그해서 순서를 바꿀 수 있습니다 ;D"%></textarea>
+	<%= f.hidden_field :content%>
 
 
 	<div class="inputWrapper">
@@ -84,6 +136,8 @@ function previewFiles(){
 		<% end %>
 	</div>
 </div>
+<%= f.hidden_field(:post_type, value:1) %>
+<%= f.hidden_field(:img_order) %>
 <%= f.button :submit, class: "hidden", id: "feeldup-submit" %>
 <% end %>
 
@@ -94,6 +148,6 @@ function previewFiles(){
 
 
 <div align="center" style="float:left; width:25%; height:75px; background:white; padding:5px;">
-	<%= link_to image_tag('/assets/feeldup_write.png'), "#", :onclick=>"$('#feeldup-submit').click()", id: "feeldup-submit-link" %> 
+	<%= link_to image_tag('/assets/feeldup_write.png'), "#", id: "feeldup-submit-link" %> 
 </div>
 <!--</form>-->
