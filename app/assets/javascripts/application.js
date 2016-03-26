@@ -53,12 +53,24 @@ function prevetScrollPropFrom(target){
 var isFeeldupClicked = false
 
 
+// 이후에 show.js.erb에서 모달 확대 버튼을 클릭 했을 때 이용할 변수
+// 이 변수를 참조해서 모달창을 그릴 때 가로크기를 조절한다
+var want_expand_modal = false
+
 // modal bg를 클릭했을 때
 // 여기서 변경하는 modal 의 height를 auto로 초기화해줘야한다.
 // http://stackoverflow.com/questions/20267675/div-height-doesnt-adjust-to-fit-content
 // show_modal_bg_board 호출 이후에 불리는 함수이다
 // show_modal_bg_board 호출 이후에 불리는 함수이다
 function changeWidthHeightModalBoard(){
+	if (want_expand_modal){
+		$('#modal_board_wrapper').css('width', '1000')
+		$('#modal_board').css('width', '1018')
+	}
+	else {
+		$('#modal_board_wrapper').css('width', '700')
+		$('#modal_board').css('width', '718')
+	}
 	$('#modal_board_wrapper').css('left', ($(window).width() -  $('#modal_board_wrapper').width())/2)
 
 	// 필드업 보드의 높이를 조정

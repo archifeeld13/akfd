@@ -13,7 +13,6 @@ function postsColumnResize(){
 	}
 }
 
-
 // post 아이템을 클릭하면 
 // post 아이템을 클릭하면 
 function show_post_item_event(){
