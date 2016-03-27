@@ -19,12 +19,14 @@ $('.show-post-img').each(function(){
 	this.onload = function(){
 		ccc ++;
 		// 맨 마지막에 실행되는 부분
+		// 맨 마지막에 실행되는 부분
+		// 맨 마지막에 실행되는 부분
 		if ($('.show-post-img').size() ==  ccc){
 			// 내용을 채우고나선 반드시 이 함수를 호출해줘야한다
 			changeWidthHeightModalBoard();
 			
 			$('#modal_board').perfectScrollbar();  
-
+		
 			// 아니 이부분을 루프 바깥에 놧는데 아직 이미지가 로드가 안되서? 등록이안되네 ㅅㅂ!
 			$('.show-post-img').click(function(){
 				current_id = Number( $(this).attr('id').split('-')[3])
@@ -43,7 +45,19 @@ $('.show-post-img').each(function(){
 					})
 				}
 			})
+
+			<% if @post.post_type == 1 %>
+				var captions = jQuery.parseJSON("<%=j @post.content %>".replace(/&quot;/g, "\""))
+				var img_order = "<%=j @post.img_order %>".split(',')
+				//alert(captions[img_order[0]])
+				$(".show-post-img").each(function(idx){
+					alert( decodeURIComponent($(this).attr('src')))
+				})
+			<% end %>
 		}
+		// 맨 마지막에 실행되는 부분
+		// 맨 마지막에 실행되는 부분
+		// 맨 마지막에 실행되는 부분
 	}
 })
 
