@@ -13,7 +13,7 @@
 	</div>
 	<br />
 	<% if @post.post_type == 1 %>
-		<div style="color:gray; font-size:0.6em; float:right;">사진을 <span style="color:red">클릭</span>하면 다음 사진으로 쉽게 넘어갈 수 있습니다 <span style="color:orange">;D</span></div>
+		<div style="color:darkgray; font-size:0.6em; float:right;">사진을 <span style="color:gray;">클릭</span>하면 다음 사진으로 쉽게 넘어갈 수 있습니다 <span style="color:gray">;D</span></div>
 	<% end %>
 </div>
 <%# 헤더 부분 %>
@@ -23,11 +23,15 @@
 <%# 이미지 부분 %>
 <%# 이미지 부분 %>
 <%# 이미지 부분 %>
+<div id="show-post-imgs">
 <% if @post.post_type == 1 %>
 	<% @post.images.each_with_index do |image, idx| %>
-		<%= image_tag(image.url, class: 'show-post-img', id: "show-post-img-#{idx}") %>
+		<%= image_tag(image.url, class: 'show-post-img') %>
+		<%#이미지의 아이디를 여기서 붙이면 안된다, 이후에 정렬 할 것이기 때문이다
+		= image_tag(image.url, class: 'show-post-img', id: "show-post-img-#{idx}") %>
 	<% end %>
 <% end %>
+</div>
 <%# 이미지 부분 %>
 <%# 이미지 부분 %>
 <%# 이미지 부분 %>
@@ -36,7 +40,9 @@
 <%# 내용 부분 %>
 <%# 내용 부분 %>
 <div id="show-post-content">
+	<% if @post.post_type == 0 %>
 	<div ><%= @post.content.html_safe %></div>
+	<% end %>
 	<br>
 	<% if current_user %>
 		<% if Like.find_by(post_id: @post.id, user_id: current_user.id) %>

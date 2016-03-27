@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160326185942) do
+ActiveRecord::Schema.define(version: 20160327180813) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "post_id"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20160326185942) do
     t.boolean  "use_nick",   default: false
     t.boolean  "use_photo",  default: false
     t.integer  "user_type",  default: 0
+    t.string   "salt"
   end
 
 end

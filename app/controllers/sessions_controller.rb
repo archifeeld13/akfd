@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+	require 'digest/sha1'
 	def new
 		render "sessions/new", :layout => 'front' 
 	end
@@ -21,9 +22,7 @@ class SessionsController < ApplicationController
 	def create_normal
 		user = User.find_by(email: params[:session][:email])
 		if user 
-			#salt = BCrypt::Engine.generate_salt
-			#pw = BCrypt::Engine.hash_secret(params[:session][:password], salt)
-			pw = params[:session][:password]
+			pw = BCrypt::Engine.hash_secret(params[:session][:password], user.salt)
 			if user.password == pw 
 				session[:user_id] = user.id					
 				redirect_to posts_path 

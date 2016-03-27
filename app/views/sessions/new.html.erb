@@ -1,3 +1,37 @@
+<style>
+form
+{
+		max-width: 300px;
+		/*padding: 15px; */
+		margin: 0 auto;
+}
+form .form-control
+{
+		position: relative;
+		font-size: 16px;
+		height: auto;
+		padding: 10px;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+}
+form .form-control:focus
+{
+		z-index: 2;
+}
+form input[type="text"]
+{
+		margin-bottom: -1px;
+}
+form input[type="password"]
+{
+		margin-bottom: 0;
+}
+.reg_cancel{
+	color: white;	
+}
+</style>
+
 <div>
 	<%= form_for(:session, url: login_path, class: "form-signin") do |f| %>	
 		<div style="color:white; background:rgba(20,20,20, 0.2); margin-bottom: 2%;">
@@ -8,15 +42,16 @@
 		<%= f.submit id:"login-btn", class: "hidden" %>
 	<% end %>
 </div>
+<div style="margin-top: 5px">
 <div>
 	<%= link_to image_tag('login.png', class: "login_btns"), '#', onclick: '$("#login-btn").click()' %> 
 </div>
-<div style="margin-top: 1%">
+<div style="margin-top: 5px">
 	<%= link_to image_tag('facebooklogin.png', class: "login_btns"), '/auth/facebook'%> 
 </div>
-<div style="margin-top: 1%">
+<div style="margin-top: 5px">
 	<%= link_to image_tag('register.png', class: "login_btns"), new_user_path %> 
 </div>
-<div style="margin-top: 20px">
+<div style="margin-top: 15px">
 	<a href="/posts" style="color:white"> 비회원 입장 </a> 
 </div>

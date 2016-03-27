@@ -17,7 +17,6 @@ class WelcomeController < ApplicationController
 			p.save
 		end
 		render text: "성공;D"
-=end
 		users = User.all
 		users.each do |u|
 			if u.email
@@ -27,6 +26,7 @@ class WelcomeController < ApplicationController
 			end
 			u.save
 		end
-		render text: "성공;D"
+=end
+
 	end
 end
