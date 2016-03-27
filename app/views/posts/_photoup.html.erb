@@ -1,66 +1,77 @@
 <script>
 function previewFiles(){
-    var preview = document.querySelector("#preview");
-    var files = document.querySelector('input[type=file]').files;
-    console.log(files)
-    preview.innerHTML = "";
-    global_files = files;
-		
-		var fileCount = 0;
-		var captions = {};
-    function readAndPreview(file){
-        // Make sure  'file.name' matches our extensions cirteria
-        //if (/\.(jpe?g|png|gif)$/i.text(file.name)){
-        //if (file.name){
-				var reader = new FileReader();
-				reader.addEventListener("load", function(){
-						var image = new Image();
-						image.height = 150;
-						image.width= 220;
-						image.title = file.name;
-						image.src = this.result;
-						image.onload = function(){
-							//alert($('#preview img').size())
-							fileCount ++;
-							// complte load 이벤트
-							if (fileCount == global_files.length){
-								
-								$('#preview').sortable()
+	var preview = document.querySelector("#preview");
+	var files = document.querySelector('input[type=file]').files;
+	console.log(files)
+	preview.innerHTML = "";
+	global_files = files;
+	
+	var fileCount = 0;
+	// 각 이미지에 달리는 캡션은, 이미지의 제목을 키로해서 저장된다
+	var captions = {};
+	// 현재 선택한 이미지의 키를 글로벌하게 기록한다, textarea keyup event에서 참조한다
+	var selectedImgKey;
+	// 파일이 제출되면 불리는 함수다.
+	function readAndPreview(file){
+			// Make sure  'file.name' matches our extensions cirteria
+			//if (/\.(jpe?g|png|gif)$/i.text(file.name)){
+			//if (file.name){
+			var reader = new FileReader();
+			reader.addEventListener("load", function(){
+					var image = new Image();
+					image.height = 150;
+					image.width= 220;
+					image.title = file.name;
+					image.src = this.result;
+					image.onload = function(){
+						//alert($('#preview img').size())
+						fileCount ++;
+						// complte load 이벤트
+						if (fileCount == global_files.length){
+							
+							$('#preview').sortable()
 
-								$('#preview img').each(function(index){
-									$(this).draggable({
-										connectToSortable: "#preview"	,
-										revert: "invalid"
-									}).click(function(){
-										// 이 이후에 텍스트에리아에 작성하는 것에 대해 어디에 기록함
-										// 배열 만들어서 넣어놓고 꺼네고(클릭하면 꺼네고) 작성 이벤트잇으면 넣고
-										var key = $(this).attr('title')
-										if (captions[key] == null){
-											// 안내 메시지
-											$('#input_post_content').attr("placeholder", (index + 1) + " 번째 사진\
-											["+ $(this).attr('title')+"]\
-											에 대한 캡션을 작성해주세요;D" )
+							$('#preview img').each(function(index){
+								$(this).draggable({
+									connectToSortable: "#preview"	,
+									revert: "invalid"
+								}).click(function(){
+									// 비워준다.
+									$('#input_post_content').val("")
 
-											captions[key] = ""
+									// 이 이후에 텍스트에리아에 작성하는 것에 대해 어디에 기록함
+									var key = $(this).attr('title')
+									selectedImgKey = key;
+									// 특정 이미지에 아무 캡션도 달리지 않았을 때
+									if (captions[key] == null || captions[key].trim() == ""){
+										// 안내 메시지
+										$('#input_post_content').attr("placeholder", "["+ $(this).attr('title')+"]\
+										에 대한 캡션을 작성해주세요;D" )
 
-										} else {
-											// 키에 어떤 값이 들어갔을 때
-											// 플레그 true만들고 다른건 다 false만들어서 뒤에 textarea에서
-											// 식별한 후 특정 captions key에 접근할 수 있게
-										}
-									})	
-								})
-							}
+										captions[key] = ""
+									} 
+									// 키에 어떤 값이 들어갔을 때
+									else {
+										$('#input_post_content').val(captions[key])
+									}
+								})	
+							})
 						}
-						preview.appendChild(image);
-				}, false);
-				reader.readAsDataURL(file);
-        //}
-    }
+					}
+					preview.appendChild(image);
+			}, false);
+			reader.readAsDataURL(file);
+			//}
+	}
 
-    if (global_files){
-        [].forEach.call(files, readAndPreview);
-    }
+	if (global_files){
+			[].forEach.call(files, readAndPreview);
+	}
+
+	// textare 값 입력 이벤트
+	$('#input_post_content').keyup(function(){
+			captions[selectedImgKey] = $('#input_post_content').val()
+	})
 			
 	// application.js
 	prevetScrollPropFrom('#preview')
@@ -68,18 +79,21 @@ function previewFiles(){
 	$('#feeldup-submit-link').click(function(){
 		fileTitleOrder = [] 
 
+		// 순서 구하기
 		$('#preview img').each(function(index){
 			fileTitleOrder.push($(this).attr('title')	)
 		})
 
 		$('#post_img_order').val(fileTitleOrder.join(','))
 
+		// 각 이미지에 달린 캡션 하나로 합치기
+		// http://api.jquery.com/jquery.parsejson/ 나중엔 이거로 파싱
+		$('#post_content').val(JSON.stringify(captions, null, 1))
+
 		$('#feeldup-submit').click();
+		return false;
 	})
 
-	$('#input_post_content').keyup(function(){
-			$('#input_post_content').val()
-	})
 }
 
 </script>
