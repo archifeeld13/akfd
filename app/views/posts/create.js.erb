@@ -1,0 +1,15 @@
+<% if @post.errors.any? %>
+	var errors = []
+	<% @post.errors.full_messages.each  do |e| %>
+		errors.push("<%=e %>")	
+	<% end %>
+	alert(errors.join(','));
+<% else %>
+	<% if @post.post_type == 1 %> 
+			alert(<%= "테스트///////////////////////title: " << @post[:title] << ", img_order: " << @post[:img_order] << ", content: " << @post[:content] %>)
+	<% else %>
+		$('#modal_bg').click();
+		$('<%=j render @post %>').prependTo('#posts-container').hide().fadeIn();
+	<% end %>
+<% end %>
+	

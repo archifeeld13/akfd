@@ -32,6 +32,9 @@ function previewFiles(){
 							$('#preview').sortable()
 
 							$('#preview img').each(function(index){
+								// 일단 다 "" 을 넣음으로써 key/value가 생성되게 click에서 여기로 옮겼따
+								captions[$(this).attr('title')] = ""
+
 								$(this).draggable({
 									connectToSortable: "#preview"	,
 									revert: "invalid"
@@ -43,12 +46,10 @@ function previewFiles(){
 									var key = $(this).attr('title')
 									selectedImgKey = key;
 									// 특정 이미지에 아무 캡션도 달리지 않았을 때
-									if (captions[key] == null || captions[key].trim() == ""){
+									if (captions[key].trim() == ""){
 										// 안내 메시지
 										$('#input_post_content').attr("placeholder", "["+ $(this).attr('title')+"]\
 										에 대한 캡션을 작성해주세요;D" )
-
-										captions[key] = ""
 									} 
 									// 키에 어떤 값이 들어갔을 때
 									else {
@@ -91,10 +92,13 @@ function previewFiles(){
 		$('#post_content').val(JSON.stringify(captions, null, 1))
 
 		$('#feeldup-submit').click();
-		return false;
 	})
 
 }
+
+$(function(){
+	$('#preview').perfectScrollbar(); 
+})
 
 </script>
 <div style="float:left; width:75%; height:75px; background:#F2F2F2; padding:2%;">
@@ -107,7 +111,7 @@ function previewFiles(){
 	<div style="color:#BBBBBB; font-size:1.3em;">마이필드<br> 프로젝트 관리</div>
 </div>
 
-<%= form_for @post do |f| %>
+<%= form_for @post, remote: true  do |f| %>
 <div id="form_container" style="float:left; height: 400px; width: 75%; background:#E9E9E9; padding: 10px;"> 
 	<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
 
@@ -123,7 +127,7 @@ function previewFiles(){
 
 
 	<div class="inputWrapper">
-		<%= f.file_field :images, multiple: true,  accept: 'image/png,image/gif,image/jpeg', class: "fileInput", onchange: "previewFiles()" %>
+		<%= f.file_field :images, multiple: true, accept: 'image/png,image/gif,image/jpeg', class: "fileInput", onchange: "previewFiles()" %>
 	</div>
 
 	<div style="margin-bottom: 1%"></div>

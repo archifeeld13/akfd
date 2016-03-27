@@ -55,5 +55,5 @@ form input[type="password"]
 	<%= link_to image_tag('registered.png', class: "login_btns"), '#', onclick: "$('#register_btn').click()" %> 
 </div>
 <div style="margin-top: 20px">
-	<%= link_to '취소', '/login', class: "reg_cancel" %>
+	<%= link_to '취소', url_for(:back), class: "reg_cancel" %>
 </div>

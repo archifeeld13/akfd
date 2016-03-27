@@ -123,11 +123,7 @@ class PostsController < ApplicationController
 		#
 		@post = Post.new(post_params)
 		@post.user_id = current_user.id
-		if @post.save
-			redirect_to :back, notice: 'Post was successfully created'
-		else
-			render 'new'
-		end
+		@post.save
 	end
 
 	def update

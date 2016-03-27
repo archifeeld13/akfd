@@ -22,6 +22,8 @@ $('.show-post-img').each(function(){
 		if ($('.show-post-img').size() ==  ccc){
 			// 내용을 채우고나선 반드시 이 함수를 호출해줘야한다
 			changeWidthHeightModalBoard();
+			
+			$('#modal_board').perfectScrollbar();  
 
 			// 아니 이부분을 루프 바깥에 놧는데 아직 이미지가 로드가 안되서? 등록이안되네 ㅅㅂ!
 			$('.show-post-img').click(function(){
@@ -47,6 +49,8 @@ $('.show-post-img').each(function(){
 
 // 추가적으로
 // 안에서의 스크롤이 부모로 전달 되지 않게
-prevetScrollPropFrom('#modal_board')
+//prevetScrollPropFrom('#modal_board')
 
-
+$(function(){
+	$('#moad_board').perfectScrollbar(); 
+})
