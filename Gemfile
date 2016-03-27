@@ -48,11 +48,11 @@ gem 'acts-as-taggable-on'
 # env vari
 gem 'dotenv-rails'
 
-# remote true file upload
-gem 'remotipart'
-
 # encryption pw
 gem 'bcrypt-ruby', :require => 'bcrypt'
+
+# ajax file upload
+gem 'remotipart' 
 
 
 # Use ActiveModel has_secure_password

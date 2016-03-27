@@ -6,6 +6,7 @@ class WelcomeController < ApplicationController
 
 
 	def test
+=begin
 		posts = Post.all
 		posts.each do |p|
 			if p.images.size > 0
@@ -14,6 +15,17 @@ class WelcomeController < ApplicationController
 				p.post_type = 0
 			end
 			p.save
+		end
+		render text: "성공;D"
+=end
+		users = User.all
+		users.each do |u|
+			if u.email
+				u.user_type = 0
+			else
+				u.user_type = 1
+			end
+			u.save
 		end
 		render text: "성공;D"
 	end

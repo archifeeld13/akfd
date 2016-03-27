@@ -1,16 +1,22 @@
 <script>
+var fileCount = 0;
+
+// 각 이미지에 달리는 캡션은, 이미지의 제목을 키로해서 저장된다
+var captions = {};
+
+// 현재 선택한 이미지의 키를 글로벌하게 기록한다, textarea keyup event에서 참조한다
+var selectedImgKey;
+
 function previewFiles(){
+	
 	var preview = document.querySelector("#preview");
 	var files = document.querySelector('input[type=file]').files;
 	console.log(files)
 	preview.innerHTML = "";
 	global_files = files;
-	
-	var fileCount = 0;
-	// 각 이미지에 달리는 캡션은, 이미지의 제목을 키로해서 저장된다
-	var captions = {};
-	// 현재 선택한 이미지의 키를 글로벌하게 기록한다, textarea keyup event에서 참조한다
-	var selectedImgKey;
+
+	fileCount = 0;
+
 	// 파일이 제출되면 불리는 함수다.
 	function readAndPreview(file){
 			// Make sure  'file.name' matches our extensions cirteria
@@ -29,27 +35,36 @@ function previewFiles(){
 						// complte load 이벤트
 						if (fileCount == global_files.length){
 							
+							// 이미지들이 정렬 가능하도록 바꾼다
 							$('#preview').sortable()
 
+							// 이미지 마다 이벤트를 걸어준다
 							$('#preview img').each(function(index){
 								// 일단 다 "" 을 넣음으로써 key/value가 생성되게 click에서 여기로 옮겼따
 								captions[$(this).attr('title')] = ""
 
 								$(this).draggable({
 									connectToSortable: "#preview"	,
-									revert: "invalid"
+									revert: "invalid",
+
 								}).click(function(){
+									
+									// textarea disabled 풀어준다.
+									$('#input_post_content').removeAttr("disabled")
+
 									// 비워준다.
 									$('#input_post_content').val("")
 
 									// 이 이후에 텍스트에리아에 작성하는 것에 대해 어디에 기록함
 									var key = $(this).attr('title')
+
+									// 현재 선택한 키를 참조해, textArea에 입력하는 값을 내부JSON에 기록한다
 									selectedImgKey = key;
+
 									// 특정 이미지에 아무 캡션도 달리지 않았을 때
 									if (captions[key].trim() == ""){
 										// 안내 메시지
-										$('#input_post_content').attr("placeholder", "["+ $(this).attr('title')+"]\
-										에 대한 캡션을 작성해주세요;D" )
+										$('#input_post_content').attr("placeholder", "["+ $(this).attr('title')+"]  캡션을 작성해주세요;D" )
 									} 
 									// 키에 어떤 값이 들어갔을 때
 									else {
@@ -77,27 +92,35 @@ function previewFiles(){
 	// application.js
 	prevetScrollPropFrom('#preview')
 
-	$('#feeldup-submit-link').click(function(){
-		fileTitleOrder = [] 
-
-		// 순서 구하기
-		$('#preview img').each(function(index){
-			fileTitleOrder.push($(this).attr('title')	)
-		})
-
-		$('#post_img_order').val(fileTitleOrder.join(','))
-
-		// 각 이미지에 달린 캡션 하나로 합치기
-		// http://api.jquery.com/jquery.parsejson/ 나중엔 이거로 파싱
-		$('#post_content').val(JSON.stringify(captions, null, 1))
-
-		$('#feeldup-submit').click();
-	})
 
 }
 
 $(function(){
 	$('#preview').perfectScrollbar(); 
+
+	$('#feeldup-submit-link').click(function(){
+		if (fileCount > 0){
+			fileTitleOrder = [] 
+
+			// 순서 구하기
+			$('#preview img').each(function(index){
+				fileTitleOrder.push($(this).attr('title')	)
+			})
+
+			$('#post_img_order').val(fileTitleOrder.join(','))
+
+			// 각 이미지에 달린 캡션 하나로 합치기
+			// http://api.jquery.com/jquery.parsejson/ 나중엔 이거로 파싱
+			$('#post_content').val(JSON.stringify(captions, null, 1))
+
+			$('#feeldup-submit').click();
+		}
+		else {
+		
+			alert('먼저, 파일을 선택해 주세요;D')
+		}
+	})
+
 })
 
 </script>
@@ -111,26 +134,27 @@ $(function(){
 	<div style="color:#BBBBBB; font-size:1.3em;">마이필드<br> 프로젝트 관리</div>
 </div>
 
-<%= form_for @post, remote: true  do |f| %>
+<%= form_for @post, remote: true, :format=>'js'  do |f| %>
 <div id="form_container" style="float:left; height: 400px; width: 75%; background:#E9E9E9; padding: 10px;"> 
 	<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
-
 	
 	<div style="margin-bottom: 1%"></div>
 
-	<div id="preview"></div>
+	<div id="preview_container">
+		<div id="preview"></div>
+	</div>
 
-	<textarea id="input_post_content" class="form-control" placeholder="파일 업로드 후,
-이미지를 클릭하면 캡션을 달 수 있습니다.
-이미지를 드래그해서 순서를 바꿀 수 있습니다 ;D"%></textarea>
+	<textarea id="input_post_content" class="form-control" disabled placeholder="파일 업로드 후,
+이미지를 선택(클릭)하면 캡션을 달 수 있습니다.
+이미지를 드래그하면 순서를 바꿀 수 있습니다 ;D
+"%></textarea>
+
 	<%= f.hidden_field :content%>
-
-
 	<div class="inputWrapper">
 		<%= f.file_field :images, multiple: true, accept: 'image/png,image/gif,image/jpeg', class: "fileInput", onchange: "previewFiles()" %>
 	</div>
 
-	<div style="margin-bottom: 1%"></div>
+	<div style="margin-bottom: 10px"></div>
 
 	<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그 (태그는 쉼표로 구분해주세요! ex) 태그1, 태그2)" %>
 	<div class="has-error">
@@ -143,7 +167,7 @@ $(function(){
 	</div>
 </div>
 
-<div style="float:left; width:25%; height:323px; background:#F2F2F2; padding:1%; overflow-y: scroll">
+<div style="float:left; width:25%; height:350px; background:#F2F2F2; padding:1%; overflow-y: scroll">
 	<div id="project_radio_container">
 		<div>
 			<%= f.radio_button(:project_id, "") %>

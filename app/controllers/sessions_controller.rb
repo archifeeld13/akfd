@@ -6,6 +6,8 @@ class SessionsController < ApplicationController
 	def create_facebook
 		begin
 			@user = User.from_omniauth(request.env['omniauth.auth'])
+			@user.user_type = 1
+			@user.save
 			session[:user_id] = @user.id
 			flash[:success] = "Welcome, #{@user.name}!"
 		rescue
