@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 	root 'posts#index'
 
 	resources :users
-	get '/login' => "welcome#login"
 
 	resources :friendships, only: [:create, :destroy]
 	get 'friendships/:id/:type' => 'friendships#show'
@@ -29,7 +28,9 @@ Rails.application.routes.draw do
 
 
 
-	get '/auth/:provider/callback' => 'sessions#create'
+	get '/login' => "sessions#new"
+	post '/login' => "sessions#create_normal"
+	get '/auth/:provider/callback' => 'sessions#create_facebook'
 	delete '/logout', to: 'sessions#destroy'
 
 	get 'welcome/test/930911' => 'welcome#test'

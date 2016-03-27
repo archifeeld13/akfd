@@ -44,7 +44,7 @@ form input[type="password"]
 		<%= f.text_field :name, placeholder: "Name", class: "form-control" %>
 		<%= f.password_field :password, placeholder: "Password", required: true, class: "form-control" %>
 		<%= f.password_field :password_confirmation, placeholder: "Password Confirmation", required: true, class: "form-control" %>
-		<%= f.hidden_field :not_oauth, value: true %>
+		<%= f.hidden_field :user_type, value: 0 %>
 	</div>
 	<div class="form-actions">
 		<%= f.submit :submit, class: "hidden", id: "register_btn" %>
@@ -55,5 +55,5 @@ form input[type="password"]
 	<%= link_to image_tag('registered.png', class: "login_btns"), '#', onclick: "$('#register_btn').click()" %> 
 </div>
 <div style="margin-top: 20px">
-	<%= link_to '취소', url_for(:back), class: "reg_cancel" %>
+	<%= link_to '취소', '/login', class: "reg_cancel" %>
 </div>

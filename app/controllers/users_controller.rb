@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
-
 	def show
   end
 
   def new	
 		@user = User.new 
 		render "users/new", :layout => 'front'
+		flash[:notice]= "회원가입이 완료"
   end
 
 	# 이건 필요가 없어 create에서 호출하면 되
@@ -19,9 +19,12 @@ class UsersController < ApplicationController
 	# http://www.sitepoint.com/rails-userpassword-authentication-from-scratch-part-i/
 	def create
 		@user = User.new(post_params)
+		#salt = BCrypt::Engine.generate_salt
+		#@user.password =BCrypt::Engine.hash_secret(@user.password, salt)
+		#@user.password_confirmation =BCrypt::Engine.hash_secret(@user.password_confirmation, salt)
+
 		if @user.save
-			render text: @user.name <<  "," << @user.email << "," << @user.password
-			# 암호화 필요
+			redirect_to '/login'
 		else 
 			render "users/new", :layout => 'front'
 		end
@@ -38,6 +41,6 @@ class UsersController < ApplicationController
 
 private
 	def post_params
-		params.require(:user).permit(:email, :name, :password, :password_confirmation)
+		params.require(:user).permit(:email, :name, :password, :password_confirmation, :user_type)
 	end
 end

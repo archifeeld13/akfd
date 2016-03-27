@@ -51,6 +51,9 @@ gem 'dotenv-rails'
 # remote true file upload
 gem 'remotipart'
 
+# encryption pw
+gem 'bcrypt-ruby', :require => 'bcrypt'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

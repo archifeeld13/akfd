@@ -1,0 +1,22 @@
+<div>
+	<%= form_for(:session, url: login_path, class: "form-signin") do |f| %>	
+		<div style="color:white; background:rgba(20,20,20, 0.2); margin-bottom: 2%;">
+			<%= flash[:notice] %>
+		</div>
+		<%= f.email_field :email, class: 'form-control', required: true, placeholder: "이메일 주소" %>	
+		<%= f.password_field :password, class: 'form-control', required: true, placeholder: "비밀번호" %>	
+		<%= f.submit id:"login-btn", class: "hidden" %>
+	<% end %>
+</div>
+<div>
+	<%= link_to image_tag('login.png', class: "login_btns"), '#', onclick: '$("#login-btn").click()' %> 
+</div>
+<div style="margin-top: 1%">
+	<%= link_to image_tag('facebooklogin.png', class: "login_btns"), '/auth/facebook'%> 
+</div>
+<div style="margin-top: 1%">
+	<%= link_to image_tag('register.png', class: "login_btns"), new_user_path %> 
+</div>
+<div style="margin-top: 20px">
+	<a href="/posts" style="color:white"> 비회원 입장 </a> 
+</div>

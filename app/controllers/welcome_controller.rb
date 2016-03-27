@@ -4,9 +4,6 @@ class WelcomeController < ApplicationController
 		@users = User.all
   end
 
-	def login
-		render "welcome/login", :layout => 'front' 
-	end
 
 	def test
 		posts = Post.all
