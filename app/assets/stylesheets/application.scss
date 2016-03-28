@@ -88,29 +88,6 @@ a.tag {
 }
 
 
-#feeld{
-	img{
-		height: 30px;
-	}
-}
-
-#feeldin{
-	img{
-		height: 30px;
-	}
-}
-
-#edit{
-	img {
-		height: 30px;
-	}
-}
-
-// for summernote
-.note-editor{
-	margin: 0;
-}
-
 // CC로 축약해 부를 것이다
 #contents-container {
 	margin-left: 25px;
@@ -208,5 +185,16 @@ a.tag {
 	
 }
 
+#loading_bg{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 701;
+	display: hidden;	
+	background: rgba(220,220,220,0.9);
+	img {
+		margin: auto;
+	}
+}
 // layout 에 적용되는 스타일들  
 // layout 에 적용되는 스타일들  

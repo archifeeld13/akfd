@@ -165,6 +165,18 @@ function showModalBG(){
 		.fadeIn()/*show()*/
 }
 
+// loading bg
+function showLoadingBG(){
+	$('#loading_bg')
+		.css('height', $(document).height())
+		.css('width', $(document).width())
+		.html('<img id="loading_gif" src="/assets/loading.gif">')
+		.fadeIn()/*show()*/
+	$('#loading_gif').css('position','fixed')
+		.css('left', ($(window).width() - $(this).width()));
+		.css('top', ($(window).height() - $(this).height())/2 )
+}
+
 // 동적으로 모달 배경과 모달 창을 보여주는 부분으로
 // 여러 곳에서 호출할 수 있다
 // 호출 후에 반드시 changeWidthHeightModalBoard 함수를 호출해줌으로써 모달보드를 조정해줘야한다
@@ -186,9 +198,10 @@ function hideModalBoard(){
 
 // feeldup 눌렀을 때 나오는 배경 및 필드업 보드  숨겨놓기
 // 맨첨에만 불린다
-// 사실 hideModalBoard와 비슷하다
-function hideModalBG(){
+//  로딩 bg랑 별거 다 없애논다
+function hideDivsAtFirst(){
 	$('#modal_bg').hide()
+	$('#loading_bg').hide()
 	$('#option_container').hide()
 	$('#modal_board').hide()
 }
@@ -225,7 +238,7 @@ $(function(){
 	})
 
 	//	feeldup Background를일단 숨겨놓음 
-	hideModalBG();
+	hideDivsAtFirst();
 
 	imgIconHover(".nav-icon");
 	imgIconHover("#feeldup img");

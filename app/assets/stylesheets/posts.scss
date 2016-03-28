@@ -148,6 +148,30 @@
 
 
 // show.js.erb
+
+#feeld{
+	img{
+		height: 30px;
+	}
+}
+
+#feeldin{
+	img{
+		height: 30px;
+	}
+}
+
+#edit{
+	img {
+		height: 30px;
+	}
+}
+
+// for summernote
+.note-editor{
+	margin: 0;
+}
+
 #show-post-header {
 	font-size: 1.5em;
 	padding: 2%

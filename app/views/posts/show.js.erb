@@ -31,7 +31,7 @@ $('.show-post-img').each(function(){
 					var nameOfFile = tmp[tmp.length - 1]
 					//if (decodeURIComponent($(this).attr('src')).indexOf(img_order[k]) >= 0){
 					if (nameOfFile == img_order[k]){
-							$(this).parent().prepend("<center><div style='font-size:1.5em'>" + captions[img_order[k]] + "</div></center>");
+							$(this).parent().prepend("<center><div style='font-size:1.3em; margin: 1% 3%;'>" + captions[img_order[k]] + "</div></center>");
 							$(this).parent().prepend($(this));
 							$(this).attr('id', 'show-post-img-' + k )
 					}

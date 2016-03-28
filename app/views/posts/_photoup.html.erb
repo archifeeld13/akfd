@@ -99,10 +99,19 @@ $(function(){
 	$('#preview').perfectScrollbar(); 
 
 	$('#feeldup-submit-link').click(function(){
-		if (fileCount > 7){
+		if ($('#input_post_title').val().length == 0 ){
+			alert('제목을 입력해 주세요;)') 	
+		}
+		else if ( fileCount == 0){
+			alert('먼저, 파일을 선택해 주세요;D')
+		}
+		else if (fileCount > 7){
 			alert('파일 개수는 7개로 제한되어 있습니다(beta)') 	
 		}
 		else if (fileCount > 0){
+
+			//로딩 이미지
+		  showLoadingBG();	
 
 			fileTitleOrder = [] 
 
@@ -118,10 +127,15 @@ $(function(){
 			$('#post_content').val(JSON.stringify(captions, null, 1))
 
 			$('#feeldup-submit').click();
+			$('#preview').click();
+
+			fileCount = 0;
+			captions = {};
+			selectedImgKey = null	
+			$('#preview').html("")
 		}
 		else {
-		
-			alert('먼저, 파일을 선택해 주세요;D')
+			alert('error')	
 		}
 	})
 
