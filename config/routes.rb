@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 	delete '/logout', to: 'sessions#destroy'
 
 	get 'welcome/test/930911' => 'welcome#test'
+	get '/state' => 'welcome#state'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,7 +1,11 @@
 class SessionsController < ApplicationController
 	require 'digest/sha1'
 	def new
-		render "sessions/new", :layout => 'front' 
+		if current_user
+			redirect_to posts_path
+		else 
+			render "sessions/new", :layout => 'front' 
+		end
 	end
 
 	def create_facebook

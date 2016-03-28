@@ -38,4 +38,8 @@ class WelcomeController < ApplicationController
 		render text: 'ok'
 	end
 
+	def state
+			render text: "현재 가입자: " +  User.all.count.to_s
+	end
+
 end
