@@ -1,7 +1,10 @@
 class FriendshipsController < ApplicationController
+	before_action :check_logined, only: [:create,  :destroy]
+
 	def create
 		@friendship = current_user.friendships.find_or_create_by(:friend_id => params[:friend_id])
-		if @friendship.save
+		
+		if params[:friend_id] != current_user.id and @friendship.save
 			#flash[:notice] = "Added friend."
 			redirect_to("/my_feeld?user_id=#{params[:friend_id]}")
 		else

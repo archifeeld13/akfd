@@ -27,6 +27,15 @@ class WelcomeController < ApplicationController
 			u.save
 		end
 =end
+		users = User.all
+		users.each do |u|
+			if u.user_type == 0
 
+				u.use_photo = true
+				u.save
+			end
+		end
+		render text: 'ok'
 	end
+
 end

@@ -4,7 +4,11 @@
 	<article id="comment_<%=comment.id %>" class="row">
 		<div class="col-md-2 col-sm-2 col-xs-2">
 			<figure class="thumbnail">
-				<img class="img-responsive" src="<%=comment.user.image_url%>" />
+				<% if comment.user.use_photo %>
+					<img class="img-responsive" src="<%=comment.user.photo%>" />
+				<% else %>
+					<img class="img-responsive" src="<%=comment.user.image_url%>" />
+				<% end %>
 				<figcaption class="text-center"><%= link_to comment.user.name, "/my_feeld?user_id=#{comment.user.id}"%></figcaption>
 			</figure>
 		</div>
@@ -58,7 +62,11 @@
 		</div>
 		<div class="col-md-2 col-sm-2 col-xs-2">
 			<figure class="thumbnail">
-				<img class="img-responsive" src="<%=comment.user.image_url%>" />
+				<% if comment.user.use_photo %>
+					<img class="img-responsive" src="<%=comment.user.photo%>" />
+				<% else %>
+					<img class="img-responsive" src="<%=comment.user.image_url%>" />
+				<% end %>
 				<figcaption class="text-center"><%= link_to comment.user.name, "/my_feeld?user_id=#{comment.user.id}"%></figcaption>
 			</figure>
 		</div>

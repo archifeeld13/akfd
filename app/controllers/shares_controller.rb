@@ -1,4 +1,6 @@
 class SharesController < ApplicationController
+	before_action :check_logined, only: [:create]
+
   def create
 		share = Share.find_by(user_id: current_user.id, post_id: params[:post_id])
 		if share

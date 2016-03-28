@@ -29,4 +29,10 @@ class ApplicationController < ActionController::Base
 		def json_request?
 			request.format.json?
 		end
+		def check_logined
+			if !session[:user_id] 
+				flash[:notice] = "로그인을 해주세요"
+				redirect_to login_path	
+			end
+		end
 end

@@ -1,13 +1,17 @@
 <div class="posts-item">
 	<div class="posts-item-writer">
-		<%= image_tag(post.user.image_url) %>
+		<% if post.user.use_photo %>
+			<%= image_tag(post.user.photo) %>
+		<% else %>
+			<%= image_tag(post.user.image_url) %>
+		<% end %>
 		<%= link_to post.user.name, "/my_feeld?user_id=#{post.user.id}"%>
 		&nbsp;
 		<% if current_user and (current_user.id == 1 or current_user.id == post.user.id)%>
 			<%= link_to "x", post, method: :delete, data: { confirm:	"Are you sure?" } %>
 		<% end %>
 	</div>
-	<% if post.images.size > 0 %>
+	<% if post.post_type == 1 %>
     <%= link_to image_tag(post.images[0].url, class: 'posts-item-img'), post, remote:true %></td>
 	<% else %>
 		<%= link_to(post, remote: true) do %>

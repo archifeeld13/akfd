@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+	before_action :check_logined, only: [:message_box, :new, :create, :edit, :update, :destroy]
+
   def index
 		if params[:tag]
 			# 태그 검색시 실행 부분

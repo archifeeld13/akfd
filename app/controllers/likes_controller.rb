@@ -1,4 +1,6 @@
 class LikesController < ApplicationController
+	before_action :check_logined, only: [:create]
+
   def create
 =begin
 		like = Like.find_or_create_by(user_id: current_user.id, post_id: params[:post_id])

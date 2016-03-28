@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
 	def destroy
 		if current_user
 			session.delete(:user_id)
-			flash[:success] = 'See you!'
+			flash[:notice] = '이용해주셔서 감사합니다;D'
 		end
 		redirect_to root_path
 	end

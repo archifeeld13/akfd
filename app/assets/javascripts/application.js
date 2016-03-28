@@ -23,6 +23,16 @@ if ($(window).width() < 1000){
 	alert('아키필드는 현재 PC환경에 최적화 되어있습니다.\n 모바일 환경을 위한 서비스는 추후 개발 예정입니다.\n 감사합니다^^');
 }
 */
+function tag_truncate(){
+	var result = ""
+	$('.tag_list').each(function(){	
+		tmp_arr = $(this).html().split(",").slice(0, 3);
+		result = tmp_arr.join();
+		if ($(this).html().split(",").length > 3)
+			result += " <strong> ...+</strong> "
+		$(this).html(result);
+	})
+}
 
 function imgIconHover(selector){
 	prev = ""

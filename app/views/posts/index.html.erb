@@ -8,14 +8,7 @@
 	<%= render @posts %>
 </div>
 
-<script>
-	var result = ""
-	$('.tag_list').each(function(){	
-		tmp_arr = $(this).html().split(",").slice(0, 3);
-		result = tmp_arr.join();
-		if ($(this).html().split(",").length > 3)
-			result += " <strong> ...+</strong> "
-		$(this).html(result);
-	})
 
+<script >
+	tag_truncate()
 </script>
