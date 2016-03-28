@@ -32,7 +32,7 @@
 	<div id="navbar" class="navbar-right" style="margin-right: 1%">
 		<% if current_user.use_photo %>
 			<!-- 여기 둥글게 스타일 입혀야댐 -->
-			<%= image_tag(current_user.photo, id:"profile_img", class: "nav-icon-nohover") %>
+			<%= link_to image_tag(current_user.photo, id:"profile_img", class: "nav-icon-nohover"), "/my_feeld" %>
 		<% else %>
 			<img id="profile_img" class="nav-icon-nohover" src="<%= current_user.image_url%>" style="border-radius:3px">
 		<% end %>

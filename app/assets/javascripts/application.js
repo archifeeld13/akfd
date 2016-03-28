@@ -214,6 +214,7 @@ function rightFixedMenuEvent(){
 // 문서가 다 로드 되면 해야 할 작업들
 // 문서가 다 로드 되면 해야 할 작업들
 $(function(){
+	
 	rightFixedMenuEvent();
 
 	// 네브바 서치 인풋태그 배경 토글

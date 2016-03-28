@@ -20,7 +20,7 @@ class PostsController < ApplicationController
 		else
 			# 기본 메인 페이지
 			@posts = Post.all.reverse
-			flash[:notice] = "<span style='color:gray'>아키필드</span>에 오신 것을 환영합니다! ;D"
+			flash[:notice] = "<span style='color:gray'>아키필드</span>에 오신 것을 환영합니다! :D"
 		end
   end
   

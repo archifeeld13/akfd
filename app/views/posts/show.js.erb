@@ -27,7 +27,10 @@ $('.show-post-img').each(function(){
 			var img_order = "<%=j @post.img_order %>".split(',')
 			for (k = img_order.length - 1 ; k >= 0; k--){
 				$(".show-post-img").each(function(idx){
-					if (decodeURIComponent($(this).attr('src')).indexOf(img_order[k]) >= 0){
+					var tmp = $(this).attr('src').split('/')
+					var nameOfFile = tmp[tmp.length - 1]
+					//if (decodeURIComponent($(this).attr('src')).indexOf(img_order[k]) >= 0){
+					if (nameOfFile == img_order[k]){
 							$(this).parent().prepend("<center><div style='font-size:1.5em'>" + captions[img_order[k]] + "</div></center>");
 							$(this).parent().prepend($(this));
 							$(this).attr('id', 'show-post-img-' + k )
@@ -72,4 +75,10 @@ $('.show-post-img').each(function(){
 
 $(function(){
 	$('#moad_board').perfectScrollbar(); 
+
+	$(document).keyup(function(e){
+		if (e.keyCode == 27){
+			$('#modal_bg').click()
+		}	
+	})
 })

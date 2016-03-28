@@ -22,15 +22,6 @@
 		</span>
 		<span style="color:gray; font-size: 1.2em; white-space: nowrap">
 			@<%= @user.company %>
-			<% if @user.id == 7 %>
-				<strong style="color:red">똥싸개</strong>
-			<% elsif @user.id == 6 %>
-				<strong style="color:aqua"> 초밥왕지원짱</strong>
-			<% elsif @user.id == 1 %>
-				<strong style="color:green"> 오하시송</strong>
-			<% elsif @user.id == 4 %>
-				<strong style="color:purple">대장</strong>
-			<% end %>
 		</span><br>
 		<% if current_user %>
 			<% if @user.id == current_user.id %>
