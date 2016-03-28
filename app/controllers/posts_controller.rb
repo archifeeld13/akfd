@@ -1,7 +1,4 @@
 class PostsController < ApplicationController
-	# 보여주기 용으로 해논거임
-	before_action :set_posts_users
-
   def index
 		if params[:tag]
 			# 태그 검색시 실행 부분
@@ -141,10 +138,6 @@ class PostsController < ApplicationController
 	private
 		def post_params
 			params.require(:post).permit(:title, :content, :post_type, :img_order, :project_id, {images: []}, :tag_list_fixed)
-		end
-		def set_posts_users
-			@posts = Post.all
-			@users = User.all
 		end
 
 end

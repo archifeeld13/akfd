@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 	# http://www.sitepoint.com/rails-userpassword-authentication-from-scratch-part-i/
 	def create
 		@user = User.new(post_params)
+		@user.use_photo = true 
 		@user.salt = BCrypt::Engine.generate_salt
 		@user.password = BCrypt::Engine.hash_secret(params[:user][:password], @user.salt)
 		@user.password_confirmation = BCrypt::Engine.hash_secret(params[:user][:password_confirmation], @user.salt)
@@ -31,9 +32,16 @@ class UsersController < ApplicationController
   end
 
   def edit
+		@user = User.find(params[:id])
   end
 
   def update
+		@user= User.find(params[:id])
+		if @user.update(post_params)
+			redirect_to '/my_feeld' 
+		else 
+			render "users/edit"
+		end
   end
 
   def destroy
@@ -41,6 +49,6 @@ class UsersController < ApplicationController
 
 private
 	def post_params
-		params.require(:user).permit(:email, :name, :password, :password_confirmation, :user_type)
+		params.require(:user).permit(:email, :name, :password, :password_confirmation, :user_type, :nickname, :use_nick, :company, :photo, :use_photo)
 	end
 end

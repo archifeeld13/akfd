@@ -19,12 +19,12 @@ class S3Uploader < CarrierWave::Uploader::Base
 
 	# 요청한 이미지가 없을 때 대체해서 사용하는 default 이미지 설정
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  # def default_url
-  #   # For Rails 3.1+ asset pipeline compatibility:
-  #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-  #
-  #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-  # end
+  def default_url
+    # For Rails 3.1+ asset pipeline compatibility:
+    #ActionController::Base.helpers.asset_path("fallback/" + [:thumb, "default.png"].compact.join('_'))
+    #"/images/fallback/" + [version_name, "default.png"].compact.join('_')
+    "/assets/default.png"
+  end
 
 	# 저장할 이미지 사이즈 조정
   # Process files as they are uploaded:

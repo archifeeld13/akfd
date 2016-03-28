@@ -30,7 +30,12 @@
 
 	<% if current_user %>
 	<div id="navbar" class="navbar-right" style="margin-right: 1%">
-		<img id="profile_img" class="nav-icon-nohover" src="<%= current_user.image_url%>" style="border-radius:3px">
+		<% if current_user.use_photo %>
+			<!-- 여기 둥글게 스타일 입혀야댐 -->
+			<%= image_tag(current_user.photo, id:"profile_img", class: "nav-icon-nohover") %>
+		<% else %>
+			<img id="profile_img" class="nav-icon-nohover" src="<%= current_user.image_url%>" style="border-radius:3px">
+		<% end %>
 
 		<%= link_to image_tag('/assets/home.png', class: "nav-icon"), posts_path  %>
 		<a href="/my_feeld">
@@ -47,7 +52,7 @@
 			});
 		</script>
 
-		<a href="#setting"><img class="nav-icon" src="/assets/setting.png"></a>
+		<a href="<%= edit_user_path(current_user.id)%>"><img class="nav-icon" src="/assets/setting.png"></a>
 
 		<%= link_to image_tag('/assets/logout.png', class: "nav-icon-nohover"), logout_path, method: :delete  %>
 

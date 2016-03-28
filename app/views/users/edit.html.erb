@@ -1,2 +1,60 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<script>
+	$(function(){
+		$('#user_edit_panel').hide().slideDown()	
+	})
+</script>
+
+<div id="user_edit_panel">
+	<%# http://stackoverflow.com/questions/2821061/facebook-api-how-do-i-get-a-facebook-users-profile-image-through-the-facebook %>
+	<% if @user.user_type == 1 %>
+		페북 프로필 사진 → 
+		<%= image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130", id: "message_box") %>
+	<% end %> 
+	
+	<% if @user.photo %>
+		프로필 사진 별도 설정→ 
+		<%=image_tag(@user.photo, class: "my_feeld_profile_img") %>
+	<% end %>
+
+	<div id="user_info_name_dept">
+		<label>이름</label>
+		<br>
+		<span style="font-weight: bold; font-size: 2em;">
+			<%= @user.name %>
+		</span>
+	<%= form_for(@user) do |f| %>
+		<div style="color:white; background:rgba(20,20,20, 0.2); margin-bottom: 2%;">
+			<% @user.errors.full_messages.each do |msg| %>
+				<div><%=msg %> </div>
+			<% end %>
+		</div>
+		<div class="form-inputs">
+			<%= f.label :nickname, '닉네임'%>
+			<%= f.text_field :nickname, placeholder: "닉네임을 입력해주세요", class: "form-control" %>
+
+			<%= f.label :use_nick, '닉네임 노출 여부'%>
+			<%= f.check_box :use_nick, placeholder: "Name" %>
+	<br>
+	<br>
+			<%= f.label :company, '소속'%>
+			<%= f.text_field :company, placeholder: "소속을 입력해주세요", class: "form-control" %>
+
+	<br>
+	<br>
+			<%= f.label :photo, '프로필 사진 별도 설정'%>
+			<%= f.file_field :photo, class: "form-control", as: :file %>
+			<% if @user.user_type == 0 %>
+				<%= f.hidden_field :use_photo, class: "form-control", value: true %>
+			<% else %>
+				<%= f.label :photo, '프로필 사진 노출 여부'%>
+				<%= f.check_box :use_photo %>
+			<% end %>
+		</div>
+	<br>
+	<br>
+		<div class="form-actions">
+			<%= f.submit :submit  %>
+		</div>
+	<% end %>
+	</div>
+</div>
