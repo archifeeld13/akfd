@@ -1,3 +1,13 @@
+<style>
+	.friend_imgs{
+		width: 75px;
+		height: 75px;
+	}
+</style>
 <% @user.friendships.each do |f| %>
-	<%= link_to image_tag(f.friend.image_url, class: "friend_imgs"), "/my_feeld?user_id=#{f.friend.id}" %>
+	<% if f.friend.use_photo %>
+		<%= link_to image_tag(f.friend.photo, class: "friend_imgs"), "/my_feeld?user_id=#{f.friend.id}" %>
+	<% else %>
+		<%= link_to image_tag(f.friend.image_url, class: "friend_imgs"), "/my_feeld?user_id=#{f.friend.id}" %>
+	<% end %>
 <% end %>

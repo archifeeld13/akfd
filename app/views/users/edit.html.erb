@@ -6,15 +6,32 @@
 
 <div id="user_edit_panel">
 	<%# http://stackoverflow.com/questions/2821061/facebook-api-how-do-i-get-a-facebook-users-profile-image-through-the-facebook %>
-	<% if @user.user_type == 1 %>
-		페북 프로필 사진 → 
-		<%= image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130", id: "message_box") %>
-	<% end %> 
-	
-	<% if @user.photo %>
-		프로필 사진 별도 설정→ 
-		<%=image_tag(@user.photo, class: "my_feeld_profile_img") %>
-	<% end %>
+	<table class="table" style="width:30%">
+	<tr>
+		<td>
+		<% if @user.user_type == 1 %>
+			페북 프로필 사진  
+		<% end %> 
+		</td>	
+		<td>	
+		<% if @user.photo %>
+			프로필 사진 별도 설정 
+		<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<% if @user.user_type == 1 %>
+			<%= image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130", id: "message_box") %>
+		<% end %> 
+		</td>
+		<td>	
+		<% if @user.photo %>
+			<%=image_tag(@user.photo, class: "my_feeld_profile_img") %>
+		<% end %>
+		</td>
+	</tr>
+	</table>
 
 	<div id="user_info_name_dept">
 		<label>이름</label>
@@ -35,11 +52,9 @@
 			<%= f.label :use_nick, '닉네임 노출 여부'%>
 			<%= f.check_box :use_nick, placeholder: "Name" %>
 	<br>
-	<br>
 			<%= f.label :company, '소속'%>
 			<%= f.text_field :company, placeholder: "소속을 입력해주세요", class: "form-control" %>
 
-	<br>
 	<br>
 			<%= f.label :photo, '프로필 사진 별도 설정'%>
 			<%= f.file_field :photo, class: "form-control", as: :file %>
@@ -53,7 +68,7 @@
 	<br>
 	<br>
 		<div class="form-actions">
-			<%= f.submit :submit  %>
+			<%= f.submit :submit , class:"form-control btn-info" %>
 		</div>
 	<% end %>
 	</div>
