@@ -8,8 +8,9 @@ function postsColumnResize(){
 	var rWidth = $('#right_fixed_menu').width()
 	var except_RFM = $(window).width() - (rWidth + 25) // 25 : RFM의 오른쪽 마진
 	if ($(window).width() > 700){
-		$('#contents-container').css('width', except_RFM - (except_RFM % (pWidth + 20)) ) // 각 포스트 아이템 마진 사방으로 20px임
-											.css('margin-left', (except_RFM - $('#contents-container').width())/2)
+		$('#contents-container')
+			.css('width', except_RFM - (except_RFM % (pWidth + 20)) ) // 각 포스트 아이템 마진 사방으로 20px임
+			.css('margin-left', (except_RFM - $('#contents-container').width())/2)
 	}
 }
 
@@ -40,7 +41,7 @@ function my_feeld_menu_event(){
 		}
 	);
 
-	$("#project_list").hover(
+	$("#project_management").hover(
 		function() {
 			$(this).css('background', 'white');
 		},

@@ -92,7 +92,6 @@ function previewFiles(){
 	// application.js
 	prevetScrollPropFrom('#preview')
 
-
 }
 
 $(function(){
@@ -153,7 +152,7 @@ $(function(){
 </div>
 
 <%= form_for @post, remote: true, :format=>'js'  do |f| %>
-<div id="form_container" style="float:left; height: 400px; width: 75%; background:#E9E9E9; padding: 10px;"> 
+<div id="form_container_for_photoup" style="float:left; height: 400px; width: 75%; background:#E9E9E9; padding: 10px;"> 
 	<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
 	
 	<div style="margin-bottom: 1%"></div>

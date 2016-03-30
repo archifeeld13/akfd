@@ -1,0 +1,29 @@
+<style>
+	.project_add_btn{
+		font-size: 1.5em;	
+		color: gray;
+	}
+</style>
+<% @project = Project.new %>
+<%# 임시로 project/_project.html.erb에서 사용한 폼을 가져왔다 %>
+<div id="project_manage_board"class="posts-item" style="background:#f9f9f9">
+	<div class="posts-item-writer" style="font-size: 2em; color: darkgray">
+		<center>프로젝트 관리</center>
+	</div>
+	<div class="posts-item-text" align="center">
+		추가 기능 개발 예정		
+	</div>
+	<div class="posts-item-info">
+		<%= simple_form_for([current_user, @project], remote: true) do |f| %>
+		<div style="">
+			<div style="">
+				<%= f.text_field :name, :class => "form-control",  :placeholder => '프로젝트명 입력' %>
+				<%= f.hidden_field :type, value: "my_feeld" %>
+			</div>
+			<div style="height:5px"></div>
+			<%= f.submit "프로젝트 추가", class: 'btn-default btn-block project_add_btn'%>
+		</div>
+		<% end %>
+	</div>
+</div>
+

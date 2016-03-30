@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 	get '/message_box/:user_id' => 'posts#message_box'
 	get '/archive_mine' => 'posts#archive_mine'
 	get '/archive_share' => 'posts#archive_share'
-	get '/project_list' => 'posts#project_list'
+	get '/project_management' => 'posts#project_management'
 	get '/project_list_in' => 'posts#project_list_in'
 
 

@@ -27,7 +27,7 @@ $('.show-post-img').each(function(){
 			var img_order = "<%=j @post.img_order %>".split(',')
 			for (k = img_order.length - 1 ; k >= 0; k--){
 				$(".show-post-img").each(function(idx){
-					var tmp = $(this).attr('src').split('/')
+					var tmp = decodeURIComponent($(this).attr('src')).split('/')
 					var nameOfFile = tmp[tmp.length - 1]
 					//if (decodeURIComponent($(this).attr('src')).indexOf(img_order[k]) >= 0){
 					if (nameOfFile == img_order[k]){

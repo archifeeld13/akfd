@@ -1,0 +1,5 @@
+$('#posts-container').html('');
+<% if @isMine %>
+$('#posts-container').html("<%=j render 'projects/form2' %>");
+<% end %>
+$('#posts-container').append("<%=j render 'projects/projects' %>");

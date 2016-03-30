@@ -14,12 +14,12 @@
 // photoup.html.erb
 // photoup.html.erb
 // photoup.html.erb
-#form_container{
+#form_container_for_photoup{
 	#input_post_content{
 		position: relative;
 		top:0;
 		right:0;
-		width:69%;
+		width:59%;
 		height:250px;
 	}
 
@@ -29,7 +29,7 @@
 		top: 0;
 		left: 0;
 		height:300px;
-		width:30%;
+		width:40%;
 		padding:0;
 		background: rgba(40,40,40, 0.1);
 		margin:0;
@@ -42,8 +42,8 @@
 			img{
 				margin-top: 15px;
 				margin-left: 17px;
-				width: 100px;	
-				height: 60px;	
+				width: 80%;	
+				height: 100px;	
 			}
 		}
 	}
@@ -54,7 +54,7 @@
 	.inputWrapper {
 		position: relative;
 		height: 50px;
-		width: 69%;
+		width: 59%;
 		padding:0;
 		cursor: pointer;
 		/*Using a background color, but you can use a background image to represent a button*/
@@ -265,7 +265,7 @@
 			padding-top: 13px;
 		}
 	}
-	#project_list {
+	#project_management{
 		height:100%;
 		float: left;
 

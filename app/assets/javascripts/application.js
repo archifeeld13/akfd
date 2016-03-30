@@ -173,8 +173,8 @@ function showLoadingBG(){
 		.html('<img id="loading_gif" src="/assets/loading.gif">')
 		.fadeIn()/*show()*/
 	$('#loading_gif').css('position','fixed')
-		.css('left', ($(window).width() - $(this).width()));
-		.css('top', ($(window).height() - $(this).height())/2 )
+		.css('left', ($(window).width() - 63) /2)
+		.css('top', ($(window).height() - 63) /2 )
 }
 
 // 동적으로 모달 배경과 모달 창을 보여주는 부분으로

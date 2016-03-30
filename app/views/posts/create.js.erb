@@ -6,6 +6,7 @@
 	alert(errors.join(','));
 <% else %>
 		$('#modal_bg').click();
+		$('#loading_bg').fadeOut();
 		// 여기 나중에 쇼우로 바꾸기
 		location.reload()
 <% end %>

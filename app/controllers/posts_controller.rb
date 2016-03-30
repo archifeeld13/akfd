@@ -30,7 +30,7 @@ class PostsController < ApplicationController
 		- message_box
 		- archive_mine
 		- archive_share
-		- project_list
+		- project_management
 =end
 	def my_feeld
 		# 회원 이름을 클릭해서 들어오면 /my_feeld?user_id=유저아이디
@@ -51,7 +51,7 @@ class PostsController < ApplicationController
 
 
 	#
-	# archive_mine, archive_share, project_list -> ajax
+	# archive_mine, archive_share, project_management-> ajax
 	# in my_feeld
 	# 
 	def archive_mine
@@ -70,14 +70,17 @@ class PostsController < ApplicationController
 		end
 	end
 
-	def project_list
-		if params[:user_id]
+	def project_management
+		if params[:user_id] && (User.find(params[:user_id]).id != current_user.id)
+			@isMine = false
 			@projects = Project.where(user_id: User.find(params[:user_id]).id).reverse
 		else
+			@isMine = true 
 			@projects = Project.where(user_id: current_user.id).reverse
 		end
 	end
 
+	# 특정 프로젝트를 눌렀을 때의 행동
 	def project_list_in
 		project = Project.find(params[:project_id])
 		@posts = project.posts.reverse

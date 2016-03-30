@@ -3,7 +3,9 @@ class ProjectsController < ApplicationController
 
 	# ajax로 프로젝트만 생성하는 곳이다
   def create
-		@project = current_user.projects.new(project_params)
+		@type = params[:project][:type]
+		#@project = current_user.projects.new(project_params)
+		@project = current_user.projects.new(name: params[:project][:name])
 		@project.save
   end
 
@@ -14,6 +16,6 @@ class ProjectsController < ApplicationController
 
 private
 	def project_params
-		params.require(:project).permit(:name)
+		params.require(:project).permit(:name, :type)
 	end
 end
