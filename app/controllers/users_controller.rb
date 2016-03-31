@@ -9,7 +9,9 @@ class UsersController < ApplicationController
 			if request.post? 
 				type = search_params[:type]
 				name = search_params[:name]
-				if type == "name"
+				if name.length == 0
+					@users = []
+				elsif type == "name"
 					@users = User.where('name LIKE ?', "%#{name}%")	
 				else 
 					@users = User.where('nickname LIKE ?', "%#{name}%")	
