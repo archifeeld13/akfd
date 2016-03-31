@@ -8,7 +8,9 @@
 		<%= link_to post.user.name, "/my_feeld?user_id=#{post.user.id}"%>
 		&nbsp;
 		<% if current_user and (current_user.id == 1 or current_user.id == post.user.id)%>
-			<%= link_to "x", post, method: :delete, data: { confirm:	"Are you sure?" } %>
+			<span style="font-size: 0.8em ">
+			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"Are you sure?" } %>
+			</span>
 		<% end %>
 	</div>
 	<% if post.post_type == 1 %>
