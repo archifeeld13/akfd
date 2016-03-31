@@ -1,0 +1,8 @@
+<%= form_for :search,  url: user_search_path, remote: true do |f| %>
+	<%= f.text_field :name, class: 'form-control' %>	
+	<%= f.radio_button(:type, "name", checked: true) %>이름검색
+	<%= f.radio_button(:type, "nick") %>닉네임검색
+	<%= f.submit "검색", class:'btn btn-success' %>
+<% end %>
+<div id="userSearchResult">
+</div>

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
 	root 'sessions#new'
 
-	resources :users
+	#resources :users
 
 	resources :friendships, only: [:create, :destroy]
 	get 'friendships/:id/:type' => 'friendships#show'
@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 	resources :users do
 		resources :projects, only: [:create, :destroy]	
 	end
+
+	get '/user_search' => 'users#search', as: 'users_search'
+	post '/user_search' => 'users#search'
 
 	resources :posts do
 		resources :comments, only: [:create, :destroy]

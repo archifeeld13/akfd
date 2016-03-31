@@ -1,0 +1,15 @@
+<style>
+	.search_result_img{
+		width: 50px;
+		height: 50px;
+	}
+</style>
+<% @users.each do |user| %>
+		<% if user.use_photo %>
+			<%= link_to image_tag(user.photo, class: "search_result_img"), "/my_feeld?user_id=#{user.id}" %> 
+		<% else %>
+			<%= link_to image_tag(user.image_url, class: "search_result_img"), "/my_feeld?user_id=#{user.id}" %> 
+		<% end %> 
+		<%= link_to user.name, "/my_feeld?user_id=#{user.id}"%>
+		<br/>	
+<% end %>

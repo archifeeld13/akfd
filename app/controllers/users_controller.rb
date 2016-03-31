@@ -3,6 +3,24 @@ class UsersController < ApplicationController
 	def show
   end
 
+	def search
+		# /user/search
+		respond_to do |format|
+			if request.post? 
+				type = search_params[:type]
+				name = search_params[:name]
+				if type == "name"
+					@users = User.where('name LIKE ?', "%#{name}%")	
+				else 
+					@users = User.where('nickname LIKE ?', "%#{name}%")	
+				end
+				format.js{ render :file => "users/search.js.erb" }
+			else
+				format.js { render :file => "users/search_form.js.erb" }
+			end
+		end
+	end
+
   def new	
 		@user = User.new 
 		render "users/new", :layout => 'front'
@@ -18,7 +36,7 @@ class UsersController < ApplicationController
 	# https://coderwall.com/p/u56rra/ruby-on-rails-user-signup-email-confirmation-tutorial
 	# http://www.sitepoint.com/rails-userpassword-authentication-from-scratch-part-i/
 	def create
-		@user = User.new(post_params)
+		@user = User.new(user_params)
 		@user.use_photo = true 
 		@user.salt = BCrypt::Engine.generate_salt
 		@user.password = BCrypt::Engine.hash_secret(params[:user][:password], @user.salt)
@@ -37,7 +55,7 @@ class UsersController < ApplicationController
 
   def update
 		@user= User.find(params[:id])
-		if @user.update(post_params)
+		if @user.update(user_params)
 			redirect_to '/my_feeld' 
 		else 
 			render "users/edit"
@@ -48,7 +66,11 @@ class UsersController < ApplicationController
   end
 
 private
-	def post_params
+	def user_params
 		params.require(:user).permit(:email, :name, :password, :password_confirmation, :user_type, :nickname, :use_nick, :company, :photo, :use_photo)
+	end
+
+	def search_params
+		params.require(:search).permit(:type, :name)
 	end
 end

@@ -273,6 +273,10 @@ $(function(){
 	})
 	// feeldup option 클릭 end
 
+	//User Search Button 클릭
+	$('#userSearchBtn').click(function() {
+		show_modal_bg_board();
+	})
 	
 	// #modal_bg click
 	// #modal_bg click
@@ -283,6 +287,8 @@ $(function(){
 		hideModalBoard();
 	})
 	// #modal_bg click end
+	//
+
 
 
 	// window resize
