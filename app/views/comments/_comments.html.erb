@@ -12,6 +12,7 @@
 <script>
 	$('#comment_body').keyup(function(e){
 		if (e.keyCode == 13){
+			$('#comment_body').val($('#comment_body').val().trim())
 			if (!e.shiftKey) $('#comment-submit').click()
 		}	
 	})

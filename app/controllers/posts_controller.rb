@@ -71,7 +71,7 @@ class PostsController < ApplicationController
 	end
 
 	def project_management
-		if params[:user_id] && (User.find(params[:user_id]).id != current_user.id)
+		if params[:user_id] and (!current_user or (User.find(params[:user_id]).id != current_user.id))
 			@isMine = false
 			@projects = Project.where(user_id: User.find(params[:user_id]).id).reverse
 		else

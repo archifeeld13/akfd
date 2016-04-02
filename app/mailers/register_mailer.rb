@@ -5,12 +5,10 @@ class RegisterMailer < ApplicationMailer
   #
   #   en.register_mailer.sendmail_confirm.subject
   #
-	
-	default from: 'welcome@archifeeld.com'
-  def sendmail_confirm
-    @greeting = 'www.naver.com'
-
-    mail to: "0911jiwon@naver.com",
-			subject: '메롱'
+  def sendmail_confirm(auth_key, user)
+    @auth_link = 'http://archifeeld.net:3000/auth_user/' + auth_key
+		
+    mail to: user.email,
+			subject: 'Archifeeld 회원가입 인증 메일'
   end
 end

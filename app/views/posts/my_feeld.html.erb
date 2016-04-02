@@ -15,7 +15,13 @@
 	<div id="user_info_name_dept">
 		<span style="font-weight: bold; font-size: 2em;">
 			<%if @user.use_nick %>
-				<%= @user.nickname%>
+				<%if @user.id == 1 %>
+					<span style="color:pink">	
+						<%= @user.nickname%>
+					</span>
+				<% else %>
+					<%= @user.nickname%>
+				<% end %>
 			<% else %>
 				<%= @user.name %>
 			<% end %>

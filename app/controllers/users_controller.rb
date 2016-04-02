@@ -30,9 +30,18 @@ class UsersController < ApplicationController
 
 	# 이건 필요가 없어 create에서 호출하면 되
 	# email에서 클릭한 주소를 위한 액션은 있어야지
-	def register_mailer
-		@mail = RegisterMailer.sendmail_confirm().deliver
-		render text: '메일로 전송된 링크를 클릭할 시, 회원가입이 완료됩니다.'
+	def auth_user 
+		auth = EmailAuth.find_by(auth_key: params[:auth_key])
+		if auth
+			auth.user.my_auth = true
+			auth.user.save
+			auth.destroy
+			flash[:notice]= '시스템 가동- 인증완료.-'
+		else
+			flash[:notice]= '없는 인증키 입니다.'
+		end
+
+		redirect_to '/login'
 	end
   
 	# https://coderwall.com/p/u56rra/ruby-on-rails-user-signup-email-confirmation-tutorial
@@ -44,7 +53,12 @@ class UsersController < ApplicationController
 		@user.password = BCrypt::Engine.hash_secret(params[:user][:password], @user.salt)
 		@user.password_confirmation = BCrypt::Engine.hash_secret(params[:user][:password_confirmation], @user.salt)
 		if @user.save
-			flash[:notice]= "회원가입이 완료"
+			auth_key = @user.id.to_s + SecureRandom.urlsafe_base64.to_s 
+			ea = EmailAuth.new(auth_key: auth_key, user_id: @user.id)
+			ea.save
+	 		RegisterMailer.sendmail_confirm(auth_key, @user).deliver
+
+			flash[:notice]= "입력하신 메일 주소로 <br> 인증 메일이 발송되었습니다;D"
 			redirect_to '/login'
 		else 
 			render "users/new", :layout => 'front'

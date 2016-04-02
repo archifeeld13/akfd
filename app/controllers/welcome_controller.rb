@@ -6,7 +6,7 @@ class WelcomeController < ApplicationController
 
 
 	def test
-=begin
+=begin 포스트 타입 설정
 		posts = Post.all
 		posts.each do |p|
 			if p.images.size > 0
@@ -27,6 +27,8 @@ class WelcomeController < ApplicationController
 			u.save
 		end
 =end
+
+=begin 유저타입에 대한 사진 사용 여부
 		users = User.all
 		users.each do |u|
 			if u.user_type == 0
@@ -35,7 +37,16 @@ class WelcomeController < ApplicationController
 				u.save
 			end
 		end
+=end
+
+=begin 이메일 인증
+		users = User.all
+		users.each do |u|
+			u.email_auth = true
+			u.save
+		end
 		render text: 'ok'
+=end
 	end
 
 	def state
