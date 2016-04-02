@@ -47,6 +47,12 @@
 //}
 // 여기까지 summernote 이슈 + 기존의 z-index 숫자 단위 600/700으로 낮춤
 
+
+// loadingOveray z-idx
+.loadingoverlay{
+	z-index: 9999;
+}
+
 body{
 	margin-top: 64px;
 	background: #F0F0F0;

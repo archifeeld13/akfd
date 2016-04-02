@@ -47,7 +47,6 @@ function imgIconHover(selector){
 	);
 }
 
-/*
 function prevetScrollPropFrom(target){
 	$( target ).on( 'mousewheel', function ( e ) {
 		var event = e.originalEvent,
@@ -57,7 +56,6 @@ function prevetScrollPropFrom(target){
 		e.preventDefault();
 	});
 }
-*/
 
 // change width and height of modal board
 // 필드업을 눌러서, 옵션을 선택했을 때 나오는 보드의 크기를 조정한다.
@@ -167,26 +165,25 @@ function showModalBG(){
 		.fadeIn()/*show()*/
 }
 
-
-
-// 로딩중 표시 위해서
-// 로딩중 표시 위해서
-// 로딩중 표시 위해서
-// http://gasparesganga.com/labs/jquery-loading-overlay/
+// loading bg
 function showLoadingBG(){
-	$('#modal_board').LoadingOverlay("show")
+/*	
+	$('#loading_bg')
+		.css('height', $(document).height())
+		.css('width', $(document).width())
+		.fadeIn()
+		*/
+	$('body').faLoading();
 }
 function hideLoadingBG(){
-	$('#modal_board').LoadingOverlay("hide")
+	//$('#loading_bg').fadeOut();
 }
-// 로딩중 표시 위해서
-// 로딩중 표시 위해서
-
 
 // 동적으로 모달 배경과 모달 창을 보여주는 부분으로
 // 여러 곳에서 호출할 수 있다
 // 호출 후에 반드시 changeWidthHeightModalBoard 함수를 호출해줌으로써 모달보드를 조정해줘야한다
 function show_modal_bg_board(){
+
 	showModalBG();
 	showModalBoard();
 	// ajax에 의해 이 보드가 채워진다
