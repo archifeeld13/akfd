@@ -44,6 +44,9 @@ $('.show-post-img').each(function(){
 					}
 				})
 			}
+			
+			// image 타입의 글일 때는 여기서 없애줘야한다
+			hideLoadingBG()
 
 			// 그냥 따로 할게 위에서 해도 될거같긴한데
 			$('.show-post-img').click(function(){
@@ -86,4 +89,9 @@ $(function(){
 			$('#modal_bg').click()
 		}	
 	})
+
+	<%# 텍스트 타입의 글은 여기서 불러줘야 한다%>
+	<% if @post.post_type == 0 %>
+		hideLoadingBG()
+	<% end %>
 })

@@ -35,7 +35,9 @@ form input[type="password"]
 <div>
 	<%= form_for(:session, url: login_path, class: "form-signin") do |f| %>	
 		<div style="color:white; background:rgba(20,20,20, 0.2); margin-bottom: 2%;">
+		<% if flash[:notice] %>
 			<%= flash[:notice].html_safe %>
+		<% end %>
 		</div>
 		<%= f.email_field :email, class: 'form-control', required: true, placeholder: "이메일 주소" %>	
 		<%= f.password_field :password, class: 'form-control', required: true, placeholder: "비밀번호" %>	

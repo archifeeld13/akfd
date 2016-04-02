@@ -20,6 +20,7 @@ function show_post_item_event(){
 	$('.posts-item-img, .posts-item-text, .fav-posts').click(function(){
 		// feeldup 버튼 눌렀을 때의 액션 중 option 띄우는거 제외하고 
 		show_modal_bg_board();
+		showLoadingBG()
 	})
 }
 
