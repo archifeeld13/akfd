@@ -1,0 +1,141 @@
+<script>
+
+// 각 이미지에 달리는 캡션은, 이미지의 제목을 키로해서 저장된다
+var captions = {};
+
+$(function(){
+
+	$('#feeldup-submit-link').click(function(){
+		if ($('#input_post_title').val().length == 0 ){
+			alert('제목을 입력해 주세요;)') 	
+		}
+
+		// 완전히 끝이라는 표시
+		$('#finish').val('1');
+		// ajax 글쓰기 요청 
+		$('#feeldup-submit').click();
+
+		captions = {};
+		$('#finish').val('0');
+	})
+	
+	$('.preview-img').click(function(){
+		if ( $("#" + $(this).attr('id') + '-caption').length ){
+			// pass		
+		} else {
+			// 애초에 이미지에 data-caption으로 이미지태그에 넣어놓고 
+			// 여기서 캡션 만드는 과정에서 벨류 넣어야겠네!
+			// captions json에도 초기화해야돼
+			$("#" + $(this).attr('id') + "-container")
+					.css('position', 'relative')
+					.append('<input class="form-control" \
+							id="'+ $(this).attr('id') + '-caption" \
+							style="background:rgba(0,0,0,0.6); color:white; position:absolute; margin-left:10%; top:45%; left:0; width: 80%;" \
+							placeholder="캡션을 달아주세요">')	
+			// 만약 이미 캡션을 가지고 있으면
+			if ($(this).attr('data-caption') != null){
+				$('#' + $(this).attr('id') + '-caption').val($(this).attr('data-caption'))
+				captions[$(this).attr('id').split('-')[1]] = $(this).attr('data-caption')
+			}
+			// 입력 할 때마다 caption을 초기화 
+			$('#' + $(this).attr('id') + '-caption').keyup(function(){
+				captions[$(this).attr('id').split('-')[1]] = $('#' + $(this).attr('id')).val()
+			})
+		}
+	})
+
+	$('#feeldup-submit').click(function(){
+		$('#captions').val(JSON.stringify(captions, null, 1))
+	})
+})
+
+</script>
+<style>
+	#form_container_for_photoup textarea {
+		background-color: white !important;
+	}
+	.preview-img{
+		position: relative;
+		width: 100%;	
+	}
+</style>
+<div style="float:left; width:75%; height:75px; background:#F2F2F2; padding:2%;">
+	<img src="<%= current_user.image_url%>" style="width:8%" class="img-rounded">&nbsp; 
+	<span style="color:#4C5249; font-size:1.5em"><%= current_user.name %></span>
+	<img class="modal_close" style="width:20px; height:20px;" align="right" src="/assets/xbtn.png">
+</div>
+
+<div align="center" style="float:left; width:25%; height:75px; background:white; padding:2%;">
+	<div style="color:#BBBBBB; font-size:1.3em;">마이필드<br> 프로젝트 관리</div>
+</div>
+
+<%# form_for @post, remote: true, :format=>'js'  do |f| %>
+<%= form_for @post, url: update2_path(@post), method: :patch,  :html => {multipart: true}   do |f| %>
+<div id="form_container_for_photoup" style="float:left; height: 400px; width: 75%; background:#E9E9E9; padding: 10px; overflow:auto;"> 
+	<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
+	
+	<div style="margin-bottom: 10px"></div>
+	<% @post.photos.each do |photo| %>
+		<div style="margin-bottom: 10px"></div>
+		<div id="preview-<%=photo.id%>-container">
+			<% if photo.caption %>
+				<%= image_tag photo.image, id: "preview-#{photo.id}", class: "preview-img", data: {caption: photo.caption} %>
+			<% else %>
+				<%= image_tag photo.image, id: "preview-#{photo.id}", class: "preview-img" %>
+			<% end %>
+		</div>
+	<% end %>
+
+	<div style="margin-bottom: 10px"></div>
+	<div class="inputWrapper" style="width: 100%; height: 60px;">
+		<%#
+			images[] returned to the album as an array. 
+			We use file_field_tag since images is not @album's attribute%>
+		<%= file_field_tag "images[]", type: :file, multiple: true, accept: 'image/png,image/gif,image/jpeg', class: "fileInput", onchange: "$('#feeldup-submit').click()" %>
+		<%= hidden_field_tag "captions", id: "captions" %>
+	</div>
+
+	<%#= f.text_area :content, :id => 'input_post_content', :class => 'form-control'%>
+	<div style="margin-bottom: 10px"></div>
+	<%= f.text_area :content,  :class => 'form-control', rows: 5%>
+
+	<div style="margin-bottom: 10px"></div>
+	<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그 (태그는 쉼표로 구분해주세요! ex) 태그1, 태그2)" %>
+	<div class="has-error">
+		<div class="checkbox disabled">
+			<label style="margin-left: 1%;">
+				<input type="checkbox" value="secret" disabled>
+				비밀글로 작성합니다
+			</label>
+		</div>
+	</div>
+</div>
+
+<div style="float:left; width:25%; height:350px; background:#F2F2F2; padding:1%; overflow-y: scroll">
+	<div id="project_radio_container">
+		<div>
+			<%= f.radio_button(:project_id, "") %>
+			&nbsp;선택 안함
+		</div>
+		<% current_user.projects.each do |project| %>
+			<%= render 'projects/project_radio', project: project, f: f %>
+		<% end %>
+	</div>
+</div>
+<%= f.hidden_field(:post_type, value:1) %>
+<%= f.hidden_field(:img_order) %>
+<%#= f.button :submit, class: "hidden", id: "feeldup-submit" %>
+<%= hidden_field_tag "finish", value:0 %>
+<%= f.button :submit,  id: "feeldup-submit" %>
+<% end %>
+
+<%= render "projects/form" %>
+
+<div style="float:left; width:75%; height:75px; background:#F2F2F2;">
+</div>
+
+
+<div align="center" style="float:left; width:25%; height:75px; background:white; padding:5px;">
+	<%= link_to image_tag('/assets/feeldup_write.png'), "#", id: "feeldup-submit-link" %> 
+</div>
+<!--</form>-->

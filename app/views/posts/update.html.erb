@@ -93,9 +93,8 @@ function previewFiles(){
 	prevetScrollPropFrom('#preview')
 
 }
-
+/*
 $(function(){
-	alert('포토업 기능의 큰 변경이 있을 예정입니다. ')
 	$('#preview').perfectScrollbar(); 
 
 	$('#feeldup-submit-link').click(function(){
@@ -138,6 +137,7 @@ $(function(){
 			alert('error')	
 		}
 	})
+	*/
 
 })
 
@@ -152,7 +152,8 @@ $(function(){
 	<div style="color:#BBBBBB; font-size:1.3em;">마이필드<br> 프로젝트 관리</div>
 </div>
 
-<%= form_for @post, remote: true, :format=>'js'  do |f| %>
+<%# form_for @post, remote: true, :format=>'js'  do |f| %>
+<%= form_for @post, url: posts2_path,  :html => {multipart: true}   do |f| %>
 <div id="form_container_for_photoup" style="float:left; height: 400px; width: 75%; background:#E9E9E9; padding: 10px;"> 
 	<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
 	
@@ -162,17 +163,14 @@ $(function(){
 		<div id="preview"></div>
 	</div>
 
-	<textarea id="input_post_content" class="form-control" disabled placeholder="파일 업로드 후,
-이미지를 선택(클릭)하면 캡션을 달 수 있습니다.
-이미지를 드래그하면 순서를 바꿀 수 있습니다 ;D
-원활한 이용을 위해 베타기간 동안
-1회 파일 업로드 개수를 7개로 제한하였습니다. 
-(현재 여러개의 이미지는 파일 업로드 창에서  한 번에 선택하셔야 합니다!)
-"%></textarea>
+	<textarea id="input_post_content" class="form-control" placeholder="내용 입력"%></textarea>
 
 	<%= f.hidden_field :content%>
 	<div class="inputWrapper">
-		<%= f.file_field :images, multiple: true, accept: 'image/png,image/gif,image/jpeg', class: "fileInput", onchange: "previewFiles()" %>
+		<%#
+			images[] returned to the album as an array. 
+			We use file_field_tag since images is not @album's attribute%>
+		<%= file_field_tag "images[]", type: :file, multiple: true %>
 	</div>
 
 	<div style="margin-bottom: 8px"></div>
@@ -201,7 +199,8 @@ $(function(){
 </div>
 <%= f.hidden_field(:post_type, value:1) %>
 <%= f.hidden_field(:img_order) %>
-<%= f.button :submit, class: "hidden", id: "feeldup-submit" %>
+<%#= f.button :submit, class: "hidden", id: "feeldup-submit" %>
+<%= f.button :submit,  id: "feeldup-submit" %>
 <% end %>
 
 <%= render "projects/form" %>
