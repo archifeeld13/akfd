@@ -50,7 +50,23 @@
 		<% else %>
 			<%= link_to image_tag('/assets/feeld.png'), post_likes_path(@post.id), id: "feeld" ,method: :post, remote: true %>
 		<% end %>
-		x <strong id="feeldcnt"><%=@post.likes.count%></strong>
+		<strong><a href="#" id="feeldcnt" data-toggle="popover" data-trigger="focus"  data-placement="right" >x <%=@post.likes.count%></a></strong>
+		<div id="popover-content" class="hide">
+			<% @post.likes.each do |like| %>
+				<%= link_to like.user.name, "/my_feeld?user_id=#{like.user.id}", class: "like_user_list"%>
+			<% end %>
+		</div>
+		<script>
+			$(function(){
+			 // http://jsfiddle.net/raving/2thfaxeu/
+				$('#feeldcnt').popover({
+					html: true,
+					content: function(){
+						return $('#popover-content').html()	
+					}
+				});
+			});
+		</script>
 		&nbsp;
 		<% if current_user.id != @post.user.id %>
 			<%= link_to image_tag('/assets/feeldin.png'),  post_shares_path(@post.id), id: "feeldin", method: :post, remote: true %>
