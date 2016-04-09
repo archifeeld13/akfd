@@ -14,7 +14,11 @@
 		<% end %>
 	</div>
 	<% if post.post_type == 1 %>
-    <%= link_to image_tag(post.images[0].url, class: 'posts-item-img'), post, remote:true %></td>
+		<% if post.images.any? %>
+			<%= link_to image_tag(post.images[0].url, class: 'posts-item-img'), post, remote:true %></td>
+		<% else %>
+			<%= link_to image_tag(post.photos[0].image, class: 'posts-item-img'), post, remote:true %></td>
+		<% end %>
 	<% else %>
 		<%= link_to(post, remote: true) do %>
 			<div class="posts-item-text">

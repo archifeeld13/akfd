@@ -1,147 +1,75 @@
 <script>
-var fileCount = 0;
-
 // 각 이미지에 달리는 캡션은, 이미지의 제목을 키로해서 저장된다
 var captions = {};
 
-// 현재 선택한 이미지의 키를 글로벌하게 기록한다, textarea keyup event에서 참조한다
-var selectedImgKey;
-
-function previewFiles(){
-	
-	var preview = document.querySelector("#preview");
-	var files = document.querySelector('input[type=file]').files;
-	console.log(files)
-	preview.innerHTML = "";
-	global_files = files;
-
-	fileCount = 0;
-
-	// 파일이 제출되면 불리는 함수다.
-	function readAndPreview(file){
-			// Make sure  'file.name' matches our extensions cirteria
-			//if (/\.(jpe?g|png|gif)$/i.text(file.name)){
-			//if (file.name){
-			var reader = new FileReader();
-			reader.addEventListener("load", function(){
-					var image = new Image();
-					image.height = 150;
-					image.width= 220;
-					image.title = file.name;
-					image.src = this.result;
-					image.onload = function(){
-						//alert($('#preview img').size())
-						fileCount ++;
-						// complte load 이벤트
-						if (fileCount == global_files.length){
-							
-							// 이미지들이 정렬 가능하도록 바꾼다
-							$('#preview').sortable()
-
-							// 이미지 마다 이벤트를 걸어준다
-							$('#preview img').each(function(index){
-								// 일단 다 "" 을 넣음으로써 key/value가 생성되게 click에서 여기로 옮겼따
-								captions[$(this).attr('title')] = ""
-
-								$(this).draggable({
-									connectToSortable: "#preview"	,
-									revert: "invalid",
-
-								}).click(function(){
-									
-									// textarea disabled 풀어준다.
-									$('#input_post_content').removeAttr("disabled")
-
-									// 비워준다.
-									$('#input_post_content').val("")
-
-									// 이 이후에 텍스트에리아에 작성하는 것에 대해 어디에 기록함
-									var key = $(this).attr('title')
-
-									// 현재 선택한 키를 참조해, textArea에 입력하는 값을 내부JSON에 기록한다
-									selectedImgKey = key;
-
-									// 특정 이미지에 아무 캡션도 달리지 않았을 때
-									if (captions[key].trim() == ""){
-										// 안내 메시지
-										$('#input_post_content').attr("placeholder", "["+ $(this).attr('title')+"]  캡션을 작성해주세요;D" )
-									} 
-									// 키에 어떤 값이 들어갔을 때
-									else {
-										$('#input_post_content').val(captions[key])
-									}
-								})	
-							})
-						}
-					}
-					preview.appendChild(image);
-			}, false);
-			reader.readAsDataURL(file);
-			//}
-	}
-
-	if (global_files){
-			[].forEach.call(files, readAndPreview);
-	}
-
-	// textare 값 입력 이벤트
-	$('#input_post_content').keyup(function(){
-			captions[selectedImgKey] = $('#input_post_content').val()
-	})
-			
-	// application.js
-	prevetScrollPropFrom('#preview')
-
-}
-
 $(function(){
-	alert('포토업 기능의 큰 변경이 있을 예정입니다. ')
-	$('#preview').perfectScrollbar(); 
 
+	// 업로드 혹은 수정을 마친다는 표현
 	$('#feeldup-submit-link').click(function(){
 		if ($('#input_post_title').val().length == 0 ){
 			alert('제목을 입력해 주세요;)') 	
 		}
-		else if ( fileCount == 0){
-			alert('먼저, 파일을 선택해 주세요;D')
-		}
-		else if (fileCount > 7){
-			alert('파일 개수는 7개로 제한되어 있습니다(beta)') 	
-		}
-		else if (fileCount > 0){
 
-			//로딩 이미지
-		  showLoadingBG();	
+		// 완전히 끝이라는 표시
+		$('#finish').val('1');
+		// ajax 글쓰기 요청 
+		$('#feeldup-submit').click();
 
-			fileTitleOrder = [] 
+		captions = {};
+		$('#finish').val('0');
+	})
+	
+	$('.preview-img').click(function(){
+		// 해당 셀렉터의 결과가 null인지 판단하는 방법이 .length이다.
+		if ( $("#" + $(this).attr('id') + '-caption').length ){
+			// pass		
+		} else {
+			// 애초에 이미지에 data-caption으로 이미지태그에 넣어놓고 
+			// 여기서 캡션 만드는 과정에서 벨류 넣어야겠네!
+			// captions json에도 초기화해야돼
+			$("#" + $(this).attr('id') + "-container")
+					.css('position', 'relative')
+					.append('<input class="form-control" \
+							id="'+ $(this).attr('id') + '-caption" \
+							style="background:rgba(0,0,0,0.6); color:white; position:absolute; margin-left:10%; top:45%; left:0; width: 80%;" \
+							placeholder="캡션을 달아주세요">')	
 
-			// 순서 구하기
-			$('#preview img').each(function(index){
-				fileTitleOrder.push($(this).attr('title')	)
+			// 만약 이미 캡션을 가지고 있으면
+			if ($(this).attr('data-caption') != null){
+				$('#' + $(this).attr('id') + '-caption').val($(this).attr('data-caption'))
+				captions[$(this).attr('id').split('-')[1]] = $(this).attr('data-caption')
+			}
+
+			// 입력 할 때마다 caption을 초기화 
+			$('#' + $(this).attr('id') + '-caption').keyup(function(){
+				captions[$(this).attr('id').split('-')[1]] = $('#' + $(this).attr('id')).val()
 			})
 
-			$('#post_img_order').val(fileTitleOrder.join(','))
-
-			// 각 이미지에 달린 캡션 하나로 합치기
-			// http://api.jquery.com/jquery.parsejson/ 나중엔 이거로 파싱
-			$('#post_content').val(JSON.stringify(captions, null, 1))
-
-			$('#feeldup-submit').click();
-			$('#preview').click();
-
-			fileCount = 0;
-			captions = {};
-			selectedImgKey = null	
-			$('#preview').html("")
 		}
-		else {
-			alert('error')	
-		}
+	})
+	
+	// captions에 들어있는 JSON데이터를 string화해서 captions 히든태그에 value로 넣는다 
+	// 서버에서는 이걸 열어봐서 JSON파싱한 이후에 캡션의 업데이트 혹은 생성 여부를 판단한다.
+	$('#feeldup-submit').click(function(){
+		$('#captions').val(JSON.stringify(captions, null, 1))
+	})
+
+	$('#images_').change(function(){
+		$('#feeldup-submit').click()
 	})
 
 })
 
 </script>
+<style>
+	#form_container_for_photoup textarea {
+		background-color: white !important;
+	}
+	.preview-img{
+		position: relative;
+		width: 100%;	
+	}
+</style>
 <div style="float:left; width:75%; height:75px; background:#F2F2F2; padding:2%;">
 	<img src="<%= current_user.image_url%>" style="width:8%" class="img-rounded">&nbsp; 
 	<span style="color:#4C5249; font-size:1.5em"><%= current_user.name %></span>
@@ -152,31 +80,40 @@ $(function(){
 	<div style="color:#BBBBBB; font-size:1.3em;">마이필드<br> 프로젝트 관리</div>
 </div>
 
-<%= form_for @post, remote: true, :format=>'js'  do |f| %>
-<div id="form_container_for_photoup" style="float:left; height: 400px; width: 75%; background:#E9E9E9; padding: 10px;"> 
+<%= form_for @post, remote: true, :format=>'js', html: {multipart: true}  do |f| %>
+<%# form_for @post, url: update2_path(@post), method: :patch,  :html => {multipart: true}   do |f| %>
+<div id="form_container_for_photoup" style="float:left; height: 400px; width: 75%; background:#E9E9E9; padding: 10px; overflow:auto;"> 
 	<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
 	
-	<div style="margin-bottom: 1%"></div>
+	<div style="margin-bottom: 10px"></div>
+	<% @post.photos.each do |photo| %>
+		<div style="margin-bottom: 10px"></div>
+		<div id="preview-<%=photo.id%>-container">
+			<% if photo.caption %>
+				<%= image_tag photo.image, id: "preview-#{photo.id}", class: "preview-img", data: {caption: photo.caption} %>
+			<% else %>
+				<%= image_tag photo.image, id: "preview-#{photo.id}", class: "preview-img" %>
+			<% end %>
+		</div>
+	<% end %>
 
-	<div id="preview_container">
-		<div id="preview"></div>
+	<div style="margin-bottom: 10px"></div>
+	<div class="inputWrapper" style="width: 100%; height: 60px;">
+		<%#
+			images[] returned to the album as an array. 
+			We use file_field_tag since images is not @album's attribute%>
+		<%# 버그가 있나봄. file_field_tag가 안떠..%>
+		<%#= file_field_tag "images[]", type: :file, multiple: true, accept: 'image/png,image/gif,image/jpeg', class: "fileInput", onchange: "$('#feeldup-submit').click()" %>
+		<input type="file" name="images[]" id="images_" multiple="multiple" accept="image/png,image/gif,image/jpeg" class="fileInput" >
+		<%= hidden_field_tag "captions" %>
+		<%#<input type="hidden" name="captions" id="captions"> %>
 	</div>
 
-	<textarea id="input_post_content" class="form-control" disabled placeholder="파일 업로드 후,
-이미지를 선택(클릭)하면 캡션을 달 수 있습니다.
-이미지를 드래그하면 순서를 바꿀 수 있습니다 ;D
-원활한 이용을 위해 베타기간 동안
-1회 파일 업로드 개수를 7개로 제한하였습니다. 
-(현재 여러개의 이미지는 파일 업로드 창에서  한 번에 선택하셔야 합니다!)
-"%></textarea>
+	<%#= f.text_area :content, :id => 'input_post_content', :class => 'form-control'%>
+	<div style="margin-bottom: 10px"></div>
+	<%= f.text_area :content,  :class => 'form-control', rows: 5, placeholder: "이곳에 내용을 남겨주세요\n사진을 클릭하면 캡션을 남길 수 있습니다;D"%>
 
-	<%= f.hidden_field :content%>
-	<div class="inputWrapper">
-		<%= f.file_field :images, multiple: true, accept: 'image/png,image/gif,image/jpeg', class: "fileInput", onchange: "previewFiles()" %>
-	</div>
-
-	<div style="margin-bottom: 8px"></div>
-
+	<div style="margin-bottom: 10px"></div>
 	<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그 (태그는 쉼표로 구분해주세요! ex) 태그1, 태그2)" %>
 	<div class="has-error">
 		<div class="checkbox disabled">
@@ -201,6 +138,9 @@ $(function(){
 </div>
 <%= f.hidden_field(:post_type, value:1) %>
 <%= f.hidden_field(:img_order) %>
+<%= hidden_field_tag "finish", 0 %>
+<%#<input type="hidden" name="finish" id="finish" value="0"> %>
+<%#= f.button :submit,  id: "feeldup-submit" %>
 <%= f.button :submit, class: "hidden", id: "feeldup-submit" %>
 <% end %>
 
