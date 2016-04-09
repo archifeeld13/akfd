@@ -1,12 +1,8 @@
 $('#modal_board').html('<%=j render 'show_post' %>')
 
-// modal close button click
-// modal close button click
 $('.modal_close').click(function(){
 	$('#modal_bg').click();
 })	
-// modal close button click end
-
 
 // 한번 불러주고 이미지 로드 다되면 다시부른다
 changeWidthHeightModalBoard();
@@ -15,7 +11,7 @@ changeWidthHeightModalBoard();
 // 이미지가 로드 될 때마다 modal_board의 크기가 달라서
 var ccc = 0;
 
-$('.show-post-img').hide()
+//$('.show-post-img').hide()
 
 $('.show-post-img').each(function(){
 	// 이미지 로드 이벤트	
@@ -26,8 +22,9 @@ $('.show-post-img').each(function(){
 		// 맨 마지막에 실행되는 부분
 		if ($('.show-post-img').size() ==  ccc){
 
-			var captions = jQuery.parseJSON("<%=j @post.content %>".replace(/&quot;/g, "\""))
-			var img_order = "<%=j @post.img_order %>".split(',')
+			//var captions = jQuery.parseJSON("<%=j @post.content %>".replace(/&quot;/g, "\""))
+			//var img_order = "<%=j @post.img_order %>".split(',')
+			/*
 			for (k = img_order.length - 1 ; k >= 0; k--){
 				$(".show-post-img").each(function(idx){
 					var tmp = decodeURIComponent($(this).attr('src')).split('/')
@@ -44,6 +41,7 @@ $('.show-post-img').each(function(){
 					}
 				})
 			}
+			*/
 			
 			// image 타입의 글일 때는 여기서 없애줘야한다
 			hideLoadingBG()
@@ -66,7 +64,6 @@ $('.show-post-img').each(function(){
 					})
 				}
 			})
-
 
 			// 내용을 채우고나선 반드시 이 함수를 호출해줘야한다
 			changeWidthHeightModalBoard();

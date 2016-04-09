@@ -206,7 +206,8 @@ class PostsController < ApplicationController
 				end
 			end
 			# 그 이외의 수정 사항 반영
-			if @post.update(params[:post].permit(:title, :content))
+			#if @post.update(params[:post].permit(:title, :content))
+			if @post.update(post_params)
 				if params[:images]
 					params[:images].each do |image|
 						@post.photos.create(image: image)

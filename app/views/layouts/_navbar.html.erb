@@ -55,7 +55,7 @@
 						<% else %>
 							<img src="<%=event.user.image_url%>" style="width:30px;" />
 						<% end %>
-						<%= link_to event.user.name, "/my_feeld?user_id=#{event.user.id}" %> 님이
+						<%#= link_to event.user.name, "/my_feeld?user_id=#{event.user.id}" %> 님이
 						<% if event.event_type == 0 %>
 							 팔로우
 						<% elsif event.event_type == 1 %>
@@ -69,7 +69,7 @@
 					</div>
 				<% end %>
 			<% else %>
-				이벤트가 표시 됩니다.
+				새로운 이벤트가 없습니다 ;D
 			<% end %>
 		</div>
 		<script>
