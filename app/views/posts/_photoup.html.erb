@@ -51,6 +51,7 @@ $(function(){
 	// captions에 들어있는 JSON데이터를 string화해서 captions 히든태그에 value로 넣는다 
 	// 서버에서는 이걸 열어봐서 JSON파싱한 이후에 캡션의 업데이트 혹은 생성 여부를 판단한다.
 	$('#feeldup-submit').click(function(){
+		showLoadingBG();	
 		$('#captions').val(JSON.stringify(captions, null, 1))
 	})
 
