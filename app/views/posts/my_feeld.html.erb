@@ -19,6 +19,10 @@
 					<span style="color:pink">	
 						<%= @user.nickname%>
 					</span>
+				<% elsif @user.id == 6 %>
+					<span style="color:skyblue">
+						<%= @user.nickname %>
+					</span>
 				<% else %>
 					<%= @user.nickname%>
 				<% end %>

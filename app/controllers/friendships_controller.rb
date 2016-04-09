@@ -6,6 +6,13 @@ class FriendshipsController < ApplicationController
 		
 		if params[:friend_id] != current_user.id and @friendship.save
 			#flash[:notice] = "Added friend."
+			e = Event.new
+			e.user_id = current_user.id
+			e.target_id = params[:friend_id] 
+			e.event_type = 0 
+			e.check = false
+			e.save
+
 			redirect_to("/my_feeld?user_id=#{params[:friend_id]}")
 		else
 			#flash[:error] = "Unable to add friend."

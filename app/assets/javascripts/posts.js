@@ -16,6 +16,7 @@ function postsColumnResize(){
 
 // post 아이템을 클릭하면 
 // post 아이템을 클릭하면 
+// 눌렀을 때 모달 띄우고 post보여줄 애들
 function show_post_item_event(){
 	$('.posts-item-img, .posts-item-text, .fav-posts').click(function(){
 		// feeldup 버튼 눌렀을 때의 액션 중 option 띄우는거 제외하고 

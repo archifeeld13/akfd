@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
 	has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
 	has_many :inverse_friends, :through => :inverse_friendships, :source => :user	
 
+	has_many :events, dependent: :destroy
+	has_many :inverse_events, class_name: "Event", foreign_key: "target_id"
+
 	mount_uploader :photo, S3Uploader
 	
 	# 페이스북 로그인시 유저 생성할 때도 관여하네..

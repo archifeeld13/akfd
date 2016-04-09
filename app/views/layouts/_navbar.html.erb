@@ -45,10 +45,28 @@
 		<a href="#message" id='msg_btn' rel="popover" data-placement="bottom">
 			<img id="msg_icon" class="nav-icon" src="/assets/msg.png">
 		</a>
+
 		<div id="popover-msg-content" class="hide">
-			<span> 각종 이벤트를<br /> 보여줄 예정입니다 :D </span>
-			<div style="width:235px; height:30px; background:yellow;">
-			</div>
+			<% current_user.inverse_events[0..7].reverse.each do |event| %>
+				<div style="width:235px; height:34px; background:rgba(50,50,50,0.1); margin-bottom: 5px; padding:2px">
+					<% if event.user.use_photo %>
+						<img src="<%=event.user.photo%>" style="width:30px;" />
+					<% else %>
+						<img src="<%=event.user.image_url%>" style="width:30px;" />
+					<% end %>
+					<%= link_to event.user.name, "/my_feeld?user_id=#{event.user.id}" %> 님이
+					<% if event.event_type == 0 %>
+						 팔로우
+					<% elsif event.event_type == 1 %>
+    				<%= link_to event.post.title, post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 댓글;D
+		
+					<% elsif event.event_type == 2 %>
+    				<%= link_to event.post.title, post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 Feel'd!
+					<% else %>
+						이상한 값임.
+					<% end %>
+				</div>
+			<% end %>
 		</div>
 		<script>
 			$(function(){

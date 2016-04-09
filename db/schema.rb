@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403054423) do
+ActiveRecord::Schema.define(version: 20160409073904) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "post_id"
@@ -32,6 +32,18 @@ ActiveRecord::Schema.define(version: 20160403054423) do
   end
 
   add_index "email_auths", ["user_id"], name: "index_email_auths_on_user_id"
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "target_id"
+    t.integer  "event_type"
+    t.integer  "post_id"
+    t.boolean  "check"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "events", ["post_id"], name: "index_events_on_post_id"
 
   create_table "friendships", force: :cascade do |t|
     t.integer  "user_id"

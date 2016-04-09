@@ -5,6 +5,8 @@ class Post < ActiveRecord::Base
 	has_many :shares, dependent: :destroy
 	has_many :shared_users, class_name: 'User', through: :shares, source: :user
 
+	has_many :events
+
 	# Post has many photos
 	has_many :photos, :inverse_of => :post, :dependent => :destroy
 	# enable nested attributes for photos through album class
