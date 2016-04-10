@@ -50,7 +50,7 @@
 		<script>
 			$("#msg_icon_container")
 					.css('position', 'relative')
-					.append('<span	style="background: red; color:white; border-radius: 5px; padding-left: 4px;  position:absolute; margin-left:10%; top:13px; right:2px;; width: 20px; height:20px;">N</span>')	
+					.append('<span	style="background: red; color:white; border-radius: 5px; padding-left: 4px;  position:absolute; margin-left:10%; top:13px; right:2px;; width: 19px; height:20px;">N</span>')	
 
 		</script>
 
@@ -67,10 +67,10 @@
 						<% if event.event_type == 0 %>
 							 <strong>팔로우</strong>하셨습니다
 						<% elsif event.event_type == 1 %>
-							<%= link_to event.post.title, post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 <strong>댓글</strong>을 남기셨습니다
+							<%= link_to truncate(event.post.title, length:10), post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 <strong>댓글</strong>을 남기셨습니다
 			
 						<% elsif event.event_type == 2 %>
-							<%= link_to event.post.title, post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 <strong>Feel'd!</strong> 를 누르셨습니다
+							<%= link_to truncate(event.post.title, length:10), post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 <strong>Feel'd!</strong> 를 누르셨습니다
 						<% else %>
 							이상한 값임.
 						<% end %>

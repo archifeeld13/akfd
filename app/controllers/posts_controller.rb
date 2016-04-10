@@ -4,10 +4,11 @@ class PostsController < ApplicationController
 
   def index
 		if params[:tag]
-			# 태그 검색시 실행 부분
+		# 태그 검색
 			@posts = Post.tagged_with(params[:tag]).reverse
 			flash[:notice] = "<strong class='text-danger'>#{params[:tag]}</strong> 에 대한 검색결과 입니다."
 		elsif params[:type]
+		# 필터링
 			if params[:type] == "txt"
 				post_type = 0
 				flash[:notice] = "<strong class='text-danger'>텍스트</strong> 필터링 결과 입니다."
@@ -19,8 +20,13 @@ class PostsController < ApplicationController
 			end
 			@posts = Post.where(post_type: post_type).reverse
 		else
-			# 기본 메인 페이지
-			@posts = Post.all.reverse
+		# 기본 메인 페이지
+			if params[:page]
+				page = params[:page].to_i
+				@posts = Post.all.reverse[(page * 20)..(page * 20) + 19]
+			else
+				@posts = Post.all.reverse[0..19]
+			end
 			flash[:notice] = "<span style='color:gray'>아키필드</span>에 오신 것을 환영합니다! :D"
 		end
   end

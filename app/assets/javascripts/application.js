@@ -173,11 +173,17 @@ function showModalBG(){
 // 로딩중 표시 위해서
 // 로딩중 표시 위해서
 // http://gasparesganga.com/labs/jquery-loading-overlay/
-function showLoadingBG(){
-	$('#modal_board').LoadingOverlay("show")
+function showLoadingBG(option="modal"){
+	if (option == "wholePage")
+		$('body').LoadingOverlay("show")
+	else 
+		$('#modal_board').LoadingOverlay("show")
 }
-function hideLoadingBG(){
-	$('#modal_board').LoadingOverlay("hide")
+function hideLoadingBG(option="modal"){
+	if (option == "wholePage")
+		$('body').LoadingOverlay("hide")
+	else
+		$('#modal_board').LoadingOverlay("hide")
 }
 // 로딩중 표시 위해서
 // 로딩중 표시 위해서

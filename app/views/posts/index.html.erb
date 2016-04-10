@@ -8,7 +8,46 @@
 	<%= render @posts %>
 </div>
 
+<style>
+	#posts_adder{
+		color:black; 
+		font-size:3.5em; 
+		font-weight: bold;
+	}
+	#posts_adder_container{
+		margin-bottom: 2%; 	
+		clear:both;
+		border-radius: 5px;
+		background: rgba(50,50,50,0.1);
+		width: 90px;
+	}
+	#posts_adder_container:hover{
+		background: #CBFD34; 
+	}
+</style>
+
+<center>
+	<div id="posts_adder_container">
+		<%#= link_to "글 더보기", posts_path(page: 1), remote: true, id: "posts_adder"%>
+		<%# page = n 은 제이쿼리로 붙여줌 %>
+		<%= link_to "+", posts_path, remote: true, id: "posts_adder"%>
+	</div>
+</center>
 
 <script >
-	tag_truncate()
+	// 글의 마지막에 도달해도 계속 증가하지만 상관없지않나?
+	var page = 1;
+	var ori_url = "";
+	$(function(){
+		tag_truncate()
+
+		ori_url = $('#posts_adder').attr('href')
+
+		$('#posts_adder').click(function(){
+			showLoadingBG("wholePage");
+			$('#posts_adder').attr('href', ori_url + "?page=" + page)
+			page ++;
+		})
+
+	});
 </script>

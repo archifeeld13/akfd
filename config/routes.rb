@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
 	root 'sessions#new'
 
 	#resources :users
@@ -20,6 +21,8 @@ Rails.application.routes.draw do
 		resources :likes, only: [:create]
 		resources :shares, only: [:create]
 	end
+
+	resources :photos , only: [:destroy]
 
 	post '/posts2' => 'posts#create2'
 	patch '/update2/:id' => 'posts#update2', as: "update2"

@@ -1,0 +1,10 @@
+<% if @posts %>
+	$('<%=j render @posts %>').appendTo('#posts-container')
+<% else %>
+	alert('마지막 입니다')
+<% end %>
+
+hideLoadingBG("wholePage")
+
+// 이걸 한번 호출해 줘야 새로 로드된 애들에 대해 클릭 이벤트가 다시금  걸려
+show_post_item_event()
