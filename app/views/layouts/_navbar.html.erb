@@ -43,26 +43,34 @@
 		</a>
 
 		<a href="#message" id='msg_btn' rel="popover" data-placement="bottom">
-			<img id="msg_icon" class="nav-icon" src="/assets/msg.png">
+			<div id="msg_icon_container" style="display:inline">
+				<img id="msg_icon" class="nav-icon" src="/assets/msg.png">
+			</div>
 		</a>
+		<script>
+			$("#msg_icon_container")
+					.css('position', 'relative')
+					.append('<span	style="background: red; color:white; border-radius: 5px; padding-left: 4px;  position:absolute; margin-left:10%; top:13px; right:2px;; width: 20px; height:20px;">N</span>')	
+
+		</script>
 
 		<div id="popover-msg-content" class="hide">
 			<% if current_user.inverse_events.any? %>	
 				<% current_user.inverse_events[0..7].reverse.each do |event| %>
-					<div style="width:235px; height:34px; background:rgba(50,50,50,0.1); margin-bottom: 5px; padding:2px">
+					<div style="width:235px; height:60px; background:rgba(50,50,50,0.1); margin-bottom: 5px; padding:5px;; border-radius: 5px;">
 						<% if event.user.use_photo %>
-							<img src="<%=event.user.photo%>" style="width:30px;" />
+							<img src="<%=event.user.photo%>" style="width:30px; height:30px; border-radius:5px;" />
 						<% else %>
-							<img src="<%=event.user.image_url%>" style="width:30px;" />
+							<img src="<%=event.user.image_url%>" style="width:30px; height:30px; border-radius:5px;" />
 						<% end %>
-						<%#= link_to event.user.name, "/my_feeld?user_id=#{event.user.id}" %> 님이
+						<%= link_to event.user.name, "/my_feeld?user_id=#{event.user.id}" %> 님이
 						<% if event.event_type == 0 %>
-							 팔로우
+							 <strong>팔로우</strong>하셨습니다
 						<% elsif event.event_type == 1 %>
-							<%= link_to event.post.title, post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 댓글;D
+							<%= link_to event.post.title, post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 <strong>댓글</strong>을 남기셨습니다
 			
 						<% elsif event.event_type == 2 %>
-							<%= link_to event.post.title, post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 Feel'd!
+							<%= link_to event.post.title, post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 <strong>Feel'd!</strong> 를 누르셨습니다
 						<% else %>
 							이상한 값임.
 						<% end %>
