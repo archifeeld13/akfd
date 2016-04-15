@@ -12,13 +12,15 @@ class LikesController < ApplicationController
 			like =  Like.new(user_id: current_user.id, post_id: params[:post_id])
 			like.save
 
-			e = Event.new
-			e.user_id = current_user.id
-			e.target_id = like.post.user.id
-			e.event_type = 2 
-			e.post_id = like.post.id
-			e.check = false
-			e.save
+			if current_user.id != like.post.user.id
+				e = Event.new
+				e.user_id = current_user.id
+				e.target_id = like.post.user.id
+				e.event_type = 2 
+				e.post_id = like.post.id
+				e.check = false
+				e.save
+			end
 		end
 		@post = Post.find(params[:post_id]) 
 

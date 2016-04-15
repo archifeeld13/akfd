@@ -37,10 +37,10 @@
 	<% if @post.photos.any? %>
 		<% @post.photos.each_with_index do |photo, idx| %>
 			<%= image_tag(photo.image, class: 'show-post-img', id: "show-post-img-#{idx}") %>
-			<center><div style='font-size:1.3em; margin: 1% 3%; font-weight: bold'><%= photo.caption %></div></center>
+			<center><div style='font-size:1.3em; margin: 1% 3%;'><%= photo.caption %></div></center>
 		<% end %>
 		<hr>
-		<div div style="font-size:1.3em; margin: 3%;"><%= @post.content %></div>
+		<div div style="font-size:1.3em; margin: 3%;"><%= @post.content.gsub(/\n/, '<br/>').html_safe %></div>
 	<% end %>
 
 <% end %>

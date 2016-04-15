@@ -8,13 +8,15 @@ class CommentsController < ApplicationController
 		@comment.user_id = current_user.id
 		@comment.save
 
-		e = Event.new
-		e.user_id = current_user.id
-		e.target_id = @post.user.id
-		e.event_type = 1
-		e.post_id = @post.id
-		e.check = false
-		e.save
+		if current_user.id != @post.user.id 
+			e = Event.new
+			e.user_id = current_user.id
+			e.target_id = @post.user.id
+			e.event_type = 1
+			e.post_id = @post.id
+			e.check = false
+			e.save
+		end
   end
 
   def destroy

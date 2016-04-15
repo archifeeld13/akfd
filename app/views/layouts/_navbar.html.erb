@@ -50,13 +50,13 @@
 		<script>
 			$("#msg_icon_container")
 					.css('position', 'relative')
-					.append('<span	style="background: red; color:white; border-radius: 5px; padding-left: 4px;  position:absolute; margin-left:10%; top:13px; right:2px;; width: 19px; height:20px;">N</span>')	
+					.append('<span	style="background: white; color:black; border-radius: 5px; padding-left: 4px;  position:absolute; margin-left:10%; top:13px; right:5px; font-size:0.9em; width: 17px; height:18px;">N</span>')	
 
 		</script>
 
 		<div id="popover-msg-content" class="hide">
 			<% if current_user.inverse_events.any? %>	
-				<% current_user.inverse_events[0..7].reverse.each do |event| %>
+				<% current_user.inverse_events.reverse[0..7].each do |event| %>
 					<div style="width:235px; height:60px; background:rgba(50,50,50,0.1); margin-bottom: 5px; padding:5px;; border-radius: 5px;">
 						<% if event.user.use_photo %>
 							<img src="<%=event.user.photo%>" style="width:30px; height:30px; border-radius:5px;" />

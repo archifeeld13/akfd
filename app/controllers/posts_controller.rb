@@ -130,20 +130,26 @@ class PostsController < ApplicationController
 		# 
 		# post_type // 0:text, 1:img, 2:link
 		#
-		@post = Post.new(post_params)
-		@post.title = "제목 없음" if @post.title.length == 0
-		@post.user_id = current_user.id
-		@post.save
+		if params[:link] 
+			@post = Post.new(post_params)
+			@link = params[:link]			
+			@object = LinkThumbnailer.generate(params[:link])
+		else 
+			@post = Post.new(post_params)
+			@post.title = "제목 없음" if @post.title.length == 0
+			@post.user_id = current_user.id
+			@post.save
 
-		if @post.post_type == 1 
-			if params[:images]
-				params[:images].each do |image|
-					#image.original_filename 
-					@post.photos.create(image: image)
+			if @post.post_type == 1 
+				if params[:images]
+					params[:images].each do |image|
+						#image.original_filename 
+						@post.photos.create(image: image)
+					end
 				end
 			end
-		end
 
+		end
 	end
 
 	# http://api.rubyonrails.org/v3.1.1/classes/ActionDispatch/Http/UploadedFile.html

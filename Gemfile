@@ -54,6 +54,8 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 # ajax file upload
 gem 'remotipart' 
 
+# link preview https://github.com/gottfrois/link_thumbnailer
+gem 'link_thumbnailer'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

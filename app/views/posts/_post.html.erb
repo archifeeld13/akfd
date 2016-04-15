@@ -16,7 +16,7 @@
 	<% if post.post_type == 1 %>
 		<% if post.images.any? %>
 			<%= link_to image_tag(post.images[0].url, class: 'posts-item-img'), post, remote:true %></td>
-		<% else %>
+		<% elsif post.photos.any? %>
 			<%= link_to image_tag(post.photos[0].image, class: 'posts-item-img'), post, remote:true %></td>
 		<% end %>
 	<% else %>

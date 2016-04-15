@@ -1,0 +1,11 @@
+<%= form_for @post, remote: true do |f| %>
+	<%= text_field_tag :link , nil, class: 'form-control', placeholder: "링크 입력" %>	
+	<%= f.hidden_field(:post_type, value:2) %>
+	<%= f.submit "필드업", class:'btn btn-success', id: 'linkupbtn' %>
+<% end %>
+
+<script>
+ $('#linkupbtn').click(function(){
+		showLoadingBG();
+	})
+</script>

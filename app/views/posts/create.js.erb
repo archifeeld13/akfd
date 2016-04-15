@@ -32,5 +32,8 @@
 	changeWidthHeightModalBoard();
 <% else %>
 	<%# link up %>
+	$('<h1><%=@object.title%>"</h1>').appendTo($('#modal_board'))
+	$('<img src="<%=@object.images.first.src.to_s%>"></img>').appendTo($('#modal_board'))
+	hideLoadingBG();
 <% end %>
 
