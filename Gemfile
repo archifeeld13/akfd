@@ -57,6 +57,9 @@ gem 'remotipart'
 # link preview https://github.com/gottfrois/link_thumbnailer
 gem 'link_thumbnailer'
 
+# https://github.com/fnando/browser
+gem 'browser'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

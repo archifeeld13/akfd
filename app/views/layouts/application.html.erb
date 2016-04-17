@@ -31,10 +31,12 @@
 
 	<script src="/assets/loadingoverlay.min.js"></script>
 
-  <%= csrf_meta_tags %>
+	<%= csrf_meta_tags %>
+
 </head>
 
 <body>
+
 	<!-- 필드업 버튼 눌렀을 때 나오는 배경 및 옵션-->
 	<div id="modal_bg">
 	</div>	
@@ -58,11 +60,8 @@
 			</td>
 		</table>
 	</div>
-	<%#<div id="modal_board_wrapper"> %>
 	<div id="modal_board">
-			<%# render :partial => 'posts/text_type_board' %>
 	</div>
-	<%# </div> %>
 	<!-- 필드업 버튼 눌렀을 때 나오는 뱅경 및 옵션 끝 -->
 
 	<!-- nav bar : 사이즈 키워야됨. http://bootsnipp.com/snippets/featured/advanced-dropdown-search-->
@@ -73,6 +72,7 @@
 	<!-- right sidebar http://www.bootply.com/101100 -->
 	<!-- right fixed menu에 jquery만으로 15% 너비 설정하는걸 주면, 로고 버튼 눌렀을 때
 			그 초기 설정이 다시 실행 안되는것 같다. 따라서 css자체에 15%를 주었다.??-->
+<% if not browser.device.mobile? %>
 	<div id="right_fixed_menu" >
 		<% if current_user %>
 			<a id="feeldup" href="#"><img style="width:100%" src="/assets/feeldup.png"></a>
@@ -121,12 +121,56 @@
 
 	</div>
 	<!-- 오른쪽 고정 메뉴이다 끝 -->
+<% end %>
 
 	<!-- contents container -->
 	<div id="contents-container" >
 		<%= yield %>
 	</div>
 	<!-- contents container end -->
+
+<div id="my_modal"class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="gridSystemModalLabel">Modal title</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-4">.col-md-4</div>
+						<div class="col-md-4 col-md-offset-4">.col-md-4 .col-md-offset-4</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
+						<div class="col-md-2 col-md-offset-4">.col-md-2 .col-md-offset-4</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-9">
+							Level 1: .col-sm-9
+							<div class="row">
+								<div class="col-xs-8 col-sm-6">
+									Level 2: .col-xs-8 .col-sm-6
+								</div>
+								<div class="col-xs-4 col-sm-6">
+									Level 2: .col-xs-4 .col-sm-6
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 </body>
 </html>

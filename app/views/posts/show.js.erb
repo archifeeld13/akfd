@@ -1,8 +1,10 @@
-$('#modal_board').html('<%=j render 'show_post' %>')
+//$('#my_modal').modal({
+//	keyboard: true,
+//})
 
-$('.modal_close').click(function(){
-	$('#modal_bg').click();
-})	
+$('#modal_board').html('<%=j render 'show_post' %>')
+//$('.modal-body').html('<%=j render 'show_post' %>')
+
 
 // 한번 불러주고 이미지 로드 다되면 다시부른다
 changeWidthHeightModalBoard();

@@ -30,6 +30,11 @@ form input[type="password"]
 .reg_cancel{
 	color: white;	
 }
+
+.form-btns{
+	width: 300px;
+}
+
 </style>
 
 <div>
@@ -52,7 +57,7 @@ form input[type="password"]
 <% end %>
 </div>
 <div style="margin-top: 10px">
-	<%= link_to image_tag('registered.png', class: "login_btns"), '#', onclick: "$('#register_btn').click()" %> 
+	<%= link_to image_tag('registered.png', class: "form-btns"), '#', onclick: "$('#register_btn').click()" %> 
 </div>
 <div style="margin-top: 20px">
 	<%= link_to '취소', '/login', class: "reg_cancel" %>

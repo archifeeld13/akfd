@@ -39,7 +39,18 @@
 	var page = 1;
 	var ori_url = "";
 	$(function(){
-		tag_truncate()
+		// 익스에서 여러 자바스크립트 못합쳐서 따로 써놓을게
+		//tag_truncate()
+		var result = ""
+		$('.tag_list').each(function(){	
+			tmp_arr = $(this).html().split(",").slice(0, 3);
+			result = tmp_arr.join();
+			if ($(this).html().split(",").length > 3)
+				result += " <strong> ...+</strong> "
+			$(this).html(result);
+		})
+		// tag_truncate end
+
 
 		ori_url = $('#posts_adder').attr('href')
 

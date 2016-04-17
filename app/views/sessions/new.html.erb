@@ -30,6 +30,9 @@ form input[type="password"]
 .reg_cancel{
 	color: white;	
 }
+.form-btns{
+	width: 300px;
+}
 </style>
 
 <div>
@@ -46,13 +49,13 @@ form input[type="password"]
 </div>
 <div style="margin-top: 5px">
 <div>
-	<%= link_to image_tag('login.png', class: "login_btns"), '#', onclick: '$("#login-btn").click()' %> 
+	<%= link_to image_tag('login.png', class: "form-btns"), '#', onclick: '$("#login-btn").click()' %> 
 </div>
 <div style="margin-top: 5px">
-	<%= link_to image_tag('facebooklogin.png', class: "login_btns"), '/auth/facebook'%> 
+	<%= link_to image_tag('facebooklogin.png', class: "form-btns"), '/auth/facebook'%> 
 </div>
 <div style="margin-top: 5px">
-	<%= link_to image_tag('register.png', class: "login_btns"), new_user_path %> 
+	<%= link_to image_tag('register.png', class: "form-btns"), new_user_path %> 
 </div>
 <div style="margin-top: 15px">
 	<a href="/posts" style="color:white"> 비회원 입장 </a> 

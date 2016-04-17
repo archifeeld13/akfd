@@ -70,6 +70,7 @@ GEM
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    browser (2.0.3)
     builder (3.2.2)
     byebug (8.2.2)
     coffee-rails (4.1.1)
@@ -267,6 +268,7 @@ DEPENDENCIES
   acts-as-taggable-on
   bcrypt-ruby
   bootstrap-sass (~> 3.3.3)
+  browser
   byebug
   carrierwave!
   coffee-rails (~> 4.1.0)

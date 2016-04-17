@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 	before_action :set_fav_posts
 	before_action :set_fav_tags
 
+
 	# http://www.sitepoint.com/rails-authentication-oauth-2-0-omniauth/
 	private
 		def current_user

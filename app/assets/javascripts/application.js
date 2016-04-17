@@ -18,11 +18,7 @@
 //= require_tree .
 //
 
-/*
-if ($(window).width() < 1000){
-	alert('아키필드는 현재 PC환경에 최적화 되어있습니다.\n 모바일 환경을 위한 서비스는 추후 개발 예정입니다.\n 감사합니다^^');
-}
-*/
+// 여기 있으나 마나이다. 익스플로러나 모바일에선 다른곳에서 이거 못읽는다
 function tag_truncate(){
 	var result = ""
 	$('.tag_list').each(function(){	
@@ -238,7 +234,7 @@ function rightFixedMenuEvent(){
 // 문서가 다 로드 되면 해야 할 작업들
 // 문서가 다 로드 되면 해야 할 작업들
 $(function(){
-	
+
 	rightFixedMenuEvent();
 
 	// 네브바 서치 인풋태그 배경 토글

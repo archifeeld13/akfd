@@ -4,6 +4,17 @@
 	alert('마지막 입니다')
 <% end %>
 
+// tag_trunctate()
+var result = ""
+$('.tag_list').each(function(){	
+	tmp_arr = $(this).html().split(",").slice(0, 3);
+	result = tmp_arr.join();
+	if ($(this).html().split(",").length > 3)
+		result += " <strong> ...+</strong> "
+	$(this).html(result);
+})
+// tag_trunctate() end
+
 hideLoadingBG("wholePage")
 
 // 이걸 한번 호출해 줘야 새로 로드된 애들에 대해 클릭 이벤트가 다시금  걸려
