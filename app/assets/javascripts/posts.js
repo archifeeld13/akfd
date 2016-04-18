@@ -14,15 +14,6 @@ function postsColumnResize(){
 	}
 }
 
-// post 아이템을 클릭하면 
-// post 아이템을 클릭하면 
-// 눌렀을 때 모달 띄우고 post보여줄 애들
-function show_post_item_event(){
-	$('.posts-item-img, .posts-item-text, .fav-posts').click(function(){
-		//필요없을듯?
-	})
-}
-
 
 // my_feeld의 메뉴들에 대한 이벤트를 정의한다
 // my_feeld의 메뉴들에 대한 이벤트를 정의한다

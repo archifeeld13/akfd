@@ -1,5 +1,6 @@
-$('<%=j render 'linkup' %>').appendTo($('#modal_board'))
+$('#my_modal').modal({
+	keyboard: true,
+})
+$('.modal-content').html('<%=j render 'linkup' %>')
 
-changeWidthHeightModalBoard();
-
-
+$('.modal-body').css('max-height', $(window).height()*0.75)

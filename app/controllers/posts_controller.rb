@@ -134,6 +134,7 @@ class PostsController < ApplicationController
 			@post = Post.new(post_params)
 			@link = params[:link]			
 			@object = LinkThumbnailer.generate(params[:link])
+
 		else 
 			@post = Post.new(post_params)
 			@post.title = "제목 없음" if @post.title.length == 0

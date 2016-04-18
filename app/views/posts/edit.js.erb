@@ -3,7 +3,6 @@
 $('.modal-content').html('<%=j render 'textup' %>')
 $('.modal-body').css('max-height', $(window).height()*0.75)
 
-
 $('.modal-content').append('<script src="/javascripts/summernote-ko-KR.js"></script>')
 
 $('#input_post_content').summernote({
@@ -24,8 +23,8 @@ $('#input_post_content').summernote({
 
 <% elsif @post.post_type == 1 %>
 
-	alert(';;;')
 	$('body').LoadingOverlay("hide")
+
 	$('.modal-content').html('<%=j render 'photoup' %>')
 	$('.modal-body').css('max-height', $(window).height()*0.75)
 

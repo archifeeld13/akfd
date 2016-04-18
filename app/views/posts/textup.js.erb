@@ -1,11 +1,8 @@
-$('#my_modal').modal({
-	keyboard: true,
-})
+$('#my_modal').modal('show')
 
 $('.modal-content').html('<%=j render 'textup' %>')
 
 $('.modal-body').css('max-height', $(window).height()*0.75)
-
 
 $('.modal-content').append('<script src="/javascripts/summernote-ko-KR.js"></script>')
 

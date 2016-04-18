@@ -11,30 +11,29 @@
 */
 
 <% if @post.post_type == 0 %>
-	$('#modal_bg').click();
+
 	$('body').LoadingOverlay("hide")
-	// 여기 나중에 쇼우로 바꾸기
+	$('#my_modal').modal('hide') // 임시로지움, 나중에 쇼우띄워줄땐 굳이 안꺼도댐
+
+	// 여기 나중에 쇼우로 바꾸기 -> 그냥 컨트롤러에서 분기하면 기존에 있는거 이용해서 편할텐데..
 	location.reload()
 
 <% elsif @post.post_type == 1 %>
 
-	// 이미 있는 글에 대한 form은 자동으로 edit으로 잡히는듯!
-	$('.modal-content').html('<%=j render 'photoup' %>')
-
-	$('.modal-body').css('max-height', $(window).height()*0.75)
-	// 이미지 업 같은 경우 finish가 아닌 이상 edit모드 유지
-
 	$('body').LoadingOverlay("hide")
+
+	// 이미 있는 글에 대한 form은 자동으로 edit으로 잡히는듯!
+	// 이미지 업 같은 경우 finish가 아닌 이상 edit모드 유지!!
+	$('.modal-content').html('<%=j render 'photoup' %>')
+	$('.modal-body').css('max-height', $(window).height()*0.75)
 
 	//$('#form_container_for_photoup').perfectScrollbar(); 
-
+	
+<%# link up %>
 <% else %>
 
-	<%# link up %>
-	$('<h1><%=@object.title%>"</h1>').appendTo($('#modal_board'))
-	$('<img src="<%=@object.images.first.src.to_s%>"></img>').appendTo($('#modal_board'))
-
 	$('body').LoadingOverlay("hide")
-
+	$('<h1><%=@object.title%>"</h1>').appendTo($('.modal-body'))
+	$('<img src="<%=@object.images.first.src.to_s%>"></img>').appendTo($('.modal-body'))
 <% end %>
 

@@ -1,8 +1,16 @@
 $('#posts-container').html('');
 $('#posts-container').html('<%=j render @posts%>');
 
-// event 재등록
-show_post_item_event();
+// tag_trunctate()
+var result = ""
+$('.tag_list').each(function(){	
+	tmp_arr = $(this).html().split(",").slice(0, 3);
+	result = tmp_arr.join();
+	if ($(this).html().split(",").length > 3)
+		result += " <strong> ...+</strong> "
+	$(this).html(result);
+})
+// tag_trunctate() end
 
 // 여기엔 재등록 할 필요 없다. 클릭 못함
 $('#posts-container').prepend("<%=j render 'projects/projects' %>");

@@ -67,6 +67,7 @@ body{
 	margin-top: 64px;
 	background: #F0F0F0;
 	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 a {
@@ -109,11 +110,19 @@ a.tag {
 	margin-left: 25px;
 }
 
+#contents-container-mobile {
+	.posts-item{
+		width: 95%; 
+		margin: 2.5%;
+	}
+}
+
 // width 15설정을 안해주고 jquery만으로 15%설정하면 
 // 로고 버튼눌러서 새로고침했을 때 적용이 안된다.
 // 자바스크립트에서 RFM으로 축약해 부를것이다
 #right_fixed_menu{
-	position:fixed; width:250px;  right:25px;
+	position:fixed; 
+	width:250px;  right:25px;
 
 	#fav_feeldup_content{
 		overflow: hidden;	
@@ -179,16 +188,6 @@ a.tag {
 .option_item{
 	width:150px;
 	height:150px;
-}
-
-#modal_board{
-	position:fixed;
-	width: 700px;
-	z-index: 700;
-	overflow-y: auto;
-	//background: #F0F0F0;
-	background: white;
-	border-radius: 5px;
 }
 
 // 필드업 클릭시 흐린 배경

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
   <title>Archifeeld</title>
 	<link rel="icon" type="image/png" href="/assets/favicon.png">
@@ -60,77 +60,81 @@
 			</td>
 		</table>
 	</div>
-	<%#
-	<div id="modal_board">
-	</div>
-	%>
 	<!-- 필드업 버튼 눌렀을 때 나오는 뱅경 및 옵션 끝 -->
 
 	<!-- nav bar : 사이즈 키워야됨. http://bootsnipp.com/snippets/featured/advanced-dropdown-search-->
 	<%= render :partial => 'layouts/navbar' %>
 
+	<% if not browser.device.mobile? %>
 
-	<!-- 오른쪽 고정 메뉴이다 -->
-	<!-- right sidebar http://www.bootply.com/101100 -->
-	<!-- right fixed menu에 jquery만으로 15% 너비 설정하는걸 주면, 로고 버튼 눌렀을 때
-			그 초기 설정이 다시 실행 안되는것 같다. 따라서 css자체에 15%를 주었다.??-->
-<% if not browser.device.mobile? %>
-	<div id="right_fixed_menu" >
-		<% if current_user %>
-			<a id="feeldup" href="#"><img style="width:100%" src="/assets/feeldup.png"></a>
-		<% end %>
-		<div class="RFMPanel">
-			<div class="RFMPanelTitle">인기 필드업 &nbsp;<span id="fav_feeldup" style="color:darkgray; font-size:0.7em;">더보기</span></div>
-			<hr style="margin:5px 0">
-			<div id="fav_feeldup_content">
-				<% @fav_posts[0,15].each do |post| %>
-					<div class="RFMPanelItem">
-						<%= link_to truncate(post.title, length:20, separater: ' '), post, remote:true, class: 'fav-posts' %></br>
-					</div>
+		<div id="right_fixed_menu">
+			<% if current_user %>
+				<a id="feeldup" href="#"><img style="width:100%" src="/assets/feeldup.png"></a>
+			<% end %>
+			<div class="RFMPanel">
+				<div class="RFMPanelTitle">인기 필드업 &nbsp;<span id="fav_feeldup" style="color:darkgray; font-size:0.7em;">더보기</span></div>
+				<hr style="margin:5px 0">
+				<div id="fav_feeldup_content">
+					<% @fav_posts[0,15].each do |post| %>
+						<div class="RFMPanelItem">
+							<%= link_to truncate(post.title, length:20, separater: ' '), post, remote:true, class: 'fav-posts' %></br>
+						</div>
+					<% end %>
+				</div>
+			</div>
+			<div class="RFMPanel" style="float:left">
+				<div class="RFMPanelTitle">인기 태그</div>
+				<hr style="margin:5px 0">
+				<% @fav_tags[0..10].shuffle.each do |tag| %>
+					<div class="tag_div"><a href='/posts?tag=<%= tag %>' class='tag'><%= tag %></a></div>
 				<% end %>
 			</div>
+
+			<div style="clear:both"></div>
+
+			<div class="RFMPanel" >
+				<div class="RFMPanelTitle">추천 마이필드</div>
+				<hr style="margin:5px 0">
+				<% User.all.shuffle[0,3].each do |user| %>
+					<div class="RFMPanelItem" >
+						<% if user.use_photo %>
+							<%= link_to image_tag(user.photo, class: "reco_myfeeld_img"), "/my_feeld?user_id=#{user.id}" %> 
+						<% else %>
+							<%= link_to image_tag(user.image_url, class: "reco_myfeeld_img"), "/my_feeld?user_id=#{user.id}" %> 
+						<% end %> 
+						<%= link_to user.name, "/my_feeld?user_id=#{user.id}"%>
+						<%= link_to image_tag('/assets/plusbtn.png', class: "reco_myfeeld_plustbtn"), friendships_path(:friend_id => user.id), :method => :post %>
+					</div> 
+				<% end %>
+			</div>
+
+			<div class="RFMPanel">
+				<!--<a href="/users/search"><button id="userSearchBtn" class="btn btn-block btn-default">유저검색</button></a> -->
+				<%= link_to "유저검색", '/user_search', remote: true, id: 'userSearchBtn', class:'btn btn-block btn-default'%>
+			</div>
+
 		</div>
-		<div class="RFMPanel" style="float:left">
-			<div class="RFMPanelTitle">인기 태그</div>
-			<hr style="margin:5px 0">
-			<% @fav_tags[0..10].shuffle.each do |tag| %>
-				<div class="tag_div"><a href='/posts?tag=<%= tag %>' class='tag'><%= tag %></a></div>
-			<% end %>
+		<!-- 오른쪽 고정 메뉴이다 끝 -->
+
+		<!-- contents container -->
+		<div id="contents-container" >
+			<%= yield %>
+		</div>
+		<!-- contents container end -->
+
+	<% else %>
+		<%# 모바일에서 보이는 부분 %>
+		<%# 포스트아이템의 디자인이 약간 바뀌어야 한다.%>
+		<%# contents container id 뺐다. 25px marginleft 필요없어서.%>
+		<div id="contents-container-mobile" >
+			<center>
+				<%= yield %>
+			</center>
 		</div>
 
-		<div style="clear:both"></div>
+	<% end %>
 
-		<div class="RFMPanel" >
-			<div class="RFMPanelTitle">추천 마이필드</div>
-			<hr style="margin:5px 0">
-			<% User.all.shuffle[0,3].each do |user| %>
-				<div class="RFMPanelItem" >
-					<% if user.use_photo %>
-						<%= link_to image_tag(user.photo, class: "reco_myfeeld_img"), "/my_feeld?user_id=#{user.id}" %> 
-					<% else %>
-						<%= link_to image_tag(user.image_url, class: "reco_myfeeld_img"), "/my_feeld?user_id=#{user.id}" %> 
-					<% end %> 
-					<%= link_to user.name, "/my_feeld?user_id=#{user.id}"%>
-					<%= link_to image_tag('/assets/plusbtn.png', class: "reco_myfeeld_plustbtn"), friendships_path(:friend_id => user.id), :method => :post %>
-				</div> 
-			<% end %>
-		</div>
-
-		<div class="RFMPanel">
-			<!--<a href="/users/search"><button id="userSearchBtn" class="btn btn-block btn-default">유저검색</button></a> -->
-			<%= link_to "유저검색", '/user_search', remote: true, id: 'userSearchBtn', class:'btn btn-block btn-default'%>
-		</div>
-
-	</div>
-	<!-- 오른쪽 고정 메뉴이다 끝 -->
-<% end %>
-
-	<!-- contents container -->
-	<div id="contents-container" >
-		<%= yield %>
-	</div>
-	<!-- contents container end -->
-
+<%#<div id="my_modal"class="modal fade" data-keyboard="true" data-backdrop="static" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true"> %>
 <div id="my_modal"class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
