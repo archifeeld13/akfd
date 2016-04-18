@@ -32,6 +32,12 @@
 .modal-backdrop{
 	z-index: -1;
 }
+.modal-body{
+	overflow-y: auto
+}
+.modal-header{
+	padding:0;
+}
 
 // summernote 추가하면서 모달창이 백드롭에 가려지는 이슈 해결 도중 추가
 // -> 결국 link 추가하기 안쓰기로함-> 색,폰트사이즈 조절하는 것과 충돌

@@ -19,8 +19,7 @@ function postsColumnResize(){
 // 눌렀을 때 모달 띄우고 post보여줄 애들
 function show_post_item_event(){
 	$('.posts-item-img, .posts-item-text, .fav-posts').click(function(){
-		// feeldup 버튼 눌렀을 때의 액션 중 option 띄우는거 제외하고 
-		show_modal_bg_board();
+		//필요없을듯?
 	})
 }
 
@@ -102,7 +101,7 @@ $(function(){
 	// index
 	// index
 	// 조회 기능
-	show_post_item_event();
+	// show_post_item_event();
 	
 	// my_feeld
 	// my_feeld

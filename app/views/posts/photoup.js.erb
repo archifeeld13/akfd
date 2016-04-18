@@ -1,12 +1,9 @@
-$('<%=j render 'photoup' %>').appendTo($('#modal_board'))
+$('#my_modal').modal({
+	keyboard: true,
+})
 
-// modal close button click
-// modal close button click
-$('.modal_close').click(function(){
-	$('#modal_bg').click();
-})	
-// modal close button click end
+$('.modal-content').html('<%=j render 'photoup' %>')
 
-// 이걸 호출해 줌으로써 모달 보드의 배치를 적절히 한다
-changeWidthHeightModalBoard();
+$('.modal-body').css('max-height', $(window).height()*0.75)
 
+//$('#form_container_for_photoup').perfectScrollbar(); 

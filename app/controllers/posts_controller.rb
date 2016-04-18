@@ -148,56 +148,6 @@ class PostsController < ApplicationController
 					end
 				end
 			end
-
-		end
-	end
-
-	# http://api.rubyonrails.org/v3.1.1/classes/ActionDispatch/Http/UploadedFile.html
-	def create2
-		@post = Post.new
-		@post.user_id = current_user.id
-		@post.title = "제목 없음" if @post.title.length == 0
-		@post.content = "테스트(기능 개발) 중입니다" 
-
-		if @post.save
-			if params[:images]
-				params[:images].each do |image|
-					#image.original_filename 
-					@post.photos.create(image: image)
-				end
-			end
-			render :edit
-		end
-	end
-
-	# 사진이 있는 상태에서 작업한건 언제나 여기로
-	def update2
-		@post = Post.find(params[:id])	
-		# 1이면 중간 사진 업로드를 위한 요청이 아닌, 완전히 끝낸다는 표시
-		isFinished = params[:finish]
-		# 캡션은 이미 저장된 이미지에 대해서만 달 수 있어!
-		# 캡션을 임시로 담고 있는 captions Hash 
-		captions = JSON.parse(params[:captions])	
-		@post.photos.each do |photo|
-			# 이 조건문이 없으면 수정 사항이 아닌 것들이 다 초기화됨
-			if captions[photo.id.to_s] 
-				photo.update(caption: captions[photo.id.to_s])
-			end
-		end
-		# 그 이외의 수정 사항 반영
-		if @post.update(params[:post].permit(:title, :content))
-			if params[:images]
-				params[:images].each do |image|
-					@post.photos.create(image: image)
-				end
-			end
-			if isFinished == "1"
-				redirect_to @post  # 나중엔 수정
-			else
-				render :edit 
-			end
-		else
-			render :edit
 		end
 	end
 

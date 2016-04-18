@@ -1,15 +1,12 @@
-//$('#my_modal').modal({
-//	keyboard: true,
-//})
+$('#my_modal').modal({
+	keyboard: true,
+})
 
-$('#modal_board').html('<%=j render 'show_post' %>')
-//$('.modal-body').html('<%=j render 'show_post' %>')
+$('.modal-content').html('<%=j render 'show_post' %>')
 
+$('.modal-body').css('max-height', $(window).height()*0.75)
 
-// 한번 불러주고 이미지 로드 다되면 다시부른다
-changeWidthHeightModalBoard();
-showLoadingBG()
-
+$('body').LoadingOverlay("show")
 
 // 이미지가 로드 될 때마다 modal_board의 크기가 달라서
 var ccc = 0;
@@ -22,32 +19,10 @@ $('.show-post-img').each(function(){
 		ccc ++;
 		// 맨 마지막에 실행되는 부분
 		// 맨 마지막에 실행되는 부분
-		// 맨 마지막에 실행되는 부분
 		if ($('.show-post-img').size() ==  ccc){
-
-			//var captions = jQuery.parseJSON("<%=j @post.content %>".replace(/&quot;/g, "\""))
-			//var img_order = "<%=j @post.img_order %>".split(',')
-			/*
-			for (k = img_order.length - 1 ; k >= 0; k--){
-				$(".show-post-img").each(function(idx){
-					var tmp = decodeURIComponent($(this).attr('src')).split('/')
-					var nameOfFile = tmp[tmp.length - 1]
-					//if (decodeURIComponent($(this).attr('src')).indexOf(img_order[k]) >= 0){
-					// () 를 __로 바꿔버리는 버그가 있었다
-					// carrierwave initialize를 수정했다.
-					// 이 전 파일을 위해서따로 처리를 해줄까?
-					if (nameOfFile == img_order[k]){
-							$(this).fadeIn();
-							$(this).parent().prepend("<center><div style='font-size:1.3em; margin: 1% 3%;'>" + captions[img_order[k]] + "</div></center>");
-							$(this).parent().prepend($(this));
-							$(this).attr('id', 'show-post-img-' + k )
-					}
-				})
-			}
-			*/
 			
 			// image 타입의 글일 때는 여기서 없애줘야한다
-			hideLoadingBG()
+			$('body').LoadingOverlay("hide")
 
 			// 그냥 따로 할게 위에서 해도 될거같긴한데
 			$('.show-post-img').click(function(){
@@ -55,40 +30,40 @@ $('.show-post-img').each(function(){
 				// https://github.com/flesler/jquery.scrollTo
 				nextID = '#show-post-img-' + (current_id + 1)
 				if ($(nextID).length){
-					$('#modal_board').scrollTo(nextID, {
+					//$('#modal_board').scrollTo(nextID, {
+					$('.modal-body').scrollTo(nextID, {
 						offset: -50	,
 						duration: 200 ,
 					})
 				}
 				else {
-					$('#modal_board').scrollTo("#show-post-content", {
+					//$('#modal_board').scrollTo("#show-post-content", {
+					$('.modal-body').scrollTo("#show-post-content", {
 						offset: -50	,
 						duration: 200 ,
 					})
 				}
 			})
 
-			// 내용을 채우고나선 반드시 이 함수를 호출해줘야한다
-			changeWidthHeightModalBoard();
 		}
-		// 맨 마지막에 실행되는 부분
 		// 맨 마지막에 실행되는 부분
 		// 맨 마지막에 실행되는 부분
 	}
 })
 
-// 추가적으로
-// 안에서의 스크롤이 부모로 전달 되지 않게
-//prevetScrollPropFrom('#modal_board')
 
 $(function(){
-	$('#modal_board').perfectScrollbar(); 
+	//$('#modal_board').perfectScrollbar(); 
+	$('.modal-body').perfectScrollbar(); 
 
+	/*
 	$(document).keyup(function(e){
 		if (e.keyCode == 27){
 			$('#modal_bg').click()
 		}	
 	})
+	*/
+
 
 	<%# 텍스트 타입의 글은 여기서 불러줘야 한다%>
 	<% if @post.post_type == 0 %>

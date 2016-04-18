@@ -51,7 +51,7 @@ $(function(){
 	// captions에 들어있는 JSON데이터를 string화해서 captions 히든태그에 value로 넣는다 
 	// 서버에서는 이걸 열어봐서 JSON파싱한 이후에 캡션의 업데이트 혹은 생성 여부를 판단한다.
 	$('#feeldup-submit').click(function(){
-		showLoadingBG();	
+		$('body').LoadingOverlay("show")
 		$('#captions').val(JSON.stringify(captions, null, 1))
 	})
 
@@ -71,87 +71,99 @@ $(function(){
 		width: 100%;	
 	}
 </style>
-<div style="float:left; width:75%; height:75px; background:#F2F2F2; padding:2%;">
-	<img src="<%= current_user.image_url%>" style="width:8%" class="img-rounded">&nbsp; 
-	<span style="color:#4C5249; font-size:1.5em"><%= current_user.name %></span>
-	<img class="modal_close" style="width:20px; height:20px;" align="right" src="/assets/xbtn.png">
+
+<div class="modal-header">
+	<div id="show-post-header">
+		<span class="modal-title">포토업 유아이 수정중</span>&nbsp;
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	</div>
 </div>
 
-<div align="center" style="float:left; width:25%; height:75px; background:white; padding:2%;">
-	<div style="color:#BBBBBB; font-size:1.3em;">마이필드<br> 프로젝트 관리</div>
-</div>
+<%# feeldup의 경우에만 예외로 body padding 0 ??%>
+<div class="modal-body" style="padding:0;">
+	<div style="float:left; width:75%; height:75px; background:#F2F2F2; padding:2%;">
+		<img src="<%= current_user.image_url%>" style="width:8%" class="img-rounded">&nbsp; 
+		<span style="color:#4C5249; font-size:1.5em"><%= current_user.name %></span>
+	</div>
 
-<%= form_for @post, remote: true, :format=>'js', html: {multipart: true}  do |f| %>
-<%# form_for @post, url: update2_path(@post), method: :patch,  :html => {multipart: true}   do |f| %>
-<div id="form_container_for_photoup" style="float:left; height: 400px; width: 75%; background:#E9E9E9; padding: 10px; overflow:auto;"> 
-	<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
-	
-	<div style="margin-bottom: 10px"></div>
-	<% @post.photos.each do |photo| %>
+	<div align="center" style="float:left; width:25%; height:75px; background:white; padding:2%;">
+		<div style="color:#BBBBBB; font-size:1.3em;">마이필드<br> 프로젝트 관리</div>
+	</div>
+
+	<%= form_for @post, remote: true, :format=>'js', html: {multipart: true}  do |f| %>
+	<%# form_for @post, url: update2_path(@post), method: :patch,  :html => {multipart: true}   do |f| %>
+	<div id="form_container_for_photoup" style="float:left; height: 400px; width: 75%; background:#E9E9E9; padding: 10px; overflow:auto;"> 
+		<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
+		
 		<div style="margin-bottom: 10px"></div>
-		<div id="preview-<%=photo.id%>-container">
-			<% if photo.caption %>
-				<%= image_tag photo.image, id: "preview-#{photo.id}", class: "preview-img", data: {caption: photo.caption} %>
-			<% else %>
-				<%= image_tag photo.image, id: "preview-#{photo.id}", class: "preview-img" %>
+		<% @post.photos.each do |photo| %>
+			<div style="margin-bottom: 10px"></div>
+			<div id="preview-<%=photo.id%>-container">
+				<% if photo.caption %>
+					<%= image_tag photo.image, id: "preview-#{photo.id}", class: "preview-img", data: {caption: photo.caption} %>
+				<% else %>
+					<%= image_tag photo.image, id: "preview-#{photo.id}", class: "preview-img" %>
+				<% end %>
+			</div>
+		<% end %>
+
+		<div style="margin-bottom: 10px"></div>
+		<div class="inputWrapper" style="width: 100%; height: 60px;">
+			<%#
+				images[] returned to the album as an array. 
+				We use file_field_tag since images is not @album's attribute%>
+			<%# 버그가 있나봄. file_field_tag가 안떠..%>
+			<%#= file_field_tag "images[]", type: :file, multiple: true, accept: 'image/png,image/gif,image/jpeg', class: "fileInput", onchange: "$('#feeldup-submit').click()" %>
+			<input type="file" name="images[]" id="images_" multiple="multiple" accept="image/png,image/gif,image/jpeg" class="fileInput" >
+			<%= hidden_field_tag "captions" %>
+			<%#<input type="hidden" name="captions" id="captions"> %>
+		</div>
+
+		<%#= f.text_area :content, :id => 'input_post_content', :class => 'form-control'%>
+		<div style="margin-bottom: 10px"></div>
+		<%= f.text_area :content,  :class => 'form-control', rows: 5, placeholder: "이곳에 내용을 남겨주세요\n사진을 클릭하면 캡션을 남길 수 있습니다;D"%>
+
+		<div style="margin-bottom: 10px"></div>
+		<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그 (태그는 쉼표로 구분해주세요! ex) 태그1, 태그2)" %>
+		<div class="has-error">
+			<div class="checkbox disabled">
+				<label style="margin-left: 1%;">
+					<input type="checkbox" value="secret" disabled>
+					비밀글로 작성합니다
+				</label>
+			</div>
+		</div>
+	</div>
+
+	<div style="float:left; width:25%; height:350px; background:#F2F2F2; padding:1%; overflow-y: scroll">
+		<div id="project_radio_container">
+			<div>
+				<%= f.radio_button(:project_id, "") %>
+				&nbsp;선택 안함
+			</div>
+			<% current_user.projects.each do |project| %>
+				<%= render 'projects/project_radio', project: project, f: f %>
 			<% end %>
 		</div>
+	</div>
+	<%= f.hidden_field(:post_type, value:1) %>
+	<%= f.hidden_field(:img_order) %>
+	<%= hidden_field_tag "finish", 0 %>
+	<%#<input type="hidden" name="finish" id="finish" value="0"> %>
+	<%#= f.button :submit,  id: "feeldup-submit" %>
+	<%= f.button :submit, class: "hidden", id: "feeldup-submit" %>
 	<% end %>
 
-	<div style="margin-bottom: 10px"></div>
-	<div class="inputWrapper" style="width: 100%; height: 60px;">
-		<%#
-			images[] returned to the album as an array. 
-			We use file_field_tag since images is not @album's attribute%>
-		<%# 버그가 있나봄. file_field_tag가 안떠..%>
-		<%#= file_field_tag "images[]", type: :file, multiple: true, accept: 'image/png,image/gif,image/jpeg', class: "fileInput", onchange: "$('#feeldup-submit').click()" %>
-		<input type="file" name="images[]" id="images_" multiple="multiple" accept="image/png,image/gif,image/jpeg" class="fileInput" >
-		<%= hidden_field_tag "captions" %>
-		<%#<input type="hidden" name="captions" id="captions"> %>
+	<%= render "projects/form" %>
+
+	<div style="float:left; width:75%; height:75px; background:#F2F2F2;">
 	</div>
 
-	<%#= f.text_area :content, :id => 'input_post_content', :class => 'form-control'%>
-	<div style="margin-bottom: 10px"></div>
-	<%= f.text_area :content,  :class => 'form-control', rows: 5, placeholder: "이곳에 내용을 남겨주세요\n사진을 클릭하면 캡션을 남길 수 있습니다;D"%>
 
-	<div style="margin-bottom: 10px"></div>
-	<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그 (태그는 쉼표로 구분해주세요! ex) 태그1, 태그2)" %>
-	<div class="has-error">
-		<div class="checkbox disabled">
-			<label style="margin-left: 1%;">
-				<input type="checkbox" value="secret" disabled>
-				비밀글로 작성합니다
-			</label>
-		</div>
+	<div align="center" style="float:left; width:25%; height:75px; background:white; padding:5px;">
+		<%= link_to image_tag('/assets/feeldup_write.png'), "#", id: "feeldup-submit-link" %> 
 	</div>
+	<!--</form>-->
 </div>
-
-<div style="float:left; width:25%; height:350px; background:#F2F2F2; padding:1%; overflow-y: scroll">
-	<div id="project_radio_container">
-		<div>
-			<%= f.radio_button(:project_id, "") %>
-			&nbsp;선택 안함
-		</div>
-		<% current_user.projects.each do |project| %>
-			<%= render 'projects/project_radio', project: project, f: f %>
-		<% end %>
-	</div>
+<div class="modal-footer">
 </div>
-<%= f.hidden_field(:post_type, value:1) %>
-<%= f.hidden_field(:img_order) %>
-<%= hidden_field_tag "finish", 0 %>
-<%#<input type="hidden" name="finish" id="finish" value="0"> %>
-<%#= f.button :submit,  id: "feeldup-submit" %>
-<%= f.button :submit, class: "hidden", id: "feeldup-submit" %>
-<% end %>
-
-<%= render "projects/form" %>
-
-<div style="float:left; width:75%; height:75px; background:#F2F2F2;">
-</div>
-
-
-<div align="center" style="float:left; width:25%; height:75px; background:white; padding:5px;">
-	<%= link_to image_tag('/assets/feeldup_write.png'), "#", id: "feeldup-submit-link" %> 
-</div>
-<!--</form>-->

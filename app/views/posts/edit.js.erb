@@ -1,17 +1,10 @@
 <% if @post.post_type == 0 %>
-////////////////////////////////////////////////////////////////////
-$('#modal_board').html("")
 
-$('<%=j render 'textup' %>').appendTo($('#modal_board'))
+$('.modal-content').html('<%=j render 'textup' %>')
+$('.modal-body').css('max-height', $(window).height()*0.75)
 
-$('.modal_close').click(function(){
-	$('#modal_bg').click();
-})	
 
-changeWidthHeightModalBoard();
-////////////////////////////////////////////////////////////////////
-
-$('#modal_board').append('<script src="/javascripts/summernote-ko-KR.js"></script>')
+$('.modal-content').append('<script src="/javascripts/summernote-ko-KR.js"></script>')
 
 $('#input_post_content').summernote({
 	height: 200,
@@ -30,29 +23,18 @@ $('#input_post_content').summernote({
 
 
 <% elsif @post.post_type == 1 %>
-////////////////////////////////////////////////////////////////////
-	//hideLoadingBG()
-	$('#modal_board').html("")
 
-	$("<%=j render 'photoup' %>").appendTo($('#modal_board'))
+	alert(';;;')
+	$('body').LoadingOverlay("hide")
+	$('.modal-content').html('<%=j render 'photoup' %>')
+	$('.modal-body').css('max-height', $(window).height()*0.75)
 
-	// modal close button click
-	// modal close button click
-	$('.modal_close').click(function(){
-		$('#modal_bg').click();
-	})	
-	// modal close button click end
-	//$('#form_container_for_photoup').perfectScrollbar(); 
-
-	changeWidthHeightModalBoard();
-////////////////////////////////////////////////////////////////////
 <% else %>
 	alert('error')
 <% end %>
 
 // 모달창의 높이를 초기상태로 돌려준다
 // show modal이 길 때, edit모드로 전환하면 긴 부분이 남아있는 현상 해결
-$('#modal_board').css('height', 'auto')
+//$('#modal-body').css('height', 'auto')
 //이제 얘 없음$('#modal_board_wrapper').css('height', 'auto')
-
 

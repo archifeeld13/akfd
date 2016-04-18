@@ -12,28 +12,29 @@
 
 <% if @post.post_type == 0 %>
 	$('#modal_bg').click();
-	hideLoadingBG()
+	$('body').LoadingOverlay("hide")
 	// 여기 나중에 쇼우로 바꾸기
 	location.reload()
 
 <% elsif @post.post_type == 1 %>
-	// 이미지 업 같은 경우 finish가 아닌 이상 edit모드 유지
-	hideLoadingBG()
-	$('#modal_board').html("")
-	// 이미 있는 글에 대한 form은 자동으로 edit으로 잡히는듯!
-	$('<%=j render "photoup" %>').appendTo($('#modal_board'))
 
-	$('.modal_close').click(function(){
-		$('#modal_bg').click();
-	})	
+	// 이미 있는 글에 대한 form은 자동으로 edit으로 잡히는듯!
+	$('.modal-content').html('<%=j render 'photoup' %>')
+
+	$('.modal-body').css('max-height', $(window).height()*0.75)
+	// 이미지 업 같은 경우 finish가 아닌 이상 edit모드 유지
+
+	$('body').LoadingOverlay("hide")
 
 	//$('#form_container_for_photoup').perfectScrollbar(); 
 
-	changeWidthHeightModalBoard();
 <% else %>
+
 	<%# link up %>
 	$('<h1><%=@object.title%>"</h1>').appendTo($('#modal_board'))
 	$('<img src="<%=@object.images.first.src.to_s%>"></img>').appendTo($('#modal_board'))
-	hideLoadingBG();
+
+	$('body').LoadingOverlay("hide")
+
 <% end %>
 

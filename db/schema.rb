@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160409073904) do
+ActiveRecord::Schema.define(version: 20160418003533) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "post_id"
@@ -73,13 +73,14 @@ ActiveRecord::Schema.define(version: 20160409073904) do
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.text     "images"
     t.integer  "user_id"
     t.integer  "project_id"
     t.integer  "post_type"
     t.string   "img_order"
+    t.boolean  "is_secret",  default: false
   end
 
   add_index "posts", ["project_id"], name: "index_posts_on_project_id"
