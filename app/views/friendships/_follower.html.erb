@@ -1,9 +1,11 @@
 <style>
 	.friend_imgs{
-		width: 70px;
-		height: 70px;
+		width: 50px;
+		height: 50px;
+		border-radius: 5px;
 	}
 </style>
+<div style="padding: 5px;">
 <% @user.inverse_friends.each do |f| %>
 	<% if f.use_photo %>
 		<%= link_to image_tag(f.photo, class: "friend_imgs"), "/my_feeld?user_id=#{f.id}" %>
@@ -11,3 +13,4 @@
 		<%= link_to image_tag(f.image_url, class: "friend_imgs"), "/my_feeld?user_id=#{f.id}" %>
 	<% end %>
 <% end %>
+</div>

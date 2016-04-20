@@ -1,5 +1,8 @@
-show_modal_bg_board();
+$('#my_modal').modal({
+	keyboard: true,
+})
 
-$('#modal_board').html('<%=j render 'follow' %>')
+$('.modal-content').html('<%=j render 'follow' %>')
 
-changeWidthHeightModalBoard();
+$('.modal-body').css('max-height', $(window).height()*0.75)
+

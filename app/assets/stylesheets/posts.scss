@@ -287,6 +287,36 @@
 	}
 }
 
+// my feeld의 필드바인더 부분
+// my feeld의 필드바인더 부분
+.project_name {
+	color: black;
+	font-size: 1.5em;
+}
+.project_preview_container{
+	width: 240px;
+	height: 240px;
+	padding: 0;
+}
+.project_preview100{
+	float:left;
+	width: 120px; 
+	height: 120px;
+	margin:0;
+	opacity: 0.7;
+	filter: alpha(opacity=70); 
+}
+.project_preview50{
+	float:left;
+	width: 60px;
+	height: 60px;
+	margin:0;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+}
+// my feeld의 필드바인더 부분
+// my feeld의 필드바인더 부분
+
 
 // user edit
 #user_edit_panel{

@@ -91,5 +91,14 @@
 </div>
 
 <script >
-	tag_truncate()
+	//	tag_truncate()
+	var result = ""
+	$('.tag_list').each(function(){	
+		tmp_arr = $(this).html().split(",").slice(0, 3);
+		result = tmp_arr.join();
+		//	result += " <strong> ...+</strong> "
+		if ($(this).html().split(",").length > 3)
+			$(this).html(result + "<img src='/assets/dot.png' style='width:15px;'>");
+	})
+	//	tag_truncate()
 </script>
