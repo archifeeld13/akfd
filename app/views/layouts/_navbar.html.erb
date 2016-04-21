@@ -58,11 +58,15 @@
 
 			<%# link_to image_tag('/assets/home.png', class: "nav-icon"), posts_path  %>
 
+			<% if not browser.device.mobile? %>
 			<a href="#message" id='msg_btn' rel="popover" data-placement="bottom">
 				<div id="msg_icon_container" style="display:inline">
 					<img id="msg_icon" class="nav-icon" src="/assets/msg.png">
 				</div>
 			</a>
+			<% else %>
+					<%= link_to image_tag("/assets/msg.png", class: "nav-icon", id:"msg_icon"), events_path, remote: true %>
+			<% end %>
 			<script>
 				$("#msg_icon_container")
 						.css('position', 'relative')
@@ -92,7 +96,7 @@
 							<% end %>
 						</div>
 					<% end %>
-					<%= link_to "더 보기", events_path, id: "more-events", class: "btn btn-default btn-block", onclick:"$('#my_modal').modal({keyboard: true})", remote: true %>
+					<%= link_to "더 보기", events_path, id: "more-events", class: "btn btn-default btn-block", remote: true %>
 				<% else %>
 					새로운 이벤트가 없습니다 ;D
 				<% end %>
