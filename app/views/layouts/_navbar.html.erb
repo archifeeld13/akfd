@@ -92,6 +92,7 @@
 							<% end %>
 						</div>
 					<% end %>
+					<%= link_to "더 보기", events_path, id: "more-events", class: "btn btn-default btn-block", onclick:"$('#my_modal').modal({keyboard: true})", remote: true %>
 				<% else %>
 					새로운 이벤트가 없습니다 ;D
 				<% end %>

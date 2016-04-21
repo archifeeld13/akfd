@@ -3,6 +3,10 @@ class UsersController < ApplicationController
 	def show
   end
 
+	def events
+			@events = current_user.inverse_events
+	end
+
 	def search
 		# /user/search
 		respond_to do |format|

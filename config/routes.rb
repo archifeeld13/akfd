@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 	resources :users do
 		resources :projects, only: [:create, :destroy]	
 	end
+	get '/events' => "users#events"
+
 	get '/auth_user/:auth_key'=> "users#auth_user"
 
 	get '/user_search' => 'users#search', as: 'users_search'

@@ -1,0 +1,31 @@
+<div class="modal-header">
+	<div id="show-post-header">
+		<span class="modal-title">이벤트 목록 입니다;D</span>&nbsp;
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	</div>
+</div>
+<%# feeldup의 경우에만 예외로 body padding 0 ??%>
+<div class="modal-body" style="padding:0;">
+	<% current_user.inverse_events.reverse.each do |event| %>
+		<div style="width:100%; background:rgba(50,50,50,0.1); margin-bottom: 5px; padding:5px;; border-radius: 5px;">
+			<% if event.user.use_photo %>
+				<img src="<%=event.user.photo%>" style="width:30px; height:30px; border-radius:5px;" />
+			<% else %>
+				<img src="<%=event.user.image_url%>" style="width:30px; height:30px; border-radius:5px;" />
+			<% end %>
+			<%= link_to event.user.name, "/my_feeld?user_id=#{event.user.id}" %> 님이
+			<% if event.event_type == 0 %>
+				 <strong>팔로우</strong>하셨습니다
+			<% elsif event.event_type == 1 %>
+				<%= link_to truncate(event.post.title, length:10), post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 <strong>댓글</strong>을 남기셨습니다
+
+			<% elsif event.event_type == 2 %>
+				<%= link_to truncate(event.post.title, length:10), post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 <strong>Feel'd!</strong> 를 누르셨습니다
+			<% else %>
+				이상한 값임.
+			<% end %>
+		</div>
+	<% end %>
+</div>
+<div class="modal-footer">
+</div>
