@@ -28,12 +28,18 @@
 		<% end %>
 	<% end %>
 	<div class="posts-item-info">
-		<div class="posts-item-title" ><%= truncate(post.title, length: 20, separater: ' ')%></div>
+		<div class="posts-item-title" >
+			<%= truncate(post.title, length: 20, separater: ' ')%>
+			<% if post.is_secret %>
+				<span class="text-danger">(비밀글)</span>
+			<% end %>
+		</div>
 		<div style="height:8px;"></div>
 		<div class="posts-item-counts">
 			<span><i class="fa fa-heart"></i> <%= post.likes.count %></span>, &nbsp;
 			<span><i class="fa fa-comment"></i> <%= post.comments.count %></span>, &nbsp;
-			<span><i class="fa fa-share-alt"></i> <%= post.shares.count %></span>
+			<span><i class="fa fa-share-alt"></i> <%= post.shares.count %></span>, &nbsp;
+			<span><i class="fa fa-eye"></i> <%= post.view_count%></span>
 		</div>
 		<div style="height:10px;"></div>
 		<div class="posts-item-hashtags">

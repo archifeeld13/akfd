@@ -23,9 +23,9 @@ class PostsController < ApplicationController
 		# 기본 메인 페이지
 			if params[:page]
 				page = params[:page].to_i
-				@posts = Post.all.reverse[(page * 20)..(page * 20) + 19]
+				@posts = Post.where(is_secret: false).reverse[(page * 20)..(page * 20) + 19]
 			else
-				@posts = Post.all.reverse[0..19]
+				@posts = Post.where(is_secret: false).reverse[0..19]
 			end
 			flash[:notice] = "아키필드에 오신 것을 환영합니다! :D"
 		end
@@ -102,6 +102,8 @@ class PostsController < ApplicationController
 
 	def show
 		@post = Post.find(params[:id])
+		@post.view_count += 1
+		@post.save
 		@comment = Comment.new # 이거 안적으니까 지난 시간 구하는거에서 에러나
 		respond_to do |format|
 			format.html { render :action => "show" }
@@ -197,7 +199,7 @@ class PostsController < ApplicationController
 		def post_params
 			# 여기 개발 할때바꺼야해.
 			#params.require(:post).permit(:title, :content, :post_type, :img_order, :project_id, :tag_list_fixed )
-			params.require(:post).permit(:title, :content, :post_type, :img_order, :project_id, {images: []}, :tag_list_fixed)
+			params.require(:post).permit(:title, :content, :post_type, :img_order, :project_id, {images: []}, :tag_list_fixed, :is_secret)
 		end
 
 end

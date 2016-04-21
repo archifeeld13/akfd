@@ -8,9 +8,16 @@
 <div style="padding: 5px;">
 <% @user.friendships.each do |f| %>
 	<% if f.friend.use_photo %>
-		<%= link_to image_tag(f.friend.photo, class: "friend_imgs"), "/my_feeld?user_id=#{f.friend.id}" %>
+		<%= link_to image_tag(f.friend.photo, class: "friend_imgs"), "/my_feeld?user_id=#{f.friend.id}", title: "#{f.friend.name}", data: {toggle: "tooltip", placement: "bottom"} %>
+
 	<% else %>
-		<%= link_to image_tag(f.friend.image_url, class: "friend_imgs"), "/my_feeld?user_id=#{f.friend.id}" %>
+		<%= link_to image_tag(f.friend.image_url, class: "friend_imgs"), "/my_feeld?user_id=#{f.friend.id}", title: "#{f.friend.name}", data: {toggle: "tooltip", placement: "bottom"} %>
 	<% end %>
 <% end %>
 </div>
+
+<script>
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
+</script>
