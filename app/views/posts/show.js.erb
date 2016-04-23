@@ -6,8 +6,9 @@ $('.modal-content').html('<%=j render 'show_post' %>')
 
 $('.modal-body').css('max-height', $(window).height()*0.75)
 
-<% if @post.post_type == 1 %>
-	$('body').LoadingOverlay("show")
+<% if @post.post_type == 1  %>
+	//잠시 꺼둠
+	//$('body').LoadingOverlay("show")
 <% end %>
 
 // 이미지가 로드 될 때마다 modal_board의 크기가 달라서

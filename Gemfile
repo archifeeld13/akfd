@@ -60,6 +60,16 @@ gem 'link_thumbnailer'
 # https://github.com/fnando/browser
 gem 'browser'
 
+
+# seed dump
+gem 'seed_dump'
+
+# mysql
+gem 'mysql2'
+
+# https://github.com/yamldb/yaml_db
+gem 'yaml_db'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

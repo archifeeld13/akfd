@@ -47,6 +47,20 @@ class WelcomeController < ApplicationController
 		end
 		render text: 'ok'
 =end
+	
+		posts = Post.all
+		results = []
+		posts.each do |p|
+			if p.project_id
+				#있을 때
+				begin
+				 Project.find(p.project_id)
+				rescue	
+					results << p.id
+				end
+			end
+		end
+		render text: results 
 	end
 
 	def state

@@ -14,9 +14,7 @@
 		<% end %>
 	</div>
 	<% if post.post_type == 1 %>
-		<% if post.images.any? %>
-			<%= link_to image_tag(post.images[0].url, class: 'posts-item-img'), post, remote:true %></td>
-		<% elsif post.photos.any? %>
+		<% if post.photos.any? %>
 			<%= link_to image_tag(post.photos[0].image, class: 'posts-item-img'), post, remote:true %></td>
 		<% end %>
 	<% else %>
@@ -29,7 +27,7 @@
 	<% end %>
 	<div class="posts-item-info">
 		<div class="posts-item-title" >
-			<%= truncate(post.title, length: 20, separater: ' ')%>
+			<%= link_to truncate(post.title, length: 20, separater: ' '), post, remote:true %>
 			<% if post.is_secret %>
 				<span class="text-danger">(비밀글)</span>
 			<% end %>
