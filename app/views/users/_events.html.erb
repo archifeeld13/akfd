@@ -6,8 +6,14 @@
 </div>
 <%# feeldup의 경우에만 예외로 body padding 0 ??%>
 <div class="modal-body" style="padding:0;">
+	<% colorW = "white" %>
+	<% colorG = "rgba(50,50,50,0.1)" %>
 	<% current_user.inverse_events.reverse.each do |event| %>
-		<div style="width:100%; background:rgba(50,50,50,0.1); margin-bottom: 5px; padding:5px;; border-radius: 5px;">
+		<% if event.check %>
+			<div style="width:100%; background:<%= colorW %>; margin-bottom: 5px; padding:5px;; border-radius: 5px;">
+		<% else %>	
+			<div style="width:100%; background:<%= colorG %>; margin-bottom: 5px; padding:5px;; border-radius: 5px;">
+		<% end %>
 			<% if event.user.use_photo %>
 				<img src="<%=event.user.photo%>" style="width:30px; height:30px; border-radius:5px;" />
 			<% else %>

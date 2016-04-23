@@ -2,17 +2,16 @@
 	<%= simple_form_for([@post, @comment], remote: true) do |f| %>
 	<section class="comment-list">
 	<article class="row">
-			<div class="col-md-2 col-sm-2 col-xs-2">
+			<div class="col-md-2 col-sm-3 col-xs-3">
 				<figure class="thumbnail" >
 					<% if current_user.use_photo %>
 						<img class="img-responsive" src="<%=current_user.photo%>" />
 					<% else %>
 						<img class="img-responsive" src="<%=current_user.image_url%>" />
 					<% end %>
-					<figcaption class="text-center"><%= current_user.name %></figcaption>
 				</figure>
 			</div>
-			<div class="col-md-10 col-sm-10 col-xs-10">
+			<div class="col-md-10 col-sm-9 col-xs-9">
 				<div class="panel panel-default arrow left">
 					<div class="panel-body panel-body-form">
 						<div class="comment-post">

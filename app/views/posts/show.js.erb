@@ -6,7 +6,9 @@ $('.modal-content').html('<%=j render 'show_post' %>')
 
 $('.modal-body').css('max-height', $(window).height()*0.75)
 
-$('body').LoadingOverlay("show")
+<% if @post.post_type == 1 %>
+	$('body').LoadingOverlay("show")
+<% end %>
 
 // 이미지가 로드 될 때마다 modal_board의 크기가 달라서
 var ccc = 0;
@@ -65,8 +67,4 @@ $(function(){
 	*/
 
 
-	<%# 텍스트 타입의 글은 여기서 불러줘야 한다%>
-	<% if @post.post_type == 0 %>
-		hideLoadingBG()
-	<% end %>
 })

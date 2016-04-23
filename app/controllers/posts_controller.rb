@@ -101,6 +101,15 @@ class PostsController < ApplicationController
 =end
 
 	def show
+		# 혹시 events목록에 이 글이 있다면
+		# 해당 이벤트를 check true로 만든다
+		if current_user
+			my_events = Event.where(post_id: params[:id], target_id: current_user.id)		
+			my_events.each do |e|
+				e.check = true
+				e.save
+			end
+		end
 		@post = Post.find(params[:id])
 		@post.view_count += 1
 		@post.save

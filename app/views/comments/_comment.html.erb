@@ -1,17 +1,17 @@
 <% if comment.post.user.id != comment.user.id %>
-	<!-- First Comment -->
 	<article id="comment_<%=comment.id %>" class="row">
-		<div class="col-md-2 col-sm-2 col-xs-2">
+		<div class="col-md-2 col-sm-3 col-xs-3">
 			<figure class="thumbnail">
-				<% if comment.user.use_photo %>
-					<img class="img-responsive" src="<%=comment.user.photo%>" />
-				<% else %>
-					<img class="img-responsive" src="<%=comment.user.image_url%>" />
+				<%= link_to "/my_feeld?user_id=#{comment.user.id}" do%>
+					<% if comment.user.use_photo %>
+						<img class="img-responsive" src="<%=comment.user.photo%>" />
+					<% else %>
+						<img class="img-responsive" src="<%=comment.user.image_url%>" />
+					<% end %>
 				<% end %>
-				<figcaption class="text-center"><%= link_to comment.user.name, "/my_feeld?user_id=#{comment.user.id}"%></figcaption>
 			</figure>
 		</div>
-		<div class="col-md-10 col-sm-10 col-xs-10">
+		<div class="col-md-10 col-sm-9 col-xs-9">
 			<div class="panel panel-default arrow left">
 				<div class="panel-body">
 					<header class="text-left">
@@ -35,9 +35,8 @@
 		</div>
 	</article>
 <% else %>
-	<!-- Third Comment -->
 	<article id="comment_<%=comment.id %>" class="row">
-		<div class="col-md-10 col-sm-10 col-xs-10">
+		<div class="col-md-10 col-sm-9 col-xs-9">
 			<div class="panel panel-default arrow right">
 				<div class="panel-body">
 					<header class="text-right">
@@ -59,14 +58,15 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-2 col-sm-2 col-xs-2">
+		<div class="col-md-2 col-sm-3 col-xs-3">
 			<figure class="thumbnail">
-				<% if comment.user.use_photo %>
-					<img class="img-responsive" src="<%=comment.user.photo%>" />
-				<% else %>
-					<img class="img-responsive" src="<%=comment.user.image_url%>" />
+				<%= link_to "/my_feeld?user_id=#{comment.user.id}" do%>
+					<% if comment.user.use_photo %>
+						<img class="img-responsive" src="<%=comment.user.photo%>" />
+					<% else %>
+						<img class="img-responsive" src="<%=comment.user.image_url%>" />
+					<% end %>
 				<% end %>
-				<figcaption class="text-center"><%= link_to comment.user.name, "/my_feeld?user_id=#{comment.user.id}"%></figcaption>
 			</figure>
 		</div>
 	</article>

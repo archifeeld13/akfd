@@ -67,17 +67,29 @@
 			<% else %>
 					<%= link_to image_tag("/assets/msg.png", class: "nav-icon", id:"msg_icon"), events_path, remote: true %>
 			<% end %>
-			<script>
-				$("#msg_icon_container")
-						.css('position', 'relative')
-						.append('<span	style="background: white; color:black; border-radius: 5px; padding-left: 4px;  position:absolute; margin-left:10%; top:13px; right:5px; font-size:0.9em; width: 17px; height:18px;">N</span>')	
 
-			</script>
+			<% current_user.inverse_events.each do |event| %>
+				<% if not event.check %>
+				<script>
+					$("#msg_icon_container")
+							.css('position', 'relative')
+							.append('<span	style="background: white; color:black; border-radius: 5px; padding-left: 4px;  position:absolute; margin-left:10%; top:13px; right:5px; font-size:0.9em; width: 17px; height:18px;">N</span>')	
+
+				</script>
+				<% break %>
+				<% end %>
+			<% end %>
 
 			<div id="popover-msg-content" class="hide">
-				<% if current_user.inverse_events.any? %>	
+				<% if current_user.inverse_events.any? %>
+					<% colorW = "white" %>
+					<% colorG = "rgba(50,50,50,0.1)" %>
 					<% current_user.inverse_events.reverse[0..7].each do |event| %>
-						<div style="width:235px; height:60px; background:rgba(50,50,50,0.1); margin-bottom: 5px; padding:5px;; border-radius: 5px;">
+					<% if event.check %>
+						<div style="width:235px; height:60px; background:<%= colorW %>; margin-bottom: 5px; padding:5px;; border-radius: 5px;">
+					<% else %>	
+						<div style="width:235px; height:60px; background:<%= colorG %>; margin-bottom: 5px; padding:5px;; border-radius: 5px;">
+					<% end %>
 							<% if event.user.use_photo %>
 								<img src="<%=event.user.photo%>" style="width:30px; height:30px; border-radius:5px;" />
 							<% else %>
