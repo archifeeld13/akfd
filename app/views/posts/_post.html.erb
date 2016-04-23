@@ -9,7 +9,7 @@
 		&nbsp;
 		<% if current_user and (current_user.id == 1 or current_user.id == post.user.id)%>
 			<span style="font-size: 0.8em ">
-			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"Are you sure?" } %>
+			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
 			</span>
 		<% end %>
 	</div>

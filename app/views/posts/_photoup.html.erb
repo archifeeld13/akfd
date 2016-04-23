@@ -98,11 +98,15 @@ $(function(){
 		<div style="margin-bottom: 10px"></div>
 		<% @post.photos.each do |photo| %>
 			<div style="margin-bottom: 10px"></div>
-			<div id="preview-<%=photo.id%>-container">
+			<div id="preview-<%=photo.id%>-container" style="position:relative">
 				<% if photo.caption %>
 					<%= image_tag photo.image, id: "preview-#{photo.id}", class: "preview-img", data: {caption: photo.caption} %>
 				<% else %>
 					<%= image_tag photo.image, id: "preview-#{photo.id}", class: "preview-img" %>
+				<% end %>
+				<%= link_to photo_path(photo.id), method: :delete, remote: true, data:{confirm:"사진을 삭제합니다"}  do%>
+				<div style="background:url('/assets/xbtn.png'); background-size:30px; position:absolute; top:0; right:0; width: 30px; height:30px;">
+				</div>
 				<% end %>
 			</div>
 		<% end %>
