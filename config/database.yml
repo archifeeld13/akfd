@@ -31,6 +31,19 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+#production:
+#  <<: *default
+#  database: db/production.sqlite3
+
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: mysql2
+  database: akfd 
+  username: archifeeld
+  password: <%= ENV["DB_PW"] %>
+  host: archifeeld.clwx5yvu2mng.ap-northeast-2.rds.amazonaws.com
+  port: 3306
+  pool: 5
+  encoding: utf8
+  timeout: 5000
+
+
