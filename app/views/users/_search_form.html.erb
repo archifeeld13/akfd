@@ -1,8 +1,18 @@
-<%= form_for :search,  url: user_search_path, remote: true do |f| %>
-	<%= f.text_field :name, class: 'form-control', placeholder: "이름 혹은 닉네임 검색" %>	
-	<%= f.radio_button(:type, "name", checked: true) %>이름검색
-	<%= f.radio_button(:type, "nick") %>닉네임검색
-	<%= f.submit "검색", class:'btn btn-success' %>
-<% end %>
-<div id="userSearchResult">
+<div class="modal-header" style="padding-left:2%; padding-bottom:1%;">
+	<h3>유저 검색</h3>
 </div>
+
+<div class="modal-body">
+	<%= form_for :search,  url: user_search_path, remote: true do |f| %>
+		<%= f.text_field :name, class: 'form-control', placeholder: "이름 혹은 닉네임 검색" %>	
+		<%= f.radio_button(:type, "name", checked: true) %>이름검색
+		<%= f.radio_button(:type, "nick") %>닉네임검색
+		<%= f.submit "검색", class:'btn btn-success' %>
+	<% end %>
+	<div id="userSearchResult">
+	</div>
+</div>
+
+<div class="modal-footer">
+</div>
+

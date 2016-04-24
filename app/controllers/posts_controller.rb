@@ -206,8 +206,6 @@ class PostsController < ApplicationController
 	
 	private
 		def post_params
-			# 여기 개발 할때바꺼야해.
-			#params.require(:post).permit(:title, :content, :post_type, :img_order, :project_id, :tag_list_fixed )
 			params.require(:post).permit(:title, :content, :post_type, :project_id, :tag_list_fixed, :is_secret)
 		end
 

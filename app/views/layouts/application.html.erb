@@ -102,7 +102,7 @@
 							<%= link_to image_tag(user.image_url, class: "reco_myfeeld_img"), "/my_feeld?user_id=#{user.id}" %> 
 						<% end %> 
 						<%= link_to user.name, "/my_feeld?user_id=#{user.id}"%>
-						<%= link_to image_tag('/assets/plusbtn.png', class: "reco_myfeeld_plustbtn"), friendships_path(:friend_id => user.id), :method => :post %>
+						<%= link_to image_tag('/assets/plusbtn.png', class: "reco_myfeeld_plustbtn"), friendships_path(:friend_id => user.id), :method => :post, data: { confirm: "팔로우 합니다" } %>
 					</div> 
 				<% end %>
 			</div>

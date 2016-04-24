@@ -1,7 +1,13 @@
 // my_feeld에서 유저의 사진을 클릭하면.. 메시지 박스를 보여줄거다
 // my_feeld에서 유저의 사진을 클릭하면.. 메시지 박스를 보여줄거다
-show_modal_bg_board();
 
-$('#modal_board').append("<h1 style='color:black'>해당 유저에게 비밀메시지를 보낼 수 있는 기능 추가 예정입니다;D</h1><img src='http://2.bp.blogspot.com/-F38-hWt4I4U/UVfyoqMpzsI/AAAAAAAAAi8/Ye8BRIaH9ro/s1600/easter_eggs_8.gif' style='width:100%'>")
 
-changeWidthHeightModalBoard();
+$('#my_modal').modal({
+	keyboard: true,
+})
+
+$('.modal-content').append("<div class='modal-body'><h1 style='color:black'>해당 유저에게 비밀메시지를 보낼 수 있는 기능 추가 예정입니다;D</h1><img src='http://2.bp.blogspot.com/-F38-hWt4I4U/UVfyoqMpzsI/AAAAAAAAAi8/Ye8BRIaH9ro/s1600/easter_eggs_8.gif' style='width:100%'></div>")
+
+$('.modal-body').css('max-height', $(window).height()*0.75)
+
+

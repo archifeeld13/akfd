@@ -153,6 +153,7 @@ $(function(){
 
 		// modal board는
 		// option_item이 클릭 되었을 때 띄운다
+		return false;
 
 	})
 	// #feeldup click end

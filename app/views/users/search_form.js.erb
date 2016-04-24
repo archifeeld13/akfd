@@ -1,4 +1,9 @@
-// #modal_board에 폼 추가
-//$('<#%=j render "search_form"%>').appendTo('#modal_board')
-$('#modal_board').html('<%=j render "search_form" %>');
-changeWidthHeightModalBoard();
+$('#my_modal').modal({
+	keyboard: true,
+})
+
+$('.modal-content').html('<%=j render 'search_form' %>')
+
+$('.modal-body').css('max-height', $(window).height()*0.75)
+
+

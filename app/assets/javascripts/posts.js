@@ -11,6 +11,9 @@ function postsColumnResize(){
 		$('#contents-container')
 			.css('width', except_RFM - (except_RFM % (pWidth + 20)) ) // 각 포스트 아이템 마진 사방으로 20px임
 			.css('margin-left', (except_RFM - $('#contents-container').width())/2)
+
+		$("#contents-controlbar")
+			.css('width', except_RFM - (except_RFM % (pWidth + 20))) // contents container와 너비가 같게 해준다
 	}
 }
 

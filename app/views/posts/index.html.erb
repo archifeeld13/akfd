@@ -1,11 +1,20 @@
 <div id="contents-controlbar">
-	<span style="color:darkgray"><%= flash[:notice].html_safe %></span>
-	<a href="/posts?type=txt" id="filter_only_text" style="float:right; margin-left:0.5%;  color:gray">텍스트</a>
-	<a href="/posts?type=img" id="filter_only_image" style="float:right; margin-left:0.5%;  color:gray">이미지</a>
-	<a href="#" id="filter_only_text" style="float:right; margin-left:0.5%;  color:gray">관심사</a>
-	<a href="#" id="filter_only_text" style="float:right; margin-left:0.5%;  color:gray">팔로우</a>
-	<a href="#" id="filter_only_text" style="float:right; margin-left:0.5%;  color:gray">전체</a>
+  &nbsp;<%# span 두개 다를 플롯해버리면 부모가 relative?여야 하는데, 그러면 affix가 안먹어 &nbsp;써놓으니 해결댐ㅡ,ㅡ;%>
+	<span style="color:darkgray; float:left;"><%= flash[:notice].html_safe %></span>
+	&nbsp;
+	&nbsp;
+	&nbsp;
+	<span style="float:right; margin-right: 5px; white-space: nowrap; ">
+		<a href="/posts?type=txt" id="filter_only_text" style="margin-right:0.5%;  color:gray">텍스트</a>
+		<a href="/posts?type=img" id="filter_only_image" style="margin-right:0.5%;  color:gray">이미지</a>
+		<a href="#" id="filter_only_text" style="margin-right:0.5%;  color:gray">관심사</a>
+		<a href="#" id="filter_only_text" style="margin-right:0.5%;  color:gray">팔로우</a>
+		<a href="#" id="filter_only_text" style="margin-right:0.5%;  color:gray">전체</a>
+	</span>
 </div>
+
+<%# 50px 정도 띄워준 이유는 컨텐츠컨트롤바 때문%>
+<div style="height:50px"></div>
 
 <div id="posts-container">
 	<%= render @posts %>
@@ -63,5 +72,12 @@
 			page ++;
 		})
 
+		$(window).scroll(function() {
+			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+				//alert('창 끝 도달시, 글 로드 기능 개발중');
+				//$('#posts_adder').click()
+			}
+		});
+		
 	});
 </script>
