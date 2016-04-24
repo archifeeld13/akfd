@@ -5,9 +5,9 @@
 			<div class="col-md-2 col-sm-3 col-xs-3">
 				<figure class="thumbnail" >
 					<% if current_user.use_photo %>
-						<img class="img-responsive" src="<%=current_user.photo%>" />
+						<%= image_tag current_user.photo, class:"img-responsive" %>
 					<% else %>
-						<img class="img-responsive" src="<%=current_user.image_url%>" />
+						<%= image_tag current_user.image_url, class:"img-responsive" %>
 					<% end %>
 				</figure>
 			</div>

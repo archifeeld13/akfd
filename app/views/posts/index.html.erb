@@ -1,15 +1,15 @@
 <div id="contents-controlbar">
   &nbsp;<%# span 두개 다를 플롯해버리면 부모가 relative?여야 하는데, 그러면 affix가 안먹어 &nbsp;써놓으니 해결댐ㅡ,ㅡ;%>
-	<span style="color:darkgray; float:left;"><%= flash[:notice].html_safe %></span>
+	<span style="color:rgb(30,30,30; float:left;"><%= flash[:notice].html_safe %></span>
 	&nbsp;
 	&nbsp;
 	&nbsp;
 	<span style="float:right; margin-right: 5px; white-space: nowrap; ">
-		<a href="/posts?type=txt" id="filter_only_text" style="margin-right:0.5%;  color:gray">텍스트</a>
-		<a href="/posts?type=img" id="filter_only_image" style="margin-right:0.5%;  color:gray">이미지</a>
-		<a href="#" id="filter_only_text" style="margin-right:0.5%;  color:gray">관심사</a>
-		<a href="#" id="filter_only_text" style="margin-right:0.5%;  color:gray">팔로우</a>
-		<a href="#" id="filter_only_text" style="margin-right:0.5%;  color:gray">전체</a>
+		<a href="/posts?type=txt" id="filter_only_text" style="margin-right:0.5%;  color:rgb(30,30,30)">텍스트</a>
+		<a href="/posts?type=img" id="filter_only_image" style="margin-right:0.5%;  color:rgb(30,30,30)">이미지</a>
+		<a href="#" id="filter_only_text" style="margin-right:0.5%;  color:rgb(30,30,30)">관심사</a>
+		<a href="#" id="filter_only_text" style="margin-right:0.5%;  color:rgb(30,30,30)">팔로우</a>
+		<a href="#" id="filter_only_text" style="margin-right:0.5%;  color:rgb(30,30,30)">전체</a>
 	</span>
 </div>
 
@@ -39,11 +39,13 @@
 </style>
 
 <center>
-	<div id="posts_adder_container">
-		<%#= link_to "글 더보기", posts_path(page: 1), remote: true, id: "posts_adder"%>
-		<%# page = n 은 제이쿼리로 붙여줌 %>
-		<%= link_to "+", posts_path, remote: true, id: "posts_adder"%>
-	</div>
+	<%#= link_to "글 더보기", posts_path(page: 1), remote: true, id: "posts_adder"%>
+	<%# page = n 은 제이쿼리로 붙여줌 %>
+	<%= link_to posts_path, remote: true, id: "posts_adder" do%>
+		<div id="posts_adder_container">
+			+
+		</div>
+	<% end %>
 </center>
 
 <script >
@@ -71,13 +73,15 @@
 			$('#posts_adder').attr('href', ori_url + "?page=" + page)
 			page ++;
 		})
-
+		
+		/*
 		$(window).scroll(function() {
 			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
 				//alert('창 끝 도달시, 글 로드 기능 개발중');
 				//$('#posts_adder').click()
 			}
 		});
+		*/
 		
 	});
 </script>

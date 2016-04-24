@@ -1,7 +1,7 @@
 <div id="project_form">
 	<% @project = Project.new %>
 	<%= simple_form_for([current_user, @project], remote: true) do |f| %>
-	<div style="float:left; width:25%; height:50px; background:#F2F2F2; padding:1%">
+	<div style="float:left; width:30%; height:50px; background:#F2F2F2; padding:1%">
 		<div style="width:85%; float:left;">
 			<%= f.text_field :name, :class => "form-control",  :placeholder => '프로젝트 추가' %>
 			<%= f.hidden_field :type, value: "feeld_up" %>

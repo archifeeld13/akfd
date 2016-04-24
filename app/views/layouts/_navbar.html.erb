@@ -11,14 +11,16 @@
 
 	<div class="collapse navbar-collapse" id="nav-collapse">	
 		<form class="navbar-form navbar-left" onsubmit="return false" role="search">
-			<div class="form-group">
+			<div class="input-group">
 				<input id="nav_search_input" type="text" class="form-control" style="background-color:rgba(104,104,104,0.3)" placeholder="태그 검색" />
+				<span class="input-group-btn">
+					<a id="nav_search_submit" href='#'>
+						<button type="button" class="btn btn-default" style="background:#333333; border-color:#333333">
+								<span style="color:#CBFD34" class="fa fa-search" aria-hidden="true"></span>
+						</button>
+					</a>
+				</span>
 			</div>
-		<a id="nav_search_submit" href='#'>
-			<button type="button" class="btn btn-default" style="background:#333333; border-color:#333333">
-					<span style="color:#CBFD34" class="fa fa-search" aria-hidden="true"></span>
-			</button>
-		</a>
 		</form>
 		<script>
 			$(function(){
@@ -35,7 +37,7 @@
 			})
 		</script>
 
-		<div id="navbar" class="navbar-right" style="margin-right: 1%">
+		<div id="navbar" class="navbar-right" >
 		<% if current_user %>
 			<% if current_user.use_photo %>
 				<!-- 여기 둥글게 스타일 입혀야댐 -->
