@@ -47,20 +47,11 @@ class WelcomeController < ApplicationController
 		end
 		render text: 'ok'
 =end
-	
-		posts = Post.all
-		results = []
-		posts.each do |p|
-			if p.project_id
-				#있을 때
-				begin
-				 Project.find(p.project_id)
-				rescue	
-					results << p.id
-				end
-			end
-		end
-		render text: results 
+		u = User.find(106)
+		u.password = BCrypt::Engine.hash_secret("1111", u.salt)
+		u.password_confirmation = BCrypt::Engine.hash_secret("1111", u.salt)
+		u.save
+		render text: "success"
 	end
 
 	def state

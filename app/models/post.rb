@@ -15,9 +15,6 @@ class Post < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :project
 
-	mount_uploaders :images, S3Uploader
-	serialize :images, Array
-
 	acts_as_taggable
 
 	#validates :title, presence: true

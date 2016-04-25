@@ -46,16 +46,24 @@
 			<% end %>
 		</div>
 		<div class="form-inputs">
+			<%= f.label :password, '비밀번호'%>
+			<% if @user.user_type == 0 %>
+				<%= f.password_field :password, placeholder: "비밀번호 입력", required: true, class: "form-control" %>
+				<div style="height:5px;"></div>
+				<%= f.password_field :password_confirmation, placeholder: "비밀번호 확인", required: true, class: "form-control" %>
+			<% end %>
+
+			<div style="height:15px;"></div>
 			<%= f.label :nickname, '닉네임'%>
 			<%= f.text_field :nickname, placeholder: "닉네임을 입력해주세요", class: "form-control" %>
-
 			<%= f.label :use_nick, '닉네임 노출 여부'%>
 			<%= f.check_box :use_nick, placeholder: "Name" %>
-	<br>
+
+			<div style="height:15px;"></div>
 			<%= f.label :company, '소속'%>
 			<%= f.text_field :company, placeholder: "소속을 입력해주세요", class: "form-control" %>
 
-	<br>
+			<div style="height:15px;"></div>
 			<%= f.label :photo, '프로필 사진 별도 설정'%>
 			<%= f.file_field :photo, class: "form-control", as: :file %>
 			<% if @user.user_type == 0 %>
