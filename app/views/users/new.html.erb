@@ -45,10 +45,10 @@ form input[type="password"]
 		<% end %>
 	</div>
 	<div class="form-inputs">
-		<%= f.text_field :email, placeholder: "Email" , class: "form-control"%>
-		<%= f.text_field :name, placeholder: "Name", class: "form-control" %>
-		<%= f.password_field :password, placeholder: "Password", required: true, class: "form-control" %>
-		<%= f.password_field :password_confirmation, placeholder: "Password Confirmation", required: true, class: "form-control" %>
+		<%= f.text_field :email, placeholder: "이메일" , class: "form-control"%>
+		<%= f.text_field :name, placeholder: "이름", class: "form-control" %>
+		<%= f.password_field :password, placeholder: "비밀번호", required: true, class: "form-control" %>
+		<%= f.password_field :password_confirmation, placeholder: "비밀번호 확인", required: true, class: "form-control" %>
 		<%= f.hidden_field :user_type, value: 0 %>
 	</div>
 	<div class="form-actions">

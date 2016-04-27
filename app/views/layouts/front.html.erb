@@ -24,7 +24,7 @@
 	body {
 		background-color: #fff;
 		color: white;
-		background: url('/assets/loginbg.jpg');
+		background: url('<%= image_path('loginbg.jpg')%>');
 		background-size: 100%;
 	}
 	.bgalpha {
@@ -59,7 +59,7 @@
 <div class="bgalpha"> 
 	<center>
 		<div id="formPanel" align="center">	
-			<img id="logo" src="/assets/loginlogo.png">
+			<%= image_tag "loginlogo.png", id: "logo" %>
 			<%= yield %>
 		</div>
 	</center>

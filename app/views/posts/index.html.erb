@@ -61,7 +61,7 @@
 			result = tmp_arr.join();
 			//	result += " <strong> ...+</strong> "
 			if ($(this).html().split(",").length > 3)
-				$(this).html(result + "<img src='/assets/dot.png' style='width:15px;'>");
+				$(this).html(result + '&nbsp;<%=j image_tag "dot.png", class:"dot"%>');
 		})
 		// tag_truncate end
 

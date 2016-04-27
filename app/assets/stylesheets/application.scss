@@ -26,7 +26,8 @@
 // layout 에 적용되는 스타일들  
 
 // http://ichbintaeeun.tistory.com/30
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+// @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 * { font-family: 'Noto Sans KR', serif; }
 
 .modal-backdrop{
@@ -211,6 +212,14 @@ a.tag {
 		a{
 			color: black	
 		}
+	}
+}
+
+
+
+#feeldup {
+	img{
+		width: 100%;	
 	}
 }
 

@@ -47,9 +47,9 @@ class WelcomeController < ApplicationController
 		end
 		render text: 'ok'
 =end
-		u = User.find(106)
-		u.password = BCrypt::Engine.hash_secret("1111", u.salt)
-		u.password_confirmation = BCrypt::Engine.hash_secret("1111", u.salt)
+		u = User.find(56)
+		u.password = BCrypt::Engine.hash_secret("5252", u.salt)
+		u.password_confirmation = BCrypt::Engine.hash_secret("5252", u.salt)
 		u.save
 		render text: "success"
 	end

@@ -58,7 +58,7 @@
 		padding:0;
 		cursor: pointer;
 		/*Using a background color, but you can use a background image to represent a button*/
-		background: url(/assets/fileupload.png) no-repeat;
+		background: url(fileupload.png) no-repeat;
 		background-size: 100% 100%;;
 		//background: black; 
 		// 이거빼면 안됨 ㅅ밤바
@@ -98,13 +98,18 @@
 // 스타일을 모바일과 PC 따로 적용할 수 있을것 같다 (확인함)
 // user-info panel도 마찬가지로 분기할 수 있을 것 같다 
 .posts-item{
+	position: relative;
 	width:290px; height:400px; float:left; 
 	background:white; 
 	margin: 10px;
 	border-radius: 5px;
 
+	.dot {
+		width:15px;	
+	}
+
 	.posts-item-writer{
-		height: 40px;
+		height: 10%;;
 		a{
 			color: black;	
 		}
@@ -128,13 +133,20 @@
 	}
 	.posts-item-info{
 		font-size:0.9em; padding:5%;
+		padding-bottom: 0;
+		height: 30%;
 		.posts-item-title{
 			font-size:1.2em;
 			color: #444444;
 			font-weight:bold;
+			a{
+				color:black;	
+			}
 		}
 		.posts-item-counts{
 			color:gray; margin:2% 0;
+			position: absolute; bottom:0; font-size: 1.2em;
+			width: 90%;
 			span{
 				white-space: nowrap;
 			}
@@ -333,6 +345,7 @@
 	border-radius:5px;
 	padding:3%;
 }	
+
 .my_feeld_profile_img{
 	width: 130px;
 	height: 130px;

@@ -23,7 +23,7 @@ class S3Uploader < CarrierWave::Uploader::Base
     # For Rails 3.1+ asset pipeline compatibility:
     #ActionController::Base.helpers.asset_path("fallback/" + [:thumb, "default.png"].compact.join('_'))
     #"/images/fallback/" + [version_name, "default.png"].compact.join('_')
-    "/assets/default.png"
+    "default.png"
   end
 
 	# 저장할 이미지 사이즈 조정
@@ -36,7 +36,7 @@ class S3Uploader < CarrierWave::Uploader::Base
 
 	# 여러가지 이미지의 버전 설정 
   # Create different versions of your uploaded files:
-	process :resize_to_fit => [800, 800]
+	process :resize_to_fit => [1500, 1500]
   version :thumb do
     process resize_to_fit: [200, 200]
   end

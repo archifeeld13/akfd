@@ -18,7 +18,7 @@ class PostsController < ApplicationController
 			else
 				# link..
 			end
-			@posts = Post.where(post_type: post_type).reverse
+			@posts = Post.where(post_type: post_type, is_secret: false).reverse
 		else
 		# 기본 메인 페이지
 			if params[:page]

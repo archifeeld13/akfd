@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" style="padding: 2px">
 <div class="container-fluid">
-	<div class="navbar-header" style="margin-left: 1%">
-		<%= link_to image_tag('/assets/logo.png', id: "brand-image"), posts_path , class: "navbar-brand", id: 'navbar-brand-link'%>
+	<div class="navbar-header" >
+		<%= link_to image_tag('logo.png', id: "brand-image"), posts_path , class: "navbar-brand", id: 'navbar-brand-link'%>
 		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -47,19 +47,19 @@
 			<% end %>
 
 			<a href="/my_feeld">
-				<img class="nav-icon icon-hover" src="/assets/myfeeld.png">
+				<%= image_tag "myfeeld.png", class: "nav-icon icon-hover" %>
 			</a>
 
-			<%# link_to image_tag('/assets/home.png', class: "nav-icon"), posts_path  %>
+			<%# link_to image_tag('home.png', class: "nav-icon"), posts_path  %>
 
 			<% if not browser.device.mobile? %>
 			<a href="#message" id='msg_btn' rel="popover" data-placement="bottom">
 				<div id="msg_icon_container" style="display:inline">
-					<img id="msg_icon" class="nav-icon" src="/assets/msg.png">
+					<%= image_tag "msg.png", class: "nav-icon", id:"msg_icon" %>
 				</div>
 			</a>
 			<% else %>
-					<%= link_to image_tag("/assets/msg.png", class: "nav-icon", id:"msg_icon"), events_path, remote: true %>
+					<%= link_to image_tag("msg.png", class: "nav-icon", id:"msg_icon"), events_path, remote: true %>
 			<% end %>
 
 			<% current_user.inverse_events.each do |event| %>
@@ -118,16 +118,17 @@
 				});
 			</script>
 
-			<a href="<%= edit_user_path(current_user.id)%>"><img class="nav-icon" src="/assets/setting.png"></a>
+			<a href="<%= edit_user_path(current_user.id)%>">
+			<%= image_tag "setting.png", class: "nav-icon"%>
 
-			<%= link_to image_tag('/assets/logout.png', class: "nav-icon-nohover"), logout_path, method: :delete  %>
+			<%= link_to image_tag('logout.png', class: "nav-icon-nohover"), logout_path, method: :delete  %>
 
 		<% else %>
 			<a href="/login">
-				<%= image_tag "/assets/navlogin.png", class: 'nav-icon-nohover'%>
+				<%= image_tag "navlogin.png", class: 'nav-icon-nohover'%>
 			</a>
 			<a href="<%= new_user_path %>">
-				<%= image_tag "/assets/navregister.png", class: 'nav-icon-nohover' %>
+				<%= image_tag "navregister.png", class: 'nav-icon-nohover' %>
 			</a>
 		<% end %>
 		</div>

@@ -29,21 +29,22 @@
 		<div class="posts-item-title" >
 			<%= link_to truncate(post.title, length: 20, separater: ' '), post, remote:true %>
 			<% if post.is_secret %>
-				<span class="text-danger">(비밀글)</span>
+				<span class="text-danger">(<i class="fa fa-lock"></i>&nbsp;나만보기)</span>
 			<% end %>
 		</div>
-		<div style="height:8px;"></div>
-		<div class="posts-item-counts">
-			<span><i class="fa fa-heart"></i> <%= post.likes.count %></span>, &nbsp;
-			<span><i class="fa fa-comment"></i> <%= post.comments.count %></span>, &nbsp;
-			<span><i class="fa fa-share-alt"></i> <%= post.shares.count %></span>, &nbsp;
-			<span><i class="fa fa-eye"></i> <%= post.view_count%></span>
-		</div>
-		<div style="height:10px;"></div>
+		<div style="height:20px;"></div>
 		<div class="posts-item-hashtags">
 			<% if post.tag_list.size > 0 %>	
 				<div class='tag_list'><%= tag_icons(post.tag_list) %> </div>
 			<% end %>
+		</div>
+		<div class="posts-item-counts" >
+			<div style="position:relative">
+				<span><i class="fa fa-heart"></i> <%= post.likes.count %></span> &nbsp;&nbsp;&nbsp;
+				<span><i class="fa fa-comment"></i> <%= post.comments.count %></span> &nbsp;&nbsp;&nbsp;
+				<span><i class="fa fa-share-alt"></i> <%= post.shares.count %></span> 
+				<span style="position:absolute; right:0;"><i class="fa fa-eye"></i> <%= post.view_count%></span>
+			</div>
 		</div>
 	</div>
 </div>

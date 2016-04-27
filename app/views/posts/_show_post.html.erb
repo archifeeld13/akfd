@@ -87,9 +87,9 @@
 	<div style="float:left">
 	<% if current_user %>
 		<% if Like.find_by(post_id: @post.id, user_id: current_user.id) %>
-			<%= link_to image_tag('/assets/feeldrev.png'), post_likes_path(@post.id), id: "feeld" ,method: :post, remote: true %>
+			<%= link_to image_tag('feeldrev.png'), post_likes_path(@post.id), id: "feeld" ,method: :post, remote: true %>
 		<% else %>
-			<%= link_to image_tag('/assets/feeld.png'), post_likes_path(@post.id), id: "feeld" ,method: :post, remote: true %>
+			<%= link_to image_tag('feeld.png'), post_likes_path(@post.id), id: "feeld" ,method: :post, remote: true %>
 		<% end %>
 		<strong><a href="#" id="feeldcnt" data-toggle="popover" data-trigger="focus"  data-placement="right" >x <%=@post.likes.count%></a></strong>
 		<div id="popover-content" class="hide">
@@ -117,10 +117,10 @@
 		</script>
 		&nbsp;
 		<% if current_user.id != @post.user.id %>
-			<%= link_to image_tag('/assets/feeldin.png'),  post_shares_path(@post.id), id: "feeldin", method: :post, remote: true %>
+			<%= link_to image_tag('feeldin.png'),  post_shares_path(@post.id), id: "feeldin", method: :post, remote: true %>
 			x <strong id="feeldincnt"><%=@post.shares.count%></strong>
 		<% else %>
-			<%= link_to image_tag('/assets/edit.png'), edit_post_path(@post.id), id:"edit", remote: true %>
+			<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit", remote: true %>
 		<% end %>
 	<% end %>
 	</div>

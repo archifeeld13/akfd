@@ -6,15 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
   <title>Archifeeld</title>
-	<link rel="icon" type="image/png" href="/assets/favicon.png">
+	<link rel="icon" type="image/png" href="favicon.png">
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
 	<%= stylesheet_link_tag 'navbarcolor.css' %>
-	<%#= stylesheet_link_tag 'searchbox.css' %>
-	<%# stylesheet_link_tag 'jquery.mCustomScrollbar.css' %>
 
-	<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+	<!-- 제이쿼리 -->
 	<%= javascript_include_tag "https://code.jquery.com/jquery-1.12.0.js" %>
 	<%= javascript_include_tag "https://code.jquery.com/ui/1.11.4/jquery-ui.js" %>
 
@@ -22,14 +20,21 @@
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"></script>
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
 
+	<!-- scroll to -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"></script>
+
+	<!-- bootstrap js -->
 	<%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js" %>
 
 	<%# https://github.com/noraesae/perfect-scrollbar	%>	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.10/js/min/perfect-scrollbar.jquery.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.10/css/perfect-scrollbar.min.css" rel="stylesheet">
 
-	<script src="/assets/loadingoverlay.min.js"></script>
+	<!-- overlay min js -->
+	<%= javascript_include_tag "loadingoverlay.min.js" %>
+
+	<%# font css 포함하니 임의로 바뀌어서 여기에 포함했다 %>
+	<link href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
 
 	<%= csrf_meta_tags %>
 
@@ -43,17 +48,17 @@
 		<table >
 			<tr>
 			<td style="padding: 5px">
-				<%= link_to image_tag('/assets/txtbtn.png', class: 'option_item'), '/posts/new?type=text', remote: true %>
+				<%= link_to image_tag('txtbtn.png', class: 'option_item'), '/posts/new?type=text', remote: true %>
 				<br>
 				<center style="color:white">텍스트</center>
 			</td>
 			<td style="padding: 5px">
-				<%= link_to image_tag('/assets/photobtn.png', class: 'option_item'), '/posts/new?type=photo', remote: true %>
+				<%= link_to image_tag('photobtn.png', class: 'option_item'), '/posts/new?type=photo', remote: true %>
 				<br>
 				<center style="color:white">사진</center>
 			</td>
 			<td style="padding: 5px">
-				<%= link_to image_tag('/assets/linkbtn.png', class: 'option_item'), '/posts/new?type=link', remote: true %>
+				<%= link_to image_tag('linkbtn.png', class: 'option_item'), '/posts/new?type=link', remote: true %>
 				<br>
 				<center style="color:white">링크</center>
 			</td>
@@ -68,7 +73,7 @@
 
 		<div id="right_fixed_menu">
 			<% if current_user %>
-				<a id="feeldup" href="#"><img style="width:100%" src="/assets/feeldup.png"></a>
+				<a id="feeldup" href="#"><%= image_tag "feeldup.png" %></a>
 			<% end %>
 			<div class="RFMPanel">
 				<div class="RFMPanelTitle">인기 필드업 &nbsp;<span id="fav_feeldup" style="color:darkgray; font-size:0.7em;">더보기</span></div>
@@ -102,7 +107,7 @@
 							<%= link_to image_tag(user.image_url, class: "reco_myfeeld_img"), "/my_feeld?user_id=#{user.id}" %> 
 						<% end %> 
 						<%= link_to user.name, "/my_feeld?user_id=#{user.id}"%>
-						<%= link_to image_tag('/assets/plusbtn.png', class: "reco_myfeeld_plustbtn"), friendships_path(:friend_id => user.id), :method => :post, data: { confirm: "팔로우 합니다" } %>
+						<%= link_to image_tag('plusbtn.png', class: "reco_myfeeld_plustbtn"), friendships_path(:friend_id => user.id), :method => :post, data: { confirm: "팔로우 합니다" } %>
 					</div> 
 				<% end %>
 			</div>
@@ -135,7 +140,7 @@
 
 <%#<div id="my_modal"class="modal fade" data-keyboard="true" data-backdrop="static" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true"> %>
 <div id="my_modal"class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog">
 		<div class="modal-content">
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
