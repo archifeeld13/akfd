@@ -11,11 +11,8 @@ $('.tag_list').each(function(){
 	result = tmp_arr.join();
 	//	result += " <strong> ...+</strong> "
 	if ($(this).html().split(",").length > 3)
-		$(this).html(result + "&nbsp;<img src='/assets/dot.png' style='width:15px;'>");
+		$(this).html(result + '&nbsp; <i class="fa fa-ellipsis-h"></i>');
 })
 // tag_trunctate() end
 
-hideLoadingBG("wholePage")
-
-// 이걸 한번 호출해 줘야 새로 로드된 애들에 대해 클릭 이벤트가 다시금  걸려
-show_post_item_event()
+$('body').LoadingOverlay("hide")

@@ -84,14 +84,20 @@
 
 // index.html.erb
 // index.html.erb
-#contents-controlbar{
+#contents-controllbar{
 	position: fixed;
 	width: 100%;
-	padding:0.5%;
 	border-radius: 5px;
 	font-size: 1.1em;
+	z-index: 500; 
 	border: 1px solid #eaeaea;
 	background: rgba(255,255,255,0.7);
+	padding: 5px;
+
+	#cc-wrapper{
+		position: relative;
+		width: 100%;
+	}
 }
 
 // 이걸 application.css의 contents-container / mobile 여기안에 포함시키면
