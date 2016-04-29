@@ -88,19 +88,32 @@ function hideDivsAtFirst(){
 
 // RFM의 여러 이벤트를 설정하는 곳
 var isFavFeeldupClicked = false
+var isFavTagClicked = false
 function rightFixedMenuEvent(){
 	// 인기 필드업
 	$('#fav_feeldup').click(function() {
 		if (!isFavFeeldupClicked){
 			isFavFeeldupClicked = true
-			$('#fav_feeldup_content').animate({height: '315'});
+			$('#fav_feeldup_content').animate({height: '350'});
 		}
 		else{
 			isFavFeeldupClicked = false;
-			$('#fav_feeldup_content').animate({height: '105'});
+			$('#fav_feeldup_content').animate({height: '70'}); // css에서 초기값을 70 픽셀로 해놈
 		}
 	});
+
 	//인기 태그
+	$('#fav_tag').click(function() {
+		if (!isFavTagClicked){
+			isFavTagClicked = true
+			$('#fav_tag_content').animate({height: '185'});
+		}
+		else{
+			isFavTagClicked = false;
+			$('#fav_tag_content').animate({height: '60'}); // css에서 초기값을 60 픽셀로 해놈
+		}
+	});
+
 }
 
 

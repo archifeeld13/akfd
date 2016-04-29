@@ -70,7 +70,7 @@
 		ori_url = $('#posts_adder').attr('href')
 
 		$('#posts_adder').click(function(){
-			showLoadingBG("wholePage");
+			$('body').LoadingOverlay("show")
 			$('#posts_adder').attr('href', ori_url + "?page=" + page)
 			page ++;
 		})

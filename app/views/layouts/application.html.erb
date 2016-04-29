@@ -76,7 +76,7 @@
 				<a id="feeldup" href="#" data-reverse-img="<%=image_path "feelduprev.png"%>"><%= image_tag "feeldup.png" , data: {reverse: "#{image_path "feelduprev.png"}" }%></a>
 			<% end %>
 			<div class="RFMPanel">
-				<div class="RFMPanelTitle">인기 필드업 &nbsp;<span id="fav_feeldup" style="color:darkgray; font-size:0.7em;">더보기</span></div>
+				<div class="RFMPanelTitle">인기 필드업 &nbsp;<span id="fav_feeldup" style="color:darkgray; font-size:0.7em;cursor:pointer">더보기</span></div>
 				<hr style="margin:5px 0">
 				<div id="fav_feeldup_content">
 					<% @fav_posts[0,15].each do |post| %>
@@ -87,11 +87,13 @@
 				</div>
 			</div>
 			<div class="RFMPanel" style="float:left">
-				<div class="RFMPanelTitle">인기 태그</div>
+				<div class="RFMPanelTitle">인기 태그 &nbsp;<span id="fav_tag" style="color:darkgray; font-size:0.7em;cursor:pointer">더보기</span></div>
 				<hr style="margin:5px 0">
-				<% @fav_tags[0..10].shuffle.each do |tag| %>
+				<div id="fav_tag_content">
+				<% @fav_tags[0..20].shuffle.each do |tag| %>
 					<div class="tag_div"><a href='/posts?tag=<%= tag %>' class='tag'><%= tag %></a></div>
 				<% end %>
+			</div>
 			</div>
 
 			<div style="clear:both"></div>
@@ -99,7 +101,7 @@
 			<div class="RFMPanel" >
 				<div class="RFMPanelTitle">추천 마이필드</div>
 				<hr style="margin:5px 0">
-				<% User.all.shuffle[0,3].each do |user| %>
+				<% User.all.shuffle[0,4].each do |user| %>
 					<div class="RFMPanelItem" >
 						<% if user.use_photo %>
 							<%= link_to image_tag(user.photo, class: "reco_myfeeld_img"), "/my_feeld?user_id=#{user.id}" %> 

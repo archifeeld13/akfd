@@ -236,7 +236,11 @@ a.tag {
 
 	#fav_feeldup_content{
 		overflow: hidden;	
-		height: 105px; // <-> 350
+		height: 70px; // <-> 350
+	}
+	#fav_tag_content{
+		overflow: hidden;	
+		height: 60px;
 	}
 
 	.RFMPanel{
