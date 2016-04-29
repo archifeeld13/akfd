@@ -1,15 +1,68 @@
 <% if @post.errors.any? %>
 	var errors = []
 	<% @post.errors.full_messages.each  do |e| %>
-		errors.push("<%=e %>")	
+		errors.push("<%= e %>")	
 	<% end %>
 	alert(errors.join(','));
 <% else %>
 
 		$('body').LoadingOverlay("hide")
-		$('#my_modal').modal('hide') // 임시로지움, 나중에 쇼우띄워줄땐 굳이 안꺼도댐
 
-		// 여기 나중에 쇼우로 바꾸기
-		location.reload()
+		// show로 전환하는 기능을 아래 두 줄로서 구현했다
+		// 여기서 포토 타입이면 show.js에서 해주는대로 처리해줘야댈텐데..
+		$('.modal-content').html('<%=j render 'show_post' %>')
+		$('.modal-body').css('max-height', $(window).height()*0.75)
+
+		// 이거 맨 밑에서 안해도 문제 안되나봄
+		$('.modal-body').perfectScrollbar(); 
+
+		// show.js.erb에서 하는것
+		// show.js.erb에서 하는것
+		// show.js.erb에서 하는것
+		<% if @post.post_type == 1 and @post.photos.any? %>
+			$('body').LoadingOverlay("show")
+		<% end %>
+
+		// 이미지가 로드 될 때마다 modal_board의 크기가 달라서
+		var ccc = 0;
+
+		$('.show-post-img').each(function(){
+			// 이미지 로드 이벤트	
+			this.onload = function(){
+				ccc ++;
+				// 맨 마지막에 실행되는 부분
+				// 맨 마지막에 실행되는 부분
+				if ($('.show-post-img').size() ==  ccc){
+					
+					// image 타입의 글일 때는 여기서 없애줘야한다
+					$('body').LoadingOverlay("hide")
+
+					// 그냥 따로 할게 위에서 해도 될거같긴한데
+					$('.show-post-img').click(function(){
+						current_id = Number( $(this).attr('id').split('-')[3])
+						// https://github.com/flesler/jquery.scrollTo
+						nextID = '#show-post-img-' + (current_id + 1)
+						if ($(nextID).length){
+							//$('#modal_board').scrollTo(nextID, {
+							$('.modal-body').scrollTo(nextID, {
+								offset: -50	,
+								duration: 200 ,
+							})
+						}
+						else {
+							//$('#modal_board').scrollTo("#show-post-content", {
+							$('.modal-body').scrollTo("#show-post-content", {
+								offset: -50	,
+								duration: 200 ,
+							})
+						}
+					})
+
+				}
+				// 맨 마지막에 실행되는 부분
+				// 맨 마지막에 실행되는 부분
+			}
+		})
+
 <% end %>
 	

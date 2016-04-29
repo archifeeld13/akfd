@@ -13,10 +13,12 @@
 <% if @post.post_type == 0 %>
 
 	$('body').LoadingOverlay("hide")
-	$('#my_modal').modal('hide') // 임시로지움, 나중에 쇼우띄워줄땐 굳이 안꺼도댐
+	//$('#my_modal').modal('hide') // 임시로지움, 나중에 쇼우띄워줄땐 굳이 안꺼도댐
 
-	// 여기 나중에 쇼우로 바꾸기 -> 그냥 컨트롤러에서 분기하면 기존에 있는거 이용해서 편할텐데..
-	location.reload()
+	// show로 전환하는 기능을 아래 두 줄로서 구현했다
+	$('.modal-content').html('<%=j render 'show_post' %>')
+	$('.modal-body').css('max-height', $(window).height()*0.75)
+	$('.modal-body').perfectScrollbar(); 
 
 <% elsif @post.post_type == 1 %>
 

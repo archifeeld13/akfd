@@ -141,17 +141,22 @@ class PostsController < ApplicationController
 		# 
 		# post_type // 0:text, 1:img, 2:link
 		#
+		
+		# link param이 있을 때는 링크업이다
 		if params[:link] 
 			@post = Post.new(post_params)
 			@link = params[:link]			
 			@object = LinkThumbnailer.generate(params[:link])
 
+		# 그 이외에는 텍스트업 혹은 포토업이다
 		else 
 			@post = Post.new(post_params)
-			@post.title = "제목 없음" if @post.title.length == 0
+			#@post.title = "제목 없음" if @post.title.length == 0
+			#@post.content= "내용 없음" if @post.content.length == 0
 			@post.user_id = current_user.id
 			@post.save
 
+			# 이미지 타입일 경우엔 이미지 저장도 해준다
 			if @post.post_type == 1 
 				if params[:images]
 					params[:images].each do |image|
@@ -160,16 +165,22 @@ class PostsController < ApplicationController
 					end
 				end
 			end
+
+			# show 로 전환될 경우 필요
+			@comment = Comment.new 
 		end
+
 	end
 
 	def update
 		@post = Post.find(params[:id])
 		if @post.post_type == 0
 			@post.update(post_params)
+			# show 로 전환될 경우 필요
+			@comment = Comment.new 
 		else
 			# 1이면 중간 사진 업로드를 위한 요청이 아닌, 완전히 끝낸다는 표시
-			isFinished = params[:finish]
+			@isFinished = params[:finish]
 			# 캡션은 이미 저장된 이미지에 대해서만 달 수 있어!
 			# 캡션을 임시로 담고 있는 captions Hash 
 			captions = JSON.parse(params[:captions])	
@@ -187,8 +198,10 @@ class PostsController < ApplicationController
 						@post.photos.create(image: image)
 					end
 				end
-				if isFinished == "1"
-					# update.js
+				if @isFinished == "1"
+					# update.js 실행됨
+					# show 로 전환될 경우 필요
+					@comment = Comment.new 
 				else
 					render :edit 
 				end

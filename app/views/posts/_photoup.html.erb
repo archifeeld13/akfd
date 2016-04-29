@@ -5,11 +5,12 @@ var captions = {};
 $(function(){
 
 	// 업로드 혹은 수정을 마친다는 표현
+	// 만약 사진을 업로드하게 되면 이부분 무시하고 섭밋 누름
 	$('#feeldup-submit-link').click(function(){
 		if ($('#input_post_title').val().length == 0 ){
 			alert('제목을 입력해 주세요;)') 	
+			return 
 		}
-
 		// 완전히 끝이라는 표시
 		$('#finish').val('1');
 		// ajax 글쓰기 요청 
@@ -55,6 +56,7 @@ $(function(){
 		$('#captions').val(JSON.stringify(captions, null, 1))
 	})
 
+	// 사진 업로드시 일단 서버로 전송 
 	$('#images_').change(function(){
 		$('#feeldup-submit').click()
 	})
@@ -102,7 +104,7 @@ $(function(){
 					<%= image_tag photo.image, id: "preview-#{photo.id}", class: "preview-img" %>
 				<% end %>
 				<%= link_to photo_path(photo.id), method: :delete, remote: true, data:{confirm:"사진을 삭제합니다"}  do%>
-				<div style="background:url(<%=image_path('xbtn.png')%>); background-size:30px; position:absolute; top:0; right:0; width: 30px; height:30px;">
+				<div style="background:url(<%=image_path('xbtn.png')%>); background-size:20px; position:absolute; top:0; right:0; width: 20px; height:20px;">
 				</div>
 				<% end %>
 			</div>
@@ -124,7 +126,7 @@ $(function(){
 			<div class="checkbox">
 				<label style="margin-left: 1%;">
 					<%= f.check_box :is_secret %>
-					비밀글로 작성합니다
+					<i class="fa fa-lock"></i>&nbsp;	비밀글로 작성합니다
 				</label>
 			</div>
 		</div>
