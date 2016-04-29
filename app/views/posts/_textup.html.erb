@@ -1,7 +1,11 @@
 <div class="modal-header">
 	<div id="show-post-header">
 		<span class="modal-title">
-			<img src="<%= current_user.image_url%>" style="width:5%" class="img-rounded">&nbsp; 
+			<% if current_user.use_photo %>
+				<%= image_tag current_user.photo, class:"img-rounded"%>
+			<% else %>
+				<%= image_tag current_user.image_url, class:"img-rounded"%>
+			<% end %>
 			<%= current_user.name %>
 		</span>&nbsp;
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

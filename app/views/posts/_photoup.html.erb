@@ -75,7 +75,11 @@ $(function(){
 <div class="modal-header">
 	<div id="show-post-header">
 		<span class="modal-title">
-			<img src="<%= current_user.image_url%>" style="width:5%" class="img-rounded">&nbsp; 
+			<% if current_user.use_photo %>
+				<%= image_tag current_user.photo, class:"img-rounded"%>
+			<% else %>
+				<%= image_tag current_user.image_url, class:"img-rounded"%>
+			<% end %>
 			<%= current_user.name %>
 		</span>&nbsp;
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -98,7 +102,7 @@ $(function(){
 					<%= image_tag photo.image, id: "preview-#{photo.id}", class: "preview-img" %>
 				<% end %>
 				<%= link_to photo_path(photo.id), method: :delete, remote: true, data:{confirm:"사진을 삭제합니다"}  do%>
-				<div style="background:url('/assets/xbtn.png'); background-size:30px; position:absolute; top:0; right:0; width: 30px; height:30px;">
+				<div style="background:url(<%=image_path('xbtn.png')%>); background-size:30px; position:absolute; top:0; right:0; width: 30px; height:30px;">
 				</div>
 				<% end %>
 			</div>
@@ -153,5 +157,5 @@ $(function(){
 	<!--</form>-->
 </div>
 <div class="modal-footer">
-		<%= link_to image_tag('/assets/feeldup_write.png'), "#", id: "feeldup-submit-link" %> 
-</div>
+		<%= link_to image_tag('feeldup_write.png'), "#", id: "feeldup-submit-link" %> 
+</div/>

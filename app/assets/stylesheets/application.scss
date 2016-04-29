@@ -17,8 +17,9 @@
 
 @import 'bootstrap';
 
-@import 'comments';
-@import 'projects';
+//@import 'posts';
+//@import 'comments';
+//@import 'projects';
 
 // layout 에 적용되는 스타일들  
 // layout 에 적용되는 스타일들  
@@ -30,6 +31,11 @@
 
 .modal-backdrop{
 	z-index: -1;
+}
+.modal-title{
+	img{
+		width: 5%;	
+	}
 }
 .modal-body{
 	overflow-y: auto
