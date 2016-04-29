@@ -47,7 +47,7 @@
 			<% end %>
 
 			<a href="/my_feeld">
-				<%= image_tag "myfeeld.png", class: "nav-icon icon-hover" %>
+				<%= image_tag "myfeeld.png", class: "nav-icon icon-hover", data: {reverse: "#{image_path "myfeeldrev.png"}"} %>
 			</a>
 
 			<%# link_to image_tag('home.png', class: "nav-icon"), posts_path  %>
@@ -55,11 +55,11 @@
 			<% if not browser.device.mobile? %>
 			<a href="#message" id='msg_btn' rel="popover" data-placement="bottom">
 				<div id="msg_icon_container" style="display:inline">
-					<%= image_tag "msg.png", class: "nav-icon", id:"msg_icon" %>
+					<%= image_tag "msg.png", class: "nav-icon", id:"msg_icon", data: {reverse: "#{image_path "msgrev.png"}"} %>
 				</div>
 			</a>
 			<% else %>
-					<%= link_to image_tag("msg.png", class: "nav-icon", id:"msg_icon"), events_path, remote: true %>
+					<%= link_to image_tag("msg.png", class: "nav-icon", id:"msg_icon", data: {reverse: "#{image_path "msgrev.png"}"}), events_path, remote: true %>
 			<% end %>
 
 			<% current_user.inverse_events.each do |event| %>
@@ -119,7 +119,7 @@
 			</script>
 
 			<a href="<%= edit_user_path(current_user.id)%>">
-			<%= image_tag "setting.png", class: "nav-icon"%>
+			<%= image_tag "setting.png", class: "nav-icon", data: {reverse: "#{image_path "settingrev.png"}"}%>
 
 			<%= link_to image_tag('logout.png', class: "nav-icon-nohover"), logout_path, method: :delete  %>
 

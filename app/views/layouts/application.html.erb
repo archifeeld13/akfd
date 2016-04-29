@@ -73,7 +73,7 @@
 
 		<div id="right_fixed_menu">
 			<% if current_user %>
-				<a id="feeldup" href="#"><%= image_tag "feeldup.png" %></a>
+				<a id="feeldup" href="#" data-reverse-img="<%=image_path "feelduprev.png"%>"><%= image_tag "feeldup.png" , data: {reverse: "#{image_path "feelduprev.png"}" }%></a>
 			<% end %>
 			<div class="RFMPanel">
 				<div class="RFMPanelTitle">인기 필드업 &nbsp;<span id="fav_feeldup" style="color:darkgray; font-size:0.7em;">더보기</span></div>

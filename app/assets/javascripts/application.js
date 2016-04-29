@@ -35,8 +35,7 @@ function imgIconHover(selector){
 	$( selector ).hover(
 		function() {
 			prev = $(this).attr('src')
-			prev_split = prev.split(".")
-			$( this ).attr('src',  prev_split[0] + "rev" + ".png")
+			$( this ).attr('src', $(this).attr('data-reverse'))
 		}, function() {
 			$( this ).attr('src', prev)
 		}
@@ -61,6 +60,7 @@ function showOptionContainer(){
 // 버튼을 누르지 않았음에도 이벤트가 발생해 이 문제를 해결하고자 추가했다.
 isModalBgShowed = false;
 function showModalBG(){
+
 	isModalBgShowed = true;
 
 	// 흐린 배경 표시 -> 이 액션은 posts.js에서도 post item 클릭시 취한다
@@ -69,26 +69,6 @@ function showModalBG(){
 		.css('width', $(document).width())
 		.fadeIn()/*show()*/
 }
-
-
-// 로딩중 표시 위해서
-// 로딩중 표시 위해서
-// 로딩중 표시 위해서
-// http://gasparesganga.com/labs/jquery-loading-overlay/
-function showLoadingBG(option="modal"){
-		$('body').LoadingOverlay("show")
-	//	$('.modal-body').LoadingOverlay("show")
-		//$('#modal_board').LoadingOverlay("show")
-}
-function hideLoadingBG(option="modal"){
-		$('body').LoadingOverlay("hide")
-	//	$('.modal-body').LoadingOverlay("hide")
-		//$('#modal_board').LoadingOverlay("hide")
-}
-// 로딩중 표시 위해서
-// 로딩중 표시 위해서
-
-
 
 // modal bg와options를 숨긴다. background 클릭시 호출한다
 function hideModalBGandBoard(){
