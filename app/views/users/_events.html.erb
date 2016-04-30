@@ -15,9 +15,9 @@
 			<div style="width:100%; background:<%= colorG %>; margin-bottom: 5px; padding:5px;; border-radius: 5px;">
 		<% end %>
 			<% if event.user.use_photo %>
-				<img src="<%=event.user.photo%>" style="width:30px; height:30px; border-radius:5px;" />
+					<%= link_to image_tag(event.user.photo, class: "nav-event-img"), "/my_feeld?user_id=#{event.user.id}" %> 
 			<% else %>
-				<img src="<%=event.user.image_url%>" style="width:30px; height:30px; border-radius:5px;" />
+					<%= link_to image_tag(event.user.image_url, class: "nav-event-img"), "/my_feeld?user_id=#{event.user.id}" %> 
 			<% end %>
 			<%= link_to event.user.name, "/my_feeld?user_id=#{event.user.id}" %> 님이
 			<% if event.event_type == 0 %>

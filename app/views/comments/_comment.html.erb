@@ -4,9 +4,9 @@
 			<figure class="thumbnail">
 				<%= link_to "/my_feeld?user_id=#{comment.user.id}" do%>
 					<% if comment.user.use_photo %>
-						<img class="img-responsive" src="<%=comment.user.photo%>" />
+						<%= link_to image_tag(comment.user.photo, class: "img-responsive"), "/my_feeld?user_id=#{comment.user.id}" %> 
 					<% else %>
-						<img class="img-responsive" src="<%=comment.user.image_url%>" />
+						<%= link_to image_tag(comment.user.image_url, class: "img-responsive"), "/my_feeld?user_id=#{comment.user.id}" %> 
 					<% end %>
 				<% end %>
 			</figure>

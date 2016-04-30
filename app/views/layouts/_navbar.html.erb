@@ -80,21 +80,22 @@
 					<% colorG = "rgba(50,50,50,0.1)" %>
 					<% current_user.inverse_events.reverse[0..7].each do |event| %>
 					<% if event.check %>
-						<div style="width:235px; height:60px; background:<%= colorW %>; margin-bottom: 5px; padding:5px;; border-radius: 5px;">
+						<div style="position: relative; width:235px; height:60px; background:<%= colorW %>; margin-bottom: 5px; padding:5px;; border-radius: 5px;">
 					<% else %>	
-						<div style="width:235px; height:60px; background:<%= colorG %>; margin-bottom: 5px; padding:5px;; border-radius: 5px;">
+						<div style="position: relative; width:235px; height:60px; background:<%= colorG %>; margin-bottom: 5px; padding:5px;; border-radius: 5px;">
 					<% end %>
 							<% if event.user.use_photo %>
-								<img src="<%=event.user.photo%>" style="width:30px; height:30px; border-radius:5px;" />
+								<%= link_to image_tag(event.user.photo, class: "nav-event-img"), "/my_feeld?user_id=#{event.user.id}" %> 
 							<% else %>
-								<img src="<%=event.user.image_url%>" style="width:30px; height:30px; border-radius:5px;" />
-							<% end %>
+								<%= link_to image_tag(event.user.image_url, class: "nav-event-img"), "/my_feeld?user_id=#{event.user.id}" %> 
+							<% end %> 
+
 							<%= link_to event.user.name, "/my_feeld?user_id=#{event.user.id}" %> 님이
+
 							<% if event.event_type == 0 %>
 								 <strong>팔로우</strong>하셨습니다
 							<% elsif event.event_type == 1 %>
 								<%= link_to truncate(event.post.title, length:10), post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 <strong>댓글</strong>을 남기셨습니다
-				
 							<% elsif event.event_type == 2 %>
 								<%= link_to truncate(event.post.title, length:10), post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 <strong>Feel'd!</strong> 를 누르셨습니다
 							<% else %>

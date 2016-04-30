@@ -8,7 +8,7 @@ $('.tag_list').each(function(){
 	result = tmp_arr.join();
 	//	result += " <strong> ...+</strong> "
 	if ($(this).html().split(",").length > 3)
-		$(this).html(result + "<img src='/assets/dot.png' style='width:15px;'>");
+		$(this).html(result + '&nbsp; <i class="fa fa-ellipsis-h"></i>');
 })
 // tag_trunctate() end
 

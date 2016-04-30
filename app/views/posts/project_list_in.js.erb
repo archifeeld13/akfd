@@ -6,11 +6,13 @@ var result = ""
 $('.tag_list').each(function(){	
 	tmp_arr = $(this).html().split(",").slice(0, 3);
 	result = tmp_arr.join();
+	//	result += " <strong> ...+</strong> "
 	if ($(this).html().split(",").length > 3)
-		result += " <strong> ...+</strong> "
-	$(this).html(result);
+		$(this).html(result + '&nbsp; <i class="fa fa-ellipsis-h"></i>');
 })
 // tag_trunctate() end
+
+
 
 // 여기엔 재등록 할 필요 없다. 클릭 못함
 $('#posts-container').prepend("<%=j render 'projects/projects' %>");

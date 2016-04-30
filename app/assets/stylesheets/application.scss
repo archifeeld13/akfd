@@ -290,7 +290,11 @@ a.tag {
 	margin:7px;
 }
 
-
+.nav-event-img{
+	width: 30px;
+	height: 30px;
+	border-radius: 5px;
+}
 
 // 이걸 안해주고 jquery만으로 hide해버리면 로고 눌러서 새로고침했을 때, 
 // 보인다. (버그)
