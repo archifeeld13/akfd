@@ -75,8 +75,14 @@ class UsersController < ApplicationController
 
   def update
 		@user= User.find(params[:id])
-		params[:user][:password] = BCrypt::Engine.hash_secret(params[:user][:password], @user.salt)
-		params[:user][:password_confirmation] = BCrypt::Engine.hash_secret(params[:user][:password_confirmation], @user.salt)
+		if @user.user_type == 0 and params[:user][:password].length > 0 
+			params[:user][:password] = BCrypt::Engine.hash_secret(params[:user][:password], @user.salt)
+			params[:user][:password_confirmation] = BCrypt::Engine.hash_secret(params[:user][:password_confirmation], @user.salt)
+		elsif 
+			params[:user][:password] = @user.password 
+			params[:user][:password_confirmation] = @user.password 
+		end 
+
 		if @user.update(user_params)
 			redirect_to '/my_feeld' 
 		else 

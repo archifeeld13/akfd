@@ -46,9 +46,11 @@ class PostsController < ApplicationController
 			@user = User.find(params[:user_id])
 			@posts = Post.where(user_id: params[:user_id], is_secret: false).reverse
 		# 마이필드 버튼을 클릭해서 /my_feeld로 접속했을 때 실행되는 부분 
-		else 
+		elsif session[:user_id] 
 			@user = User.find(current_user.id)
 			@posts = Post.where(user_id: @user.id).reverse
+		else
+			redirect_to login_path
 		end
 	end
 

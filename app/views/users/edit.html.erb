@@ -46,11 +46,11 @@
 			<% end %>
 		</div>
 		<div class="form-inputs">
-			<%= f.label :password, '비밀번호'%>
 			<% if @user.user_type == 0 %>
-				<%= f.password_field :password, placeholder: "비밀번호 입력", required: true, class: "form-control" %>
+			<%= f.label :password, '비밀번호'%>
+				<%= f.password_field :password, placeholder: "비밀번호 입력", class: "form-control" %>
 				<div style="height:5px;"></div>
-				<%= f.password_field :password_confirmation, placeholder: "비밀번호 확인", required: true, class: "form-control" %>
+				<%= f.password_field :password_confirmation, placeholder: "비밀번호 확인",  class: "form-control" %>
 			<% end %>
 
 			<div style="height:15px;"></div>
