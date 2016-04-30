@@ -25,7 +25,10 @@ class SessionsController < ApplicationController
 
 	def create_normal
 		user = User.find_by(email: params[:session][:email])
-		if user 
+		if not user.my_auth
+			flash[:notice] = "입력한 이메일 주소로 발송된<br /> 인증 메일을 확인해 주세요"
+			redirect_to :back
+		elsif user 
 			pw = BCrypt::Engine.hash_secret(params[:session][:password], user.salt)
 			if user.password == pw 
 				session[:user_id] = user.id					

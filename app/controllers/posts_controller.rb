@@ -44,7 +44,7 @@ class PostsController < ApplicationController
 		# 형식으로 날라온다
 		if params[:user_id]
 			@user = User.find(params[:user_id])
-			@posts = Post.where(user_id: params[:user_id]).reverse
+			@posts = Post.where(user_id: params[:user_id], is_secret: false).reverse
 		# 마이필드 버튼을 클릭해서 /my_feeld로 접속했을 때 실행되는 부분 
 		else 
 			@user = User.find(current_user.id)
@@ -144,6 +144,7 @@ class PostsController < ApplicationController
 		
 		# link param이 있을 때는 링크업이다
 		if params[:link] 
+			# title, content , link_url 초기화
 			@post = Post.new(post_params)
 			@link = params[:link]			
 			@object = LinkThumbnailer.generate(params[:link])

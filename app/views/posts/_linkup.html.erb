@@ -1,24 +1,64 @@
 <div class="modal-header">
 	<div id="show-post-header">
-		<span class="modal-title">링크업 유아이 수정중</span>&nbsp;
+		<span class="modal-title">
+			<% if current_user.use_photo %>
+				<%= image_tag current_user.photo, class:"img-rounded"%>
+			<% else %>
+				<%= image_tag current_user.image_url, class:"img-rounded"%>
+			<% end %>
+			<%= current_user.name %>
+		</span>&nbsp;
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	</div>
 </div>
+<%# feeldup의 경우에만 예외로 body padding 0 ??%>
+<div class="modal-body" style="padding:0;">
+	<%= form_for @post, remote: true do |f| %>
+	<div style="float:left; width:70%; height:475px; background:#E9E9E9; padding:2%">
+		<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
 
-<div class="modal-body">
-<%= form_for @post, remote: true do |f| %>
-	<%= text_field_tag :link , nil, class: 'form-control', placeholder: "링크 입력" %>	
+		<div style="height:15px;"></div>
+		<%= text_field_tag :link , nil, class: 'form-control', placeholder: "http://..." %>	
+
+		<%= f.text_area :content, :id => 'input_post_content', :class => 'form-control', :rows => '13'%>
+
+		<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그 (태그는 쉼표로 구분해주세요! ex) 태그1, 태그2)" %>
+		<div style="height:10px;"></div>
+		<div class="has-error">
+			<div class="checkbox">
+				<label style="margin-left: 1%;">
+					<%= f.check_box :is_secret %>
+					<i class="fa fa-lock"></i>&nbsp;	비밀글로 작성합니다
+				</label>
+			</div>
+		</div>
+	</div>
+
+	<div align="center" style="float:left; width:30%; height:50px; background:white; padding:0.5%;">
+		<div style="color:#BBBBBB; font-size:1.1em;">마이필드<br> 프로젝트 관리</div>
+	</div>
+
+	<div style="float:left; width:30%; height:375px; background:#F2F2F2; padding:1%; overflow-y: auto">
+		<div id="project_radio_container">
+			<div>
+				<%= f.radio_button(:project_id, "") %>
+				&nbsp;선택 안함
+			</div>
+			<% current_user.projects.each do |project| %>
+				<%= render 'projects/project_radio', project: project, f: f %>
+			<% end %>
+		</div>
+	</div>
+
 	<%= f.hidden_field(:post_type, value:2) %>
-	<%= f.submit "필드업", class:'btn btn-success', id: 'linkupbtn' %>
-<% end %>
+	<%= f.button :submit, class: "hidden", id: "feeldup-submit" %>
+	<% end %>
 
-<script>
- $('#linkupbtn').click(function(){
-		$('body').LoadingOverlay("show")
-	})
-</script>
+
+	<%= render "projects/form" %>
+
+<!--</form>-->
 </div>
-
-
 <div class="modal-footer">
+		<%= link_to image_tag('feeldup_write.png'), "#", :onclick=>"$('#feeldup-submit').click();$('body').LoadingOverlay('show');", id: "feeldup-submit-link" %> 
 </div>

@@ -47,11 +47,22 @@ class WelcomeController < ApplicationController
 		end
 		render text: 'ok'
 =end
+
+=begin
 		u = User.find(56)
 		u.password = BCrypt::Engine.hash_secret("5252", u.salt)
 		u.password_confirmation = BCrypt::Engine.hash_secret("5252", u.salt)
 		u.save
 		render text: "success"
+=end
+	u = User.all
+	u.each do |user|
+		user.my_auth = true
+		user.save
+	end
+
+	render text: "성공"
+	
 	end
 
 	def state

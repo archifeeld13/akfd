@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160423190712) do
+ActiveRecord::Schema.define(version: 20160430071017) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "post_id",    limit: 4
@@ -61,6 +61,17 @@ ActiveRecord::Schema.define(version: 20160423190712) do
 
   add_index "likes", ["post_id"], name: "index_likes_on_post_id", using: :btree
   add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
+
+  create_table "links", force: :cascade do |t|
+    t.integer  "post_id",    limit: 4
+    t.string   "link_title", limit: 255
+    t.string   "image_url",  limit: 255
+    t.string   "link_url",   limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "links", ["post_id"], name: "index_links_on_post_id", using: :btree
 
   create_table "photos", force: :cascade do |t|
     t.integer  "post_id",    limit: 4
@@ -148,6 +159,7 @@ ActiveRecord::Schema.define(version: 20160423190712) do
   add_foreign_key "events", "posts"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "links", "posts"
   add_foreign_key "posts", "projects"
   add_foreign_key "posts", "users"
   add_foreign_key "projects", "users"

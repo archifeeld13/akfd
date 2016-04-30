@@ -7,6 +7,8 @@ class Post < ActiveRecord::Base
 
 	has_many :events, dependent: :destroy
 
+	has_one :link, dependent: :destroy
+
 	# Post has many photos
 	has_many :photos, :inverse_of => :post, :dependent => :destroy
 	# enable nested attributes for photos through album class
