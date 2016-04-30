@@ -1,16 +1,18 @@
 <div id="contents-controllbar">
 	<div id="cc-wrapper">
-		<span style="color:rgb(30,30,30; float:left;"><%= flash[:notice].html_safe %></span>
-		&nbsp;
-		<span style="float:right; margin-right: 5px; white-space: nowrap; ">
-			<a href="#" id="filter_only_text" style="margin-right:0.5%;  color:rgb(30,30,30)">타임라인</a>
-			<a href="#" id="filter_only_text" style="margin-right:0.5%;  color:rgb(30,30,30)">전체보기</a>
-			<a href="#" id="filter_only_text" style="margin-right:0.5%;  color:rgb(30,30,30)">관심사</a>
-			<a href="#" id="filter_only_text" style="margin-right:0.5%;  color:rgb(30,30,30)">학교</a>
-			<a href="#" id="filter_only_text" style="margin-right:0.5%;  color:rgb(30,30,30)">에디터</a>
+		<div class="row">
+		<div class="col-md-8" style="color:rgb(30,30,30);"><%= flash[:notice].html_safe %></div>
+		<%#<span style="float:right; margin-right: 5px; white-space: nowrap; ">%>
+		<div class="col-md-4 " style="white-space: nowrap; text-align:right">
+			<a href="#" style="margin-right:0.5%;  color:rgb(30,30,30)">타임라인</a>
+			<a href="#" style="margin-right:0.5%;  color:rgb(30,30,30)">전체보기</a>
+			<a href="#" style="margin-right:0.5%;  color:rgb(30,30,30)">관심사</a>
+			<a href="#" style="margin-right:0.5%;  color:rgb(30,30,30)">학교</a>
+			<a href="#" style="margin-right:0.5%;  color:rgb(30,30,30)">에디터</a>
 			<a href="/posts?type=img" id="filter_only_image" style="margin-right:0.5%;  color:rgb(30,30,30)">이미지</a>
 			<a href="/posts?type=txt" id="filter_only_text" style="margin-right:0.5%;  color:rgb(30,30,30)">텍스트</a>
-		</span>
+		</div>
+		</div>
 	</div>
 </div>
 
