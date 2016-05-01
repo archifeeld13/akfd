@@ -9,9 +9,11 @@ class User < ActiveRecord::Base
 	has_many :shares, dependent: :destroy
 	has_many :shared_posts, class_name: 'Post', through: :shares, source: :post
 
-	has_many :friendships
+
+	# 유저가 삭제되면 그 친구가 관계하고 있는 프렌쉽 자체도 삭제되어야함
+	has_many :friendships, dependent: :destroy
 	has_many :friends, :through => :friendships
-	has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+	has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id", dependent: :destroy
 	has_many :inverse_friends, :through => :inverse_friendships, :source => :user	
 
 	has_many :events, dependent: :destroy

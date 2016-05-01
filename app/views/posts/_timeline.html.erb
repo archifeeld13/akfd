@@ -1,0 +1,106 @@
+<% @posts.each do |post| %>
+<div class="timeline-posts-item">
+	<div class="posts-item-writer">
+		<% if post.user.use_photo %>
+			<%= image_tag(post.user.photo) %>
+		<% else %>
+			<%= image_tag(post.user.image_url) %>
+		<% end %>
+		<%= link_to post.user.name, "/my_feeld?user_id=#{post.user.id}"%>
+		&nbsp;
+		<% if current_user and (current_user.id == 1 or current_user.id == post.user.id)%>
+			<span style="font-size: 0.8em ">
+			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
+			</span>
+		<% end %>
+	</div>
+	<% if post.post_type == 1 %>
+		<% if post.photos.any? %>
+			<%= link_to image_tag(post.photos[0].image, class: 'posts-item-img'), post, remote:true %></td>
+		<% end %>
+	<% else %>
+		<%= link_to(post, remote: true) do %>
+			<div class="posts-item-text">
+				<%#= truncate(post.content, length: 100) %>
+				<%= post.content.html_safe%>
+			</div>
+		<% end %>
+	<% end %>
+
+	<div class="posts-item-info">
+		<div class="posts-item-counts" >
+			<div style="position:relative">
+				<%# ======================================================================  %>
+				<% if current_user %>
+					<% if Like.find_by(post_id: post.id, user_id: current_user.id) %>
+						<%= link_to image_tag('feeldrev.png'), post_likes_path(post.id), id: "feeld" ,method: :post, remote: true %>
+					<% else %>
+						<%= link_to image_tag('feeld.png'), post_likes_path(post.id), id: "feeld" ,method: :post, remote: true %>
+					<% end %>
+					<strong><a href="#" id="feeldcnt" data-toggle="popover" data-trigger="focus"  data-placement="right" >x <%=post.likes.count%></a></strong>
+					<div id="popover-content" class="hide">
+						<% if post.likes.any? %>
+						<% post.likes.each do |like| %>
+							<%= link_to like.user.name, "/my_feeld?user_id=#{like.user.id}", class: "like_user_list"%>
+						<% end %>
+						<% else %>
+							첫 Feel'd 를 눌러주세요;D
+						<% end %>
+					</div>
+					<script>
+						$(function(){
+						 // http://jsfiddle.net/raving/2thfaxeu/
+							$('#feeldcnt').popover({
+								html: true,
+								content: function(){
+									return $('#popover-content').html()	
+								}
+							});
+							$('#feeldcnt').click(function(){
+								return false;	
+							})
+						});
+					</script>
+					&nbsp;
+					<% if current_user.id != post.user.id %>
+						<%= link_to image_tag('feeldin.png'),  post_shares_path(post.id), id: "feeldin", method: :post, remote: true %>
+						x <strong id="feeldincnt"><%=post.shares.count%></strong>
+					<% else %>
+						<%= link_to image_tag('edit.png'), edit_post_path(post.id), id:"edit", remote: true %>
+					<% end %>
+				<% end %>
+			<%# ======================================================================  %>
+
+			<span style="position:absolute; right:0;"><i class="fa fa-eye"></i> <%= post.view_count%></span>
+		</div>
+		
+		<hr style="margin: 10px 0">
+
+		<div class="posts-item-title" >
+			<%= link_to truncate(post.title, length: 20, separater: ' '), post, remote:true %>
+			<% if post.is_secret %>
+				<span class="text-danger">(<i class="fa fa-lock"></i>&nbsp;나만보기)</span>
+			<% end %>
+		</div>
+		<div style="height:20px;"></div>
+
+		<% if post.post_type == 1 %>
+			<div class="posts-item-image-content">
+				<%= post.content %>	
+			</div>
+		<% end %>
+		<div class="posts-item-hashtags">
+			<% if post.tag_list.size > 0 %>	
+				<div class='tag_list'><%= tag_icons(post.tag_list) %> </div>
+			<% end %>
+		</div>
+
+		<div style="height:20px;"></div>
+		<div>
+			<input type="text" class="form-control" style="background-color:rgba(104,104,104,0.3)"  placeholder="이 글에 대한 생각을 남겨주세요">
+		</div>
+		<div style="height:20px;"></div>
+		</div>
+	</div>
+</div>
+<% end %>

@@ -20,7 +20,7 @@
 <div style="height:50px"></div>
 
 <div id="posts-container">
-	<%= render @posts %>
+	<%= render 'timeline'%>
 </div>
 
 <style>
@@ -42,13 +42,12 @@
 </style>
 
 <center>
-	<%#= link_to "글 더보기", posts_path(page: 1), remote: true, id: "posts_adder"%>
 	<%# page = n 은 제이쿼리로 붙여줌 %>
-	<%= link_to posts_path, remote: true, id: "posts_adder" do%>
+	<%# link_to posts_path, remote: true, id: "posts_adder" do%>
 		<div id="posts_adder_container">
 			+
 		</div>
-	<% end %>
+	<%# end %>
 </center>
 
 <script >
@@ -60,10 +59,10 @@
 		//tag_truncate()
 		var result = ""
 		$('.tag_list').each(function(){	
-			tmp_arr = $(this).html().split(",").slice(0, 3);
+			tmp_arr = $(this).html().split(",").slice(0, 4);
 			result = tmp_arr.join();
 			//	result += " <strong> ...+</strong> "
-			if ($(this).html().split(",").length > 3)
+			if ($(this).html().split(",").length > 4)
 				$(this).html(result + '&nbsp; <i class="fa fa-ellipsis-h"></i>');
 		})
 		// tag_truncate end

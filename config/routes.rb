@@ -26,8 +26,7 @@ Rails.application.routes.draw do
 
 	resources :photos , only: [:destroy]
 
-	post '/posts2' => 'posts#create2'
-	patch '/update2/:id' => 'posts#update2', as: "update2"
+	get '/timeline' => 'posts#timeline'
 
 	# /posts를 앞에 붙이면 위에거랑 겹쳐서 문제가 되어 /my_feeld로 독립시켰다
 	get '/my_feeld' => 'posts#my_feeld'

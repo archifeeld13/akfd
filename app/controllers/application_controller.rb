@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 		end
 		def check_logined
 			if !session[:user_id] 
-				flash[:notice] = "로그인을 해주세요"
+				flash[:notice] = "로그인이 필요한 서비스입니다;D"
 				redirect_to login_path	
 			end
 		end

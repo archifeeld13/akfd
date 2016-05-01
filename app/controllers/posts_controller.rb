@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 	require 'json'
-	before_action :check_logined, only: [:message_box, :new, :create, :edit, :update, :destroy]
+	before_action :check_logined, only: [:timeline, :message_box, :new, :create, :edit, :update, :destroy]
 
   def index
 		if params[:tag]
@@ -27,9 +27,20 @@ class PostsController < ApplicationController
 			else
 				@posts = Post.where(is_secret: false).reverse[0..19]
 			end
-			flash[:notice] = "아키필드에 오신 것을 환영합니다! :D"
+			flash[:notice] = "아키필드에 오신 것을 환영합니다!&nbsp;:D"
 		end
   end
+
+	def timeline 
+		@posts = []
+		current_user.friendships.each do |f| 
+			f.friend.posts.each do |p|
+				@posts << p
+			end
+		end
+		@posts = @posts.reverse
+		flash[:notice] = "친구들의 필드업을 보여줍니다;D"
+	end
   
 
 =begin
@@ -46,6 +57,7 @@ class PostsController < ApplicationController
 			@user = User.find(params[:user_id])
 			@posts = Post.where(user_id: params[:user_id], is_secret: false).reverse
 		# 마이필드 버튼을 클릭해서 /my_feeld로 접속했을 때 실행되는 부분 
+		# login_check를 쓰지않고 직접 체크해야 하는 상황
 		elsif session[:user_id] 
 			@user = User.find(current_user.id)
 			@posts = Post.where(user_id: @user.id).reverse
