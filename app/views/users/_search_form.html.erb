@@ -4,10 +4,18 @@
 
 <div class="modal-body">
 	<%= form_for :search,  url: user_search_path, remote: true do |f| %>
-		<%= f.text_field :name, class: 'form-control', placeholder: "이름 혹은 닉네임 검색" %>	
+		<div class="input-group">
+			<%= f.text_field :name, class: 'form-control', placeholder: "이름 혹은 닉네임 검색" %>	
+			<span class="input-group-btn">
+				<a id="nav_search_submit" href='#'>
+					<button type="button" class="btn btn-default" style="background:#333333; border-color:#333333">
+							<span style="color:#CBFD34" class="fa fa-search" aria-hidden="true"></span>
+					</button>
+				</a>
+			</span>
+		</div>
 		<%= f.radio_button(:type, "name", checked: true) %>이름검색
 		<%= f.radio_button(:type, "nick") %>닉네임검색
-		<%= f.submit "검색", class:'btn btn-success' %>
 	<% end %>
 	<div id="userSearchResult">
 	</div>

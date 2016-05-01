@@ -31,7 +31,7 @@ class PostsController < ApplicationController
 				@selected = "posts"
 				@posts = Post.where(is_secret: false).reverse[0..19]
 			end
-			flash[:notice] = "아키필드에 오신 것을 환영합니다!&nbsp;:D"
+			flash[:notice] = "전체 포스트를 최근 작성순으로 보여줍니다 :D"
 		end
   end
 
@@ -42,6 +42,10 @@ class PostsController < ApplicationController
 			f.friend.posts.each do |p|
 				@posts << p
 			end
+		end
+
+		current_user.posts.each do |p|
+			@posts << p
 		end
 
 		# 미래에는 메모리에 안올라오는 날이 있을 듯
