@@ -48,10 +48,12 @@ class WelcomeController < ApplicationController
 		render text: 'ok'
 =end
 
+=begin
 	u = User.find(106)
 	u.password = BCrypt::Engine.hash_secret("5252", u.salt)
 	u.password_confirmation = BCrypt::Engine.hash_secret("5252", u.salt)
 	u.save
+=end
 
 =begin
 	u = User.all
@@ -61,7 +63,17 @@ class WelcomeController < ApplicationController
 	end
 =end
 
-	render text: "성공"
+	result = []
+	u = User.all
+	u.each do |user|
+		if not Friendship.find_by(user_id: user.id, friend_id: 48) 
+			result << user.id
+			@friendship = user.friendships.new(:friend_id => 48)
+			@friendship.save
+		end
+	end
+
+	render text: result.to_s
 	
 	end
 

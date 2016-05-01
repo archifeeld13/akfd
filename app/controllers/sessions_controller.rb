@@ -14,6 +14,10 @@ class SessionsController < ApplicationController
 			@user.user_type = 1
 			@user.save
 			session[:user_id] = @user.id
+			# 아키필드 계정 친구로 추가
+			@friendship = @user.friendships.find_or_create_by(:friend_id => 48)
+			@friendship.save
+			# ######
 			flash[:success] = "Welcome, #{@user.name}!"
 		rescue
 			flash[:warning] = "There was an error while trying to authenticate you..."
@@ -24,14 +28,18 @@ class SessionsController < ApplicationController
 
 
 	def create_normal
-		user = User.find_by(email: params[:session][:email])
-		if not user.my_auth
+		@user = User.find_by(email: params[:session][:email])
+		if not @user.my_auth
 			flash[:notice] = "입력한 이메일 주소로 발송된<br /> 인증 메일을 확인해 주세요"
 			redirect_to :back
-		elsif user 
-			pw = BCrypt::Engine.hash_secret(params[:session][:password], user.salt)
-			if user.password == pw 
-				session[:user_id] = user.id					
+		elsif @user 
+			pw = BCrypt::Engine.hash_secret(params[:session][:password], @user.salt)
+			if @user.password == pw 
+				session[:user_id] = @user.id					
+				# 아키필드 계정 친구로 추가
+				@friendship = @user.friendships.find_or_create_by(:friend_id => 48)
+				@friendship.save
+				# ######
 				redirect_to timeline_path 
 			else
 				flash[:notice] = "이메일 혹은 비밀번호가 잘못되었습니다"

@@ -99,7 +99,10 @@
 			<div style="clear:both"></div>
 
 			<div class="RFMPanel" >
-				<div class="RFMPanelTitle">추천 마이필드</div>
+				<div class="RFMPanelTitle">추천 마이필드&nbsp;
+					<%= link_to '/user_search', remote: true do%>
+						<span id="fav_tag" style="color:darkgray; font-size:0.7em;cursor:pointer">유저 검색</span></div>
+					<% end %>
 				<hr style="margin:5px 0">
 				<% User.all.shuffle[0,4].each do |user| %>
 					<div class="RFMPanelItem" >
@@ -112,11 +115,6 @@
 						<%= link_to image_tag('plusbtn.png', class: "reco_myfeeld_plustbtn"), friendships_path(:friend_id => user.id), :method => :post, data: { confirm: "팔로우 합니다" } %>
 					</div> 
 				<% end %>
-			</div>
-
-			<div class="RFMPanel">
-				<!--<a href="/users/search"><button id="userSearchBtn" class="btn btn-block btn-default">유저검색</button></a> -->
-				<%= link_to "유저검색", '/user_search', remote: true, id: 'userSearchBtn', class:'btn btn-block btn-default'%>
 			</div>
 
 		</div>
