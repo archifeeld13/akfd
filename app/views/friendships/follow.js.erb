@@ -2,8 +2,9 @@ $('#my_modal').modal({
 	keyboard: true,
 })
 
-$('.modal-content').html('<%=j render 'follow' %>')
+$('.modal-content').html('<div class="modal-body"><%=j render 'follow' %></div>')
 
 $('.modal-body').css('max-height', $(window).height()*0.75)
 
+$('.modal-body').perfectScrollbar(); 
 

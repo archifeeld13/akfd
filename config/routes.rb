@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 	resources :photos , only: [:destroy]
 
 	get '/timeline' => 'posts#timeline'
+	get '/college' => 'posts#college'
 
 	# 링크 인풋을 받기 위해서
 	post '/link_create' => 'posts#link_create'
