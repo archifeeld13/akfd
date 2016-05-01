@@ -35,12 +35,10 @@
 <% else %>
 
 	$('body').LoadingOverlay("hide")
-	$('<h1><%=@object.title%>"</h1>').appendTo($('.modal-body'))
-	<% if @object.images.any? %>
-		$('<img src="<%=@object.images.first.src.to_s%>"></img>').appendTo($('.modal-body'))
-	<% else %>
-		$('<h1>이미지를 가져올 수 없습니다;D</h1>').appendTo($('.modal-body'))
-	<% end %>
+
+	$('.modal-content').html('<%=j render 'show_post' %>')
+	$('.modal-body').css('max-height', $(window).height()*0.75)
+	$('.modal-body').perfectScrollbar(); 
 
 <% end %>
 

@@ -18,6 +18,19 @@
 		<% if post.photos.any? %>
 			<%= link_to image_tag(post.photos[0].image, class: 'posts-item-img'), post, remote:true %></td>
 		<% end %>
+	<% elsif post.post_type == 2 %>
+		<%# linkup type%>
+		<%= link_to(post, remote: true) do %>
+			<div class="posts-item-text">
+			<h5 class="text-success"><%= post.link.link_title %></h5>
+			<% if post.link.image_url %>
+				<%= image_tag(post.link.image_url, class: 'show-post-img') %>
+				<a  target="_blank" href="<%=post.link.link_url%>"><%= post.link.link_url %></a>
+			<% else %>
+				<h3>이미지를 가져올 수 없습니다;(</h3>
+			<% end %>
+			</div>
+		<% end %>
 	<% else %>
 		<%= link_to(post, remote: true) do %>
 			<div class="posts-item-text">

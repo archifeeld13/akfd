@@ -153,7 +153,7 @@ class PostsController < ApplicationController
 			modal_type = params[:type]
 			case modal_type	
 				when 'text' then format.js { render :file => "posts/textup.js.erb" }
-				when 'link' then format.js { render :file => "posts/linkup.js.erb" }
+				when 'link' then format.js { render :file => "posts/link_new.js.erb" }
 				when 'photo' then format.js { render :file => "posts/photoup.js.erb" }
 			end
 		end
@@ -163,39 +163,44 @@ class PostsController < ApplicationController
 		@post = Post.find(params[:id])	
 	end
 
+	def link_create
+		# linkinput을 했을 때 오는곳 (따로 컨트롤러 만들지 않았다)
+		@link = params[:link]
+		@object = LinkThumbnailer.generate(params[:link])
+		@post = Post.new
+	end
+
 	def create
 		# 
 		# post_type // 0:text, 1:img, 2:link
 		#
-		
-		# link param이 있을 때는 링크업이다
-		if params[:link] 
-			# title, content , link_url 초기화
-			@post = Post.new(post_params)
-			@link = params[:link]			
-			@object = LinkThumbnailer.generate(params[:link])
+		@post = Post.new(post_params)
+		@post.title = "제목 없음" if @post.title.length == 0
+		#@post.content= "내용 없음" if @post.content.length == 0
+		@post.user_id = current_user.id
+		@post.save
 
-		# 그 이외에는 텍스트업 혹은 포토업이다
-		else 
-			@post = Post.new(post_params)
-			#@post.title = "제목 없음" if @post.title.length == 0
-			#@post.content= "내용 없음" if @post.content.length == 0
-			@post.user_id = current_user.id
-			@post.save
-
-			# 이미지 타입일 경우엔 이미지 저장도 해준다
-			if @post.post_type == 1 
-				if params[:images]
-					params[:images].each do |image|
-						#image.original_filename 
-						@post.photos.create(image: image)
-					end
+		# 이미지 타입일 경우엔 이미지 저장도 해준다
+		if @post.post_type == 1 
+			if params[:images]
+				params[:images].each do |image|
+					#image.original_filename 
+					@post.photos.create(image: image)
 				end
 			end
-
-			# show 로 전환될 경우 필요
-			@comment = Comment.new 
 		end
+
+		if @post.post_type == 2
+			link = Link.new
+			link.link_url = params[:link_url]
+			link.link_title= params[:link_title]
+			link.image_url = params[:image_url]
+			link.post_id = @post.id
+			link.save
+		end
+
+		# show 로 전환될 경우 필요
+		@comment = Comment.new 
 
 	end
 

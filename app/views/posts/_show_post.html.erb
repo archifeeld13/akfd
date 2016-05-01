@@ -33,7 +33,15 @@
 		<%# 이미지 타입 글의 내용 %>
 		<div div style="font-size:1.3em; margin: 3%;"><%= @post.content.gsub(/\n/, '<br/>').html_safe %></div>
 
+	<% elsif @post.post_type == 2 %>
+		<h3 class="text-success"><%= @post.link.link_title %></h3>
+		<% if @post.link %>
+			<%= link_to image_tag(@post.link.image_url, class: 'show-post-img'),@post.link.link_url, target:"_blank"  %>
+		<% else %>
+			<h3>이미지를 가져올 수 없습니다;(</h3>
+		<% end %>
 	<% end %>
+
 	</div>
 	<%# 이미지 부분 %>
 	<%# 이미지 부분 %>
@@ -44,7 +52,11 @@
 
 		<%# 텍스트 타입 글의 내용 %>
 		<% if @post.post_type == 0 %>
-			<div ><%= @post.content.html_safe %></div>
+			<div><%= @post.content.html_safe %></div>
+		<% elsif @post.post_type == 2 %>
+			<a  target="_blank" href="<%=@post.link.link_url%>"><%= @post.link.link_url %></a>
+			<hr>
+			<div style="margin-top:10px;"><%= @post.content.html_safe %></div>
 		<% end %>
 		<br>
 

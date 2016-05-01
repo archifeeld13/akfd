@@ -1,0 +1,43 @@
+<style>
+	#input_post_content {
+		background-color: white !important;
+	}
+</style>
+<div class="modal-header">
+	<div id="show-post-header">
+		<span class="modal-title">
+			<% if current_user.use_photo %>
+				<%= image_tag current_user.photo, class:"img-rounded"%>
+			<% else %>
+				<%= image_tag current_user.image_url, class:"img-rounded"%>
+			<% end %>
+			<%= current_user.name %>
+		</span>&nbsp;
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+</div>
+<%# feeldup의 경우에만 예외로 body padding 0 ??%>
+<div class="modal-body" style="padding:5%;">
+	<%# 걍 placeholder 역할 %>
+	<% @link = Link.new %>
+	<%= form_for @link, url: {action: "link_create"}, remote: true do |f| %>
+		<div class="input-group">
+			<%= text_field_tag :link , nil, class: 'form-control', placeholder: "http://..." %>	
+			<span class="input-group-btn">
+				<a id="nav_search_submit" href='#'>
+					<button type="submit" class="btn btn-default" style="background:#333333; border-color:#333333">
+							<span style="color:#CBFD34" class="fa fa-plus" aria-hidden="true"></span>
+					</button>
+				</a>
+			</span>
+		</div>
+	</div>
+
+	<%= f.hidden_field(:post_type, value:2) %>
+	<% end %>
+<!--</form>-->
+</div>
+<div class="modal-footer">
+</div>

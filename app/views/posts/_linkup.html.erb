@@ -22,12 +22,23 @@
 	<div style="float:left; width:70%; height:475px; background:#E9E9E9; padding:2%">
 		<%= f.text_field :title, :id => 'input_post_title', :class => "form-control",  :placeholder => '이곳에 제목을 작성해 주세요' %>
 
-		<div style="height:15px;"></div>
-		<%= text_field_tag :link , nil, class: 'form-control', placeholder: "http://..." %>	
+		<div style="height:10px;"></div>
+		<%= text_field_tag "" , "#{@link}", class: 'form-control',  disabled: true %>	
+		<%= hidden_field_tag :link_url , "#{@link}"%>	
+		<%= text_field_tag "", "#{@object.title}", class: 'form-control',  disabled: true %>	
+		<%= hidden_field_tag :link_title, "#{@object.title}" %>	
+		<% if @object.images.any? %>
+			<img src="<%=@object.images.first.src.to_s%>" style="width:100%">
+			<%= hidden_field_tag :image_url, "#{@object.images.first.src.to_s}" %>	
+		<% else %>
+			<h2>얻어온 이미지가 없습니다</h2>
+			<%= hidden_field_tag :image_url, nil%>	
+		<% end %>
 
-		<div style="height:15px;"></div>
-		<%= f.text_area :content, :id => 'input_post_content', :class => 'form-control', :rows => '5'%>
+		<div style="height:10px;"></div>
+		<%= f.text_area :content, :id => 'input_post_content', :class => 'form-control', :rows => '5', placeholder: '링크에 대한 설명을 작성해 주세요'%>
 
+		<div style="height:10px;"></div>
 		<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그 (태그는 쉼표로 구분해주세요! ex) 태그1, 태그2)" %>
 		<div style="height:10px;"></div>
 		<div class="has-error">

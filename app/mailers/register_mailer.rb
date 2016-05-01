@@ -6,7 +6,7 @@ class RegisterMailer < ApplicationMailer
   #   en.register_mailer.sendmail_confirm.subject
   #
   def sendmail_confirm(auth_key, user)
-    @auth_link = 'http://archifeeld.net:3000/auth_user/' + auth_key
+    @auth_link = 'http://archifeeld.net/auth_user/' + auth_key
 		
     mail to: user.email,
 			subject: 'Archifeeld 회원가입 인증 메일'

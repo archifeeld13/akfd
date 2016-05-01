@@ -28,6 +28,9 @@ Rails.application.routes.draw do
 
 	get '/timeline' => 'posts#timeline'
 
+	# 링크 인풋을 받기 위해서
+	post '/link_create' => 'posts#link_create'
+
 	# /posts를 앞에 붙이면 위에거랑 겹쳐서 문제가 되어 /my_feeld로 독립시켰다
 	get '/my_feeld' => 'posts#my_feeld'
 	get '/my_feeld/:user_id' => 'posts#my_feeld'
