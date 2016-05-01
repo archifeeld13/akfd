@@ -40,7 +40,9 @@ class PostsController < ApplicationController
 		@posts = []
 		current_user.friendships.each do |f| 
 			f.friend.posts.each do |p|
-				@posts << p
+				if not p.is_secret 
+					@posts << p
+				end
 			end
 		end
 
