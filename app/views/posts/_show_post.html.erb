@@ -1,3 +1,8 @@
+<style>
+	#change-view{
+		float:right; color:darkgray;	
+	}
+</style>
 <%# 헤더 부분 %>
 <%# 헤더 부분 %>
 <div class="modal-header">
@@ -13,7 +18,10 @@
 <%# 헤더 부분 %>
 
 <div class="modal-body">
-	<div class='tag_list' style="font-size:0.7em; margin-top:2%;"><%= tag_icons(@post.tag_list) %> </div>
+	<div class='tag_list' style="font-size:0.8em; margin-top:2%;">
+		<%= tag_icons(@post.tag_list) %> 
+		<%= link_to "보기방식 변환", @post, id:"change-view" %>
+	</div>
 	<%# 이미지 부분 %>
 	<%# 이미지 부분 %>
 	<div id="show-post-imgs">
@@ -133,6 +141,8 @@
 		<% else %>
 			<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit", remote: true %>
 		<% end %>
+
+
 	<% end %>
 	</div>
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
