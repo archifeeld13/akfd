@@ -10,9 +10,11 @@ class PostsController < ApplicationController
 		elsif params[:type]
 		# 필터링
 			if params[:type] == "txt"
+				@selected = "txt"
 				post_type = 0
 				flash[:notice] = "<strong class='text-danger'>텍스트</strong> 필터링 결과 입니다."
 			elsif params[:type] == "img"
+				@selected = "img"
 				post_type = 1
 				flash[:notice] = "<strong class='text-danger'>이미지</strong> 필터링 결과 입니다."
 			else
@@ -22,9 +24,11 @@ class PostsController < ApplicationController
 		else
 		# 기본 메인 페이지
 			if params[:page]
+				# js???	
 				page = params[:page].to_i
 				@posts = Post.where(is_secret: false).reverse[(page * 20)..(page * 20) + 19]
 			else
+				@selected = "posts"
 				@posts = Post.where(is_secret: false).reverse[0..19]
 			end
 			flash[:notice] = "아키필드에 오신 것을 환영합니다!&nbsp;:D"
@@ -32,6 +36,7 @@ class PostsController < ApplicationController
   end
 
 	def timeline 
+		@selected = "timeline"
 		@posts = []
 		current_user.friendships.each do |f| 
 			f.friend.posts.each do |p|
