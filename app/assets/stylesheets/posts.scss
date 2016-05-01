@@ -196,7 +196,7 @@
 		object-fit: cover;
 	}
 	.posts-item-text{
-		height: 60%;
+		//height: 60%;
 		width: 100%;
 		margin: 0;
 		padding: 2%;
@@ -217,8 +217,7 @@
 			}
 		}
 		.posts-item-image-content{
-			height: 20%;	
-			overflow: hidden;
+			margin-bottom: 10px;
 		}
 
 		.posts-item-counts{

@@ -38,7 +38,10 @@ class PostsController < ApplicationController
 				@posts << p
 			end
 		end
-		@posts = @posts.reverse
+
+		# 미래에는 메모리에 안올라오는 날이 있을 듯
+		# 미래에는 메모리에 안올라오는 날이 있을 듯
+		@posts = @posts.sort_by{|p| p.created_at}.reverse
 		flash[:notice] = "친구들의 필드업을 보여줍니다;D"
 	end
   
