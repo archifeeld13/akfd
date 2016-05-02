@@ -63,6 +63,8 @@ class WelcomeController < ApplicationController
 	end
 =end
 
+=begin
+	# 친구 삭제
 	result = []
 	u = User.all
 	u.each do |user|
@@ -74,7 +76,14 @@ class WelcomeController < ApplicationController
 	end
 
 	render text: result.to_s
-	
+=end
+	results = []
+	User.all.each do |u|
+		if u.company == "아키필드 에디터" or u.company == "아키필드에디터"
+			results << u.id
+		end
+	end
+	render text: results.to_s	
 	end
 
 	def state

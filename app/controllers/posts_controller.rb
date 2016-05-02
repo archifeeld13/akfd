@@ -69,6 +69,19 @@ class PostsController < ApplicationController
 		render "index"	
 	end
 
+	def editor 
+		@selected = "editor"
+		elist = [69, 134, 137, 141, 146, 156, 161, 165] 
+		@posts = []
+		Post.all.reverse.each do |p|
+			if elist.include? p.user.id and not p.is_secret 
+				@posts << p	
+			end
+		end
+		flash[:notice] = "아키필드 에디터단의 필드업을 보여줍니다;D"
+		render "index"	
+	end
+
 =begin
 	my_feeld 에 속하는 기능들
 		- message_box

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
 	get '/timeline' => 'posts#timeline'
 	get '/college' => 'posts#college'
+	get '/editor' => 'posts#editor'
 
 	# 링크 인풋을 받기 위해서
 	post '/link_create' => 'posts#link_create'
