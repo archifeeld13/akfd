@@ -31,7 +31,7 @@ class PostsController < ApplicationController
 				@selected = "posts"
 				@posts = Post.where(is_secret: false).reverse[0..19]
 			end
-			flash[:notice] = "전체 포스트를 최근 작성순으로 보여줍니다 :D"
+			flash[:notice] = "전체 필드업을 최근 작성순으로 보여줍니다 :D"
 		end
   end
 
@@ -202,7 +202,7 @@ class PostsController < ApplicationController
 		# post_type // 0:text, 1:img, 2:link
 		#
 		@post = Post.new(post_params)
-		@post.title = "제목 없음" if @post.title.length == 0
+		#@post.title = "제목 없음" if @post.title.length == 0
 		#@post.content= "내용 없음" if @post.content.length == 0
 		@post.user_id = current_user.id
 		@post.save

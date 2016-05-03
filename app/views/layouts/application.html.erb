@@ -143,6 +143,11 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<script>
+	$('#my_modal').on('hidden.bs.modal', function (e) {
+		$('.modal-content').html("");
+	})
+</script>
 
 </body>
 </html>

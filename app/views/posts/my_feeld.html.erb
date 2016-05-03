@@ -82,7 +82,7 @@
 			<%= link_to raw('<div id="archive_mine">내 것만 보기</div>'), "/archive_mine?user_id=#{@user.id}", remote: true %>
 			<%= link_to raw('<div id="archive_share">필드인 목록</div>'), "/archive_share?user_id=#{@user.id}", remote: true %>
 		</div>	
-		<%= link_to raw('<div id="project_management">프로젝트 관리</div>'), "/project_management?user_id=#{@user.id}", remote: true %>
+		<%= link_to raw('<div id="project_management">필드바인더</div>'), "/project_management?user_id=#{@user.id}", remote: true %>
 	<% end %>
 </div>
 

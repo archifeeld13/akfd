@@ -40,6 +40,9 @@ class S3Uploader < CarrierWave::Uploader::Base
   version :thumb do
     process resize_to_fit: [200, 200]
   end
+	version :medium do
+    process resize_to_fit: [400, 400]
+  end
 
 	# 저장될 파일들의 확장자 설정
   # Add a white list of extensions which are allowed to be uploaded.

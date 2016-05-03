@@ -77,6 +77,7 @@ class WelcomeController < ApplicationController
 
 	render text: result.to_s
 =end
+=begin
 	results = []
 	User.all.each do |u|
 		if u.company == "아키필드 에디터" or u.company == "아키필드에디터"
@@ -84,6 +85,36 @@ class WelcomeController < ApplicationController
 		end
 	end
 	render text: results.to_s	
+=end
+=begin
+	# image reprocess
+	u = User.find(1)
+	u.photo.recreate_versions!
+	u.photo.cache_stored_file! 
+	u.photo.retrieve_from_cache!(u.photo.cache_name) 
+	u.save!
+	render text: "good"
+=end
+	# image reprocess
+	#p = Photo.find(628)
+=begin	
+	# 이미지 타입 교체 
+	Photo.all.each do |p|
+		if p.id > 445 and not (p.image.to_s.downcase.include? "gif")
+			p.image.recreate_versions!
+			p.image.cache_stored_file! 
+			p.image.retrieve_from_cache!(p.image.cache_name) 
+			p.save!
+		end
+	end
+	render text: "ok"
+=end
+		p = Photo.find(685)
+			p.image.recreate_versions!
+			p.image.cache_stored_file! 
+			p.image.retrieve_from_cache!(p.image.cache_name) 
+			p.save!
+			render text: "ok"
 	end
 
 	def state
