@@ -109,12 +109,17 @@ class WelcomeController < ApplicationController
 	end
 	render text: "ok"
 =end
+=begin	
 		p = Photo.find(685)
 			p.image.recreate_versions!
 			p.image.cache_stored_file! 
 			p.image.retrieve_from_cache!(p.image.cache_name) 
 			p.save!
 			render text: "ok"
+=end
+		u = User.find(375)
+		u.update(name: "김건전")
+		render text: u.name
 	end
 
 	def state
