@@ -9,7 +9,7 @@
 		&nbsp;
 		<% if current_user and (current_user.id == 1 or current_user.id == @post.user.id)%>
 			<span style="font-size: 0.8em ">
-			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
+			<%= link_to "*글 지우기", @post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
 			</span>
 		<% end %>
 	</div>
@@ -117,3 +117,13 @@
 		&nbsp;
 	</div>
 </div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77436255-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 	require 'digest/sha1'
 	def new
 		if current_user
-			redirect_to timeline_path
+			redirect_to posts_path
 		else 
 			render "sessions/new", :layout => 'front' 
 		end
@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
 		rescue
 			flash[:warning] = "There was an error while trying to authenticate you..."
 		end
-		redirect_to timeline_path 
+		redirect_to posts_path 
 		#render text: request.env['omniauth.auth'].to_json
 	end
 
@@ -40,7 +40,7 @@ class SessionsController < ApplicationController
 				@friendship = @user.friendships.find_or_create_by(:friend_id => 48)
 				@friendship.save
 				# ######
-				redirect_to timeline_path 
+				redirect_to posts_path 
 			else
 				flash[:notice] = "이메일 혹은 비밀번호가 잘못되었습니다"
 				redirect_to :back		

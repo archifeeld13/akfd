@@ -1,0 +1,18 @@
+<% if @posts %>
+	$('<%=j render 'timeline' %>').appendTo('#posts-container')
+<% else %>
+	alert('마지막 입니다')
+<% end %>
+
+// tag_trunctate()
+var result = ""
+$('.tag_list').each(function(){	
+	tmp_arr = $(this).html().split(",").slice(0, 3);
+	result = tmp_arr.join();
+	//	result += " <strong> ...+</strong> "
+	if ($(this).html().split(",").length > 4)
+		$(this).html(result + '&nbsp; <i class="fa fa-ellipsis-h"></i>');
+})
+// tag_trunctate() end
+
+$('body').LoadingOverlay("hide")
