@@ -1,2 +1,2 @@
 alert ("<%= flash[:notice] %>")
-$('#feeldincnt').html("<%=@post.shares.count%>")
+$('.feeldincnt<%=@post.id%>').html("<%=@post.shares.count%>")
