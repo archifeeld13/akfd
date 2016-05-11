@@ -17,9 +17,10 @@ class ApplicationController < ActionController::Base
 
 		# 인기 마이필드 
 		def set_fav_posts
-			@fav_posts = Post.all 
+			@fav_posts = Post.where("created_at > ?", 1.week.ago.to_date) 
 			@fav_posts = @fav_posts.to_a
-			@fav_posts.sort! {|x, y| y.likes.count <=> x.likes.count}
+			@fav_posts.sort! {|x, y| (y.likes.count * 5 + y.view_count) <=> (x.likes.count * 5 + x.view_count)}
+			#@fav_posts.sort! {|x, y| y.likes.count <=> x.likes.count }
 		end	
 
 		def set_fav_tags

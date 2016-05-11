@@ -58,7 +58,7 @@ class PostsController < ApplicationController
 
 	def college
 		@selected = "college"
-		clist = [117 ,119, 171, 228, 247, 253, 305]
+		clist = [117 ,119, 171, 228, 247, 253, 305, 782]
 		@posts = []
 		Post.all.reverse.each do |p|
 			if clist.include? p.user.id 

@@ -86,7 +86,11 @@
 				<div id="fav_feeldup_content">
 					<% @fav_posts[0,15].each do |post| %>
 						<div class="RFMPanelItem">
-							<%= link_to truncate(post.title, length:20, separater: ' '), post, remote:true, class: 'fav-posts' %></br>
+							<% if post.title.size > 0 %>
+								<%= link_to truncate(post.title, length:17, separater: ' '), post, remote:true, class: 'fav-posts' %></br>
+							<% else %>
+								<%= link_to truncate("제목 없음", length:17, separater: ' '), post, remote:true, class: 'fav-posts' %></br>
+							<% end %>
 						</div>
 					<% end %>
 				</div>

@@ -11,6 +11,9 @@
 		<span style="color: darkgray; font-size:.8em; white-space: nowrap">
 			by&nbsp; <%= @post.user.name %>
 		</span>
+		<span style="color:darkgray; font-size:.8em; white-space:nowrap">
+			 &nbsp; <%= @post.created_at.strftime("%Y년 %m월 %d일") %>
+		</span>
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	</div>
 </div>
