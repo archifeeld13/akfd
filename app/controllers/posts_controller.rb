@@ -51,7 +51,6 @@ class PostsController < ApplicationController
 		end
 
 		# 미래에는 메모리에 안올라오는 날이 있을 듯?
-		# 미래에는 메모리에 안올라오는 날이 있을 듯
 		@posts = @posts.sort_by{|p| p.created_at}.reverse
 		flash[:notice] = "친구들의 필드업을 보여줍니다;D"
 
@@ -60,7 +59,6 @@ class PostsController < ApplicationController
 			page = params[:page].to_i
 			@posts = @posts[(page * 20)..(page * 20) + 19]
 		else
-			@selected = "posts"
 			@posts = @posts[0..19]
 		end
 	end

@@ -120,7 +120,11 @@
 						<% else %>
 							<%= link_to image_tag(user.image_url, class: "reco_myfeeld_img"), "/my_feeld?user_id=#{user.id}" %> 
 						<% end %> 
-						<%= link_to user.name, "/my_feeld?user_id=#{user.id}"%>
+						<% if user.use_nick %>
+							<%= link_to truncate(user.nickname, length:15), "/my_feeld?user_id=#{user.id}"%>
+						<% else %>
+							<%= link_to truncate(user.name, length:15), "/my_feeld?user_id=#{user.id}"%>
+						<% end %>
 						<%= link_to image_tag('plusbtn.png', class: "reco_myfeeld_plustbtn"), friendships_path(:friend_id => user.id), :method => :post, data: { confirm: "팔로우 합니다" } %>
 					</div> 
 				<% end %>
