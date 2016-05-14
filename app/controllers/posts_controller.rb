@@ -50,15 +50,24 @@ class PostsController < ApplicationController
 			@posts << p
 		end
 
-		# 미래에는 메모리에 안올라오는 날이 있을 듯
+		# 미래에는 메모리에 안올라오는 날이 있을 듯?
 		# 미래에는 메모리에 안올라오는 날이 있을 듯
 		@posts = @posts.sort_by{|p| p.created_at}.reverse
 		flash[:notice] = "친구들의 필드업을 보여줍니다;D"
+
+		if params[:page]
+			# js	
+			page = params[:page].to_i
+			@posts = @posts[(page * 20)..(page * 20) + 19]
+		else
+			@selected = "posts"
+			@posts = @posts[0..19]
+		end
 	end
 
 	def college
 		@selected = "college"
-		clist = [117 ,119, 171, 228, 247, 253, 305, 782]
+		clist = [117 ,119, 171, 228, 247, 253, 305, 782, 850]
 		@posts = []
 		Post.all.reverse.each do |p|
 			if clist.include? p.user.id 
@@ -95,11 +104,13 @@ class PostsController < ApplicationController
 		if params[:user_id]
 			@user = User.find(params[:user_id])
 			@posts = Post.where(user_id: params[:user_id], is_secret: false).reverse
+			flash[:notice] = "#{@user.name}의 마이필드입니다 ;D"
 		# 마이필드 버튼을 클릭해서 /my_feeld로 접속했을 때 실행되는 부분 
 		# login_check를 쓰지않고 직접 체크해야 하는 상황
 		elsif session[:user_id] 
 			@user = User.find(current_user.id)
 			@posts = Post.where(user_id: @user.id).reverse
+			flash[:notice] = "나의 작품을 관리합니다;D"
 		else
 			redirect_to login_path
 		end
@@ -154,6 +165,7 @@ class PostsController < ApplicationController
 =end
 
 	def show
+		flash[:notice] = "아키필드에 오신걸 환영합니다 ;D"
 		# 혹시 events목록에 이 글이 있다면
 		# 해당 이벤트를 check true로 만든다
 		if current_user
