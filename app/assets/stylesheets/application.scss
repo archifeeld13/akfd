@@ -38,7 +38,8 @@
 	}
 }
 .modal-body{
-	overflow-y: auto
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 .modal-header{
 	padding:0;
@@ -238,6 +239,7 @@ a.tag {
 #right_fixed_menu{
 	position:fixed; 
 	width:250px;  right:25px;
+	z-index: 500; 
 
 	#fav_feeldup_content{
 		overflow: hidden;	
