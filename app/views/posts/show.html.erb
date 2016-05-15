@@ -18,30 +18,26 @@
 	<% if @post.post_type == 1 %>
 		<% if @post.photos.any? %>
 			<% @post.photos.each_with_index do |photo, idx| %>
-				<%= link_to image_tag(photo.image, class: 'posts-item-img'), @post, remote:true %></td>
+				<%= image_tag(photo.image, class: 'posts-item-img') %></td>
 				<center><div style='font-size:1.3em; margin: 1% 3%;'><%= photo.caption %></div></center>
 			<% end %>
 		<% end %>
 	<% elsif @post.post_type == 2 %>
 		<%# linkup type%>
-		<%= link_to(@post, remote: true) do %>
-			<div class="posts-item-text">
-			<h5 class="text-success"><%= @post.link.link_title %></h5>
-			<% if @post.link.image_url %>
-				<%= image_tag(@post.link.image_url, class: 'posts-item-img') %>
-				<a  target="_blank" href="<%=@post.link.link_url%>"><%= @post.link.link_url %></a>
-			<% else %>
-				<h3>이미지를 가져올 수 없습니다;(</h3>
-			<% end %>
-			</div>
+		<div class="posts-item-text">
+		<h5 class="text-success"><%= @post.link.link_title %></h5>
+		<% if @post.link.image_url %>
+			<%= image_tag(@post.link.image_url, class: 'posts-item-img') %>
+			<a  target="_blank" href="<%=@post.link.link_url%>"><%= @post.link.link_url %></a>
+		<% else %>
+			<h3>이미지를 가져올 수 없습니다;(</h3>
 		<% end %>
+		</div>
 	<% else %>
-		<%= link_to(@post, remote: true) do %>
-			<div class="posts-item-text">
-				<%#= truncate(@post.content, length: 100) %>
-				<%= @post.content.gsub(/\n/, '<br/>').html_safe%>
-			</div>
-		<% end %>
+		<div class="posts-item-text">
+			<%#= truncate(@post.content, length: 100) %>
+			<%= @post.content.gsub(/\n/, '<br/>').html_safe%>
+		</div>
 	<% end %>
 
 	<div class="posts-item-info">
@@ -94,7 +90,7 @@
 		<hr style="margin: 10px 0">
 
 		<div class="posts-item-title" >
-			<%= link_to truncate(@post.title, length: 40, separater: ' '), @post, remote:true %>
+			<%= truncate(@post.title, length: 40, separater: ' ') %>
 			<% if @post.is_secret %>
 				<span class="text-danger">(<i class="fa fa-lock"></i>&nbsp;나만보기)</span>
 			<% end %>
