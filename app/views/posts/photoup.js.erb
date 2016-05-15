@@ -1,9 +1,15 @@
+
 $('#my_modal').modal({
 	keyboard: true,
 })
 
-$('.modal-content').html('<%=j render 'photoup' %>')
+<% if current_user %>
+	$('.modal-content').html('<%=j render 'photoup' %>')
 
-$('.modal-body').css('max-height', $(window).height()*0.75)
+	$('.modal-body').css('max-height', $(window).height()*0.75)
 
-//$('#form_container_for_photoup').perfectScrollbar(); 
+	//$('#form_container_for_photoup').perfectScrollbar(); 
+
+<% else %>
+	$('.modal-content').html('<%=j render 'need_login' %>')
+<% end %>

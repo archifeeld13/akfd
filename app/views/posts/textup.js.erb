@@ -1,23 +1,26 @@
 $('#my_modal').modal('show')
 
-$('.modal-content').html('<%=j render 'textup' %>')
+<% if current_user %>
+	$('.modal-content').html('<%=j render 'textup' %>')
 
-$('.modal-body').css('max-height', $(window).height()*0.75)
+	$('.modal-body').css('max-height', $(window).height()*0.75)
 
-$('.modal-content').append('<script src="/javascripts/summernote-ko-KR.js"></script>')
+	$('.modal-content').append('<script src="/javascripts/summernote-ko-KR.js"></script>')
 
-$('#input_post_content').summernote({
-	height: 250,
-	minHeight: 250,
-	maxHeight: 250,
-	toolbar:[
-		['style', ['bold', 'underline', 'clear']],
-		['font', ['strikethrough']],
-    ['color', ['color']],
-		['para', ['ul', 'ol', 'paragraph']],
-    ['fontsize', ['fontsize']],
-	],
-	lang: 'ko-KR',
-	placeholder: '이곳에 글을 작성해 주세요' 
-});
-
+	$('#input_post_content').summernote({
+		height: 250,
+		minHeight: 250,
+		maxHeight: 250,
+		toolbar:[
+			['style', ['bold', 'underline', 'clear']],
+			['font', ['strikethrough']],
+			['color', ['color']],
+			['para', ['ul', 'ol', 'paragraph']],
+			['fontsize', ['fontsize']],
+		],
+		lang: 'ko-KR',
+		placeholder: '이곳에 글을 작성해 주세요' 
+	});
+<% else %>
+	$('.modal-content').html('<%=j render 'need_login' %>')
+<% end %>

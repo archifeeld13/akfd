@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 	require 'json'
-	before_action :check_logined, only: [:timeline, :message_box, :new, :create, :edit, :update, :destroy]
+	before_action :check_logined, only: [:timeline, :message_box, :create, :edit, :update, :destroy]
 
   def index
 		if params[:tag]
