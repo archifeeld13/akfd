@@ -39,7 +39,7 @@
 		<%= link_to(@post, remote: true) do %>
 			<div class="posts-item-text">
 				<%#= truncate(@post.content, length: 100) %>
-				<%= @post.content.html_safe%>
+				<%= @post.content.gsub(/\n/, '<br/>').html_safe%>
 			</div>
 		<% end %>
 	<% end %>
@@ -107,7 +107,7 @@
 
 		<% if @post.post_type == 1 %>
 			<div class="posts-item-image-content">
-				<%= @post.content %>	
+				<%= @post.content.gsub(/\n/, '<br/>').html_safe%>
 			</div>
 		<% end %>
 		<div class="posts-item-hashtags">
@@ -131,4 +131,10 @@
   ga('create', 'UA-77436255-1', 'auto');
   ga('send', 'pageview');
 
+</script>
+
+<script>
+	$('img').bind('contextmenu', function(e){
+			return false;
+	}); 
 </script>

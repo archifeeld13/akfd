@@ -65,7 +65,7 @@ class PostsController < ApplicationController
 
 	def college
 		@selected = "college"
-		clist = [117 ,119, 171, 228, 247, 253, 305, 782, 850]
+		clist = [117 ,119, 171, 228, 247, 253, 305, 782, 831, 850]
 		@posts = []
 		Post.all.reverse.each do |p|
 			if clist.include? p.user.id 
@@ -78,7 +78,7 @@ class PostsController < ApplicationController
 
 	def editor 
 		@selected = "editor"
-		elist = [69, 134, 137, 141, 146, 156, 161, 165] 
+		elist = [69, 134, 137, 140, 141, 146, 156, 161, 165] 
 		@posts = []
 		Post.all.reverse.each do |p|
 			if elist.include? p.user.id and not p.is_secret 
