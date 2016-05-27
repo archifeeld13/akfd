@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+	resources :backgrounds, only: [:create, :new]
+
+	
 	#root 'sessions#new'
 	root 'posts#index' 
 

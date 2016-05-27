@@ -1,0 +1,26 @@
+<h1>로긴창 배경 화면 변경</h1>
+<%= form_for(@background) do |f| %>
+	<div style="color:white; background:rgba(20,20,20, 0.2); margin-bottom: 2%;">
+		<% @background.errors.full_messages.each do |msg| %>
+			<div><%=msg %> </div>
+		<% end %>
+	</div>
+	<div class="form-inputs">
+		<%= f.label :author, '작가 소개'%>
+		<%= f.text_field :author, placeholder: "작가 소개", class: "form-control" %>
+
+		<div style="height:15px;"></div>
+		<%= f.label :photo, '배경 사진 업로드'%>
+		<%= f.file_field :photo, class: "form-control", as: :file %>
+	</div>
+<br>
+<br>
+	<div class="form-actions">
+		<%= f.submit :submit , class:"form-control btn-info" %>
+	</div>
+<% end %>
+
+
+<h1> 현재 배경 </h1>
+<%#= image_tag(Background.last.photo) %>
+<img src="<%= image_path(Background.last.photo) %>" style="width:35%" >

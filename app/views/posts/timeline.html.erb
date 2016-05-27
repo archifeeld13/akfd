@@ -12,17 +12,19 @@
 		margin: 1.4%; 
 	}
 </style>
-<div class="feeldup-options-box">
-	<%= link_to image_tag('t_textup.png', class: 'timeline_feeldup_option', data: {reverse: "#{image_path "t_textuprev.png"}"}), '/posts/new?type=text', remote: true %>
+<% if not browser.device.mobile? %>
+	<div class="feeldup-options-box">
+		<%= link_to image_tag('t_textup.png', class: 'timeline_feeldup_option', data: {reverse: "#{image_path "t_textuprev.png"}"}), '/posts/new?type=text', remote: true %>
 
-	<%= link_to image_tag('t_photoup.png', class: 'timeline_feeldup_option', data: {reverse: "#{image_path "t_photouprev.png"}"}), '/posts/new?type=photo', remote: true %>
+		<%= link_to image_tag('t_photoup.png', class: 'timeline_feeldup_option', data: {reverse: "#{image_path "t_photouprev.png"}"}), '/posts/new?type=photo', remote: true %>
 
-	<%= link_to image_tag('t_linkup.png', class: 'timeline_feeldup_option', data: {reverse: "#{image_path "t_linkuprev.png"}"}), '/posts/new?type=link', remote: true %>
-</div>
+		<%= link_to image_tag('t_linkup.png', class: 'timeline_feeldup_option', data: {reverse: "#{image_path "t_linkuprev.png"}"}), '/posts/new?type=link', remote: true %>
+	</div>
 
-<script>
-	imgIconHover('.timeline_feeldup_option')
-</script>
+	<script>
+		imgIconHover('.timeline_feeldup_option')
+	</script>
+<% end %>
 
 <div id="posts-container">
 	<%= render 'timeline'%>

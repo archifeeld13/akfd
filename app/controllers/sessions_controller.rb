@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
 		if current_user
 			redirect_to posts_path
 		else 
+			flash[:notice] = "아키필드에 오신걸 환영합니다 ;D"
 			render "sessions/new", :layout => 'front' 
 		end
 	end

@@ -28,7 +28,7 @@
 	body {
 		background-color: #fff;
 		color: white;
-		background: url('<%= image_path('loginbg.jpg')%>');
+		background: url('<%= image_path(Background.last.photo)%>');
 		background-size: 100%;
 	}
 	.bgalpha {
@@ -67,9 +67,11 @@
 			<%= yield %>
 		</div>
 	</center>
+	<% if not browser.device.mobile? %>
 	<div style="position:fixed; right:10px; bottom: 10px; color:white">
-		가천대 서범진 학생의 작품
+		<%= Background.last.author %>	
 	</div>
+	<% end %>
 </div>
 
 <script>
