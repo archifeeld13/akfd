@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
-	resources :backgrounds, only: [:create, :new]
 
 	
 	#root 'sessions#new'
 	root 'posts#index' 
+
+	resources :backgrounds, only: [:create, :new, :destroy]
 
 	resources :friendships, only: [:create, :destroy]
 	get 'friendships/:id/:type' => 'friendships#show'

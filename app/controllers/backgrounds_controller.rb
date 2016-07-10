@@ -6,17 +6,18 @@ class BackgroundsController < ApplicationController
   def create
 		@background = Background.new(back_params)
 		if @background.save
-			bgs = Background.all
-			bgs.each do |bg|
-				if bg.id < @background.id
-					bg.destroy
-				end
-			end
 			redirect_to login_path
 		else
-			redirect_to :back	
+			#redirect_to :back	
+			render text: "에러"
 		end
   end
+
+	def destroy
+		@bg= Background.find(params[:id])	
+		@bg.destroy
+		redirect_to :back 
+	end
 
 private
 	def back_params

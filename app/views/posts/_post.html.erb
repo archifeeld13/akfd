@@ -27,7 +27,7 @@
 	<% elsif post.post_type == 2 %>
 		<%# linkup type%>
 		<%= link_to(post, remote: true) do %>
-			<% if post.link.image_url %>
+			<% if post.link and post.link.image_url %>
 				<%= image_tag(post.link.image_url, class: 'posts-item-img') %>
 			<% else %>
 				<h3>이미지를 가져올 수 없습니다;(</h3>
