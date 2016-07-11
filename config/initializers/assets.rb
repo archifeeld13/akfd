@@ -19,5 +19,7 @@ Rails.application.config.assets.version = '1.0'
 # Include all JS files, also those in subdolfer or javascripts assets folder
 # includes for exmaple applicant.js. JS isn't the problem so the catch all works.
 Rails.application.config.assets.precompile += %w(*.js)
+Rails.application.config.assets.precompile += %w(*.min.js)
 # Replace %w( *.css *.js *.css.scss) with complex regexp avoiding SCSS partials compilation
 Rails.application.config.assets.precompile += [/^[^_]\w+\.(css|css.scss)$/]
+Rails.application.config.assets.precompile += [/^[^_]\w+\.min.(css|css.scss)$/]
