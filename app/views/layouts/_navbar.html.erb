@@ -1,3 +1,30 @@
+<style>
+	/* search box drop down */
+	#holder-search{
+		position: relative;
+	}
+	#dropdown-search{
+		position: absolute;
+		top: 40px;
+		border-radius: 5px;
+		border: 1px solid black;
+		background: white;
+		display: none;
+		z-index: 2000;
+	}
+</style>
+<script>
+	$(function(){
+		$('#nav_search_input').focus(function(){
+			$('#dropdown-search').css('width', $('#holder-search').width() ).fadeIn()
+		})
+
+		$('#nav_search_input').focusout(function(){
+			$('#dropdown-search').fadeOut()
+		})
+	})		
+</script>
+
 <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" style="padding: 2px">
 <div class="container-fluid">
 	<div class="navbar-header" >
@@ -11,8 +38,13 @@
 
 	<div class="collapse navbar-collapse" id="nav-collapse">	
 		<form class="navbar-form navbar-left" onsubmit="return false" role="search">
-			<div class="input-group">
-				<input id="nav_search_input" autocomplete="off"type="text" class="form-control" style="background-color:rgba(104,104,104,0.3)" placeholder="태그 검색" />
+			<div class="input-group" id="holder-search">
+				<input id="nav_search_input" autocomplete="off" type="text" class="form-control" style="background-color:rgba(104,104,104,0.3)" placeholder="태그 검색" />
+				<div id="dropdown-search">
+					<div>추천 태그 검색 준비중</div>
+					<div>추천 태그 검색 준비중</div>
+					<div>추천 태그 검색 준비중</div>
+				</div>
 				<span class="input-group-btn">
 					<a id="nav_search_submit" href='#'>
 						<button type="button" class="btn btn-default" style="background:#333333; border-color:#333333">
