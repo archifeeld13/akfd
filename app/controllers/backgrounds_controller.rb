@@ -1,4 +1,7 @@
 class BackgroundsController < ApplicationController
+	#http_basic_authenticate_with name: ENV['BG_ID'], password: ENV['BG_PW'], except: [:index, :show]
+	http_basic_authenticate_with name: ENV['BG_ID'], password: ENV['BG_PW']
+
   def new
 		@background = Background.new 		
   end
