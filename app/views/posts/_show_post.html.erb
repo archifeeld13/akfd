@@ -45,7 +45,7 @@
 		<div div style="font-size:1.3em; margin: 3%;"><%= @post.content.gsub(/\n/, '<br/>').html_safe %></div>
 
 	<% elsif @post.post_type == 2 %>
-		<h3 class="text-success"><%= @post.link.link_title %></h3>
+		<h5 class="text-success"><%= @post.link.link_title %></h3>
 		<% if @post.link %>
 			<%= link_to image_tag(@post.link.image_url, class: 'show-post-img'),@post.link.link_url, target:"_blank"  %>
 		<% else %>
@@ -64,7 +64,7 @@
 		<% if @post.post_type == 0 %>
 			<div><%= @post.content.html_safe %></div>
 		<% elsif @post.post_type == 2 %>
-			<a  target="_blank" href="<%=@post.link.link_url%>"><%= @post.link.link_url %></a>
+			출처: <a  target="_blank"  style="font-size:0.7em;" href="<%=@post.link.link_url%>"><%= @post.link.link_url %></a>
 			<hr>
 			<div style="margin-top:10px;"><%= @post.content.gsub(/\n/, '<br/>').html_safe %></div>
 		<% end %>

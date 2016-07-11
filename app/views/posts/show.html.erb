@@ -28,7 +28,7 @@
 		<h5 class="text-success"><%= @post.link.link_title %></h5>
 		<% if @post.link.image_url %>
 			<%= image_tag(@post.link.image_url, class: 'posts-item-img') %>
-			<a  target="_blank" href="<%=@post.link.link_url%>"><%= @post.link.link_url %></a>
+			출처: <a  target="_blank" style="font-size:0.8em;" href="<%=@post.link.link_url%>"><%= @post.link.link_url %></a>
 		<% else %>
 			<h3>이미지를 가져올 수 없습니다;(</h3>
 		<% end %>
@@ -90,7 +90,7 @@
 		<hr style="margin: 10px 0">
 
 		<div class="posts-item-title" >
-			<%= truncate(@post.title, length: 40, separater: ' ') %>
+			<%= @post.title %>
 			<% if @post.is_secret %>
 				<span class="text-danger">(<i class="fa fa-lock"></i>&nbsp;나만보기)</span>
 			<% end %>

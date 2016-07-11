@@ -48,11 +48,13 @@ class WelcomeController < ApplicationController
 		render text: 'ok'
 =end
 
+=begin
 	u = User.find(1159)
 	u.password = BCrypt::Engine.hash_secret("5252", u.salt)
 	u.password_confirmation = BCrypt::Engine.hash_secret("5252", u.salt)
 	u.save
 	render text:"good"
+=end
 
 =begin
 	u = User.all
@@ -122,6 +124,16 @@ class WelcomeController < ApplicationController
 		u.update(name: "김건전")
 		render text: u.name
 =end
+
+	tags = []
+	len = 0 
+	posts = Post.all
+	posts.each do |p|
+		tags.append(p.tag_list)
+		len += p.tag_list.length
+	end
+
+	render text: posts.length.to_s + "/" + len.to_s + " " + tags.to_s 
 	end
 
 	def state
