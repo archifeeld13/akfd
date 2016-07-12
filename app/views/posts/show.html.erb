@@ -15,6 +15,8 @@
 			</span>
 		<% end %>
 	</div>
+
+
 	<% if @post.post_type == 1 %>
 		<% if @post.photos.any? %>
 			<% @post.photos.each_with_index do |photo, idx| %>
@@ -22,17 +24,21 @@
 				<center><div style='font-size:1.3em; margin: 1% 3%;'><%= photo.caption %></div></center>
 			<% end %>
 		<% end %>
+
+
 	<% elsif @post.post_type == 2 %>
 		<%# linkup type%>
 		<div class="posts-item-text">
 		<h5 class="text-success"><%= @post.link.link_title %></h5>
-		<% if @post.link.image_url %>
-			<%= image_tag(@post.link.image_url, class: 'posts-item-img') %>
+		<% if @post.link and @post.link.image_url %>
+			<%= link_to image_tag(@post.link.image_url, class: 'show-post-img'),@post.link.link_url, target:"_blank"  %>
 			출처: <a  target="_blank" style="font-size:0.8em;" href="<%=@post.link.link_url%>"><%= @post.link.link_url %></a>
 		<% else %>
 			<h3>이미지를 가져올 수 없습니다;(</h3>
 		<% end %>
 		</div>
+
+
 	<% else %>
 		<div class="posts-item-text">
 			<%#= truncate(@post.content, length: 100) %>
@@ -79,7 +85,13 @@
 						<%= link_to image_tag('feeldin.png'),  post_shares_path(@post.id), class: "feeldin feeldin#{@post.id}", method: :post, remote: true %>
 						x <strong class="feeldincnt feeldincnt<%=@post.id%>"><%=@post.shares.count%></strong>
 					<% else %>
-						<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit", remote: true %>
+						<%# link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit", remote: true %>
+						<%= link_to image_tag('edit.png'), "#", id:"edit" %>
+						<script>
+							$(function(){
+								$('#edit').click(function(){alert('기능 변경중입니다')})	
+							})
+						</script>
 					<% end %>
 				<% end %>
 			<%# ======================================================================  %>
