@@ -126,14 +126,19 @@ class WelcomeController < ApplicationController
 =end
 
 	tags = []
-	len = 0 
+	#len = 0 
+	ret = ""
 	posts = Post.all
 	posts.each do |p|
 		tags.append(p.tag_list)
-		len += p.tag_list.length
+		if p.tag_list.length > 0
+			ret += p.tag_list.to_s + "<br>"
+		end
+		#len += p.tag_list.length
 	end
 
-	render text: posts.length.to_s + "/" + len.to_s + " " + tags.to_s 
+	#render text: posts.length.to_s + "/" + len.to_s + " " + tags.to_s 
+	render text: ret 
 	end
 
 	def state

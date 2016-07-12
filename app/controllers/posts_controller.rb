@@ -78,7 +78,7 @@ class PostsController < ApplicationController
 
 	def editor 
 		@selected = "editor"
-		elist = [69, 134, 137, 140, 141, 146, 156, 161, 165] 
+		elist = [69, 134, 137, 140, 141, 146, 156, 161, 165, 218] 
 		@posts = []
 		Post.all.reverse.each do |p|
 			if elist.include? p.user.id and not p.is_secret 
