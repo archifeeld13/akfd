@@ -113,7 +113,7 @@
 
 		<div style="height:10px;"></div>
 
-		<% if @post.post_type == 1 %>
+		<% if @post.post_type == 1 or @post.post_type == 2%>
 			<div class="posts-item-image-content">
 				<%= @post.content.gsub(/\n/, '<br/>').html_safe%>
 			</div>
