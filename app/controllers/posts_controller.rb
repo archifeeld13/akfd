@@ -144,7 +144,8 @@ class PostsController < ApplicationController
 
 	def project_management
 		# 내 페이지가 아닐 때, 현재 유저가 없거나 혹은 로긴하고 있는 유저의 페이지가 아닐 때
-		if params[:user_id] and (!current_user or (User.find(params[:user_id]).id != current_user.id))
+		if params[:user_id] 
+		#if params[:user_id] and (!current_user or (User.find(params[:user_id]).id != current_user.id))
 			@isMine = false
 			@projects = Project.where(user_id: User.find(params[:user_id]).id).reverse
 		# 내 페이지 일 때
