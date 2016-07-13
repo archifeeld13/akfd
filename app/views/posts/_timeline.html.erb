@@ -20,11 +20,13 @@
 	</div>
 	<% if post.post_type == 1 %>
 		<% if post.photos.any? %>
-			<%= link_to image_tag(post.photos[0].image, class: 'posts-item-img'), post, remote:true %></td>
+			<%#= link_to image_tag(post.photos[0].image, class: 'posts-item-img'), post, remote:true %></td>
+			<%= link_to image_tag(post.photos[0].image, class: 'posts-item-img'), post %></td>
 		<% end %>
 	<% elsif post.post_type == 2 %>
 		<%# linkup type%>
-		<%= link_to(post, remote: true) do %>
+		<%#= link_to(post, remote: true) do %>
+		<%= link_to(post ) do %>
 			<div class="posts-item-text">
 			<h5 class="text-success"><%= post.link.link_title %></h5>
 			<% if post.link.image_url %>
@@ -35,7 +37,8 @@
 			</div>
 		<% end %>
 	<% else %>
-		<%= link_to(post, remote: true) do %>
+		<%# link_to(post, remote: true) do %>
+		<%= link_to(post) do %>
 			<div class="posts-item-text">
 				<%#= truncate(post.content, length: 100) %>
 				<%= post.content.gsub(/\n/, '<br/>').html_safe %>	
