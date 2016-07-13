@@ -15,6 +15,7 @@
 		<div class="col-md-7" style="color:rgb(30,30,30);"><%= flash[:notice].html_safe %></div>
 		<%#<span style="float:right; margin-right: 5px; white-space: nowrap; ">%>
 		<div class="col-md-5 " style="white-space: nowrap; text-align:right">
+			
 			<% if @selected == "timeline"	%>
 				<a href="/timeline" class="selected" >타임라인</a>
 			<% else %>
@@ -25,12 +26,6 @@
 				<a href="/posts" class="selected" >전체보기</a>
 			<% else %>
 				<a href="/posts" class="non-selected">전체보기</a>
-			<% end %>
-
-			<% if @selected == "fav" %>
-				<a href="#" class="selected" onclick="alert('준비중인 기능입니다.')">관심사</a>
-			<% else %>
-				<a href="#" class="non-selected" onclick="alert('준비중인 기능입니다.')">관심사</a>
 			<% end %>
 
 			<% if @selected == "college" %>
@@ -45,11 +40,11 @@
 				<%#<a href="/editor" class="non-selected">에디터</a>%>
 			<%# end %>
 
-			<% if @selected == "img"	%>
-				<a href="/posts?type=img" id="filter_only_image" class="selected">이미지</a>
-			<% else %>
-				<a href="/posts?type=img" id="filter_only_image" class="non-selected">이미지</a>
-			<% end %>
+			<%# if @selected == "img"	%>
+			<%#	<a href="/posts?type=img" id="filter_only_image" class="selected">이미지</a> %>
+			<%# else %>
+			<%#	<a href="/posts?type=img" id="filter_only_image" class="non-selected">이미지</a> %>
+			<%# end %>
 
 			<% if @selected == "txt" %>
 				<a href="/posts?type=txt" id="filter_only_text" class="selected">텍스트</a>

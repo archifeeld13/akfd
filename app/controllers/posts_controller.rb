@@ -99,15 +99,18 @@ class PostsController < ApplicationController
 	def my_feeld
 		# 회원 이름을 클릭해서 들어오면 /my_feeld?user_id=유저아이디
 		# 형식으로 날라온다
-		if params[:user_id]
+		if params[:user_id] and (!current_user or (User.find(params[:user_id]).id != current_user.id))
+			@isMine = false
 			@user = User.find(params[:user_id])
-			@posts = Post.where(user_id: params[:user_id], is_secret: false).reverse
+			@projects = Project.where(user_id: User.find(params[:user_id]).id).reverse
 			flash[:notice] = "#{@user.name}의 마이필드입니다 ;D"
+		# 내 페이지 일 때
 		# 마이필드 버튼을 클릭해서 /my_feeld로 접속했을 때 실행되는 부분 
 		# login_check를 쓰지않고 직접 체크해야 하는 상황
 		elsif session[:user_id] 
+			@isMine = true 
 			@user = User.find(current_user.id)
-			@posts = Post.where(user_id: @user.id).reverse
+			@projects = Project.where(user_id: current_user.id).reverse
 			flash[:notice] = "나의 작품을 관리합니다;D"
 		else
 			redirect_to login_path
@@ -118,14 +121,14 @@ class PostsController < ApplicationController
 		# 나중에 메시지 보내는 용도로 쓸 것임
 	end
 
-
 	#
 	# archive_mine, archive_share, project_management-> ajax
 	# in my_feeld
 	# 
 	def archive_mine
+		# 다른 사람 페이지 볼 때, 비밀글 보이면 안돼
 		if params[:user_id]
-			@posts = Post.where(user_id: User.find(params[:user_id]).id).reverse
+			@posts = Post.where(user_id: User.find(params[:user_id]).id, is_secret: false).reverse
 		else
 			@posts = Post.where(user_id: current_user.id).reverse
 		end
@@ -140,9 +143,11 @@ class PostsController < ApplicationController
 	end
 
 	def project_management
+		# 내 페이지가 아닐 때, 현재 유저가 없거나 혹은 로긴하고 있는 유저의 페이지가 아닐 때
 		if params[:user_id] and (!current_user or (User.find(params[:user_id]).id != current_user.id))
 			@isMine = false
 			@projects = Project.where(user_id: User.find(params[:user_id]).id).reverse
+		# 내 페이지 일 때
 		else
 			@isMine = true 
 			@projects = Project.where(user_id: current_user.id).reverse
