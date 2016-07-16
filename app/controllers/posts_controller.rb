@@ -97,13 +97,13 @@ class PostsController < ApplicationController
 		- project_management
 =end
 	def my_feeld
+	"""
 		# 회원 이름을 클릭해서 들어오면 /my_feeld?user_id=유저아이디
 		# 형식으로 날라온다
 		if params[:user_id] and (!current_user or (User.find(params[:user_id]).id != current_user.id))
 			@isMine = false
 			@user = User.find(params[:user_id])
 			@projects = Project.where(user_id: User.find(params[:user_id]).id).reverse
-			flash[:notice] = "#{@user.name}의 마이필드입니다 ;D"
 		# 내 페이지 일 때
 		# 마이필드 버튼을 클릭해서 /my_feeld로 접속했을 때 실행되는 부분 
 		# login_check를 쓰지않고 직접 체크해야 하는 상황
@@ -111,9 +111,19 @@ class PostsController < ApplicationController
 			@isMine = true 
 			@user = User.find(current_user.id)
 			@projects = Project.where(user_id: current_user.id).reverse
-			flash[:notice] = "나의 작품을 관리합니다;D"
 		else
 			redirect_to login_path
+		end
+	"""
+		# 다른 사람 페이지 볼 때, 비밀글 보이면 안돼
+		if params[:user_id]
+			@user = User.find(params[:user_id])
+			@posts = Post.where(user_id: User.find(params[:user_id]).id, is_secret: false).reverse
+			flash[:notice] = "#{@user.name}의 마이필드입니다 ;D"
+		else
+			@user = User.find(current_user.id)
+			@posts = Post.where(user_id: current_user.id).reverse
+			flash[:notice] = "나의 작품을 관리합니다;D"
 		end
 	end
 
