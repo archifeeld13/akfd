@@ -8,12 +8,6 @@
 			<%= image_tag(@post.user.image_url) %>
 		<% end %>
 		<%= link_to @post.user.name, "/my_feeld?user_id=#{@post.user.id}"%>
-		&nbsp;
-		<% if current_user and (current_user.id == 1 or current_user.id == @post.user.id)%>
-			<span style="font-size: 0.8em ">
-			<%= link_to "*글 지우기", @post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
-			</span>
-		<% end %>
 	</div>
 
 
@@ -85,7 +79,14 @@
 						<%= link_to image_tag('feeldin.png'),  post_shares_path(@post.id), class: "feeldin feeldin#{@post.id}", method: :post, remote: true %>
 						x <strong class="feeldincnt feeldincnt<%=@post.id%>"><%=@post.shares.count%></strong>
 					<% else %>
-						<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit" %>
+						<% if @post.post_type == 2 %>
+							<%= link_to image_tag('edit.png'), "", id:"edit" %>
+							<script>
+								$('#edit').click(function(){alert('링크타입의 글 수정기능은 준비중입니다')})
+							</script>
+						<% else %>
+							<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit" %>
+						<% end %>
 					<% end %>
 				<% end %>
 			<%# ======================================================================  %>
