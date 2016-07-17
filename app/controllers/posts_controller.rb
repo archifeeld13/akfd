@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 	require 'json'
-	before_action :check_logined, only: [:timeline, :message_box, :create, :edit, :update, :destroy]
+	before_action :check_logined, only: [:new, :timeline, :message_box, :create, :edit, :update, :destroy]
 
   def index
 		if params[:tag]
@@ -207,12 +207,12 @@ class PostsController < ApplicationController
   def new
 		@post = Post.new
 		respond_to do |format|
-			format.html { render :action => "new" }
-			modal_type = params[:type]
-			case modal_type	
-				when 'text' then format.js { render :file => "posts/textup.js.erb" }
-				when 'link' then format.js { render :file => "posts/link_new.js.erb" }
-				when 'photo' then format.js { render :file => "posts/photoup.js.erb" }
+			if params[:type] == "link"
+				format.js { render :file => "posts/link_new.js.erb" }
+			else
+				# 링크업 페이지는 따로 만들거임
+				@isNew = true
+				format.html { render :action => "new" }
 			end
 		end
   end
@@ -233,12 +233,10 @@ class PostsController < ApplicationController
 		# post_type // 0:text, 1:img, 2:link
 		#
 		@post = Post.new(post_params)
-		#@post.title = "제목 없음" if @post.title.length == 0
-		#@post.content= "내용 없음" if @post.content.length == 0
 		@post.user_id = current_user.id
 		@post.save
 
-		# 이미지 타입일 경우엔 이미지 저장도 해준다
+		# 이미지 타입 : 이미지 저장
 		if @post.post_type == 1 
 			if params[:images]
 				params[:images].each do |image|
@@ -247,6 +245,7 @@ class PostsController < ApplicationController
 				end
 			end
 		end
+
 
 		if @post.post_type == 2
 			link = Link.new
@@ -260,17 +259,36 @@ class PostsController < ApplicationController
 		# show 로 전환될 경우 필요
 		@comment = Comment.new 
 
+		if @post.post_type == 1
+			# 이미지 타입의 경우 수정으로 리다이렉트
+			render "edit"
+		else 
+			redirect_to @post
+		end
 	end
 
 	def update
+		# 현재는 링크업 수정 안됨
 		@post = Post.find(params[:id])
-		if @post.post_type == 0
+		
+		# post_type이 실제로 1일 때만 해줘야지
+		# 0에서 1로 바뀌려는 찰나에 여기에 걸려버리면 안됌(강제로 바꿔놓은 1이 다시 0으로 바뀜)
+		if params[:post][:post_type] == "1" and @post.post_type == 1
+			# photo 타입이어도 사진이 삭제되면 텍스트타입으로
+			if @post.photos.length == 0
+				params[:post][:post_type] = "0"
+			end
+		end
+
+		if params[:post][:post_type] == "0"
 			@post.update(post_params)
 			# show 로 전환될 경우 필요
 			@comment = Comment.new 
+			redirect_to @post
 		else
 			# 1이면 중간 사진 업로드를 위한 요청이 아닌, 완전히 끝낸다는 표시
 			@isFinished = params[:finish]
+
 			# 캡션은 이미 저장된 이미지에 대해서만 달 수 있어!
 			# 캡션을 임시로 담고 있는 captions Hash 
 			captions = JSON.parse(params[:captions])	
@@ -280,23 +298,29 @@ class PostsController < ApplicationController
 					photo.update(caption: captions[photo.id.to_s])
 				end
 			end
+
 			# 그 이외의 수정 사항 반영
 			#if @post.update(params[:post].permit(:title, :content))
 			if @post.update(post_params)
+				# 추가적으로 넣은 이미지 저장하고
 				if params[:images]
 					params[:images].each do |image|
 						@post.photos.create(image: image)
 					end
 				end
+				# 완전 끝내는 거면
 				if @isFinished == "1"
 					# update.js 실행됨
 					# show 로 전환될 경우 필요
 					@comment = Comment.new 
+					redirect_to @post
 				else
-					render :edit 
+				# finish가 0이면 
+					render "edit"
 				end
 			else
-				render :edit
+			# 에러 있으면
+				render "edit"
 			end
 		end 
 	end

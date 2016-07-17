@@ -50,18 +50,22 @@
 
 	<div class="posts-item-info">
 		<div class="posts-item-title" >
-			<%= link_to truncate(post.title, length: 21, separater: ' '), post %>
+			<%= link_to post.title, post %>
+			<%#= link_to truncate(post.title, length: 21, separater: ' '), post %>
 			<%# link_to truncate(post.title, length: 20, separater: ' '), post, remote:true %>
 			<% if post.is_secret %>
 				<span class="text-danger">(<i class="fa fa-lock"></i>&nbsp;나만보기)</span>
 			<% end %>
 		</div>
 		<div style="height:20px;"></div>
+
+		<!--
 		<div class="posts-item-hashtags">
-			<% if post.tag_list.size > 0 %>	
-				<div class='tag_list'><%= tag_icons(post.tag_list) %> </div>
-			<% end %>
+			<%# if post.tag_list.size > 0 %>	
+				<div class='tag_list'><%#= tag_icons(post.tag_list) %> </div>
+			<%# end %>
 		</div>
+		-->
 		<div class="posts-item-counts" >
 			<div style="position:relative">
 				<span><i class="fa fa-heart"></i> <%= post.likes.count %></span> &nbsp;&nbsp;&nbsp;

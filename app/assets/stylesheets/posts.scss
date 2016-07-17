@@ -138,11 +138,10 @@
 		overflow: hidden;
 	}
 	.posts-item-info{
-		font-size:0.9em; padding:5%;
+		padding:5%;
 		padding-bottom: 0;
 		height: 30%;
 		.posts-item-title{
-			font-size:1.2em;
 			color: #444444;
 			font-weight:bold;
 			a{
@@ -151,7 +150,7 @@
 		}
 		.posts-item-counts{
 			color:gray; margin:2% 0;
-			position: absolute; bottom:0; font-size: 1.2em;
+			position: absolute; bottom:0; 
 			width: 90%;
 			span{
 				white-space: nowrap;

@@ -85,13 +85,7 @@
 						<%= link_to image_tag('feeldin.png'),  post_shares_path(@post.id), class: "feeldin feeldin#{@post.id}", method: :post, remote: true %>
 						x <strong class="feeldincnt feeldincnt<%=@post.id%>"><%=@post.shares.count%></strong>
 					<% else %>
-						<%# link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit", remote: true %>
-						<%= link_to image_tag('edit.png'), "#", id:"edit" %>
-						<script>
-							$(function(){
-								$('#edit').click(function(){alert('기능 변경중입니다')})	
-							})
-						</script>
+						<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit" %>
 					<% end %>
 				<% end %>
 			<%# ======================================================================  %>

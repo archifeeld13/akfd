@@ -1,33 +1,329 @@
-<%= form_for(@post) do |f| %>
-  <% if @post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+<script>
+// 각 이미지에 달리는 캡션은, 이미지의 제목을 키로해서 저장된다
+var captions = {};
 
-      <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+$(function(){
 
-  <div class="field">
-    <span style='color:red'>글쓴이:</span> 
-    <%= current_user.name %>
-  </div>
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
-  </div>
-  <div class="field">
-    <%= f.label :images %><br>
-    <%= f.file_field :images, multiple: true,  accept: 'image/png,image/gif,image/jpeg' %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	// 업로드 혹은 수정을 마친다는 표현
+	// 만약 사진을 업로드하게 되면 이부분 무시하고 섭밋 누름
+	$('#feeldup-submit-link').click(function(){
+		if ($('#input_post_title').val().length == 0 ){
+			alert('제목을 입력해 주세요;)') 	
+			return 
+		}
+		// 완전히 끝이라는 표시
+		$('#finish').val('1');
+		// ajax 글쓰기 요청 
+		$('#feeldup-submit').click();
+
+		captions = {};
+		$('#finish').val('0');
+	})
+	
+	$('.preview-img').click(function(){
+		// 해당 셀렉터의 결과가 null인지 판단하는 방법이 .length이다.
+		if ( $("#" + $(this).attr('id') + '-caption').length ){
+			// pass		
+		} else {
+			// 애초에 이미지에 data-caption으로 이미지태그에 넣어놓고 
+			// 여기서 캡션 만드는 과정에서 벨류 넣어야겠네!
+			// captions json에도 초기화해야돼
+			$("#" + $(this).attr('id') + "-container")
+					.css('position', 'relative')
+					.append('<input class="form-control" \
+							id="'+ $(this).attr('id') + '-caption" \
+							style="background:rgba(0,0,0,0.6); color:white; position:absolute; margin-left:10%; top:45%; left:0; width: 80%;" \
+							placeholder="캡션을 달아주세요 (200자 이하)">')	
+
+			// 만약 이미 캡션을 가지고 있으면
+			if ($(this).attr('data-caption') != null){
+				$('#' + $(this).attr('id') + '-caption').val($(this).attr('data-caption'))
+				captions[$(this).attr('id').split('-')[1]] = $(this).attr('data-caption')
+			}
+
+			// 입력 할 때마다 caption을 초기화 
+			$('#' + $(this).attr('id') + '-caption').keyup(function(){
+				captions[$(this).attr('id').split('-')[1]] = $('#' + $(this).attr('id')).val()
+			})
+
+		}
+	})
+	
+	// captions에 들어있는 JSON데이터를 string화해서 captions 히든태그에 value로 넣는다 
+	// 서버에서는 이걸 열어봐서 JSON파싱한 이후에 캡션의 업데이트 혹은 생성 여부를 판단한다.
+	$('#feeldup-submit').click(function(){
+		$('body').LoadingOverlay("show")
+		$('#captions').val(JSON.stringify(captions, null, 1))
+	})
+
+	// 사진 업로드시 일단 서버로 전송 
+	$('#images_').change(function(){
+		// post type 1번으로 고친 후에 보내기
+		$('#post_type').val(1)		
+		$('#feeldup-submit').click()
+	})
+
+})
+</script>
+<script>
+;(function($){    
+    //pass in just the context as a $(obj) or a settings JS object
+    $.fn.autogrow = function(opts) {
+        var that = $(this).css({overflow: 'hidden', resize: 'none'}) //prevent scrollies
+            , selector = that.selector
+            , defaults = {
+                context: $(document) //what to wire events to
+                , animate: true //if you want the size change to animate
+                , speed: 200 //speed of animation
+                , fixMinHeight: true //if you don't want the box to shrink below its initial size
+                , cloneClass: 'autogrowclone' //helper CSS class for clone if you need to add special rules
+                , onInitialize: false //resizes the textareas when the plugin is initialized
+            }
+        ;
+        opts = $.isPlainObject(opts) ? opts : {context: opts ? opts : $(document)};
+        opts = $.extend({}, defaults, opts);
+        that.each(function(i, elem){
+            var min, clone;
+            elem = $(elem);
+            //if the element is "invisible", we get an incorrect height value
+            //to get correct value, clone and append to the body. 
+            if (elem.is(':visible') || parseInt(elem.css('height'), 10) > 0) {
+                min = parseInt(elem.css('height'), 10) || elem.innerHeight();
+            } else {
+                clone = elem.clone()
+                    .addClass(opts.cloneClass)
+                    .val(elem.val())
+                    .css({
+                        position: 'absolute'
+                        , visibility: 'hidden'
+                        , display: 'block'
+                    })
+                ;
+                $('body').append(clone);
+                min = clone.innerHeight();
+                clone.remove();
+            }
+            if (opts.fixMinHeight) {
+                elem.data('autogrow-start-height', min); //set min height                                
+            }
+            elem.css('height', min);
+            
+            if (opts.onInitialize && elem.length) {
+                resize.call(elem[0]);
+            }
+        });
+        opts.context
+            .on('keyup paste', selector, resize)
+        ;
+    
+        function resize (e){
+            var box = $(this)
+                , oldHeight = box.innerHeight()
+                , newHeight = this.scrollHeight
+                , minHeight = box.data('autogrow-start-height') || 0
+                , clone
+            ;
+            if (oldHeight < newHeight) { //user is typing
+                this.scrollTop = 0; //try to reduce the top of the content hiding for a second
+                opts.animate ? box.stop().animate({height: newHeight}, opts.speed) : box.innerHeight(newHeight);
+            } else if (!e || e.which == 8 || e.which == 46 || (e.ctrlKey && e.which == 88)) { //user is deleting, backspacing, or cutting
+                if (oldHeight > minHeight) { //shrink!
+                    //this cloning part is not particularly necessary. however, it helps with animation
+                    //since the only way to cleanly calculate where to shrink the box to is to incrementally
+                    //reduce the height of the box until the $.innerHeight() and the scrollHeight differ.
+                    //doing this on an exact clone to figure out the height first and then applying it to the
+                    //actual box makes it look cleaner to the user
+                    clone = box.clone()
+                        //add clone class for extra css rules
+                        .addClass(opts.cloneClass)
+                        //make "invisible", remove height restriction potentially imposed by existing CSS
+                        .css({position: 'absolute', zIndex:-10, height: ''}) 
+                        //populate with content for consistent measuring
+                        .val(box.val()) 
+                    ;
+                    box.after(clone); //append as close to the box as possible for best CSS matching for clone
+                    do { //reduce height until they don't match
+                        newHeight = clone[0].scrollHeight - 1;
+                        clone.innerHeight(newHeight);
+                    } while (newHeight === clone[0].scrollHeight);
+                    newHeight++; //adding one back eliminates a wiggle on deletion 
+                    clone.remove();
+                    box.focus(); // Fix issue with Chrome losing focus from the textarea.
+                    
+                    //if user selects all and deletes or holds down delete til beginning
+                    //user could get here and shrink whole box
+                    newHeight < minHeight && (newHeight = minHeight);
+                    oldHeight > newHeight && opts.animate ? box.stop().animate({height: newHeight}, opts.speed) : box.innerHeight(newHeight);
+                } else { //just set to the minHeight
+                    box.innerHeight(minHeight);
+                }
+            } 
+        }
+        return that;
+    }
+})(jQuery);
+$('textarea').autogrow({onInitialize: true});	
+</script>
+<style>
+	a{
+		color: black;	
+	}
+	#form_container_for_photoup textarea {
+		background-color: white !important;
+	}
+	.preview-img{
+		position: relative;
+		width: 100%;	
+	}
+
+	textarea{
+		overflow:hidden;
+		font-size: 1.5em !important;
+		width: 100%;
+	}
+
+	input[type="text"]{
+		font-size: 1.5em;
+		width: 100%;
+	}
+	
+	input:focus,
+	textarea:focus{
+		outline: none;
+	}
+
+	.makebinder{
+		width: 100%;	
+		height: 50px;
+	}
+
+</style>
+
+
+
+<!-- 에디터 시작  -->
+<!-- 에디터 시작  -->
+<!-- 에디터 시작  -->
+<!-- 에디터 시작  -->
+
+
+<%= form_for @post, html: {multipart: true}  do |f| %>
+<div id="form_container_for_photoup" style="float:left; width: 69%; margin-right:1%; "> 
+
+	<div style="background: white; border-radius: 5px; padding: 10px;">
+		<%# 제목 필드 %>
+		<%# 제목 필드 %>
+		<%# 제목 필드 %>
+		<%= f.text_field :title, :id => 'input_post_title', :placeholder => '제목을 입력해 주세요' %>
+		
+		<%# 사진 추가되는 필드 %>
+		<%# 사진 추가되는 필드 %>
+		<%# 사진 추가되는 필드 %>
+		<div style="margin-bottom: 10px"></div>
+		<% @post.photos.each do |photo| %>
+			<div style="margin-bottom: 10px"></div>
+			<div id="preview-<%=photo.id%>-container" style="position:relative">
+				<% if photo.caption %>
+					<%= image_tag photo.image, id: "preview-#{photo.id}", class: "preview-img", data: {caption: photo.caption} %>
+				<% else %>
+					<%= image_tag photo.image, id: "preview-#{photo.id}", class: "preview-img" %>
+				<% end %>
+				<%= link_to photo_path(photo.id), method: :delete, remote: true, data:{confirm:"사진을 삭제합니다"}  do%>
+				<div style="background:url(<%=image_path('xbtn.png')%>); background-size:20px; position:absolute; top:0; right:0; width: 20px; height:20px;">
+				</div>
+				<% end %>
+			</div>
+		<% end %>
+
+
+		<%# 내용 필드 %>
+		<%# 내용 필드 %>
+		<%# 내용 필드 %>
+		<div style="margin-bottom: 10px"></div>
+		<%= f.text_area :content,  placeholder: "내용을 입력해주세요", rows: '5'%>
+
+
+		<%# 비밀글 필드 %>
+		<%# 비밀글 필드 %>
+		<%# 비밀글 필드 %>
+		<div class="has-error">
+			<div class="checkbox">
+				<label style="margin-left: 1%;">
+					<%= f.check_box :is_secret %>
+					<i class="fa fa-lock"></i>&nbsp;	비밀글로 작성합니다
+				</label>
+			</div>
+		</div>
+	</div>
+
+	<%# 태그 필드 %>
+	<%# 태그 필드 %>
+	<%# 태그 필드 %>
+	<div style="margin-bottom: 15px"></div>
+	<div style="background: white; border-radius: 5px;">
+		<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그 *쉼표로 구분해주세요! 예) 도면, 모델" %>
+	</div>
+
+	<%# 이미지 업로드 버튼 %>
+	<%# 이미지 업로드 버튼 %>
+	<%# 이미지 업로드 버튼 %>
+	<div style="margin-bottom: 15px"></div>
+	<div style="background: white">
+		<label for="images_" class="btn btn-block" style="background: white; border: 1px dashed black; font-size:1.4em">이미지 업로드 하기</label>
+		<input type="file" name="images[]" id="images_" multiple="multiple" accept="image/png,image/gif,image/jpeg" class="hidden" >
+		<%= hidden_field_tag "captions" %>
+	</div>
+</div>
+
+<div style="position:relative; float:left; width:30%; height:425px; background:white; padding:1%; overflow-y: auto; overflow-x: hidden; font-size: 1.2em; border-radius: 5px 5px 5px 5px;">
+	<center><div style="color:#BBBBBB; font-size:1.1em;">바인더(프로젝트) 관리</div></center>
+	<%# 프로젝트 리스트 아이템 %>
+	<%# 프로젝트 리스트 아이템 %>
+	<%# 프로젝트 리스트 아이템 %>
+	<div id="project_radio_container">
+		<div>
+			<%= f.radio_button(:project_id, "") %>
+			&nbsp;선택 안함
+		</div>
+		<% current_user.projects.each do |project| %>
+			<%= render 'projects/project_radio', project: project, f: f %>
+		<% end %>
+	</div>
+
+	<%# 바인더 만들기 버튼 %>
+	<%# 바인더 만들기 버튼 %>
+	<%# 바인더 만들기 버튼 %>
+	<div style="position:absolute; bottom:0; width:90%; height:50px; margin-left: 1%; margin-bottom: 55px;">
+		<button class="btn btn-block" style="background: white; border: 1px solid black; font-size:1.2em">바인더 만들기</button>
+	</div>
+
+	<div style="position:absolute; bottom:0; width:90%; height:50px; margin-left: 1%; margin-bottom: 1%;">
+		<a href="#" id="feeldup-submit-link" class="btn btn-block" style="background: white; border: 1px solid black; font-size:1.2em"><strong>업로드 하기</strong></a> 
+	</div>
+</div>
+
+
+<%# 새로 생성하는 경우에만 이거 적용 %>
+<%# 이미지 타입이라면 val 1로 바꿔주고 있음%>
+<% if @isNew %>
+	<%= f.hidden_field(:post_type, value: 0, id: "post_type") %>
+<% else %> 
+	<%# edit일 경우엔 %>
+	<%= f.hidden_field(:post_type, value: @post.post_type, id: "post_type") %>
 <% end %>
+
+<%# 업로드 버튼 직접 클릭시 finish 1로 바뀜%>
+<%= hidden_field_tag "finish", 0 %>
+
+<%# 진짜 서브밋 버튼은 여기에 %>
+<%= f.button :submit, class: "hidden", id: "feeldup-submit" %>
+
+<% end %>
+
+<%# 모달에서 이거 보여주자 %>
+<%#= render "projects/form" %>
+
+
+<%# 이 큰 버튼은 모바일에서만 보이게 바꾸기 %>
+<%# <button id="feeldup-submit-link" class="btn btn-block" style="background: white; border: 1px solid black; font-size:1.2em">업로드</button> %>
+
