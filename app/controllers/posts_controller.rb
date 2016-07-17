@@ -199,6 +199,11 @@ class PostsController < ApplicationController
 		end
 	end
 
+	"""
+		업로드 기능 시작
+		업로드 기능 시작
+		업로드 기능 시작
+	"""
   def new
 		@post = Post.new
 		respond_to do |format|
@@ -295,6 +300,11 @@ class PostsController < ApplicationController
 			end
 		end 
 	end
+	"""
+		업로드 기능 끝 
+		업로드 기능 끝 
+		업로드 기능 끝 
+	"""
 
 	def destroy
 		@post = Post.find(params[:id])	

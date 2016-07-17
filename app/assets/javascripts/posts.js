@@ -3,9 +3,10 @@
 //# You can use CoffeeScript in this file: http://coffeescript.org/
 
 
+// 브라우저 크기 조정시 불리는 함수
 function postsColumnResize(){
 	//var pWidth = $('.posts-item').width() // 없을 땐 너비를 못찾아서절대값 넣음 
-	var pWidth = 290 
+	var pWidth = 260  // 290 -> 260
 	var rWidth = $('#right_fixed_menu').width()
 	var except_RFM = $(window).width() - (rWidth + 25) // 25 : RFM의 오른쪽 마진
 	if ($(window).width() > 700){

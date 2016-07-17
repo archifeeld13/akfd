@@ -3,7 +3,7 @@
 </div>
 
 <div class="modal-body">
-	<%= form_for :search,  url: user_search_path, remote: true do |f| %>
+	<%= form_for :search,  url: user_search_path, remote: true, html:{ autocomplete: "off"} do |f| %>
 		<div class="input-group">
 			<%= f.text_field :name, class: 'form-control', placeholder: "이름 혹은 닉네임 검색" %>	
 			<span class="input-group-btn">
