@@ -1,6 +1,10 @@
 class ProjectsController < ApplicationController
 	before_action :project_params, only: [:create]
 
+
+	def new
+	end
+
 	# ajax로 프로젝트만 생성하는 곳이다
   def create
 		@type = params[:project][:type]

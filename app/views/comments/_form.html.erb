@@ -1,5 +1,16 @@
+<style>
+	textarea{
+		overflow:hidden;
+		width: 100%;
+	}
+	
+	input:focus,
+	textarea:focus{
+		outline: none;
+	}
+</style>
 <div id="comments_form" class="col-md-12">
-	<%= simple_form_for([@post, @comment], remote: true) do |f| %>
+	<%= form_for([@post, @comment], remote: true) do |f| %>
 	<section class="comment-list">
 	<article class="row">
 			<div class="col-md-2 col-sm-3 col-xs-3">
@@ -17,7 +28,7 @@
 						<div class="comment-post">
 							<%#<div class="form-inputs col-md-10 col-sm-10 col-xs-10">%>
 							<div class="form-inputs col-md-12 col-sm-12 col-xs-12">
-								<%= f.input :body, label: false, placeholder: "댓글을 입력하세요", input_html: {rows: "3"}%>
+								<%= f.text_area :body,  placeholder: "댓글을 입력하세요", rows: "3"%>
 							</div>
 							<style>
 								#comment-write{
@@ -41,3 +52,8 @@
 	</section>
 	<% end %>
 </div>
+
+<%= javascript_include_tag "autogrow.js" %>
+<script>
+$('textarea').autogrow({onInitialize: true});	
+</script>

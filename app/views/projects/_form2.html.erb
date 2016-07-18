@@ -7,7 +7,7 @@
 <% @project = Project.new %>
 <%# 임시로 project/_project.html.erb에서 사용한 폼을 가져왔다 %>
 <div id="project_manage_board"class="posts-item" style="background:#f9f9f9">
-	<div class="posts-item-writer" style="font-size: 2em; color: darkgray">
+	<div class="posts-item-writer" style="font-size: 1.5em; color: darkgray; padding-top: 5px;">
 		<center>프로젝트 관리</center>
 	</div>
 	<div class="posts-item-text" align="center">
@@ -17,13 +17,12 @@
 		<%= simple_form_for([current_user, @project], remote: true) do |f| %>
 		<div style="">
 			<div style="">
-				<%= f.text_field :name, :class => "form-control",  :placeholder => '프로젝트명 입력' %>
+				<%= f.text_field :name, :class => "form-control",  :placeholder => '바인더 이름 입력' %>
 				<%= f.hidden_field :type, value: "my_feeld" %>
 			</div>
 			<div style="height:5px"></div>
-			<%= f.submit "프로젝트 추가", class: 'btn-default btn-block project_add_btn'%>
+			<%= f.submit "바인더 추가", class: 'btn-default btn-block project_add_btn'%>
 		</div>
 		<% end %>
 	</div>
 </div>
-

@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-
-	
 	#root 'sessions#new'
 	root 'posts#index' 
 
@@ -11,7 +9,7 @@ Rails.application.routes.draw do
 	get 'friendships/:id/:type' => 'friendships#show'
 
 	resources :users do
-		resources :projects, only: [:create, :destroy]	
+		resources :projects, only: [:create, :new, :destroy]	
 	end
 	get '/events' => "users#events"
 

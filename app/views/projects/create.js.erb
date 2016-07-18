@@ -1,8 +1,10 @@
 <% if @project.errors.size == 0 %>
 	<% if @type == "feeld_up" %>
+		// 필드업에서
 		$('<%=j render 'project_radio_ajax', project:@project%>').appendTo($("#project_radio_container")).hide().fadeIn('slow')
 		$('#project_form form')[0].reset();
 	<% else %>
+		// 마이필드에서
 		$('#project_manage_board').after("<%=j render 'projects/project'%>").hide().fadeIn();
 	<% end %>
 <% else %>
