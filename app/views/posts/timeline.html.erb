@@ -8,15 +8,13 @@
 	}
 	
 	.feeldup-options-box img{
-		width: 30%;
+		width: 46.5%;
 		margin: 1.4%; 
 	}
 </style>
 <% if not browser.device.mobile? %>
 	<div class="feeldup-options-box">
-		<%= link_to image_tag('t_textup.png', class: 'timeline_feeldup_option', data: {reverse: "#{image_path "t_textuprev.png"}"}), '/posts/new?type=text', remote: true %>
-
-		<%= link_to image_tag('t_photoup.png', class: 'timeline_feeldup_option', data: {reverse: "#{image_path "t_photouprev.png"}"}), '/posts/new?type=photo', remote: true %>
+		<%= link_to image_tag('t_upload.png', class: 'timeline_feeldup_option', data: {reverse: "#{image_path "t_uploadrev.png"}"}), '/posts/new' %>
 
 		<%= link_to image_tag('t_linkup.png', class: 'timeline_feeldup_option', data: {reverse: "#{image_path "t_linkuprev.png"}"}), '/posts/new?type=link', remote: true %>
 	</div>
