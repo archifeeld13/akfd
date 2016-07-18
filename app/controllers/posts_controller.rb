@@ -193,6 +193,25 @@ class PostsController < ApplicationController
 		@post.view_count += 1
 		@post.save
 		@comment = Comment.new # 이거 안적으니까 지난 시간 구하는거에서 에러나
+
+		# 비슷한 글 추천
+		@posts = []
+		@post.tag_list.to_a.each do |tag|
+			@posts << Post.tagged_with(tag).shuffle[0..2]
+		end
+		# 쭉 펴기
+		@posts = @posts.flatten.delete_if{|p| p.id == @post.id}.shuffle[0..4]
+
+		@isReco = false 
+		if @posts.length > 0
+			@isReco = true
+		else
+			@posts = Post.all.reverse[0..30].shuffle[0..4]
+		end
+
+		# secret false 제외 시켜야됌
+		#@posts = Post.where(post_type: post_type, is_secret: false).reverse
+
 		respond_to do |format|
 			format.html { render :action => "show" }
 			format.js { render :file => "posts/show.js.erb" }
