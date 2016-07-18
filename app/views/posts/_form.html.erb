@@ -231,7 +231,9 @@ $(function(){
 <!-- edit-controller 위치 업데이트 스크립트 -->
 <script>
 	$(function(){
-		updatePositionEditContainer();	
+		// 바로 호출하면 이전에 content container사이즈를 조정하는 시간? 때문에 left margin값이 -가 나와서 오류가있었다
+		// 일단 임시 처방으로 5ms의 딜레이를 주었다
+		setTimeout(updatePositionEditContainer, 5);
 
 		$( window ).resize(function() {
 			updatePositionEditContainer();
