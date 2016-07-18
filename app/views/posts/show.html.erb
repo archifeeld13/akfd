@@ -1,3 +1,10 @@
+<style>
+	.post-icon{
+		width:18px;	
+		margin-top: -5px;
+	}
+</style>
+
 <%= render 'contents_controllbar'%>
 
 <div class="timeline-posts-item">
@@ -91,7 +98,8 @@
 				<% end %>
 			<%# ======================================================================  %>
 
-			<span style="position:absolute; right:0;"><i class="fa fa-eye"></i> <%= @post.view_count%></span>
+			<span style="position:absolute; right:0;"><%=image_tag "eye.png", class: "post-icon"%> <%= @post.view_count%></span>
+
 		</div>
 		
 		<hr style="margin: 15px 0">

@@ -1,3 +1,10 @@
+<style>
+	.post-icon{
+		width:18px;	
+		margin-top: -5px;
+	}
+</style>
+
 <% @posts.each do |post| %>
 <div class="timeline-posts-item">
 	<div class="posts-item-writer">
@@ -88,7 +95,7 @@
 				<% end %>
 			<%# ======================================================================  %>
 
-			<span style="position:absolute; right:0;"><i class="fa fa-eye"></i> <%= post.view_count%></span>
+			<span style="position:absolute; right:0;"><%=image_tag "eye.png", class: "post-icon"%> <%= post.view_count%></span>
 		</div>
 		
 		<hr style="margin: 10px 0">
@@ -96,7 +103,7 @@
 		<div class="posts-item-title" >
 			<%= link_to truncate(post.title, length: 40, separater: ' '), post, remote:true %>
 			<% if post.is_secret %>
-				<span class="text-danger">(<i class="fa fa-lock"></i>&nbsp;나만보기)</span>
+				<span class="text-danger">(<i class="fa fa-lock"></i>&nbsp;비공개)</span>
 			<% end %>
 		</div>
 

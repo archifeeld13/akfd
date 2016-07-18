@@ -60,7 +60,7 @@
 			<%#= link_to truncate(post.title, length: 21, separater: ' '), post %>
 			<%# link_to truncate(post.title, length: 20, separater: ' '), post, remote:true %>
 			<% if post.is_secret %>
-				<span class="text-danger">(<i class="fa fa-lock"></i>&nbsp;나만보기)</span>
+				<span class="text-danger">(<i class="fa fa-lock"></i>&nbsp;비공개)</span>
 			<% end %>
 		</div>
 		<div style="height:20px;"></div>
