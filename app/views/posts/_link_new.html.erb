@@ -22,7 +22,7 @@
 <div class="modal-body" style="padding:5%;">
 	<%# 걍 placeholder 역할 %>
 	<% @link = Link.new %>
-	<%= form_for @link, url: {action: "link_create"}, remote: true do |f| %>
+	<%= form_for @link, url: {action: "link_create"} do |f| %>
 		<div class="input-group">
 			<%= text_field_tag :link , nil, class: 'form-control', placeholder: "http://... 링크를 입력하세요;D" %>	
 			<span class="input-group-btn">

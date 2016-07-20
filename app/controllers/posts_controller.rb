@@ -229,7 +229,6 @@ class PostsController < ApplicationController
 			if params[:type] == "link"
 				format.js { render :file => "posts/link_new.js.erb" }
 			else
-				# 링크업 페이지는 따로 만들거임
 				@isNew = true
 				format.html { render :action => "new" }
 			end
