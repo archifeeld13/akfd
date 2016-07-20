@@ -18,6 +18,7 @@
 			</span>
 		<% end %>
 	</div>
+
 	<% if post.post_type == 1 %>
 		<% if post.photos.any? %>
 			<%#= link_to image_tag(post.photos[0].image, class: 'posts-item-img'), post, remote:true %></td>
@@ -45,82 +46,93 @@
 			</div>
 		<% end %>
 	<% end %>
-
+	<!-- posts-item-info -->
+	<!-- posts-item-info -->
+	<!-- posts-item-info -->
 	<div class="posts-item-info">
+		<!-- posts-item-counts -->
+		<!-- posts-item-counts -->
+		<!-- posts-item-counts -->
 		<div class="posts-item-counts" >
-			<div style="position:relative">
-				<%# ======================================================================  %>
-				<% if current_user %>
-					<% if Like.find_by(post_id: post.id, user_id: current_user.id) %>
-						<%= link_to image_tag('feeldrev.png'), post_likes_path(post.id), class: "feeld feeld#{post.id}" ,method: :post, remote: true %>
-					<% else %>
-						<%= link_to image_tag('feeld.png'), post_likes_path(post.id), class: "feeld feeld#{post.id}" ,method: :post, remote: true %>
-					<% end %>
-					<strong><a href="#" class="feeldcnt feeldcnt<%=post.id%>" data-toggle="popover" data-trigger="focus"  data-placement="right" >x <%=post.likes.count%></a></strong>
-					<div id="popover-content" class="hide">
-						<% if post.likes.any? %>
-						<% post.likes.each do |like| %>
-							<%= link_to like.user.name, "/my_feeld?user_id=#{like.user.id}", class: "like_user_list"%>
-						<% end %>
-						<% else %>
-							첫 Feel'd 를 눌러주세요;D
-						<% end %>
-					</div>
-					<script>
-						$(function(){
-						 // http://jsfiddle.net/raving/2thfaxeu/
-							$('.feeldcnt').popover({
-								html: true,
-								content: function(){
-									return $('#popover-content').html()	
-								}
-							});
-							$('.feeldcnt').click(function(){
-								return false;	
-							})
-						});
-					</script>
-					&nbsp;
-					<% if current_user.id != post.user.id %>
-						<%= link_to image_tag('feeldin.png'),  post_shares_path(post.id), class: "feeldin feeldin#{post.id}", method: :post, remote: true %>
-						x <strong class="feeldincnt feeldincnt<%=post.id%>"><%=post.shares.count%></strong>
-					<% end %>
+			<%# ======================================================================  %>
+			<% if current_user %>
+				<% if Like.find_by(post_id: post.id, user_id: current_user.id) %>
+					<%= link_to image_tag('feeldrev.png'), post_likes_path(post.id), class: "feeld feeld#{post.id}" ,method: :post, remote: true %>
+				<% else %>
+					<%= link_to image_tag('feeld.png'), post_likes_path(post.id), class: "feeld feeld#{post.id}" ,method: :post, remote: true %>
 				<% end %>
+				<strong><a href="#" class="feeldcnt feeldcnt<%=post.id%>" data-toggle="popover" data-trigger="focus"  data-placement="right" >x <%=post.likes.count%></a></strong>
+				<div id="popover-content" class="hide">
+					<% if post.likes.any? %>
+					<% post.likes.each do |like| %>
+						<%= link_to like.user.name, "/my_feeld?user_id=#{like.user.id}", class: "like_user_list"%>
+					<% end %>
+					<% else %>
+						첫 Feel'd 를 눌러주세요;D
+					<% end %>
+				</div>
+				<script>
+					$(function(){
+					 // http://jsfiddle.net/raving/2thfaxeu/
+						$('.feeldcnt').popover({
+							html: true,
+							content: function(){
+								return $('#popover-content').html()	
+							}
+						});
+						$('.feeldcnt').click(function(){
+							return false;	
+						})
+					});
+				</script>
+				&nbsp;
+				<% if current_user.id != post.user.id %>
+					<%= link_to image_tag('feeldin.png'),  post_shares_path(post.id), class: "feeldin feeldin#{post.id}", method: :post, remote: true %>
+					x <strong class="feeldincnt feeldincnt<%=post.id%>"><%=post.shares.count%></strong>
+				<% end %>
+			<% end %>
 			<%# ======================================================================  %>
 
 			<span style="position:absolute; right:0;"><%=image_tag "eye.png", class: "post-icon"%> <%= post.view_count%></span>
-		</div>
 		
-		<hr style="margin: 10px 0">
+			<hr style="margin: 10px 0">
 
-		<div class="posts-item-title" >
-			<%= link_to truncate(post.title, length: 40, separater: ' '), post, remote:true %>
-			<% if post.is_secret %>
-				<span class="text-danger">(<i class="fa fa-lock"></i>&nbsp;비공개)</span>
-			<% end %>
-		</div>
-
-		<div style="height:10px;"></div>
-
-		<% if post.post_type == 1 %>
-			<div class="posts-item-image-content">
-				<%= post.content.gsub(/\n/, '<br/>').html_safe %>	
+			<div class="posts-item-title" >
+				<%= link_to truncate(post.title, length: 40, separater: ' '), post, remote:true %>
+				<% if post.is_secret %>
+					<span class="text-danger">(<i class="fa fa-lock"></i>&nbsp;비공개)</span>
+				<% end %>
 			</div>
-		<% end %>
-		<div class="posts-item-hashtags">
-			<% if post.tag_list.size > 0 %>	
-				<div class='tag_list'><%= tag_icons(post.tag_list) %> </div>
+
+			<div style="height:10px;"></div>
+
+			<% if post.post_type == 1 %>
+				<div class="posts-item-image-content">
+					<%= post.content.gsub(/\n/, '<br/>').html_safe %>	
+				</div>
 			<% end %>
-		</div>
+			<div class="posts-item-hashtags">
+				<% if post.tag_list.size > 0 %>	
+					<div class='tag_list'><%= tag_icons(post.tag_list) %> </div>
+				<% end %>
+			</div>
 
-		<hr style="margin: 10px 0">
+			<hr style="margin: 10px 0">
 
-		<div>
-			<input type="text" class="form-control" style="background-color:rgba(104,104,104,0.3)"  placeholder="이 글에 대한 생각을 남겨주세요" onclick="alert('해당기능 개발 중입니다! 현재는 게시물 클릭 후 모달창에서 댓글을 남길 수 있습니다.')">
+			<div>
+				<input type="text" class="form-control" style="background-color:rgba(104,104,104,0.3)"  placeholder="이 글에 대한 생각을 남겨주세요" onclick="alert('해당기능 개발 중입니다! 현재는 게시물 클릭 후 모달창에서 댓글을 남길 수 있습니다.')">
+			</div>
+
+			<div style="height:20px;"></div>
+
 		</div>
-		<div style="height:20px;"></div>
-		</div>
+		<!-- posts-item-counts -->
+		<!-- posts-item-counts -->
+		<!-- posts-item-counts -->
 	</div>
+	<!-- posts-item-info -->
+	<!-- posts-item-info -->
+	<!-- posts-item-info -->
 </div>
 <% end %>
 

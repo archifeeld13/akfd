@@ -1,30 +1,4 @@
 <div class="posts-item">
-	<div class="posts-item-writer">
-		<% if post.user.use_photo %>
-			<%= link_to image_tag(post.user.photo), "/my_feeld?user_id=#{post.user.id}"%>
-		<% else %>
-			<%= link_to image_tag(post.user.image_url), "/my_feeld?user_id=#{post.user.id}" %>
-		<% end %>
-
-		<% if post.user.use_nick %>
-			<%= link_to post.user.nickname, "/my_feeld?user_id=#{post.user.id}"%>
-		<% else %>
-			<%= link_to post.user.name, "/my_feeld?user_id=#{post.user.id}"%>
-		<% end %>
-		&nbsp;
-		<% if current_user and current_user.id == post.user.id%>
-			<span style="font-size: 0.8em ">
-			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
-			</span>
-		<% end %>
-
-		<%# 관리자 아이디라면 에딧 허용%>
-		<% if current_user and [1, 4, 48].include? current_user.id %>
-			<span style="font-size: 0.8em ">
-			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
-			</span>
-		<% end %>
-	</div>
 	<% if post.post_type == 1 %>
 		<%# photoup type%>
 		<% if post.photos.any? %>
@@ -81,6 +55,33 @@
 				<span style="position:absolute; right:0;"><%=image_tag "eye.png", class: "post-icon"%>&nbsp;<%= post.view_count%></span>
 			</div>
 		</div>
+	</div>
+
+	<div class="posts-item-writer">
+		<% if post.user.use_photo %>
+			<%= link_to image_tag(post.user.photo), "/my_feeld?user_id=#{post.user.id}"%>
+		<% else %>
+			<%= link_to image_tag(post.user.image_url), "/my_feeld?user_id=#{post.user.id}" %>
+		<% end %>
+
+		<% if post.user.use_nick %>
+			<%= link_to post.user.nickname, "/my_feeld?user_id=#{post.user.id}"%>
+		<% else %>
+			<%= link_to post.user.name, "/my_feeld?user_id=#{post.user.id}"%>
+		<% end %>
+		&nbsp;
+		<% if current_user and current_user.id == post.user.id%>
+			<span style="font-size: 0.8em ">
+			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
+			</span>
+		<% end %>
+
+		<%# 관리자 아이디라면 에딧 허용%>
+		<% if current_user and [1, 4, 48].include? current_user.id %>
+			<span style="font-size: 0.8em ">
+			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
+			</span>
+		<% end %>
 	</div>
 </div>
 

@@ -55,9 +55,11 @@
 		img{
 			width:25px; height: 25px; border-radius: 3px; margin:7px;
 		}
-		border-bottom: 1px solid #EEEEEE;
+		border-top: 1px solid #EEEEEE;
 	}
 	.posts-item-img{
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
 		height: 60%;
 		width: 100%;
 		object-fit: cover;
@@ -70,7 +72,9 @@
 		color: black;
 		overflow: hidden;
 	}
+
 	.posts-item-info{
+		position: relative;
 		padding:5%;
 		padding-bottom: 0;
 		height: 30%;
@@ -82,8 +86,8 @@
 			}
 		}
 		.posts-item-counts{
+			position: absolute; bottom: 0;
 			color:gray; margin:2% 0;
-			position: absolute; bottom:0; 
 			width: 90%;
 			span{
 				white-space: nowrap;
@@ -159,7 +163,8 @@
 		}
 
 		.posts-item-counts{
-			color:gray; margin:1% 0;
+			position: relative;
+			color:gray; 
 			//position: absolute; bottom:0; 
 			font-size: 1.2em;
 			width: 98%;
@@ -176,8 +181,92 @@
 	}
 }
 
-// show.js.erb
 
+// show.html
+// show.html
+// show.html
+.show-posts-item{
+	position: relative;
+	width:780px; 
+	background:white; 
+	margin: 10px auto;
+	border-radius: 5px;
+
+	.post-icon{
+		width:18px;	
+		margin-top: -5px;
+	}
+
+	.dot {
+		width:15px;	
+	}
+
+	.posts-item-writer{
+		height: 40px; 
+		//height: 10%;
+		a{
+			color: black;	
+		}
+		img{
+			width:25px; height: 25px; border-radius: 3px; margin:7px;
+		}
+		border-bottom: 1px solid #EEEEEE;
+	}
+	.posts-item-img{
+		//height: 60%;
+		width: 100%;
+		object-fit: cover;
+	}
+
+	.posts-item-text{
+		//height: 60%;
+		width: 100%;
+		margin: 0;
+		padding: 2%;
+		color: black;
+		overflow: hidden;
+	}
+
+	.posts-item-info{
+		font-size:0.9em; padding:2%;
+		padding-bottom: 0;
+		//height: 30%;
+		.posts-item-title{
+			font-size:1.2em;
+			color: 444444;
+			font-weight:bold;
+			a{
+				color:black;	
+			}
+		}
+		.posts-item-image-content{
+			margin-bottom: 10px;
+		}
+
+		.posts-item-counts{
+			position: relative;
+			color:gray; 
+			//position: absolute; bottom:0; 
+			font-size: 1.2em;
+			width: 98%;
+			span{
+				white-space: nowrap;
+			}
+		}
+		.posts-item-hashtags{
+			color:gray; 
+			span{
+				white-space: nowrap;
+			}
+		}
+	}
+}
+//show.html.erb
+//show.html.erb
+//show.html.erb
+
+
+// show.js.erb
 .feeld{
 	img{
 		height: 30px;
