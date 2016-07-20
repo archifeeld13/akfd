@@ -93,6 +93,11 @@
 								<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit" %>
 							<% end %>
 						<% end %>
+
+						<%# 관리자 아이디라면 에딧 허용%>
+						<% if [1, 4, 48].include? current_user.id %>
+								<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit" %>
+						<% end %>
 					<% end %>
 				<%# ======================================================================  %>
 

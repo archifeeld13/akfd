@@ -12,7 +12,14 @@
 			<%= link_to post.user.name, "/my_feeld?user_id=#{post.user.id}"%>
 		<% end %>
 		&nbsp;
-		<% if current_user and (current_user.id == 1 or current_user.id == post.user.id)%>
+		<% if current_user and current_user.id == post.user.id%>
+			<span style="font-size: 0.8em ">
+			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
+			</span>
+		<% end %>
+
+		<%# 관리자 아이디라면 에딧 허용%>
+		<% if [1, 4, 48].include? current_user.id %>
 			<span style="font-size: 0.8em ">
 			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
 			</span>
