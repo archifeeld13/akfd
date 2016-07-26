@@ -200,7 +200,7 @@ class PostsController < ApplicationController
 			@posts << Post.tagged_with(tag).shuffle[0..5]
 		end
 		# 쭉 펴기
-		@posts = @posts.flatten.delete_if{|p| p.id == @post.id or p.is_secret == true}.shuffle[0..9]
+		@posts = @posts.flatten.delete_if{|p| p.id == @post.id or p.is_secret == true}.shuffle[0..9].uniq
 
 		@isReco = false 
 		if @posts.length > 0
