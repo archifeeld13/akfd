@@ -6,32 +6,6 @@
 
 <div id="user_edit_panel">
 	<%# http://stackoverflow.com/questions/2821061/facebook-api-how-do-i-get-a-facebook-users-profile-image-through-the-facebook %>
-	<table class="table" style="width:30%">
-	<tr>
-		<td>
-		<% if @user.user_type == 1 %>
-			페북 프로필 사진  
-		<% end %> 
-		</td>	
-		<td>	
-		<% if @user.photo %>
-			프로필 사진 별도 설정 
-		<% end %>
-		</td>
-	</tr>
-	<tr>
-		<td>
-		<% if @user.user_type == 1 %>
-			<%= image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130", id: "message_box") %>
-		<% end %> 
-		</td>
-		<td>	
-		<% if @user.photo %>
-			<%=image_tag(@user.photo, class: "my_feeld_profile_img") %>
-		<% end %>
-		</td>
-	</tr>
-	</table>
 
 	<div id="user_info_name_dept">
 		<label>이름</label>
@@ -73,10 +47,40 @@
 				<%= f.check_box :use_photo %>
 			<% end %>
 		</div>
+
+		<br>
+
+		<table class="table table-striped table-bordered" style="width:30%">
+		<tr>
+			<% if @user.user_type == 1 %>
+			<td>
+				페이스북 프로필 사진  
+			</td>	
+			<% end %> 
+			<td>	
+			<% if @user.photo %>
+				아키필드 프로필 사진
+			<% end %>
+			</td>
+		</tr>
+		<tr>
+			<% if @user.user_type == 1 %>
+			<td>
+				<%= image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130", id: "message_box") %>
+			</td>
+			<% end %> 
+			<td>	
+			<% if @user.photo %>
+				<%=image_tag(@user.photo, class: "my_feeld_profile_img") %>
+			<% end %>
+			</td>
+		</tr>
+		</table>
+
 	<br>
 	<br>
 		<div class="form-actions">
-			<%= f.submit :submit , class:"form-control btn-info" %>
+			<%= f.submit "변경" , class:"form-control btn-info" %>
 		</div>
 	<% end %>
 	</div>
