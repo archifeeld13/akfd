@@ -3,35 +3,75 @@ class PostsController < ApplicationController
 	before_action :check_logined, only: [:new, :timeline, :message_box, :create, :edit, :update, :destroy]
 
   def index
+		# default post type 1
+		p_t= 1
+
 		if params[:tag]
 		# 태그 검색
 			@posts = Post.tagged_with(params[:tag]).reverse
 			flash[:notice] = "<strong class='text-danger'>#{params[:tag]}</strong> 에 대한 검색결과 입니다."
-		elsif params[:type]
-		# 필터링
-			if params[:type] == "txt"
-				@selected = "txt"
-				post_type = 0
-				flash[:notice] = "<strong class='text-danger'>텍스트</strong> 필터링 결과 입니다."
-			elsif params[:type] == "img"
-				@selected = "img"
-				post_type = 1
-				flash[:notice] = "<strong class='text-danger'>이미지</strong> 필터링 결과 입니다."
-			else
-				# link..
-			end
-			@posts = Post.where(post_type: post_type, is_secret: false).reverse
 		else
-		# 기본 메인 페이지
-			if params[:page]
-				# js???	
-				page = params[:page].to_i
-				@posts = Post.where(is_secret: false).reverse[(page * 20)..(page * 20) + 19]
-			else
+
+			if params[:type]
+				if params[:type] == "txt"
+					@selected = "txt"
+					p_t = 0
+					flash[:notice] = "<strong>FEEL;D TALK</strong>(자유 게시판) 입니다."
+
+				elsif params[:type] == "link"
+					@selected = "link"
+					flash[:notice] = "링크타입의 게시글을  보여줍니다;D"
+					p_t = 2
+
+				elsif params[:type] == "college"
+					@selected = "college"
+					flash[:notice] = "각 대학교의 필드업을 보여줍니다;D"
+					# college list
+					clist = [117 ,119, 171, 228, 247, 253, 305, 782, 794, 831, 850, 1159, 1273]
+				end
+			else 
 				@selected = "posts"
-				@posts = Post.where(is_secret: false).reverse[0..19]
+				flash[:notice] = "전체 필드업을 보여줍니다 :D"
 			end
-			flash[:notice] = "전체 필드업을 최근 작성순으로 보여줍니다 :D"
+
+				
+			if params[:page]
+				# 다음 글 가져오기 ajax
+				# 다음 글 가져오기 ajax
+				page = params[:page].to_i
+
+				if params[:type] == "college"
+					# college type 일 경우엔 예외처리 (clist 리스트에 들어있는 것만 골라내야 해서)
+					@posts = []
+					# clist에 있는 학교 계정의 글만 포함
+					Post.all.reverse.each do |p|
+						if clist.include? p.user.id 
+							@posts << p	
+						end
+					end
+					@posts = @posts[(page * 20)..(page * 20) + 19] 
+				else
+					# 나머지 경우(txt,all,link)
+					@posts = Post.where(post_type:p_t, is_secret: false).reverse[(page * 20)..(page * 20) + 19]
+				end
+			else
+				# 다음 글 가져오기가 아닌 최초 클릭시 
+				# 다음 글 가져오기가 아닌 최초 클릭시 
+				if params[:type] == "college"
+					# college type 일 경우엔 예외처리 (clist 리스트에 들어있는 것만 골라내야 해서)
+					@posts = []
+					# clist에 있는 학교 계정의 글만 포함
+					Post.all.reverse.each do |p|
+						if clist.include? p.user.id 
+							@posts << p	
+						end
+					end
+					@posts = @posts[0..19]
+				else
+					# 나머지 경우(txt,all,link)
+					@posts = Post.where(post_type:p_t, is_secret: false).reverse[0..19]
+				end
+			end
 		end
   end
 
@@ -61,19 +101,6 @@ class PostsController < ApplicationController
 		else
 			@posts = @posts[0..19]
 		end
-	end
-
-	def college
-		@selected = "college"
-		clist = [117 ,119, 171, 228, 247, 253, 305, 782, 794, 831, 850, 1159, 1273]
-		@posts = []
-		Post.all.reverse.each do |p|
-			if clist.include? p.user.id 
-				@posts << p	
-			end
-		end
-		flash[:notice] = "각 대학교의 필드업을 보여줍니다;D"
-		render "index"	
 	end
 
 	def editor 
