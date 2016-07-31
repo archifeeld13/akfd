@@ -20,7 +20,11 @@
 			<% else %>
 				<%= image_tag(@post.user.image_url) %>
 			<% end %>
-			<%= link_to @post.user.name, "/my_feeld?user_id=#{@post.user.id}"%>
+			<% if @post.user.use_nick %>
+				<%= link_to @post.user.nickname, "/my_feeld?user_id=#{@post.user.id}"%>
+			<% else %>
+				<%= link_to @post.user.name, "/my_feeld?user_id=#{@post.user.id}"%>
+			<% end %>
 		</div>
 
 

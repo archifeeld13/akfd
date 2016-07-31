@@ -2,7 +2,11 @@
 	figuare.thumbanail{
 		margin-bottom: 0
 	}
+	a{
+		color: gray;	
+	}
 </style>
+
 <% if comment.post.user.id != comment.user.id %>
 	<article id="comment_<%=comment.id %>" class="row">
 		<div class="col-md-2 col-sm-3 col-xs-3">
@@ -24,7 +28,11 @@
 						<time class="comment-date">
 							<i class="fa fa-clock-o"></i>&nbsp;
 							<span style="color:gray; font-size:0.9em;"><%= time_ago_in_words(comment.created_at) %> 전에</span>
-							, <strong style="white-space: nowrap"><%= comment.user.name %></strong>
+						<% if @post.user.use_nick %>
+							, <strong style="white-space: nowrap"><%= link_to comment.user.nickname, "/my_feeld?user_id=#{@post.user.id}"%></strong>
+						<% else %>
+							, <strong style="white-space: nowrap"><%= link_to comment.user.name, "/my_feeld?user_id=#{@post.user.id}"%></strong>
+						<% end %>
 						</time>
 					</header>
 					<div class="comment-post">
@@ -50,7 +58,11 @@
 						<time class="comment-date">
 							<i class="fa fa-clock-o"></i>&nbsp;
 							<span style="color:gray; font-size:0.9em;"><%= time_ago_in_words(comment.created_at) %> 전에</span>
-							, <strong style="white-space: nowrap"><%= comment.user.name %></strong>
+						<% if @post.user.use_nick %>
+							, <strong style="white-space: nowrap"><%= link_to comment.user.nickname, "/my_feeld?user_id=#{@post.user.id}"%></strong>
+						<% else %>
+							, <strong style="white-space: nowrap"><%= link_to comment.user.name, "/my_feeld?user_id=#{@post.user.id}"%></strong>
+						<% end %>
 						</time>
 					</header>
 					<div class="comment-post">
