@@ -53,6 +53,16 @@
 					</a>
 				</span>
 			</div>
+			<%# 모바일에 한해서 네브바에 인기 태그 %>
+			<% if browser.device.mobile? %>
+				<div id="fav_tag_content">
+					<% @fav_tags[0..20].shuffle.each do |tag| %>
+						<div class="tag_div" style="margin:4px 2px;"><a href='/posts?tag=<%= tag %>' class='tag' style="background:transparent; color:white;"><%= tag %></a></div>
+					<% end %>
+				</div>
+				<div style="clear:both"></div>
+			<% end %>
+			<%# 모바일에 한해서 네브바에 인기 태그 %>
 		</form>
 		<script>
 			$(function(){
@@ -68,6 +78,7 @@
 				})
 			})
 		</script>
+
 
 		<div id="navbar" class="navbar-right" >
 		<% if current_user %>
@@ -165,6 +176,7 @@
 			</a>
 		<% end %>
 		</div>
+
 	</div> <!-- collapase -->
 </div>
 </nav>

@@ -8,10 +8,24 @@ class PostsController < ApplicationController
 
 		if params[:tag]
 		# 태그 검색
-			@posts = Post.tagged_with(params[:tag]).reverse
-			flash[:notice] = "<strong class='text-danger'>#{params[:tag]}</strong> 에 대한 검색결과 입니다."
-		else
+			@posts = []
+			@t_posts = Post.tagged_with(params[:tag]).reverse
+			@t_posts.each do |p|
+				if not p.is_secret 
+					@posts << p
+				end
+			end
 
+			if params[:page]
+				page = params[:page].to_i
+				@posts = @posts[(page * 20)..(page * 20) + 19]
+			else 
+				@posts = @posts[0..19]
+			end
+			flash[:notice] = "<strong class='text-danger'>#{params[:tag]}</strong> 에 대한 검색결과 입니다."
+
+		else
+		# 태그 검색이 아닌 필터링의 경우
 			if params[:type]
 				if params[:type] == "txt"
 					@selected = "txt"

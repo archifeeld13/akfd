@@ -33,6 +33,11 @@ form input[type="password"]
 .form-btns{
 	width: 300px;
 }
+.policy {
+	white-space:nowrap;
+	font-weight: bold;
+	color: skyblue;
+}
 </style>
 
 <div>
@@ -61,3 +66,48 @@ form input[type="password"]
 	<a href="/posts" style="color:white"> 비회원 입장 </a> <br>
 	<a href="/#" style="color:white" onclick="alert('현재 비밀번호 찾기 기능 구현중에 있습니다.\n임시비밀번호 발급 문의는 \nwpdls6012@naver.com으로 부탁드리겠습니다.')"> 비밀번호 찾기</a> 
 </div>
+
+
+
+
+<div style="width:300px;margin-top: 10px">
+	<a class="policy" data-toggle="modal" data-target="#policyModal" href="#">이용약관</a> 및 <a  class="policy" data-toggle="modal" data-target="#policyModal2" href="#">개인정보정책</a>
+</div>
+
+<!-- Modal -->
+<div style="color:black; text-align:left;" class="modal fade" id="policyModal" tabindex="-1" role="dialog" aria-labelledby="policyModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong><h4 class="modal-title" id="policyModalLabel">아키필드 이용약관</h4></strong>
+      </div>
+      <div class="modal-body">
+				<%= Post.find(1639).content.gsub(/\n/, '<br/>').html_safe%>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div style="color:black; text-align:left;" class="modal fade" id="policyModal2" tabindex="-1" role="dialog" aria-labelledby="policyModalLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong><h4 class="modal-title" id="policyModalLabel2">아키필드 개인정보취급방침</h4></strong>
+      </div>
+      <div class="modal-body">
+				<%= Post.find(1640).content.gsub(/\n/, '<br/>').html_safe%>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
