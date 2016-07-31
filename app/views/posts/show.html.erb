@@ -178,10 +178,10 @@
 <%= javascript_include_tag "lightbox.min.js" %>
 
 <% if @isReco %>
-	<center><h2 class="text-success">관련 필드업</h2></center>
+	<center><h3 style="color:darkgray">관련 필드업</h2></center>
 	<%= render @posts %>
 <% else %>
-	<center><h2 class="text-success">최신 필드업</h2></center>
+	<center><h3 style="color:darkgray" >최신 필드업</h2></center>
 	<%= render @posts %>
 <% end %>
 

@@ -35,6 +35,12 @@ form input[type="password"]
 	width: 300px;
 }
 
+.policy {
+	white-space:nowrap;
+	font-weight: bold;
+	color: skyblue;
+}
+
 </style>
 
 <div>
@@ -56,12 +62,36 @@ form input[type="password"]
 	</div>
 <% end %>
 </div>
+
+<div style="width:300px;margin-top: 10px">
+	버튼을 클릭함으로써 아키필드의 <a class="policy" data-toggle="modal" data-target="#policyModal" href="#">약관</a>과 <a  class="policy" data-toggle="modal" data-target="#policyModal" href="#">개인정보정책</a>에 동의합니다
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="policyModal" tabindex="-1" role="dialog" aria-labelledby="policyModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="policyModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div style="margin-top: 10px">
 	<%= link_to image_tag('registered.png', class: "form-btns"), '#', onclick: "$('#register_btn').click()" %> 
 </div>
 <div style="margin-top: 5px">
 	<%= link_to image_tag('facebookjoin.png', class: "form-btns"), '/auth/facebook'%> 
 </div>
-<div style="margin-top: 20px">
+<div style="margin-top: 10px">
 	<%= link_to '취소', '/login', class: "reg_cancel" %>
 </div>
