@@ -76,7 +76,11 @@
 					<div id="popover-content" class="hide">
 						<% if @post.likes.any? %>
 						<% @post.likes.each do |like| %>
-							<%= link_to like.user.name, "/my_feeld?user_id=#{like.user.id}", class: "like_user_list"%>
+							<% if like.user.use_nick %>
+								<%= link_to like.user.nickname, "/my_feeld?user_id=#{like.user.id}", class: "like_user_list"%>
+							<% else %>
+								<%= link_to like.user.name, "/my_feeld?user_id=#{like.user.id}", class: "like_user_list"%>
+							<% end %>
 						<% end %>
 						<% else %>
 							첫 Feel'd 를 눌러주세요;D
