@@ -1,4 +1,6 @@
-<%= render 'contents_controllbar' %>
+<% if not browser.device.mobile? %>
+	<%= render 'contents_controllbar'%>
+<% end %>
 
 <script>
 	//$(function(){
@@ -9,9 +11,11 @@
 <div id="user_info_panel">
 	<%# http://stackoverflow.com/questions/2821061/facebook-api-how-do-i-get-a-facebook-users-profile-image-through-the-facebook %>
 	<% if !@user.use_photo %>
-		<%= link_to image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130", id: "message_box"), "/message_box/#{@user.id}", remote: true %>
+		<%#= link_to image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130", id: "message_box"), "/message_box/#{@user.id}", remote: true %>
+		<%= image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130") %>
 	<% else %>
-		<%= link_to image_tag(@user.photo, class: "my_feeld_profile_img", id: "message_box"), "/message_box/#{@user.id}", remote: true %>
+		<%#= link_to image_tag(@user.photo, class: "my_feeld_profile_img", id: "message_box"), "/message_box/#{@user.id}", remote: true %>
+		<%= image_tag(@user.photo, class: "my_feeld_profile_img", id: "message_box")%>
 	<% end %>
 
 	<div id="user_info_name_dept">

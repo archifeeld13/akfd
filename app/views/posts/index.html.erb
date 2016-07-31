@@ -1,4 +1,6 @@
-<%= render 'contents_controllbar'%>
+<% if not browser.device.mobile? %>
+	<%= render 'contents_controllbar'%>
+<% end %>
 
 <div id="posts-container">
 	<%= render @posts %>
