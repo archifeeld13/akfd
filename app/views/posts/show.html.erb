@@ -129,7 +129,7 @@
 				<div class="posts-item-title" >
 					<%= @post.title %>
 					<% if @post.is_secret %>
-						<span class="text-danger">(<i class="fa fa-lock"></i>&nbsp;나만보기)</span>
+						<span class="text-danger">(<i class="fa fa-lock"></i>&nbsp;비공개)</span>
 					<% end %>
 					<span style="color:darkgray; font-size:.7em; white-space:nowrap">
 						 &nbsp; <%= @post.created_at.strftime("%Y년 %m월 %d일") %>

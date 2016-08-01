@@ -63,10 +63,10 @@ class PostsController < ApplicationController
 							@posts << p	
 						end
 					end
-					@posts = @posts[(page * 20)..(page * 20) + 19] 
+					@posts = @posts[(page * 20)..(page * 20) + 19].shuffle
 				else
 					# 나머지 경우(txt,all,link)
-					@posts = Post.where(post_type:p_t, is_secret: false).reverse[(page * 20)..(page * 20) + 19]
+					@posts = Post.where(post_type:p_t, is_secret: false).reverse[(page * 20)..(page * 20) + 19].shuffle
 				end
 			else
 				# 다음 글 가져오기가 아닌 최초 클릭시 
@@ -80,10 +80,10 @@ class PostsController < ApplicationController
 							@posts << p	
 						end
 					end
-					@posts = @posts[0..19]
+					@posts = @posts[0..19].shuffle
 				else
 					# 나머지 경우(txt,all,link)
-					@posts = Post.where(post_type:p_t, is_secret: false).reverse[0..19]
+					@posts = Post.where(post_type:p_t, is_secret: false).reverse[0..19].shuffle
 				end
 			end
 		end
