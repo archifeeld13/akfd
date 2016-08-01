@@ -278,6 +278,12 @@ class PostsController < ApplicationController
 
 	def edit
 		@post = Post.find(params[:id])	
+		# 매니저 리스트에 포함 안되면 참(접근 불가), 아이디가 달라도 접근 불가
+		if (current_user.id != @post.user.id) 
+			if not (manager_list.include? current_user.id)
+				redirect_to root_path 
+			end
+		end
 	end
 
 	def link_create

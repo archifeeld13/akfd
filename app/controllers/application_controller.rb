@@ -31,10 +31,16 @@ class ApplicationController < ActionController::Base
 		def json_request?
 			request.format.json?
 		end
+
 		def check_logined
 			if !session[:user_id] 
 				flash[:notice] = "로그인이 필요한 서비스입니다;D"
 				redirect_to login_path	
 			end
 		end
+
+		def manager_list
+			[1, 4, 48]
+		end
+		helper_method :manager_list
 end
