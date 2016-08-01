@@ -74,10 +74,8 @@
 			<span style="font-size: 0.8em ">
 			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
 			</span>
-		<% end %>
-
 		<%# 관리자 아이디라면 에딧 허용%>
-		<% if current_user and [1, 4, 48].include? current_user.id %>
+		<% elsif current_user and manager_list.include? current_user.id %>
 			<span style="font-size: 0.8em ">
 			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
 			</span>
