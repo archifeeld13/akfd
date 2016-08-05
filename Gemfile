@@ -60,6 +60,9 @@ gem 'link_thumbnailer'
 # https://github.com/fnando/browser
 gem 'browser'
 
+# autolink
+gem 'rails_autolink'
+
 
 # seed dump
 gem 'seed_dump'

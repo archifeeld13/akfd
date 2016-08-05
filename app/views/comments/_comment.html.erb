@@ -28,7 +28,7 @@
 						<time class="comment-date">
 							<i class="fa fa-clock-o"></i>&nbsp;
 							<span style="color:gray; font-size:0.9em;"><%= time_ago_in_words(comment.created_at) %> 전에</span>
-						<% if @post.user.use_nick %>
+						<% if comment.user.use_nick %>
 							, <strong style="white-space: nowrap"><%= link_to comment.user.nickname, "/my_feeld?user_id=#{@post.user.id}"%></strong>
 						<% else %>
 							, <strong style="white-space: nowrap"><%= link_to comment.user.name, "/my_feeld?user_id=#{@post.user.id}"%></strong>
@@ -58,7 +58,7 @@
 						<time class="comment-date">
 							<i class="fa fa-clock-o"></i>&nbsp;
 							<span style="color:gray; font-size:0.9em;"><%= time_ago_in_words(comment.created_at) %> 전에</span>
-						<% if @post.user.use_nick %>
+						<% if comment.user.use_nick %>
 							, <strong style="white-space: nowrap"><%= link_to comment.user.nickname, "/my_feeld?user_id=#{@post.user.id}"%></strong>
 						<% else %>
 							, <strong style="white-space: nowrap"><%= link_to comment.user.name, "/my_feeld?user_id=#{@post.user.id}"%></strong>
