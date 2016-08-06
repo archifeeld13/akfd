@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 		if current_user
 			redirect_to posts_path
 		else 
-			flash[:notice] = "아키필드에 오신걸 환영합니다 ;D"
+			#flash[:notice] = "아키필드에 오신걸 환영합니다 ;D"
 			render "sessions/new", :layout => 'front' 
 		end
 	end
@@ -19,9 +19,9 @@ class SessionsController < ApplicationController
 			@friendship = @user.friendships.find_or_create_by(:friend_id => 48)
 			@friendship.save
 			# ######
-			flash[:success] = "Welcome, #{@user.name}!"
+			flash[:notice] = "Welcome, #{@user.name}!"
 		rescue
-			flash[:warning] = "There was an error while trying to authenticate you..."
+			flash[:notice] = "There was an error while trying to authenticate you..."
 		end
 		redirect_to posts_path 
 		#render text: request.env['omniauth.auth'].to_json
