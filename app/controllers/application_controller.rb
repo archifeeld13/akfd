@@ -5,17 +5,16 @@ class ApplicationController < ActionController::Base
 
 	before_action :set_fav_posts
 	before_action :set_fav_tags
-
+	before_action :set_fav_users
 
 	# http://www.sitepoint.com/rails-authentication-oauth-2-0-omniauth/
 	private
 		def current_user
 			@current_user ||= User.find_by(id: session[:user_id])
 		end
-
 		helper_method :current_user
 
-		# 인기 마이필드 
+		# 추천 마이필드 
 		def set_fav_posts
 			@fav_posts = Post.where("created_at > ?", 1.week.ago.to_date) 
 			@fav_posts = @fav_posts.to_a
@@ -26,6 +25,22 @@ class ApplicationController < ActionController::Base
 		def set_fav_tags
 			@fav_tags = ActsAsTaggableOn::Tag.most_used(50)
 		end
+
+		def set_fav_users
+			@fav_users = User.all
+			@fav_users= @fav_users.to_a
+			# 일단 간단하게
+			#@fav_users.sort! {|x, y| (y.posts.count) <=> (x.posts.count)}
+			# 정렬하기보단
+			tmp = []
+			@fav_users.each do |u|
+				# 최근 쓴글로 발전 시킬수있으면 좋을 텐데 -> 그냥 최근글이 2주안에?쓴거면 추가하면될듯?
+				if u.posts.count > 5	
+					tmp << u	
+				end
+			end
+			@fav_users = tmp
+		end	
 
 	protected
 		def json_request?

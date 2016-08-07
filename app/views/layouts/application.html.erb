@@ -117,7 +117,7 @@
 						<span id="fav_tag" style="color:darkgray; font-size:0.7em;cursor:pointer">유저 검색</span></div>
 					<% end %>
 				<hr style="margin:5px 0">
-				<% User.all.shuffle[0,4].each do |user| %>
+				<% @fav_users.shuffle[0,4].each do |user| %>
 					<div class="RFMPanelItem" >
 						<% if user.use_photo %>
 							<%= link_to image_tag(user.photo, class: "reco_myfeeld_img"), "/my_feeld?user_id=#{user.id}" %> 
