@@ -76,8 +76,12 @@
 				
 				var new_top = (current_top + speed > origin_top) ? origin_top : current_top + speed
 				$('#contents-controllbar').css('top', new_top )	
+				// 가끔 모바일에서 맨 위임에도 불구하고 top 64가 아닐 때 예외처리
+				if ($(window).scrollTop() == 0)
+					$('#contents-controllbar').css('top', origin_top)	
 		 }
 		 previousScroll = currentScroll;
+
 	});
 
 </script>

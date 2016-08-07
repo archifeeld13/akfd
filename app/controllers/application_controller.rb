@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
 	before_action :set_fav_posts
 	before_action :set_fav_tags
-	before_action :set_fav_users
+	#before_action :set_fav_users
 
 	# http://www.sitepoint.com/rails-authentication-oauth-2-0-omniauth/
 	private
@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 		end
 		helper_method :current_user
 
-		# 추천 마이필드 
+		# 추천 필드업 
 		def set_fav_posts
 			@fav_posts = Post.where("created_at > ?", 1.week.ago.to_date) 
 			@fav_posts = @fav_posts.to_a
@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
 			@fav_tags = ActsAsTaggableOn::Tag.most_used(50)
 		end
 
+
+		# 패망 여기서 3초 이상 걸림
+		# 패망 여기서 3초 이상 걸림
+		# 패망 여기서 3초 이상 걸림
 		def set_fav_users
 			@fav_users = User.all
 			@fav_users= @fav_users.to_a

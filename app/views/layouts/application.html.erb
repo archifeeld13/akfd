@@ -95,10 +95,10 @@
 					<% @fav_posts[0,15].each do |post| %>
 						<div class="RFMPanelItem">
 							<% if post.title.size > 0 %>
-								<%= link_to truncate(post.title, length:17, separater: ' '), post, class: 'fav-posts' %></br>
+								<%= link_to truncate(post.title, length:22, separater: ' '), post, class: 'fav-posts' %></br>
 								<%#= link_to truncate(post.title, length:17, separater: ' '), post, remote:true, class: 'fav-posts' %>
 							<% else %>
-								<%= link_to truncate("제목 없음", length:17, separater: ' '), post, class: 'fav-posts' %></br>
+								<%= link_to truncate("제목 없음", length:22, separater: ' '), post, class: 'fav-posts' %></br>
 								<%#= link_to truncate("제목 없음", length:17, separater: ' '), post, remote:true, class: 'fav-posts' %>
 							<% end %>
 						</div>
@@ -123,7 +123,7 @@
 						<span id="fav_tag" style="color:darkgray; font-size:0.7em;cursor:pointer">유저 검색</span></div>
 					<% end %>
 				<hr style="margin:5px 0">
-				<% @fav_users.shuffle[0,3].each do |user| %>
+				<% User.all.shuffle[0,3].each do |user| %>
 					<div class="RFMPanelItem" >
 						<% if user.use_photo %>
 							<%= link_to image_tag(user.photo, class: "reco_myfeeld_img"), "/my_feeld?user_id=#{user.id}" %> 
