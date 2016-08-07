@@ -51,21 +51,33 @@
 </div>
 
 <%# 50px 정도 띄워준 이유는 컨텐츠컨트롤바 때문%>
-<div style="height:50px"></div>
-<script>
- var previousScroll = 0;
+<div style="height:33px"></div>
 
+<script>
+	var speed = 5;
+	var previousScroll = 0;
+	var current_top; 
+	var origin_top = parseInt($('#contents-controllbar').css('top'), 10)	
 	$(window).off('scroll')
 	$(window).scroll(function(){
 		 var currentScroll = $(this).scrollTop();
 		 if (currentScroll > previousScroll){
-				$('#contents-controllbar').hide()	
+		 // down
+				current_top = $('#contents-controllbar').css('top')	
+				current_top = parseInt(current_top, 10)
+
+				$('#contents-controllbar').css('top', current_top - speed)	
 		 } else {
-				$('#contents-controllbar').show()	
+		 // up
+		 		if (current_top < 0 )
+					current_top = 0
+				else 
+					current_top = parseInt($('#contents-controllbar').css('top'), 10)
+				
+				var new_top = (current_top + speed > origin_top) ? origin_top : current_top + speed
+				$('#contents-controllbar').css('top', new_top )	
 		 }
 		 previousScroll = currentScroll;
 	});
 
 </script>
-
-

@@ -24,18 +24,24 @@
 	<%= javascript_include_tag "https://code.jquery.com/ui/1.11.4/jquery-ui.js" %>
 
 	<!-- include summernote css/js-->
+	<!--
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"></script>
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
+	-->
 
 	<!-- scroll to -->
+	<!--
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"></script>
+	-->
 
 	<!-- bootstrap js -->
 	<%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js" %>
 
 	<%# https://github.com/noraesae/perfect-scrollbar	%>	
+	<!--
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.10/js/min/perfect-scrollbar.jquery.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.10/css/perfect-scrollbar.min.css" rel="stylesheet">
+	-->
 
 	<!-- overlay min js -->
 	<%= javascript_include_tag "loadingoverlay.min.js" %>
@@ -117,7 +123,7 @@
 						<span id="fav_tag" style="color:darkgray; font-size:0.7em;cursor:pointer">유저 검색</span></div>
 					<% end %>
 				<hr style="margin:5px 0">
-				<% @fav_users.shuffle[0,4].each do |user| %>
+				<% @fav_users.shuffle[0,3].each do |user| %>
 					<div class="RFMPanelItem" >
 						<% if user.use_photo %>
 							<%= link_to image_tag(user.photo, class: "reco_myfeeld_img"), "/my_feeld?user_id=#{user.id}" %> 

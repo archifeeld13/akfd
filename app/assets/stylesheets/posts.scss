@@ -14,13 +14,14 @@
 // index.html.erb
 #contents-controllbar{
 	position: fixed;
+	top: 64px;
 	width: 100%;
 	border-radius: 5px;
 	font-size: 1.1em;
 	z-index: 499; 
 	border: 1px solid #eaeaea;
 	background: rgba(255,255,255,0.7);
-	padding: 10px 5px;
+	padding: 5px 5px;
 
 	#cc-wrapper{
 		position: relative;
