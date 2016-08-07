@@ -52,3 +52,20 @@
 
 <%# 50px 정도 띄워준 이유는 컨텐츠컨트롤바 때문%>
 <div style="height:50px"></div>
+<script>
+ var previousScroll = 0;
+
+	$(window).off('scroll')
+	$(window).scroll(function(){
+		 var currentScroll = $(this).scrollTop();
+		 if (currentScroll > previousScroll){
+				$('#contents-controllbar').hide()	
+		 } else {
+				$('#contents-controllbar').show()	
+		 }
+		 previousScroll = currentScroll;
+	});
+
+</script>
+
+
