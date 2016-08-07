@@ -1,6 +1,16 @@
-<% if not browser.device.mobile? %>
-	<%= render 'contents_controllbar'%>
-<% end %>
+<%= render 'contents_controllbar'%>
+<script>
+ $(function(){
+	$(window).scroll(function() {
+		if ($(window).scrollTop() < 200) 
+			$('#contents-controllbar').fadeIn()	
+		else
+			$('#contents-controllbar').fadeOut()	
+		
+	});
+
+ })
+</script>
 
 <div id="posts-container">
 	<%= render @posts %>

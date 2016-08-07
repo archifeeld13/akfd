@@ -19,7 +19,7 @@
 	<% end %>
 
 	<div id="user_info_name_dept">
-		<span style="font-weight: bold; font-size: 2em;">
+		<span style="font-weight: bold; font-size: 1.4em;">
 			<%if @user.use_nick %>
 				<%if @user.id == 1 %>
 					<span style="color:pink">	
@@ -41,7 +41,7 @@
 		</span><br>
 		<% if current_user %>
 			<% if @user.id == current_user.id %>
-				<a style="color:#B1DB4E; font-size: 1.5em; font-weight:bold" href="users/<%=@user.id%>/edit">프로필 편집</a><br>
+				<a style="color:#B1DB4E; font-size: 1.2em; font-weight:bold" href="users/<%=@user.id%>/edit">프로필 편집</a><br>
 			<% else %>
 				<% if @user.inverse_friends.include? current_user %>
 					<%= link_to "팔로우 끊기", friendship_path(Friendship.find_by(user_id: current_user.id, friend_id: @user.id)), :method => :delete, class: "follow-link"%>
@@ -56,21 +56,21 @@
 		<span style="color:gray; font-size: 1.2em; margin-right:15%;">
 			게시글
 		</span>
-		<span style="font-size: 2em; font-weight:bold">
+		<span style="font-size: 1.2em; font-weight:bold">
 			<%= @user.posts.count %>	
 		</span><br>
 
 		<span style="color:gray;  font-size: 1.2em; margin-right:15%;">
 			팔로우	
 		</span>
-		<span style="font-size: 2em; font-weight:bold">
+		<span style="font-size: 1.2em; font-weight:bold">
 			<%= link_to @user.friendships.count, "/friendships/#{@user.id}/follow", remote: true %>
 		</span><br>
 
 		<span style="color:gray; font-size: 1.2em; margin-right:15%;">
 			팔로워
 		</span>
-		<span style="font-size: 2em; font-weight:bold">
+		<span style="font-size: 1.2em; font-weight:bold">
 			<%= link_to @user.inverse_friends.count, "/friendships/#{@user.id}/follower", remote: true %>
 		</span><br>
 	</div>

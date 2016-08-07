@@ -83,7 +83,11 @@ class PostsController < ApplicationController
 					@posts = @posts[0..19].shuffle
 				else
 					# 나머지 경우(txt,all,link)
-					@posts = Post.where(post_type:p_t, is_secret: false).reverse[0..19].shuffle
+					if p_t == 0 
+						@posts = Post.where(post_type:p_t, is_secret: false).reverse[0..19]
+					else
+						@posts = Post.where(post_type:p_t, is_secret: false).reverse[0..19].shuffle
+					end
 				end
 			end
 		end
