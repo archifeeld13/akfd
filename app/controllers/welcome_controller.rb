@@ -125,9 +125,17 @@ class WelcomeController < ApplicationController
 		render text: u.name
 =end
 
+=begin 연구용
 	tags = []
 	#len = 0 
 	ret = ""
+	fl = [] 
+	users = User.all
+	users.each do |user|
+		ret += (user.friendships.count + user.inverse_friends.count).to_s  + "<br>"
+	end
+	ret += "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@<br>"
+
 	posts = Post.all
 	posts.each do |p|
 		tags.append(p.tag_list)
@@ -139,6 +147,29 @@ class WelcomeController < ApplicationController
 
 	#render text: posts.length.to_s + "/" + len.to_s + " " + tags.to_s 
 	render text: ret 
+=end
+	ret = ""
+	users = User.all
+	
+	users.each do |u|
+		s = 0	
+		c = 0
+		l = 0
+		v = 0
+		u.posts.each do |p|
+			s += p.shares.count
+			c += p.comments.count
+			l += p.likes.count
+			v += p.view_count
+		end
+		if s + c + l + v > 0
+			#ret += s.to_s + "/"+ c.to_s + "/" + l.to_s + "/" + v.to_s +  "<br/>"
+			ret += (s + c + l + v ).to_s + "</br>"
+		end
+	end
+
+	render text: ret
+
 	end
 
 	def state

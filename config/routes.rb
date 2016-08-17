@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
 	#root 'sessions#new'
-	root 'posts#index' 
+	root 'posts#notice' 
+	# root 'posts#index' 
 
 	resources :backgrounds, only: [:create, :new, :destroy]
 
@@ -52,6 +53,9 @@ Rails.application.routes.draw do
 
 	get 'welcome/test/930911' => 'welcome#test'
 	get '/state' => 'welcome#state'
+
+
+	get '/notice' => 'posts#notice'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

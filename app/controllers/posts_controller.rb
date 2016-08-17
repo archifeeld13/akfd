@@ -2,6 +2,10 @@ class PostsController < ApplicationController
 	require 'json'
 	before_action :check_logined, only: [:new, :timeline, :message_box, :create, :edit, :update, :destroy]
 
+	def notice
+			render "/posts/notice", :layout => 'notice' 
+	end
+
   def index
 		# default post type 1
 		p_t= 1
