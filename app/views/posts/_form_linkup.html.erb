@@ -70,6 +70,7 @@ $(function(){
 <!-- 에디터 시작  -->
 <!-- 에디터 시작  -->
 <!-- 에디터 시작  -->
+<div class="container">
 
 <!-- edit-super-container -->
 <!-- edit-super-container -->
@@ -186,9 +187,10 @@ $(function(){
 	})
 
 	function updatePositionEditContainer(){
+		var left_offset = parseFloat($('#edit-container').offset()["left"])
 		var width = parseFloat($("#edit-container").css('width'))
 		var extra_offset = 15 // edit-container 와 edit-controller사이의 10px정도의 오프셋 
-		$("#edit-controller").css("left", width + getLeftMarginOfContentsContainer() + extra_offset)
+		$("#edit-controller").css("left", left_offset + width + extra_offset)
 	}
 	// app/assets/javascripts/posts.js의  function postsColumnResize()에 의존하는 함수
 	// app/assets/javascripts/posts.js의  function postsColumnResize()에 의존하는 함수
@@ -229,3 +231,5 @@ $(function(){
 <script>
 $('textarea').autogrow({onInitialize: true});	
 </script>
+
+</div>
