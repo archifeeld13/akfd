@@ -28,6 +28,44 @@
 	}
 }
 
+#reco-container{
+	width:100%;
+	height: 300px;
+	background: green;
+
+	#reco-users{
+		float: left;
+		width:19%;
+		margin: 0 0.5%;
+		height: 300px;
+		background: yellow;
+		border-radius: 5px;
+		padding: 1%;
+		.reco-user{
+			margin: 2.5% 0;	
+		}
+		img{
+			width: 40px;	
+		}
+	}
+	#reco-binders{
+		float: left;
+		width:39%;
+		margin: 0 0.5%;
+		height: 300px;
+		background: orange;
+		border-radius: 5px;
+	}
+	#reco-posts{
+		float: left;
+		width:39%;
+		margin: 0 0.5%;
+		height: 300px;
+		background: red;
+		border-radius: 5px;
+	}
+}
+
 // 이걸 application.css의 contents-container / mobile 여기안에 포함시키면
 // 스타일을 모바일과 PC 따로 적용할 수 있을것 같다 (확인함)
 // user-info panel도 마찬가지로 분기할 수 있을 것 같다 

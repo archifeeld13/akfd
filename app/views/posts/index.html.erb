@@ -1,6 +1,43 @@
 <%= render 'contents_controllbar'%>
 
 <div class="container">
+	<div id="reco-container">
+		<div id="reco-users">
+			<% User.all.shuffle[0,6].each do |user| %>
+					<div class="reco-user">
+						<% if user.use_photo %>
+							<%= link_to image_tag(user.photo, class:"img-circle"), "/my_feeld?user_id=#{user.id}" %> 
+						<% else %>
+							<%= link_to image_tag(user.image_url, class:"img-circle"), "/my_feeld?user_id=#{user.id}" %> 
+						<% end %> 
+						<% if user.use_nick %>
+							<%= link_to truncate(user.nickname, length:15), "/my_feeld?user_id=#{user.id}"%><br>
+						<% else %>
+							<%= link_to truncate(user.name, length:15), "/my_feeld?user_id=#{user.id}"%><br>
+						<% end %>
+						<%#= link_to image_tag('plusbtn.png', class: "reco_myfeeld_plustbtn"), friendships_path(:friend_id => user.id), :method => :post, data: { confirm: "팔로우 합니다" } %>
+					</div>
+			<% end %>
+		</div>
+		<div id="reco-binders">
+			<h4>HIT 바인더</h4>
+		</div>
+		<div id="reco-posts">
+			<h4>HIT 필디</h4>
+			<% @fav_posts[0,15].each do |post| %>
+				<div class="RFMPanelItem">
+					<% if post.title.size > 0 %>
+						<%= link_to truncate(post.title, length:22, separater: ' '), post, class: 'fav-posts' %></br>
+						<%#= link_to truncate(post.title, length:17, separater: ' '), post, remote:true, class: 'fav-posts' %>
+					<% else %>
+						<%= link_to truncate("제목 없음", length:22, separater: ' '), post, class: 'fav-posts' %></br>
+						<%#= link_to truncate("제목 없음", length:17, separater: ' '), post, remote:true, class: 'fav-posts' %>
+					<% end %>
+				</div>
+			<% end %>
+
+		</div>
+	</div>
 	<div id="posts-container">
 		<%= render @posts %>
 	</div>
