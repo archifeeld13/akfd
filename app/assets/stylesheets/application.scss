@@ -53,10 +53,63 @@
 }
 
 #profile_img{
-	width: 36px;
-	height: 36px;
+	padding: 10px 10px;
+	img{
+		width: 30px;
+		height: 30px;
+		border-radius: 5px;
+	}
+}
+
+#feeldup {
+	padding-left: 10px;
+	padding-right: 0;
+	span{
+		border-radius: 5px;
+		border: 1px solid gray;
+		padding: 5px;
+		font-size: 1.1em;
+		color: rgb(200,200,200);
+	}
+}
+
+#msg_btn{
+	padding-left: 10px;
+	padding-right: 0;
+	span{
+		border-radius: 5px;
+		border: 1px solid gray;
+		padding: 5px;
+		font-size: 1.1em;
+		color: rgb(200,200,200);
+	}
+}
+
+#brand-image{
+	height:30px;
+	margin:10px;
+}
+
+.navbar-brand{
+	padding:0;
+}
+
+.nav-icon{
+	height:36px;
+	margin:7px;
+}
+.nav-icon-nohover{
+	height:36px;
+	margin:7px;
+}
+
+.nav-event-img{
+	width: 30px;
+	height: 30px;
 	border-radius: 5px;
 }
+
+
 
 //.modal-backdrop, .modal-backdrop.in{
 //  display: none;
@@ -234,12 +287,6 @@ a.tag {
 
 
 
-#feeldup {
-	img{
-		width: 100%;	
-	}
-}
-
 // width 15설정을 안해주고 jquery만으로 15%설정하면 
 // 로고 버튼눌러서 새로고침했을 때 적용이 안된다.
 // 자바스크립트에서 RFM으로 축약해 부를것이다
@@ -284,30 +331,6 @@ a.tag {
 		}
 	}
 	
-}
-
-#brand-image{
-	height:40px;
-	margin:5px;
-}
-
-.navbar-brand{
-	padding:0;
-}
-
-.nav-icon{
-	height:36px;
-	margin:7px;
-}
-.nav-icon-nohover{
-	height:36px;
-	margin:7px;
-}
-
-.nav-event-img{
-	width: 30px;
-	height: 30px;
-	border-radius: 5px;
 }
 
 // 이걸 안해주고 jquery만으로 hide해버리면 로고 눌러서 새로고침했을 때, 

@@ -27,6 +27,8 @@
 
 <nav class="navbar navbar-default navbar-fixed-top" style="padding: 2px">
 <div class="container">
+	<!-- navbar header -->
+	<!-- navbar header -->
 	<div class="navbar-header" >
 		<%= link_to image_tag('logobeta.png', id: "brand-image"), posts_path , class: "navbar-brand", id: 'navbar-brand-link'%>
 		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
@@ -35,11 +37,18 @@
 			<span class="icon-bar"></span>
 		</button>
 	</div>
+	<!-- navbar header -->
+	<!-- navbar header -->
 
+	<!-- collapase -->
+	<!-- collapase -->
+	<!-- collapase -->
 	<div class="collapse navbar-collapse" id="nav-collapse">	
+		<!-- navbar-form -->
+		<!-- navbar-form -->
 		<form class="navbar-form navbar-left" onsubmit="return false" role="search">
 			<div class="input-group" id="holder-search">
-				<input id="nav_search_input" autocomplete="off" type="text" class="form-control" style="background-color:rgba(104,104,104,0.3)" placeholder="태그 검색" />
+				<input id="nav_search_input" autocomplete="off" type="text" class="form-control" style="background-color:rgba(204,204,204,0.3)" placeholder="태그 검색" />
 				<div id="dropdown-search">
 					<div>추천 태그 검색 준비중</div>
 					<div>추천 태그 검색 준비중</div>
@@ -65,10 +74,7 @@
 			<%# 모바일에 한해서 네브바에 인기 태그 %>
 		</form>
 		<script>
-			$(function(){
-				$('#nav_search_submit').click(function(){
-					// 일단 #제거, 태그엔 특수문자 허용하지 말까?
-					$('#nav_search_submit').attr('href', '/posts?tag=' + $("#nav_search_input").val())
+			$(function(){ $('#nav_search_submit').click(function(){ // 일단 #제거, 태그엔 특수문자 허용하지 말까?  $('#nav_search_submit').attr('href', '/posts?tag=' + $("#nav_search_input").val())
 				})	
 
 				$('#nav_search_input').keyup(function(e){
@@ -78,95 +84,21 @@
 				})
 			})
 		</script>
+		<!-- navbar-form -->
+		<!-- navbar-form -->
 
 
+		<!-- navbar-right -->
+		<!-- navbar-right -->
+		<!-- navbar-right -->
 		<div id="navbar" class="navbar-right" >
+
+		<!-- 로그인상태일 때 -->
 		<% if current_user %>
-			<% if current_user.use_photo %>
-				<!-- 여기 둥글게 스타일 입혀야댐 -->
-				<%= link_to image_tag(current_user.photo, id:"profile_img", class: "nav-icon-nohover"), "/my_feeld" %>
-			<% else %>
-				<img id="profile_img" class="nav-icon-nohover" src="<%= current_user.image_url%>" style="border-radius:3px">
-			<% end %>
+			
+			<%#= link_to image_tag('logout.png', class: "nav-icon-nohover"), logout_path, method: :delete  %>
 
-			<a href="/my_feeld">
-				<%= image_tag "myfeeld.png", class: "nav-icon icon-hover", data: {reverse: "#{image_path "myfeeldrev.png"}"} %>
-			</a>
-
-			<%# link_to image_tag('home.png', class: "nav-icon"), posts_path  %>
-
-			<% if not browser.device.mobile? %>
-			<a href="#message" id='msg_btn' rel="popover" data-placement="bottom">
-				<div id="msg_icon_container" style="display:inline">
-					<%= image_tag "msg.png", class: "nav-icon", id:"msg_icon", data: {reverse: "#{image_path "msgrev.png"}"} %>
-				</div>
-			</a>
-			<% else %>
-					<%= link_to image_tag("msg.png", class: "nav-icon", id:"msg_icon", data: {reverse: "#{image_path "msgrev.png"}"}), events_path, remote: true %>
-			<% end %>
-
-			<% current_user.inverse_events.each do |event| %>
-				<% if not event.check %>
-				<script>
-					$("#msg_icon_container")
-							.css('position', 'relative')
-							.append('<span	style="background: white; color:black; border-radius: 5px; padding-left: 4px;  position:absolute; margin-left:10%; top:13px; right:5px; font-size:0.9em; width: 17px; height:18px;">N</span>')	
-
-				</script>
-				<% break %>
-				<% end %>
-			<% end %>
-
-			<div id="popover-msg-content" class="hide">
-				<% if current_user.inverse_events.any? %>
-					<% colorW = "white" %>
-					<% colorG = "rgba(50,50,50,0.1)" %>
-					<% current_user.inverse_events.reverse[0..7].each do |event| %>
-					<% if event.check %>
-						<div style="position: relative; width:235px; height:60px; background:<%= colorW %>; margin-bottom: 5px; padding:5px;; border-radius: 5px;">
-					<% else %>	
-						<div style="position: relative; width:235px; height:60px; background:<%= colorG %>; margin-bottom: 5px; padding:5px;; border-radius: 5px;">
-					<% end %>
-							<% if event.user.use_photo %>
-								<%= link_to image_tag(event.user.photo, class: "nav-event-img"), "/my_feeld?user_id=#{event.user.id}" %> 
-							<% else %>
-								<%= link_to image_tag(event.user.image_url, class: "nav-event-img"), "/my_feeld?user_id=#{event.user.id}" %> 
-							<% end %> 
-
-							<%= link_to event.user.name, "/my_feeld?user_id=#{event.user.id}" %> 님이
-
-							<% if event.event_type == 0 %>
-								 <strong>팔로우</strong>하셨습니다
-							<% elsif event.event_type == 1 %>
-								<%= link_to truncate(event.post.title, length:10), post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 <strong>댓글</strong>을 남기셨습니다
-							<% elsif event.event_type == 2 %>
-								<%= link_to truncate(event.post.title, length:10), post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 <strong>Feel'd!</strong> 를 누르셨습니다
-							<% else %>
-								이상한 값임.
-							<% end %>
-						</div>
-					<% end %>
-					<%= link_to "더 보기", events_path, id: "more-events", class: "btn btn-default btn-block", remote: true %>
-				<% else %>
-					새로운 이벤트가 없습니다 ;D
-				<% end %>
-			</div>
-			<script>
-				$(function(){
-					$('#msg_btn').popover({
-						html: true,
-						content: function() {
-							return $('#popover-msg-content').html()
-						}
-					});
-				});
-			</script>
-
-			<a href="<%= edit_user_path(current_user.id)%>">
-			<%= image_tag "setting.png", class: "nav-icon", data: {reverse: "#{image_path "settingrev.png"}"}%>
-
-			<%= link_to image_tag('logout.png', class: "nav-icon-nohover"), logout_path, method: :delete  %>
-
+		<!-- 로그인 안되어 있으면 -->
 		<% else %>
 			<a href="/login">
 				<%= image_tag "navlogin.png", class: 'nav-icon-nohover'%>
@@ -176,7 +108,135 @@
 			</a>
 		<% end %>
 		</div>
+		<!-- navbar-right -->
+		<!-- navbar-right -->
+		<!-- navbar-right -->
 
-	</div> <!-- collapase -->
+		<!-- navbar-right -->
+		<!-- navbar-right -->
+		<!-- navbar-right -->
+		<%# 리스트 간의 간격을 조정하기 위해 li밑에 a엘리먼트에 padding-right 및 padding에 대한 스타일을 inline으로 추가함%>
+		<%# 리스트 간의 간격을 조정하기 위해 li밑에 a엘리먼트에 padding-right 및 padding에 대한 스타일을 inline으로 추가함%>
+		<ul class="nav navbar-nav navbar-right" >
+			<li>
+				<!-- feeldup icon -->
+				<a href="#" id="feeldup">
+					<span>+ UPLOAD</span>
+				</a>
+				<!-- feeldup icon -->
+			</li>
+			<li>
+				<!-- msg icon -->
+				<%= link_to raw("<span><i class='fa fa-bell-o' aria-hidden='true'></i></span>"), events_path, remote: true, id: 'msg_btn' %>
+				<!-- msg icon -->
+				
+				<!-- 삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정 -->
+				<!-- 삭삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정제예정
+				<a href="#" style="padding-right:0">
+					<span id="msg_btn" rel="popover" data-placement="bottom" >
+						<% if not browser.device.mobile? %>
+							<i class="fa fa-bell-o" aria-hidden="true"></i>
+							<div id="msg_icon_container" style="display:inline; padding:0;">
+							</div>
+						<% else %>
+							<%= link_to raw("<i class='fa fa-bell-o' aria-hidden='true'></i>"), events_path, remote: true %>
+						<% end %>
+					</span>
+				</a>
+				-->
+				<!-- n 표시 하려고 -->
+				<%# current_user.inverse_events.each do |event| %>
+					<%# if not event.check %>
+					<script>
+						//$("#msg_icon_container")
+								//.css('position', 'relative')
+								//.append('<span	style="background: white; color:black; border-radius: 5px; padding-left: 4px;  
+								// position:absolute; margin-left:10%; top:13px; right:5px; font-size:0.9em; width: 17px; height:18px;">N</span>')	
+								// 일단 이거 주석처리함 N 표시
+					</script>
+					<%# break %>
+					<%# end %>
+				<%# end %>
+				<!-- msg icon -->
+				<!-- msg icon -->
+				<!-- 바로 밑에 달리는삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정 -->
+				<!-- 바로 밑에 달리는삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정 -->
+				<!-- popover-msg-content -->
+				<!-- popover-msg-content -->
+				<div id="popover-msg-content" class="hide">
+					<% if current_user.inverse_events.any? %>
+						<% colorW = "white" %>
+						<% colorG = "rgba(50,50,50,0.1)" %>
+						<% current_user.inverse_events.reverse[0..7].each do |event| %>
+						<% if event.check %>
+							<div style="position: relative; width:235px; height:60px; background:<%= colorW %>; margin-bottom: 5px; padding:5px;; border-radius: 5px;">
+						<% else %>	
+							<div style="position: relative; width:235px; height:60px; background:<%= colorG %>; margin-bottom: 5px; padding:5px;; border-radius: 5px;">
+						<% end %>
+								<% if event.user.use_photo %>
+									<%= link_to image_tag(event.user.photo, class: "nav-event-img"), "/my_feeld?user_id=#{event.user.id}" %> 
+								<% else %>
+									<%= link_to image_tag(event.user.image_url, class: "nav-event-img"), "/my_feeld?user_id=#{event.user.id}" %> 
+								<% end %> 
+
+								<%= link_to event.user.name, "/my_feeld?user_id=#{event.user.id}" %> 님이
+
+								<% if event.event_type == 0 %>
+									 <strong>팔로우</strong>하셨습니다
+								<% elsif event.event_type == 1 %>
+									<%= link_to truncate(event.post.title, length:10), post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 <strong>댓글</strong>을 남기셨습니다
+								<% elsif event.event_type == 2 %>
+									<%= link_to truncate(event.post.title, length:10), post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 <strong>Feel'd!</strong> 를 누르셨습니다
+								<% else %>
+									이상한 값임.
+								<% end %>
+							</div>
+						<% end %>
+						<%= link_to "더 보기", events_path, id: "more-events", class: "btn btn-default btn-block", remote: true %>
+					<% else %>
+						새로운 이벤트가 없습니다 ;D
+					<% end %>
+				</div>
+				<script>
+					/*
+					$(function(){
+						$('#msg_btn').popover({
+							html: true,
+							content: function() {
+								return $('#popover-msg-content').html()
+							}
+						});
+					});
+					*/
+				</script>
+				<!-- popover-msg-content 삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정-->
+				<!-- popover-msg-content 삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정-->
+			</li>
+			<li class="dropdown">
+				<!-- profile icon -->
+				<!-- profile icon -->
+				<a id="profile_img" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+				<% if current_user.use_photo %>
+					<!-- 여기 둥글게 스타일 입혀야댐 -->
+					<%= image_tag(current_user.photo) %>
+				<% else %>
+					<img src="<%= current_user.image_url%>">
+				<% end %>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Action</a></li>
+					<li><a href="#">Another action</a></li>
+					<li><a href="#">Something else here</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="#">Separated link</a></li>
+				</ul>
+				<!-- profile icon -->
+				<!-- profile icon -->
+			</li>
+		</ul>
+	</div> 
+	<!-- collapase -->
+	<!-- collapase -->
+	<!-- collapase -->
 </div>
 </nav>
