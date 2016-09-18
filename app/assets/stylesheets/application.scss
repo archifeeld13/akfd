@@ -52,8 +52,14 @@
 	z-index: 501 !important;
 }
 
+// 프사 눌렀을 때 배경 바뀌는거 해결 
+.navbar-default .navbar-nav > .open > a{
+	background-color: transparent !important;
+}
+
 #profile_img{
 	padding: 10px 10px;
+	padding-right: 0;
 	img{
 		width: 30px;
 		height: 30px;
@@ -74,6 +80,30 @@
 }
 
 #msg_btn{
+	padding-left: 10px;
+	padding-right: 0;
+	span{
+		border-radius: 5px;
+		border: 1px solid gray;
+		padding: 5px;
+		font-size: 1.1em;
+		color: rgb(200,200,200);
+	}
+}
+
+#login_btn{
+	padding-left: 10px;
+	padding-right: 0;
+	span{
+		border-radius: 5px;
+		border: 1px solid gray;
+		padding: 5px;
+		font-size: 1.1em;
+		color: rgb(200,200,200);
+	}
+}
+
+#join_btn {
 	padding-left: 10px;
 	padding-right: 0;
 	span{

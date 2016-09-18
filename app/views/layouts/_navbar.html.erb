@@ -93,20 +93,8 @@
 		<!-- navbar-right -->
 		<div id="navbar" class="navbar-right" >
 
-		<!-- 로그인상태일 때 -->
-		<% if current_user %>
 			
-			<%#= link_to image_tag('logout.png', class: "nav-icon-nohover"), logout_path, method: :delete  %>
 
-		<!-- 로그인 안되어 있으면 -->
-		<% else %>
-			<a href="/login">
-				<%= image_tag "navlogin.png", class: 'nav-icon-nohover'%>
-			</a>
-			<a href="<%= new_user_path %>">
-				<%= image_tag "navregister.png", class: 'nav-icon-nohover' %>
-			</a>
-		<% end %>
 		</div>
 		<!-- navbar-right -->
 		<!-- navbar-right -->
@@ -118,6 +106,8 @@
 		<%# 리스트 간의 간격을 조정하기 위해 li밑에 a엘리먼트에 padding-right 및 padding에 대한 스타일을 inline으로 추가함%>
 		<%# 리스트 간의 간격을 조정하기 위해 li밑에 a엘리먼트에 padding-right 및 padding에 대한 스타일을 inline으로 추가함%>
 		<ul class="nav navbar-nav navbar-right" >
+			<!-- 로그인상태일 때 -->
+			<% if current_user %>
 			<li>
 				<!-- feeldup icon -->
 				<a href="#" id="feeldup">
@@ -228,11 +218,30 @@
 					<li><a href="#">Another action</a></li>
 					<li><a href="#">Something else here</a></li>
 					<li role="separator" class="divider"></li>
-					<li><a href="#">Separated link</a></li>
+					<li>
+						<%= link_to '로그아웃', logout_path, method: :delete  %>
+					</li>
 				</ul>
 				<!-- profile icon -->
 				<!-- profile icon -->
 			</li>
+			<!-- 로그인 안되어 있으면 -->
+			<% else %>
+			<li>
+				<!-- login icon -->
+				<a href="/login" id="login_btn">
+					<span>Login</span>
+				</a>
+				<!-- login icon -->
+			</li>
+			<li>
+				<!-- join icon -->
+				<a href="<%=new_user_path%>" id="join_btn">
+					<span>Join</span>
+				</a>
+				<!-- join icon -->
+			</li>
+			<% end %>
 		</ul>
 	</div> 
 	<!-- collapase -->
