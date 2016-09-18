@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
 	#root 'sessions#new'
-	root 'posts#notice' 
-	# root 'posts#index' 
+	
+	#
+	# 전환할 때 이변수 두개 왔다 갔다
+	#root 'posts#notice' 
+	root 'posts#index' 
 
 	resources :backgrounds, only: [:create, :new, :destroy]
 

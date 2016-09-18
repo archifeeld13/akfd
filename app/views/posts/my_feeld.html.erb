@@ -8,93 +8,95 @@
 	//})
 </script>
 
-<div id="user_info_panel">
-	<%# http://stackoverflow.com/questions/2821061/facebook-api-how-do-i-get-a-facebook-users-profile-image-through-the-facebook %>
-	<% if !@user.use_photo %>
-		<%#= link_to image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130", id: "message_box"), "/message_box/#{@user.id}", remote: true %>
-		<%= image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130") %>
-	<% else %>
-		<%#= link_to image_tag(@user.photo, class: "my_feeld_profile_img", id: "message_box"), "/message_box/#{@user.id}", remote: true %>
-		<%= image_tag(@user.photo, class: "my_feeld_profile_img", id: "message_box")%>
-	<% end %>
+<div class="container">
+	<div id="user_info_panel">
+		<%# http://stackoverflow.com/questions/2821061/facebook-api-how-do-i-get-a-facebook-users-profile-image-through-the-facebook %>
+		<% if !@user.use_photo %>
+			<%#= link_to image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130", id: "message_box"), "/message_box/#{@user.id}", remote: true %>
+			<%= image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130") %>
+		<% else %>
+			<%#= link_to image_tag(@user.photo, class: "my_feeld_profile_img", id: "message_box"), "/message_box/#{@user.id}", remote: true %>
+			<%= image_tag(@user.photo, class: "my_feeld_profile_img", id: "message_box")%>
+		<% end %>
 
-	<div id="user_info_name_dept">
-		<span style="font-weight: bold; font-size: 1.4em;">
-			<%if @user.use_nick %>
-				<%if @user.id == 1 %>
-					<span style="color:pink">	
+		<div id="user_info_name_dept">
+			<span style="font-weight: bold; font-size: 1.4em;">
+				<%if @user.use_nick %>
+					<%if @user.id == 1 %>
+						<span style="color:pink">	
+							<%= @user.nickname%>
+						</span>
+					<% elsif @user.id == 6 %>
+						<span style="color:skyblue">
+							<%= @user.nickname %>
+						</span>
+					<% else %>
 						<%= @user.nickname%>
-					</span>
-				<% elsif @user.id == 6 %>
-					<span style="color:skyblue">
-						<%= @user.nickname %>
-					</span>
+					<% end %>
 				<% else %>
-					<%= @user.nickname%>
+					<%= @user.name %>
 				<% end %>
-			<% else %>
-				<%= @user.name %>
-			<% end %>
-		</span>
-		<span style="color:gray; font-size: 1.2em; white-space: nowrap">
-			@<%= @user.company %>
-		</span><br>
-		<% if current_user %>
-			<% if @user.id == current_user.id %>
-				<a style="color:#B1DB4E; font-size: 1.2em; font-weight:bold" href="users/<%=@user.id%>/edit">프로필 편집</a><br>
-			<% else %>
-				<% if @user.inverse_friends.include? current_user %>
-					<%= link_to "팔로우 끊기", friendship_path(Friendship.find_by(user_id: current_user.id, friend_id: @user.id)), :method => :delete, class: "follow-link"%>
+			</span>
+			<span style="color:gray; font-size: 1.2em; white-space: nowrap">
+				@<%= @user.company %>
+			</span><br>
+			<% if current_user %>
+				<% if @user.id == current_user.id %>
+					<a style="color:#B1DB4E; font-size: 1.2em; font-weight:bold" href="users/<%=@user.id%>/edit">프로필 편집</a><br>
 				<% else %>
-					<%= link_to "팔로우 하기", friendships_path(friend_id: @user.id), :method => :post, class: "follow-link" %>
+					<% if @user.inverse_friends.include? current_user %>
+						<%= link_to "팔로우 끊기", friendship_path(Friendship.find_by(user_id: current_user.id, friend_id: @user.id)), :method => :delete, class: "follow-link"%>
+					<% else %>
+						<%= link_to "팔로우 하기", friendships_path(friend_id: @user.id), :method => :post, class: "follow-link" %>
+					<% end %>
 				<% end %>
 			<% end %>
+		</div>
+
+		<div id="user_info_counts">
+			<span style="color:gray; font-size: 1.2em; margin-right:15%;">
+				게시글
+			</span>
+			<span style="font-size: 1.2em; font-weight:bold">
+				<%= @user.posts.count %>	
+			</span><br>
+
+			<span style="color:gray;  font-size: 1.2em; margin-right:15%;">
+				팔로우	
+			</span>
+			<span style="font-size: 1.2em; font-weight:bold">
+				<%= link_to @user.friendships.count, "/friendships/#{@user.id}/follow", remote: true %>
+			</span><br>
+
+			<span style="color:gray; font-size: 1.2em; margin-right:15%;">
+				팔로워
+			</span>
+			<span style="font-size: 1.2em; font-weight:bold">
+				<%= link_to @user.inverse_friends.count, "/friendships/#{@user.id}/follower", remote: true %>
+			</span><br>
+		</div>
+	</div>
+	<div id="my_feeld_menu">
+		<% if current_user and current_user.id == @user.id %>
+			<div id="archive">아카이브</div>	
+			<div id="archive_hover">
+				<%= link_to raw('<div id="archive_mine">내 것만 보기</div>'), "/archive_mine", remote: true %>
+				<%= link_to raw('<div id="archive_share">필드인 목록</div>'), "/archive_share", remote: true %>
+			</div>	
+			<%= link_to raw('<div id="project_management">바인더</div>'), "/project_management", remote: true %>
+		<% else %>
+			<div id="archive">아카이브</div>	
+			<div id="archive_hover">
+				<%= link_to raw('<div id="archive_mine">내 것만 보기</div>'), "/archive_mine?user_id=#{@user.id}", remote: true %>
+				<%= link_to raw('<div id="archive_share">필드인 목록</div>'), "/archive_share?user_id=#{@user.id}", remote: true %>
+			</div>	
+			<%= link_to raw('<div id="project_management">바인더</div>'), "/project_management?user_id=#{@user.id}", remote: true %>
 		<% end %>
 	</div>
 
-	<div id="user_info_counts">
-		<span style="color:gray; font-size: 1.2em; margin-right:15%;">
-			게시글
-		</span>
-		<span style="font-size: 1.2em; font-weight:bold">
-			<%= @user.posts.count %>	
-		</span><br>
-
-		<span style="color:gray;  font-size: 1.2em; margin-right:15%;">
-			팔로우	
-		</span>
-		<span style="font-size: 1.2em; font-weight:bold">
-			<%= link_to @user.friendships.count, "/friendships/#{@user.id}/follow", remote: true %>
-		</span><br>
-
-		<span style="color:gray; font-size: 1.2em; margin-right:15%;">
-			팔로워
-		</span>
-		<span style="font-size: 1.2em; font-weight:bold">
-			<%= link_to @user.inverse_friends.count, "/friendships/#{@user.id}/follower", remote: true %>
-		</span><br>
+	<div id="posts-container">
+		<%= render @posts %>
 	</div>
-</div>
-<div id="my_feeld_menu">
-	<% if current_user and current_user.id == @user.id %>
-		<div id="archive">아카이브</div>	
-		<div id="archive_hover">
-			<%= link_to raw('<div id="archive_mine">내 것만 보기</div>'), "/archive_mine", remote: true %>
-			<%= link_to raw('<div id="archive_share">필드인 목록</div>'), "/archive_share", remote: true %>
-		</div>	
-		<%= link_to raw('<div id="project_management">바인더</div>'), "/project_management", remote: true %>
-	<% else %>
-		<div id="archive">아카이브</div>	
-		<div id="archive_hover">
-			<%= link_to raw('<div id="archive_mine">내 것만 보기</div>'), "/archive_mine?user_id=#{@user.id}", remote: true %>
-			<%= link_to raw('<div id="archive_share">필드인 목록</div>'), "/archive_share?user_id=#{@user.id}", remote: true %>
-		</div>	
-		<%= link_to raw('<div id="project_management">바인더</div>'), "/project_management?user_id=#{@user.id}", remote: true %>
-	<% end %>
-</div>
-
-<div id="posts-container">
-	<%= render @posts %>
 </div>
 
 <script >

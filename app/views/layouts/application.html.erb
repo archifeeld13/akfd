@@ -82,6 +82,7 @@
 	<!-- nav bar : 사이즈 키워야됨. http://bootsnipp.com/snippets/featured/advanced-dropdown-search-->
 	<%= render :partial => 'layouts/navbar' %>
 
+<!--
 	<% if not browser.device.mobile? %>
 
 		<div id="right_fixed_menu">
@@ -141,12 +142,14 @@
 			</div>
 
 		</div>
+-->
 		<!-- 오른쪽 고정 메뉴이다 끝 -->
 
 		<!-- contents container -->
-		<div id="contents-container" >
-			<%= yield %>
-		</div>
+		 <!-- 컨트롤바가 여기에 와야하는데.. -->
+			<div id="contents-container" >
+				<%= yield %>
+			</div>
 		<!-- contents container end -->
 
 	<% else %>
