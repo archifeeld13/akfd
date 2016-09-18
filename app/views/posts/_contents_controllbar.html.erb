@@ -11,43 +11,49 @@
 </style>
 <div id="contents-controllbar">
 	<div class="container">
-		<div id="cc-wrapper">
-			<div class="row">
-			<div class="col-md-7" style="color:rgb(30,30,30);"><%= flash[:notice].html_safe %></div>
-			<%#<span style="float:right; margin-right: 5px; white-space: nowrap; ">%>
-			<div class="col-md-5 " style="white-space: nowrap; text-align:right">
-				
+			<%#= flash[:notice].html_safe %>
+			<!--
+			<div class="cc-item">
 				<% if @selected == "timeline"	%>
 					<a href="/timeline" class="selected" >타임라인</a>
 				<% else %>
 					<a href="/timeline" class="non-selected">타임라인</a>
 				<% end %>
+			</div>
+			-->
 
+			<div class="cc-item">
 				<% if @selected == "posts" %>
 					<a href="/posts" class="selected" >전체보기</a>
 				<% else %>
 					<a href="/posts" class="non-selected">전체보기</a>
 				<% end %>
+			</div>
 
-				<% if @selected == "link" %>
-					<a href="/posts?type=link" class="selected" >링크</a>
-				<% else %>
-					<a href="/posts?type=link" class="non-selected">링크</a>
-				<% end %>
-
-				<% if @selected == "college" %>
-					<a href="/posts?type=college" class="selected" >학교</a>
-				<% else %>
-					<a href="/posts?type=college" class="non-selected" >학교</a>
-				<% end %>
-
+			<div class="cc-item" >
 				<% if @selected == "txt" %>
 					<a href="/posts?type=txt" id="filter_only_text" class="selected">필드톡</a>
 				<% else %>
 					<a href="/posts?type=txt" id="filter_only_text" class="non-selected">필드톡</a>
 				<% end %>
 			</div>
+
+			<div class="cc-item">
+				<% if @selected == "link" %>
+					<a href="/posts?type=link" class="selected" >링크</a>
+				<% else %>
+					<a href="/posts?type=link" class="non-selected">링크</a>
+				<% end %>
 			</div>
+
+			<div class="cc-item" style="border-right: 1px solid rgb(200,200,200);">
+				<% if @selected == "college" %>
+					<a href="/posts?type=college" class="selected" >학교</a>
+				<% else %>
+					<a href="/posts?type=college" class="non-selected" >학교</a>
+				<% end %>
+			</div>
+
 		</div>
 	</div>
 </div>

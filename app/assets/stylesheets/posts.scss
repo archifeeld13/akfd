@@ -16,29 +16,32 @@
 	position: fixed;
 	top: 55px;
 	//width: 100%;
-	font-size: 1.1em;
+	font-size: 1.2em;
+	color: rgb(150,150,150);
 	z-index: 499; 
 	border: 1px solid #eaeaea;
 	background: rgba(255,255,255,0.7);
-	padding: 5px 5px;
 
-	#cc-wrapper{
-		position: relative;
-		width: 100%;
+	padding: 0; 
+
+	.cc-item{
+		height: 100%;
+		padding: 5px 20px;
+		float:left;
+		border-left: 1px solid rgb(200,200,200);
 	}
 }
 
 #reco-container{
 	width:100%;
 	height: 300px;
-	background: green;
 
 	#reco-users{
 		float: left;
 		width:19%;
 		margin: 0 0.5%;
 		height: 300px;
-		background: yellow;
+		background: white ;
 		border-radius: 5px;
 		padding: 1%;
 		.reco-user{
@@ -53,7 +56,7 @@
 		width:39%;
 		margin: 0 0.5%;
 		height: 300px;
-		background: orange;
+		background: white;
 		border-radius: 5px;
 	}
 	#reco-posts{
@@ -61,7 +64,7 @@
 		width:39%;
 		margin: 0 0.5%;
 		height: 300px;
-		background: red;
+		background: white;
 		border-radius: 5px;
 	}
 }
