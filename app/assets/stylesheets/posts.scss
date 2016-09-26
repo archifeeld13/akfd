@@ -33,6 +33,7 @@
 	width:100%;
 	height: 300px;
 	margin-bottom: 5px;
+	overflow: hidden;
 
 	#reco-users{
 		float: left;
@@ -44,9 +45,11 @@
 		padding: 1%;
 		.reco-user{
 			margin: 2.5% 0;	
+			white-space: nowrap;
 		}
 		img{
 			width: 40px;	
+			height: 40px;	
 		}
 	}
 	#reco-binders{
@@ -67,12 +70,15 @@
 	}
 }
 
+#posts-container{
+	width: 100%;
+}
 // 이걸 application.css의 contents-container / mobile 여기안에 포함시키면
 // 스타일을 모바일과 PC 따로 적용할 수 있을것 같다 (확인함)
 // user-info panel도 마찬가지로 분기할 수 있을 것 같다 
 .posts-item{
 	position: relative;
-	width:218px; height:375px; float:left; 
+	width:215px; height:350px; float:left; 
 	background:white; 
 	margin: 5px;
 	border-radius: 5px;
@@ -86,16 +92,6 @@
 		width:15px;	
 	}
 
-	.posts-item-writer{
-		height: 10%;
-		a{
-			color: black;	
-		}
-		img{
-			width:25px; height: 25px; border-radius: 3px; margin:7px;
-		}
-		border-top: 1px solid #EEEEEE;
-	}
 	.posts-item-img{
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
@@ -104,19 +100,19 @@
 		object-fit: cover;
 	}
 	.posts-item-text{
-		height: 60%;
+		height: 50%;
 		width: 100%;
 		margin: 0;
 		padding: 2%;
 		color: black;
 		overflow: hidden;
 	}
-
+	// 글 제목 및 아이콘들 40%
 	.posts-item-info{
+		height: 40%;
 		position: relative;
 		padding:5%;
 		padding-bottom: 0;
-		height: 30%;
 		.posts-item-title{
 			color: #a0a0a0;
 			a{
@@ -137,6 +133,17 @@
 				white-space: nowrap;
 			}
 		}
+	}
+	// 유저 이름부분 10%
+	.posts-item-writer{
+		height: 10%;
+		a{
+			color: black;	
+		}
+		img{
+			width:25px; height: 25px; border-radius: 3px; margin:5px;
+		}
+		border-top: 1px solid #EEEEEE;
 	}
 }
 

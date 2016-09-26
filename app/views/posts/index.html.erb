@@ -1,5 +1,7 @@
 <%= render 'contents_controllbar'%>
+
 <div class="container">
+
 	<% if request.original_fullpath == "/posts" %>
 	<div id="reco-container">
 		<div id="reco-users">
@@ -21,7 +23,7 @@
 		</div>
 		<div id="reco-binders">
 			<h4>HIT 바인더</h4>
-					<%= link_to "유저검색" '/user_search', remote: true %>
+					<%= link_to "유저검색", '/user_search', remote: true %>
 		</div>
 		<div id="reco-posts">
 			<h4>HIT 필디</h4>
@@ -40,6 +42,7 @@
 		</div>
 	</div>
 	<% end %>
+
 	<div id="posts-container">
 		<%= render @posts %>
 	</div>

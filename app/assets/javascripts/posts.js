@@ -6,18 +6,24 @@
 // 브라우저 크기 조정시 불리는 함수
 function postsColumnResize(){
 	//var pWidth = $('.posts-item').width() // 없을 땐 너비를 못찾아서절대값 넣음 
-	var pWidth = 218;  
+	var pWidth = 215;  
+	var pMargin = 5 * 2;
 		$('#posts-container')
-			.css('margin-left', ($('#posts-container').width() % (pWidth + 10))/2) 
-			//.css('width', window_width - (except_RFM % (pWidth + 20)) ) // 각 포스트 아이템 마진 사방으로 20px임
+			.css('margin-left', ($('#posts-container').width() % (pWidth + pMargin))/2) 
+
+		$('#nav_search_input').val((($('#posts-container').width() % (pWidth + pMargin))/2) + "," + pWidth + "," + pMargin + "," +$('#reco-container').width())
 
 		$("#contents-controllbar")
-			.css('width', $('#contents-container').width())// contents container와 너비가 같게 해준다
+			.css('width', $('#contents-container').width())// contents container와 너비가 같게 해준다 
 }
 
 
+// @outdated 
+// @outdated 
+// @outdated 
 // my_feeld의 메뉴들에 대한 이벤트를 정의한다
 // my_feeld의 메뉴들에 대한 이벤트를 정의한다
+/*
 function my_feeld_menu_event(){
 	// 필드 아카이브에 hover했을 때
 	$("#archive").hover(
@@ -82,13 +88,17 @@ function my_feeld_menu_event(){
 		}
 	);
 }
+*/
+// @outdated 
+// @outdated 
+// @outdated 
 
 
 $(function(){
 	postsColumnResize();
 
 	// 처음엔 숨겨 놔야만 함
-	$('#archive_hover').hide();
+	// $('#archive_hover').hide();
 	
 	// index
 	// index
@@ -98,7 +108,7 @@ $(function(){
 	// my_feeld
 	// my_feeld
 	// 메뉴 이벤트
-	my_feeld_menu_event();
+	// my_feeld_menu_event();
 })
 
 //# window resize

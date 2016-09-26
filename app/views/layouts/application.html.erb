@@ -89,6 +89,7 @@
 	<!-- nav bar : 사이즈 키워야됨. http://bootsnipp.com/snippets/featured/advanced-dropdown-search-->
 	<%= render :partial => 'layouts/navbar' %>
 
+	<% if not browser.device.mobile? %>
 		<!-- contents container -->
 			<div id="contents-container" >
 				<%= yield %>
