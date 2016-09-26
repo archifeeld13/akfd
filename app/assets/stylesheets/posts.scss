@@ -378,8 +378,8 @@
 	margin: 0.5%;
 	border-radius:5px;
 	padding:3%;
+	color: rgb(150,150,150);
 	img {
-		border-radius:5px;
 		float:left;
 		margin-right: 3%;
 	}
@@ -389,7 +389,11 @@
 	}
 	#user_info_counts{
 		float: right;
-		width: 180px;
+		width: 210px;
+		table{
+			width: 100%; 
+			text-align: center;
+		}
 	}
 	.follow-link{
 	 color:rgb(208,241,68); font-size: 1em; font-weight:bold;
@@ -398,64 +402,33 @@
 
 #my_feeld_menu{
 	width:99%;
-	height: 50px;
+	height: 30px;
 
-	margin: 10px 0.5%;
+	margin: 0 0.5%;
 	margin-bottom: 5px;
 	padding: 0;
-	font-size: 1.2em;
-	font-weight: bold;
 	text-align: center;
 
-	#archive {
-		height:100%;
+	.my_feeld_menu_item{
 		float: left;
-
-		background: #CFCFCF;
-		width:49.5%;
-		border-radius: 5px;
+		color: rgb(150,150,150);
+		background: white;
+		width:10%;
+		border-radius: 0 0 5px 5px;
 		margin-right: 0.5%;
-		padding-top: 13px;
+		padding: 3px;;
 	}
-	#archive_hover{
-		height:100%;
-		float: left;
 
-		width:49.5%;
+	.my_feeld_menu_item_right{
+		float: right;
+		color: rgb(150,150,150);
+		width: 8%;
+		border-radius: 0 0 5px 5px;
 		margin-right: 0.5%;
-		padding: 0;
-
-		#archive_mine{
-			height:100%;
-			float: left;
-
-			background: #EAEAEA;
-			width:50%;
-			border-top-left-radius: 5px;
-			border-bottom-left-radius: 5px;
-			padding-top: 13px;
-		}
-		#archive_share{
-			height:100%;
-			float: left;
-
-			background:#EAEAEA;
-			width:50%;
-			border-top-right-radius: 5px;
-			border-bottom-right-radius: 5px;
-			padding-top: 13px;
-		}
+		padding: 4px;;
 	}
-	#project_management{
-		height:100%;
-		float: left;
 
-		background: #CFCFCF;
-		width:49.5%;
-		border-radius: 5px;
-		margin-left: 0.5%;
-		padding-top: 13px;
-	}
+
 
 	a{
 		color: black	

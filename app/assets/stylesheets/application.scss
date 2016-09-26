@@ -121,6 +121,22 @@
 	}
 }
 
+#add_binder{
+	padding-left: 10px;
+	padding-right: 0;
+	span{
+		background:white; // diff
+		border-radius: 3px;
+		border: 1px solid gray;
+		padding: 5px;	
+		padding-right : 12px;
+		padding-left: 12px;
+		font-size: 1.0em;
+		color: rgb(200,200,200);
+	}
+}
+
+
 #brand-image{
 	height:30px;
 	margin:10px;

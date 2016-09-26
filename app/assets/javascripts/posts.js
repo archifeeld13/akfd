@@ -11,8 +11,6 @@ function postsColumnResize(){
 		$('#posts-container')
 			.css('margin-left', ($('#posts-container').width() % (pWidth + pMargin))/2) 
 
-		$('#nav_search_input').val((($('#posts-container').width() % (pWidth + pMargin))/2) + "," + pWidth + "," + pMargin + "," +$('#reco-container').width())
-
 		$("#contents-controllbar")
 			.css('width', $('#contents-container').width())// contents container와 너비가 같게 해준다 
 }
