@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
 	before_action :set_fav_posts
 	before_action :set_fav_tags
-	#before_action :set_fav_users
+	before_action :set_fav_users
 
 	# http://www.sitepoint.com/rails-authentication-oauth-2-0-omniauth/
 	private
@@ -34,23 +34,12 @@ class ApplicationController < ActionController::Base
 		end
 
 
-		# 패망 여기서 3초 이상 걸림
-		# 패망 여기서 3초 이상 걸림
-		# 패망 여기서 3초 이상 걸림
 		def set_fav_users
-			@fav_users = User.all
-			@fav_users= @fav_users.to_a
-			# 일단 간단하게
-			#@fav_users.sort! {|x, y| (y.posts.count) <=> (x.posts.count)}
-			# 정렬하기보단
-			tmp = []
-			@fav_users.each do |u|
-				# 최근 쓴글로 발전 시킬수있으면 좋을 텐데 -> 그냥 최근글이 2주안에?쓴거면 추가하면될듯?
-				if u.posts.count > 5	
-					tmp << u	
-				end
+			@fav_users = []
+			fav_user= [117 ,119, 171, 228, 247, 253, 305, 782, 794, 831, 850, 1159, 1273]
+			fav_user.each do |u|
+				@fav_users << User.find(u)
 			end
-			@fav_users = tmp
 		end	
 
 	protected

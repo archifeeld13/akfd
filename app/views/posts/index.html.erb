@@ -1,9 +1,9 @@
 <%= render 'contents_controllbar'%>
-
 <div class="container">
+	<% if request.original_fullpath == "/posts" %>
 	<div id="reco-container">
 		<div id="reco-users">
-			<% User.all.shuffle[0,6].each do |user| %>
+			<% @fav_users.shuffle[0,6].each do |user| %>
 					<div class="reco-user">
 						<% if user.use_photo %>
 							<%= link_to image_tag(user.photo, class:"img-circle"), "/my_feeld?user_id=#{user.id}" %> 
@@ -21,6 +21,7 @@
 		</div>
 		<div id="reco-binders">
 			<h4>HIT 바인더</h4>
+					<%= link_to "유저검색" '/user_search', remote: true %>
 		</div>
 		<div id="reco-posts">
 			<h4>HIT 필디</h4>
@@ -38,6 +39,7 @@
 
 		</div>
 	</div>
+	<% end %>
 	<div id="posts-container">
 		<%= render @posts %>
 	</div>

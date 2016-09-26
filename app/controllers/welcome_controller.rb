@@ -148,6 +148,8 @@ class WelcomeController < ApplicationController
 	#render text: posts.length.to_s + "/" + len.to_s + " " + tags.to_s 
 	render text: ret 
 =end
+
+=begin
 	ret = ""
 	users = User.all
 	
@@ -166,9 +168,17 @@ class WelcomeController < ApplicationController
 			#ret += s.to_s + "/"+ c.to_s + "/" + l.to_s + "/" + v.to_s +  "<br/>"
 			ret += (s + c + l + v ).to_s + "</br>"
 		end
-	end
+=end
 
-	render text: ret
+=begin 아이디강제 생성
+	u = User.find(2077)
+	u.salt = BCrypt::Engine.generate_salt
+	u.password = BCrypt::Engine.hash_secret("5252", u.salt)
+	u.password_confirmation = BCrypt::Engine.hash_secret("5252", u.salt)
+	u.my_auth = true
+	u.save
+	render text:"good"
+=end
 
 	end
 

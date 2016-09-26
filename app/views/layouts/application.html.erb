@@ -38,6 +38,7 @@
 	<%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js" %>
 
 	<%# https://github.com/noraesae/perfect-scrollbar	%>	
+
 	<!--
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.10/js/min/perfect-scrollbar.jquery.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.10/css/perfect-scrollbar.min.css" rel="stylesheet">
@@ -51,8 +52,14 @@
 	<!--<link href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet"> -->
 	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
 
-
 	<%= stylesheet_link_tag 'lightbox.min.css' %>
+
+
+	<%# https://silviomoreto.github.io/bootstrap-select/ %>
+	i<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
 
 	<%= csrf_meta_tags %>
 
@@ -82,71 +89,7 @@
 	<!-- nav bar : 사이즈 키워야됨. http://bootsnipp.com/snippets/featured/advanced-dropdown-search-->
 	<%= render :partial => 'layouts/navbar' %>
 
-<!--
-	<% if not browser.device.mobile? %>
-
-		<div id="right_fixed_menu">
-
-			<a id="feeldup" href="#" data-reverse-img="<%=image_path "feelduprev.png"%>"><%= image_tag "feeldup.png" , data: {reverse: "#{image_path "feelduprev.png"}" }%></a>
-
-			<div class="RFMPanel">
-				<div class="RFMPanelTitle">인기 게시물&nbsp;<span id="fav_feeldup" style="color:darkgray; font-size:0.7em;cursor:pointer">더보기</span></div>
-				<hr style="margin:5px 0">
-				<div id="fav_feeldup_content">
-					<% @fav_posts[0,15].each do |post| %>
-						<div class="RFMPanelItem">
-							<% if post.title.size > 0 %>
-								<%= link_to truncate(post.title, length:22, separater: ' '), post, class: 'fav-posts' %></br>
-								<%#= link_to truncate(post.title, length:17, separater: ' '), post, remote:true, class: 'fav-posts' %>
-							<% else %>
-								<%= link_to truncate("제목 없음", length:22, separater: ' '), post, class: 'fav-posts' %></br>
-								<%#= link_to truncate("제목 없음", length:17, separater: ' '), post, remote:true, class: 'fav-posts' %>
-							<% end %>
-						</div>
-					<% end %>
-				</div>
-			</div>
-			<div class="RFMPanel" style="float:left">
-				<div class="RFMPanelTitle">추천 태그 &nbsp;<span id="fav_tag" style="color:darkgray; font-size:0.7em;cursor:pointer">더보기</span></div>
-				<hr style="margin:5px 0">
-				<div id="fav_tag_content">
-				<% @fav_tags[0..20].shuffle.each do |tag| %>
-					<div class="tag_div"><a href='/posts?tag=<%= tag %>' class='tag'><%= tag %></a></div>
-				<% end %>
-				</div>
-			</div>
-
-			<div style="clear:both"></div>
-
-			<div class="RFMPanel" >
-				<div class="RFMPanelTitle">추천 필드피플&nbsp;
-					<%= link_to '/user_search', remote: true do%>
-						<span id="fav_tag" style="color:darkgray; font-size:0.7em;cursor:pointer">유저 검색</span></div>
-					<% end %>
-				<hr style="margin:5px 0">
-				<% User.all.shuffle[0,3].each do |user| %>
-					<div class="RFMPanelItem" >
-						<% if user.use_photo %>
-							<%= link_to image_tag(user.photo, class: "reco_myfeeld_img"), "/my_feeld?user_id=#{user.id}" %> 
-						<% else %>
-							<%= link_to image_tag(user.image_url, class: "reco_myfeeld_img"), "/my_feeld?user_id=#{user.id}" %> 
-						<% end %> 
-						<% if user.use_nick %>
-							<%= link_to truncate(user.nickname, length:15), "/my_feeld?user_id=#{user.id}"%>
-						<% else %>
-							<%= link_to truncate(user.name, length:15), "/my_feeld?user_id=#{user.id}"%>
-						<% end %>
-						<%= link_to image_tag('plusbtn.png', class: "reco_myfeeld_plustbtn"), friendships_path(:friend_id => user.id), :method => :post, data: { confirm: "팔로우 합니다" } %>
-					</div> 
-				<% end %>
-			</div>
-
-		</div>
--->
-		<!-- 오른쪽 고정 메뉴이다 끝 -->
-
 		<!-- contents container -->
-		 <!-- 컨트롤바가 여기에 와야하는데.. -->
 			<div id="contents-container" >
 				<%= yield %>
 			</div>

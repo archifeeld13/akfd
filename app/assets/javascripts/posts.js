@@ -6,15 +6,13 @@
 // 브라우저 크기 조정시 불리는 함수
 function postsColumnResize(){
 	//var pWidth = $('.posts-item').width() // 없을 땐 너비를 못찾아서절대값 넣음 
-	var pWidth = 260  
-	if ($(window).width() > 700){
+	var pWidth = 218;  
 		$('#posts-container')
-			.css('margin-left', ($('#posts-container').width() % (pWidth + 20))/2) 
+			.css('margin-left', ($('#posts-container').width() % (pWidth + 10))/2) 
 			//.css('width', window_width - (except_RFM % (pWidth + 20)) ) // 각 포스트 아이템 마진 사방으로 20px임
 
 		$("#contents-controllbar")
 			.css('width', $('#contents-container').width())// contents container와 너비가 같게 해준다
-	}
 }
 
 

@@ -91,18 +91,6 @@
 		<!-- navbar-right -->
 		<!-- navbar-right -->
 		<!-- navbar-right -->
-		<div id="navbar" class="navbar-right" >
-
-			
-
-		</div>
-		<!-- navbar-right -->
-		<!-- navbar-right -->
-		<!-- navbar-right -->
-
-		<!-- navbar-right -->
-		<!-- navbar-right -->
-		<!-- navbar-right -->
 		<%# 리스트 간의 간격을 조정하기 위해 li밑에 a엘리먼트에 padding-right 및 padding에 대한 스타일을 inline으로 추가함%>
 		<%# 리스트 간의 간격을 조정하기 위해 li밑에 a엘리먼트에 padding-right 및 padding에 대한 스타일을 inline으로 추가함%>
 		<ul class="nav navbar-nav navbar-right" >
@@ -214,9 +202,12 @@
 				<% end %>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="#">Action</a></li>
-					<li><a href="#">Another action</a></li>
-					<li><a href="#">Something else here</a></li>
+					<li>
+						<%= link_to '마이필드', my_feeld_path%>
+					</li>
+					<li>
+						<a href="users/<%=current_user.id%>/edit">정보수정</a>
+					</li>
 					<li role="separator" class="divider"></li>
 					<li>
 						<%= link_to '로그아웃', logout_path, method: :delete  %>

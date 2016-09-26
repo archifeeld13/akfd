@@ -92,9 +92,19 @@ $(function(){
 		width: 100%;
 	}
 
-	input[type="text"]{
+	#edit-super-container {
+	}
+
+	#edit-super-container input[type="text"]{
 		font-size: 1.5em;
 		width: 100%;
+	}
+	#project_radio_container{
+		border: 1px solid rgb(200,200,200);	
+		border-radius: 5px;
+		padding: 5px;
+		height: 210px;
+		overflow: auto;
 	}
 	
 	input:focus,
@@ -200,8 +210,42 @@ $(function(){
 <!-- edit-controller -->
 <!-- edit-controller -->
 <!-- edit-controller -->
-<div id="edit-controller" style="position:fixed; width:20%; height:425px; background:white; padding:1%; overflow-y: auto; overflow-x: hidden; font-size: 1.2em; border-radius: 5px 5px 5px 5px;">
-	<center><div style="color:#BBBBBB; font-size:1.1em;">바인더(프로젝트)관리</div></center>
+<div id="edit-controller" style="position:fixed; width:20%; height:550px; background:white; padding:1%; overflow-y: auto; overflow-x: hidden; font-size: 1.2em; border-radius: 5px 5px 5px 5px;">
+
+	<div style="color:#BBBBBB; font-size:1.1em;">세부 설정</div>
+	<div style="margin-bottom: 10px;"></div>
+
+	<div id="category-pikcer">
+		<select class="form-control">
+			<option disabled >카테고리 선택</option>
+			<option selected >작업</option>
+			<option>필톡</option>
+			<option>정보</option>
+			<option>커넥터</option>
+		</select>
+		<div style="margin-bottom: 5px;"></div>
+
+		<select class="form-control">
+			<option selected disabled >분야 선택</option>
+			<option>건축학</option>
+			<option>실내건축</option>
+			<option>산업디자인</option>
+			<option>시각디자인</option>
+		</select>
+		<div style="margin-bottom: 5px;"></div>
+
+		<select class="form-control">
+			<option selected disabled >공개 범위 설정</option>
+			<option>전체공개</option>
+			<option>친구공개</option>
+			<option>비공개</option>
+		</select>
+		<div style="margin-bottom: 5px;"></div>
+	</div>
+
+	<div style="margin-bottom: 10px;"></div>
+	<div style="color:#BBBBBB; font-size:1.1em;">바인더(프로젝트)관리</div>
+	<div style="margin-bottom: 10px;"></div>
 	<%# 프로젝트 리스트 아이템 %>
 	<%# 프로젝트 리스트 아이템 %>
 	<%# 프로젝트 리스트 아이템 %>

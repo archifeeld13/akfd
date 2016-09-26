@@ -7,18 +7,10 @@
 		color: rgb(130,130,130);
 	}
 </style>
+
 <div id="contents-controllbar">
 	<div class="container">
 			<%#= flash[:notice].html_safe %>
-			<!--
-			<div class="cc-item">
-				<% if @selected == "timeline"	%>
-					<a href="/timeline" class="selected" >타임라인</a>
-				<% else %>
-					<a href="/timeline" class="non-selected">타임라인</a>
-				<% end %>
-			</div>
-			-->
 
 			<div class="cc-item">
 				<% if @selected == "posts" %>
@@ -30,26 +22,26 @@
 
 			<div class="cc-item">
 				<% if @selected == "work" %>
-					<a href="#" class="selected" >작업</a>
+					<a href="#" class="selected" >작품</a>
 				<% else %>
-					<a href="#" class="non-selected">작업</a>
+					<a href="#" class="non-selected">작품</a>
 				<% end %>
 			</div>
 
 			<div class="cc-item" >
 				<% if @selected == "txt" %>
-					<a href="/posts?type=txt" id="filter_only_text" class="selected">필드톡</a>
+					<a href="/posts?type=txt" id="filter_only_text" class="selected">커뮤니티</a>
 				<% else %>
-					<a href="/posts?type=txt" id="filter_only_text" class="non-selected">필드톡</a>
+					<a href="/posts?type=txt" id="filter_only_text" class="non-selected">커뮤니티</a>
 				<% end %>
 			</div>
 
 			<div class="cc-item">
 				<% if @selected == "link" %>
 					<!--<a href="/posts?type=link" class="selected" >링크</a>-->
-					<a href="#" class="selected" >정보</a>
+					<a href="#" class="selected" >소식</a>
 				<% else %>
-					<a href="#" class="non-selected">정보</a>
+					<a href="#" class="non-selected">소식</a>
 				<% end %>
 			</div>
 
@@ -67,7 +59,7 @@
 </div>
 
 <%# 50px 정도 띄워준 이유는 컨텐츠컨트롤바 때문%>
-<div style="height:33px"></div>
+<div style="height:15px"></div>
 
 <script>
 	var speed = 5;
@@ -99,5 +91,4 @@
 		 previousScroll = currentScroll;
 
 	});
-
 </script>
