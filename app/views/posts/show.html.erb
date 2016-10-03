@@ -229,6 +229,34 @@
 				var extra_offset = 15 // show-container 와 show-controller사이의 10px정도의 오프셋 
 				$("#show-controller").css("left", left_offset + width + extra_offset)
 			}
+
+			// contents controllbar에도 이 변수가 있어서 _2추가함
+			var previousScroll2 = 0;
+			var changedByDown= false;
+			var changedByUP= false;
+			var changeOffset = 25;
+			$(window).scroll(function(){
+				 var currentScroll2 = $(this).scrollTop();
+				 if (currentScroll2 > previousScroll2){
+					 // down flow
+				 		if (!changedByDown){
+							ori = parseInt($('#show-controller').css('margin-top'), 10	)
+							$('#show-controller').css('margin-top', ori - changeOffset)	
+							changedByUp = false;
+							changedByDown = true;
+						}
+				 } else {
+				 		if (!changedByUp){
+							ori = parseInt($('#show-controller').css('margin-top'), 10	)
+							$('#show-controller').css('margin-top', ori + changeOffset)	
+							changedByUp = true;
+							changedByDown = false;
+						}
+				 }
+				 previousScroll2 = currentScroll2;
+
+			});
+
 		</script>
 		<!-- show-controller -->
 		<!-- show-controller -->
