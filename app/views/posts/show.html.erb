@@ -1,201 +1,260 @@
+<style>
+	#show-super-container{
+		position:relative;
+	}	
+	#show-container{
+		padding:0; 
+		position:absolute; left:0; width:70%; margin-right:1%; margin-bottom:50px;
+	}
+	#show-controller{
+		position:fixed; width:20%; 
+		height:550px; background:white; 
+		padding:1%; overflow-y: auto; overflow-x: hidden; 
+		font-size: 1.2em; border-radius: 5px 5px 5px 5px;
+
+		/*추가 마진 탑좀 주겠음*/
+		margin-top: 10px;
+	}
+</style>
+
 <%# if not browser.device.mobile? %>
 	<%= render 'contents_controllbar'%>
 <%# end %>
 
 <div class="container"> 
-
-<!-- 타임라인 엘리먼트의 width가 뒤로 전파되는 문제를 container로 고립시킴으로써 해결했다 -->
-<!-- 타임라인 엘리먼트의 width가 뒤로 전파되는 문제를 container로 고립시킴으로써 해결했다 -->
-<!-- 타임라인 엘리먼트의 width가 뒤로 전파되는 문제를 container로 고립시킴으로써 해결했다 -->
-<!-- container fluid-->
-<!-- container fluid-->
-<!-- container fluid-->
-<div class="container-fluid" style="padding:0">
-	<!-- show-pots-item -->
-	<!-- show-pots-item -->
-	<!-- show-pots-item -->
-	<div class="show-posts-item">
-		<div class="posts-item-writer">
-			<% if @post.user.use_photo %>
-				<%= image_tag(@post.user.photo) %>
-			<% else %>
-				<%= image_tag(@post.user.image_url) %>
-			<% end %>
-			<% if @post.user.use_nick %>
-				<%= link_to @post.user.nickname, "/my_feeld?user_id=#{@post.user.id}"%>
-			<% else %>
-				<%= link_to @post.user.name, "/my_feeld?user_id=#{@post.user.id}"%>
-			<% end %>
-		</div>
-
-
-		<% if @post.post_type == 1 %>
-			<% if @post.photos.any? %>
-				<% @post.photos.each_with_index do |photo, idx| %>
-					<a href="<%=image_url(photo.image)%>" data-lightbox="showpostimg" data-title="<%=photo.caption%>"><%= image_tag(photo.image, class: 'posts-item-img') %></a></td>
-					<center><div style='font-size:1.1em;margin: 1% 3%;'><%= photo.caption %></div></center>
-				<% end %>
-			<% end %>
-
-
-		<% elsif @post.post_type == 2 %>
-			<%# linkup type%>
-			<div class="posts-item-text">
-			<h5 class="text-success"><%= @post.link.link_title %></h5>
-			<% if @post.link and @post.link.image_url %>
-				<%= link_to image_tag(@post.link.image_url, class: 'show-post-img'),@post.link.link_url, target:"_blank"  %>
-				출처: <a  target="_blank" style="font-size:0.8em;" href="<%=@post.link.link_url%>"><%= @post.link.link_url %></a>
-			<% else %>
-				<h3>이미지를 가져올 수 없습니다;(</h3>
-			<% end %>
-			</div>
-
-
-		<% else %>
-			<div class="posts-item-text">
-				<%#= truncate(@post.content, length: 100) %>
-				<%#= @post.content.gsub(/\n/, '<br/>').html_safe%>
-				<%= auto_link(@post.content.gsub(/\n/, '<br/>'), :html => { :target => '_blank' })%>
-			</div>
-		<% end %>
-
-		<!-- posts-item-info -->
-		<!-- posts-item-info -->
-		<!-- posts-item-info -->
-		<div class="posts-item-info">
-			<!-- posts-item-counts -->
-			<!-- posts-item-counts -->
-			<!-- posts-item-counts -->
-			<div class="posts-item-counts" >
-				<%# ======================================================================  %>
-				<% if current_user %>
-					<% if Like.find_by(post_id: @post.id, user_id: current_user.id) %>
-						<%= link_to image_tag('feeldrev.png'), post_likes_path(@post.id), class: "feeld feeld#{@post.id}" ,method: :post, remote: true %>
+	<!-- 요소들의 절대 위치를 원활히 지정하기 위해선 부모가 relative여야만 하는것 같다 -->
+	<!-- show-super-container -->
+	<!-- show-super-container -->
+	<!-- show-super-container -->
+	<div id="show-super-container" >
+		<!-- 타임라인 엘리먼트의 width가 뒤로 전파되는 문제를 container로 고립시킴으로써 해결했다 -->
+		<!-- show-container & container fluid-->
+		<!-- show-container & container fluid-->
+		<!-- show-container & container fluid-->
+		<div id="show-container" class="container-fluid">
+			<!-- show-pots-item -->
+			<!-- show-pots-item -->
+			<!-- show-pots-item -->
+			<div class="show-posts-item">
+				<div class="posts-item-writer">
+					<% if @post.user.use_photo %>
+						<%= image_tag(@post.user.photo) %>
 					<% else %>
-						<%= link_to image_tag('feeld.png'), post_likes_path(@post.id), class: "feeld feeld#{@post.id}" ,method: :post, remote: true %>
+						<%= image_tag(@post.user.image_url) %>
 					<% end %>
-					<strong><a href="#" class="feeldcnt feeldcnt<%=@post.id%>" data-toggle="popover" data-trigger="focus"  data-placement="right" >x <%=@post.likes.count%></a></strong>
-					<div id="popover-content" class="hide">
-						<% if @post.likes.any? %>
-						<% @post.likes.each do |like| %>
-							<% if like.user.use_nick %>
-								<%= link_to like.user.nickname, "/my_feeld?user_id=#{like.user.id}", class: "like_user_list"%>
-							<% else %>
-								<%= link_to like.user.name, "/my_feeld?user_id=#{like.user.id}", class: "like_user_list"%>
-							<% end %>
-						<% end %>
-						<% else %>
-							첫 Feel'd 를 눌러주세요;D
-						<% end %>
-					</div>
-					<script>
-						$(function(){
-						 // http://jsfiddle.net/raving/2thfaxeu/
-							$('.feeldcnt').popover({
-								html: true,
-								content: function(){
-									return $('#popover-content').html()	
-								}
-							});
-							$('.feeldcnt').click(function(){
-								return false;	
-							})
-						});
-					</script>
-					&nbsp;
-					<% if current_user.id != @post.user.id %>
-						<%= link_to image_tag('feeldin.png'),  post_shares_path(@post.id), class: "feeldin feeldin#{@post.id}", method: :post, remote: true %>
-						x <strong class="feeldincnt feeldincnt<%=@post.id%>"><%=@post.shares.count%></strong>
+					<% if @post.user.use_nick %>
+						<%= link_to @post.user.nickname, "/my_feeld?user_id=#{@post.user.id}"%>
 					<% else %>
-						<% if @post.post_type == 2 %>
-							<%= link_to image_tag('edit.png'), "", id:"edit" %>
-							<script>
-								$('#edit').click(function(){alert('링크타입의 글 수정기능은 준비중입니다')})
-							</script>
-						<% else %>
-							<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit" %>
-						<% end %>
+						<%= link_to @post.user.name, "/my_feeld?user_id=#{@post.user.id}"%>
 					<% end %>
-
-					<%# 관리자 아이디라면 에딧 허용%>
-					<% if manager_list.include? current_user.id %>
-							<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit" %>
-					<% end %>
-				<% end %>
-
-				<span style="position:absolute; right:0;"><%=image_tag "eye.png", class: "post-icon"%> <%= @post.view_count%></span>
-
-				
-				<hr style="margin: 15px 0">
-
-				<div class="posts-item-title" >
-					<%= @post.title %>
-					<% if @post.is_secret %>
-						<span class="text-danger">(<i class="fa fa-lock"></i>&nbsp;비공개)</span>
-					<% end %>
-					<span style="color:darkgray; font-size:.7em; white-space:nowrap">
-						 &nbsp; <%= @post.created_at.strftime("%Y년 %m월 %d일") %>
-					</span>
 				</div>
 
-				<div style="height:10px;"></div>
 
-				<%# 글 내용 부분 %>
-				<% if @post.post_type == 1 or @post.post_type == 2%>
-					<div class="posts-item-image-content">
+				<% if @post.post_type == 1 %>
+					<% if @post.photos.any? %>
+						<% @post.photos.each_with_index do |photo, idx| %>
+							<a href="<%=image_url(photo.image)%>" data-lightbox="showpostimg" data-title="<%=photo.caption%>"><%= image_tag(photo.image, class: 'posts-item-img') %></a></td>
+							<center><div style='font-size:1.1em;margin: 1% 3%;'><%= photo.caption %></div></center>
+						<% end %>
+					<% end %>
+
+
+				<% elsif @post.post_type == 2 %>
+					<%# linkup type%>
+					<div class="posts-item-text">
+					<h5 class="text-success"><%= @post.link.link_title %></h5>
+					<% if @post.link and @post.link.image_url %>
+						<%= link_to image_tag(@post.link.image_url, class: 'show-post-img'),@post.link.link_url, target:"_blank"  %>
+						출처: <a  target="_blank" style="font-size:0.8em;" href="<%=@post.link.link_url%>"><%= @post.link.link_url %></a>
+					<% else %>
+						<h3>이미지를 가져올 수 없습니다;(</h3>
+					<% end %>
+					</div>
+
+
+				<% else %>
+					<div class="posts-item-text">
+						<%#= truncate(@post.content, length: 100) %>
 						<%#= @post.content.gsub(/\n/, '<br/>').html_safe%>
 						<%= auto_link(@post.content.gsub(/\n/, '<br/>'), :html => { :target => '_blank' })%>
 					</div>
 				<% end %>
-				<div class="posts-item-hashtags">
-					<% if @post.tag_list.size > 0 %>	
-						<div class='tag_list'><%= tag_icons(@post.tag_list) %> </div>
-					<% end %>
+
+				<!-- posts-item-info -->
+				<!-- posts-item-info -->
+				<!-- posts-item-info -->
+				<div class="posts-item-info">
+					<!-- posts-item-counts -->
+					<!-- posts-item-counts -->
+					<!-- posts-item-counts -->
+					<div class="posts-item-counts" >
+						<%# ======================================================================  %>
+						<% if current_user %>
+							<% if Like.find_by(post_id: @post.id, user_id: current_user.id) %>
+								<%= link_to image_tag('feeldrev.png'), post_likes_path(@post.id), class: "feeld feeld#{@post.id}" ,method: :post, remote: true %>
+							<% else %>
+								<%= link_to image_tag('feeld.png'), post_likes_path(@post.id), class: "feeld feeld#{@post.id}" ,method: :post, remote: true %>
+							<% end %>
+							<strong><a href="#" class="feeldcnt feeldcnt<%=@post.id%>" data-toggle="popover" data-trigger="focus"  data-placement="right" >x <%=@post.likes.count%></a></strong>
+							<div id="popover-content" class="hide">
+								<% if @post.likes.any? %>
+								<% @post.likes.each do |like| %>
+									<% if like.user.use_nick %>
+										<%= link_to like.user.nickname, "/my_feeld?user_id=#{like.user.id}", class: "like_user_list"%>
+									<% else %>
+										<%= link_to like.user.name, "/my_feeld?user_id=#{like.user.id}", class: "like_user_list"%>
+									<% end %>
+								<% end %>
+								<% else %>
+									첫 Feel'd 를 눌러주세요;D
+								<% end %>
+							</div>
+							<script>
+								$(function(){
+								 // http://jsfiddle.net/raving/2thfaxeu/
+									$('.feeldcnt').popover({
+										html: true,
+										content: function(){
+											return $('#popover-content').html()	
+										}
+									});
+									$('.feeldcnt').click(function(){
+										return false;	
+									})
+								});
+							</script>
+							&nbsp;
+							<% if current_user.id != @post.user.id %>
+								<%= link_to image_tag('feeldin.png'),  post_shares_path(@post.id), class: "feeldin feeldin#{@post.id}", method: :post, remote: true %>
+								x <strong class="feeldincnt feeldincnt<%=@post.id%>"><%=@post.shares.count%></strong>
+							<% else %>
+								<% if @post.post_type == 2 %>
+									<%= link_to image_tag('edit.png'), "", id:"edit" %>
+									<script>
+										$('#edit').click(function(){alert('링크타입의 글 수정기능은 준비중입니다')})
+									</script>
+								<% else %>
+									<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit" %>
+								<% end %>
+							<% end %>
+
+							<%# 관리자 아이디라면 에딧 허용%>
+							<% if manager_list.include? current_user.id %>
+									<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit" %>
+							<% end %>
+						<% end %>
+
+						<span style="position:absolute; right:0;"><%=image_tag "eye.png", class: "post-icon"%> <%= @post.view_count%></span>
+
+						
+						<hr style="margin: 15px 0">
+
+						<div class="posts-item-title" >
+							<%= @post.title %>
+							<% if @post.is_secret %>
+								<span class="text-danger">(<i class="fa fa-lock"></i>&nbsp;비공개)</span>
+							<% end %>
+							<span style="color:darkgray; font-size:.7em; white-space:nowrap">
+								 &nbsp; <%= @post.created_at.strftime("%Y년 %m월 %d일") %>
+							</span>
+						</div>
+
+						<div style="height:10px;"></div>
+
+						<%# 글 내용 부분 %>
+						<% if @post.post_type == 1 or @post.post_type == 2%>
+							<div class="posts-item-image-content">
+								<%#= @post.content.gsub(/\n/, '<br/>').html_safe%>
+								<%= auto_link(@post.content.gsub(/\n/, '<br/>'), :html => { :target => '_blank' })%>
+							</div>
+						<% end %>
+						<div class="posts-item-hashtags">
+							<% if @post.tag_list.size > 0 %>	
+								<div class='tag_list'><%= tag_icons(@post.tag_list) %> </div>
+							<% end %>
+						</div>
+
+						<hr style="margin: 20px 0">
+
+						<%= render "comments/comments" %>
+						&nbsp;
+					</div>
+					<!-- posts-item-counts -->
+					<!-- posts-item-counts -->
+					<!-- posts-item-counts -->
 				</div>
-
-				<hr style="margin: 20px 0">
-
-				<%= render "comments/comments" %>
-				&nbsp;
+				<!-- posts-item-info -->
+				<!-- posts-item-info -->
+				<!-- posts-item-info -->
 			</div>
-			<!-- posts-item-counts -->
-			<!-- posts-item-counts -->
-			<!-- posts-item-counts -->
+			<!-- show-pots-item -->
+			<!-- show-pots-item -->
+			<!-- show-pots-item -->
+
+			<!-- 다음글 추천 -->
+			<% if @isReco %>
+				<center><h3 style="color:darkgray">관련 필드업</h2></center>
+				<%= render @posts %>
+			<% else %>
+				<center><h3 style="color:darkgray" >최신 필드업</h2></center>
+				<%= render @posts %>
+			<% end %>
+			<!-- 다음글 추천 -->
 		</div>
-		<!-- posts-item-info -->
-		<!-- posts-item-info -->
-		<!-- posts-item-info -->
+		<!-- show-container & container fluid-->
+		<!-- show-container & container fluid-->
+		<!-- show-container & container fluid-->
+
+		<!-- show-controller ; 이름을 이렇게 진 이유는 _form에서 edit-controller와 비슷한 구조기 때문 -->
+		<!-- show-controller -->
+		<div id="show-controller">
+			글 내용 들어갈 자리
+		</div>
+		<!-- show-controller 위치 업데이트 스크립트 -->
+		<!-- show-controller 위치 업데이트 스크립트 -->
+		<script>
+			$(function(){
+				// 바로 호출하면 이전에 content container사이즈를 조정하는 시간? 때문에 left margin값이 -가 나와서 오류가있었다
+				// 일단 임시 처방으로 5ms의 딜레이를 주었다
+				setTimeout(updatePositionShowContainer, 5);
+
+				$( window ).resize(function() {
+					updatePositionShowContainer();
+				})
+			})
+
+			function updatePositionShowContainer(){
+				var left_offset = parseFloat($('#show-container').offset()["left"])
+				var width = parseFloat($("#show-container").css('width'))
+				var extra_offset = 15 // show-container 와 show-controller사이의 10px정도의 오프셋 
+				$("#show-controller").css("left", left_offset + width + extra_offset)
+			}
+		</script>
+		<!-- show-controller -->
+		<!-- show-controller -->
+		
+
 	</div>
-	<!-- show-pots-item -->
-	<!-- show-pots-item -->
-	<!-- show-pots-item -->
-</div>
-<!-- container fluid-->
-<!-- container fluid-->
-<!-- container fluid-->
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	<!-- show-super-container -->
+	<!-- show-super-container -->
+	<!-- show-super-container -->
 
-  ga('create', 'UA-77436255-1', 'auto');
-  ga('send', 'pageview');
-</script>
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-<script>
-	$('img').bind('contextmenu', function(e){
-			return false;
-	}); 
-</script>
-<%= javascript_include_tag "lightbox.min.js" %>
+		ga('create', 'UA-77436255-1', 'auto');
+		ga('send', 'pageview');
+	</script>
 
-<% if @isReco %>
-	<center><h3 style="color:darkgray">관련 필드업</h2></center>
-	<%= render @posts %>
-<% else %>
-	<center><h3 style="color:darkgray" >최신 필드업</h2></center>
-	<%= render @posts %>
-<% end %>
+	<script>
+		$('img').bind('contextmenu', function(e){
+				return false;
+		}); 
+	</script>
+	<%= javascript_include_tag "lightbox.min.js" %>
+
 
 </div>

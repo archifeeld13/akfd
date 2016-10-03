@@ -6,3 +6,52 @@
 	width: 20px;
 	height: 20px;
 }
+
+#projects-container {
+	width: 100%;
+}
+
+.projects-item{
+	float: left;
+	height: 250px;
+	width: 250px;
+	background: white;
+	margin: 5px;
+	padding: 0;
+	border-radius: 5px;
+
+	.project-img{
+		height: 120px;
+		padding: 0;
+		img{
+			margin: 10px;
+			width: 230px;
+			height: 100px;
+			border-radius: 5px;
+		}
+	}
+
+	.project-img-in{
+		height: 60px;;	
+		margin: 10px;
+		margin-top: 0;
+		img{
+			width: 50px;
+			height: 50px;
+			border-radius: 5px;
+		}
+	}
+
+	.project--info{
+		height: 70px;	
+		width: 230px;
+		margin: 10px;
+		padding: 0;
+		table{
+			width: 230px;
+		}
+		td{
+			text-align: center;
+		}
+	}
+}

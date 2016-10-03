@@ -1,6 +1,5 @@
 <div class="posts-item">
-	<% if post.post_type == 1 %>
-		<%# photoup type%>
+	<% if post.post_type == 1 %> <%# photoup type%>
 		<% if post.photos.any? %>
 			<%= link_to image_tag(post.photos[0].image.medium, class: 'posts-item-img'), post %>
 			<%# link_to image_tag(post.photos[0].image.medium, class: 'posts-item-img'), post, remote:true %>
@@ -83,6 +82,7 @@
 	</div>
 </div>
 
+<!-- 이거 꼭 여기서 해야하나 ? -->
 <script>
 	$('img').bind('contextmenu', function(e){
 			return false;

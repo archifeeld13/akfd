@@ -30,13 +30,18 @@ form input[type="password"]
 .reg_cancel{
 	color: white;	
 }
-.form-btns{
-	width: 300px;
-}
 .policy {
 	white-space:nowrap;
 	font-weight: bold;
 	color: skyblue;
+}
+
+a{
+	color: white;
+}
+a:hover{
+	color: white;
+	text-decoration: none;
 }
 </style>
 
@@ -54,13 +59,13 @@ form input[type="password"]
 </div>
 <div style="margin-top: 5px">
 <div>
-	<%= link_to image_tag('login.png', class: "form-btns"), '#', onclick: '$("#login-btn").click()' %> 
+	<%= link_to raw('<button class="btn btn-block" style="background: transparent ; border: 1px solid white;  width:300px;" >로그인</button>'), '#', onclick: '$("#login-btn").click()' %> 
+	</div>
+<div style="margin-top: 5px">
+	<%= link_to raw('<button class="btn btn-block" style="background: transparent ; border: 1px solid white;  width:300px;" >페이스북 로그인</button>'), '/auth/facebook'%> 
 </div>
 <div style="margin-top: 5px">
-	<%= link_to image_tag('facebooklogin.png', class: "form-btns"), '/auth/facebook'%> 
-</div>
-<div style="margin-top: 5px">
-	<%= link_to image_tag('register.png', class: "form-btns"), new_user_path %> 
+	<%= link_to raw('<button class="btn btn-block" style="background: transparent ; border: 1px solid white;  width:300px;" >가입하기</button>'), new_user_path %> 
 </div>
 <div style="margin-top: 15px">
 	<a href="/posts" style="color:white"> 비회원 입장 </a> <br>

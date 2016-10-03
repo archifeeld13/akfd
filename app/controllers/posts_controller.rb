@@ -168,11 +168,17 @@ class PostsController < ApplicationController
 		if params[:user_id]
 			@user = User.find(params[:user_id])
 			@posts = Post.where(user_id: User.find(params[:user_id]).id, is_secret: false).reverse
-			flash[:notice] = "#{@user.name}의 마이필드입니다 ;D"
+			#flash[:notice] = "#{@user.name}의 마이필드입니다 ;D"
+			#
+			@isMine = false
+			@projects = Project.where(user_id: @user.id).reverse
 		else
 			@user = User.find(current_user.id)
 			@posts = Post.where(user_id: current_user.id).reverse
-			flash[:notice] = "나의 작품을 관리합니다;D"
+			#flash[:notice] = "나의 작품을 관리합니다;D"
+			#
+			@isMine = true 
+			@projects = Project.where(user_id: current_user.id).reverse
 		end
 	end
 

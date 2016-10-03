@@ -1,38 +1,51 @@
 <%# projects.html.erb 와 디펜던시 존재 %>
-<div class="posts-item" style=""  id="project_<%=@project.id%>">
-	<div class="posts-item-writer" style="padding-top: 5px;">
-		<center><%= link_to @project.name, "/project_list_in?project_id=#{@project.id}", class: "project_name", remote: true %></center>
+<div class="projects-item" style=""  id="project_<%=project.id%>">
+	<div class="project-img">
+		<!-- ajax 없어집니다 -->
+		<%#= link_to project.name, "/project_list_in?project_id=#{project.id}", class: "project_name", remote: true %>
+		<center><%= link_to image_tag("http://placehold.it/200x200"), "/project_list_in?project_id=#{project.id}", class: "project_name" %></center>
 	</div>
-	<div class="posts-item-text" align="center">
+
+	<div class="project-img-in" >
 		<% count = 0 %>
-		<center>
-		<%= link_to "/project_list_in?project_id=#{@project.id}", class: "project_name",remote: true  do %>
-		<div class="project_preview_container">
-		<% @project.posts.each do |post| %>
-			<% if post.post_type == 1 %>
-				<% post.photos.each do |photo| %>
-					<% count += 1 %>
-					<% # 4개 보여주면 끊기 %>
-					<% if count < 4 %>
-						<%= image_tag(photo.image, class:"project_preview100") %>
-					<% elsif count < 8 %>
-						<%= image_tag(photo.image, class:"project_preview50") %>
-					<% else %>
-						<% break %>
+		<%= link_to "/project_list_in?project_id=#{project.id}", class: "project_name"  do %>
+			<div>
+			<% project.posts.each do |post| %>
+				<% if post.post_type == 1 %>
+					<% post.photos.each do |photo| %>
+						<% count += 1 %>
+						<% # 4개 보여주면 끊기 %>
+						<% if count <= 4 %>
+							<%= image_tag(photo.image) %>
+						<% else %>
+							<% break %>
+						<% end %>
 					<% end %>
 				<% end %>
 			<% end %>
+			</div>
 		<% end %>
-		</div>
-		<% end %>
-		</center>
 	</div>
-	<div class="posts-item-info">
-		<div class="" align="center" style="color:gray">글개수:<%= @project.posts.count %>개,&nbsp; Feel'd: ???개,&nbsp; Feel'd in: ???개 </div>
-		<div class="" align="center" style="color:green"><%= time_ago_in_words(@project.created_at) %> 전에 생성</div>
+
+	<div class="project-info">
+		<div class="" align="center" style="color:gray">
+			<table>
+				<tr>
+					<td>게시물</td>
+					<td>구성원</td>
+					<td>추천</td>
+				</tr>
+				<tr>
+					<td><%=project.posts.count%></td>
+					<td>???</td>
+					<td>???</td>
+				</tr>
+			</table>
+		</div>
+		<!--<div class="" align="center" style="color:green"><%#= time_ago_in_words(project.created_at) %> 전에 생성</div>-->
 		<div class="" style="" align="center">
-		<% if current_user and current_user.id == @project.user.id%>
-			<%= link_to "*바인더 삭제", [current_user, @project], method: :delete, remote: true, data: { confirm:	"Are you sure?" } %>
+		<% if current_user and current_user.id == project.user.id%>
+			<%= link_to "*바인더 삭제", [current_user, project], method: :delete, remote: true, data: { confirm:	"Are you sure?" } %>
 		<% end %>
 		</div>
 	</div>

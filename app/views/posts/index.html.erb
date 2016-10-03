@@ -2,7 +2,7 @@
 
 <div class="container">
 
-	<% if request.original_fullpath == "/posts" %>
+	<% if not browser.device.mobile? and request.original_fullpath == "/posts" %>
 	<div id="reco-container">
 		<div id="reco-users">
 			<% @fav_users.shuffle[0,6].each do |user| %>
