@@ -7,8 +7,15 @@
 	height: 20px;
 }
 
-#projects-container {
+#projects-container-wrapper {
+	overflow-y :  hidden;
+	overflow-x :  auto;
+	height: 280px;
 	width: 100%;
+	#projects-container{
+		width: 10000px;	
+	}
+
 }
 
 .projects-item{
