@@ -9,12 +9,47 @@
 
 #projects-container-wrapper {
 	overflow-y :  hidden;
-	overflow-x :  auto;
-	height: 280px;
-	width: 100%;
+	overflow-x :  hidden;
+	position: relative;
+	height: 260px;
+	width: 99%; 
+	margin-left: 0.5%;
+	margin-right: 0.5%;
+
 	#projects-container{
-		width: 10000px;	
+		position: absolute;
+		height:100%;
+		// width는 뷰에서 
+		// <div id="projects-container" style="width:<%=@projects.length * (250 + 5 + 5) %>px">
+		// 와 같이 설정해준다.
 	}
+	#left-arrow{
+		color: #BDF253;		
+		position: absolute;
+		top: 30%;
+		left: 0.5%;
+		font-size: 3.5em;
+		font-weight: bold;
+		//text-shadow: -1px 0 green, 0 1px green, 1px 0 green, 0 -1px green;
+		text-shadow: 1px 2px 3px #666;
+		cursor: pointer;
+	}
+	#right-arrow{
+		color: #BDF253;
+		position: absolute;
+		top: 30%;
+		right: 0.5%;
+		font-size: 3.5em;
+		font-weight: bold;
+	  //text-shadow: -1px 0 green, 0 1px green, 1px 0 green, 0 -1px green;
+		text-shadow: 1px 2px 3px #666;
+		cursor: pointer;
+	}
+
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */     
 
 }
 
@@ -23,7 +58,7 @@
 	height: 250px;
 	width: 250px;
 	background: white;
-	margin: 5px;
+	margin-right: 10px;
 	padding: 0;
 	border-radius: 5px;
 
@@ -49,7 +84,7 @@
 		}
 	}
 
-	.project--info{
+	.project-info{
 		height: 70px;	
 		width: 230px;
 		margin: 10px;

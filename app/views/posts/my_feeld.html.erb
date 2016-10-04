@@ -91,9 +91,15 @@
 	</div>
 
 	<div id="projects-container-wrapper">
-		<div id="projects-container">
+		<div id="projects-container" style="width:<%=@projects.length * (250 + 5 + 5) %>px">
 			<%= render @projects %>			
 		</div>
+		<!-- pc에서만 보여주기 -->
+		<!-- pc에서만 보여주기 -->
+		<div href="" id="left-arrow">&lt;</div>
+		<div href="" id="right-arrow">&gt;</div>
+		<!-- pc에서만 보여주기 -->
+		<!-- pc에서만 보여주기 -->
 	</div>
 
 	<div style="clear:both"></div>
@@ -114,4 +120,26 @@
 			$(this).html(result + '&nbsp; <i class="fa fa-ellipsis-h"></i>');
 	})
 	//	tag_truncate()
+
+	
+	// left-arrow, right-arrow
+	// left-arrow, right-arrow
+	var arrowMaxCount= <%=@projects.length%> - 1;
+	var arrowCount = 0;
+	$('#right-arrow').click(function(){
+		if (arrowCount >= arrowMaxCount ) return;
+		curr = parseInt($('#projects-container').css('left'))
+		console.log(curr)
+		$('#projects-container').css('left', curr - (250 + 5 + 5))
+		arrowCount += 1;
+	})
+	$('#left-arrow').click(function(){
+		if (arrowCount <= 0) return;
+		curr = parseInt($('#projects-container').css('left'))
+		console.log(curr)
+		$('#projects-container').css('left', curr + (250 + 5 + 5))
+		arrowCount -= 1;
+	})
+	// left-arrow, right-arrow
+	// left-arrow, right-arrow
 </script>
