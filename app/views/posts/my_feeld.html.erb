@@ -81,7 +81,7 @@
 			<%= link_to raw('<div class="my_feeld_menu_item">아카이브()</div>'), "/archive_mine", remote: true %>
 			<%= link_to raw('<div class="my_feeld_menu_item">콜렉션()</div>'), "/archive_share", remote: true %>
 			<a href="#" id="add_binder" class="my_feeld_menu_item_right">
-				<span>+ 바인더</span>
+				<span style="white-space:nowrap">+ 바인더</span>
 			</a>
 		<% else %>
 			<%= link_to raw('<div class="my_feeld_menu_item">바인더()</div>'), "/project_management?user_id=#{@user.id}", remote: true %>
@@ -91,8 +91,12 @@
 	</div>
 
 	<div id="projects-container-wrapper">
-		<div id="projects-container" style="width:<%=@projects.length * (250 + 5 + 5) %>px">
+		<div id="projects-container" style="width:<%=(@projects.length + 4) * (300+ 5 + 5) %>px">
 			<%= render @projects %>			
+			<%= render "projects/project_empty" %>
+			<%= render "projects/project_empty" %>
+			<%= render "projects/project_empty" %>
+			<%= render "projects/project_empty" %>
 		</div>
 		<!-- pc에서만 보여주기 -->
 		<!-- pc에서만 보여주기 -->
@@ -130,14 +134,14 @@
 		if (arrowCount >= arrowMaxCount ) return;
 		curr = parseInt($('#projects-container').css('left'))
 		console.log(curr)
-		$('#projects-container').css('left', curr - (250 + 5 + 5))
+		$('#projects-container').css('left', curr - (300+ 5 + 5))
 		arrowCount += 1;
 	})
 	$('#left-arrow').click(function(){
 		if (arrowCount <= 0) return;
 		curr = parseInt($('#projects-container').css('left'))
 		console.log(curr)
-		$('#projects-container').css('left', curr + (250 + 5 + 5))
+		$('#projects-container').css('left', curr + (300+ 5 + 5))
 		arrowCount -= 1;
 	})
 	// left-arrow, right-arrow
