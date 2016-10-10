@@ -208,7 +208,8 @@
 		<!-- show-controller ; 이름을 이렇게 진 이유는 _form에서 edit-controller와 비슷한 구조기 때문 -->
 		<!-- show-controller -->
 		<div id="show-controller">
-			글 내용 들어갈 자리
+			<h5><%= @post.title %></h5>
+			<p style="font-size:0.8em;"><%= auto_link(@post.content.gsub(/\n/, '<br/>'), :html => { :target => '_blank' })%></p>
 		</div>
 		<!-- show-controller 위치 업데이트 스크립트 -->
 		<!-- show-controller 위치 업데이트 스크립트 -->

@@ -22,11 +22,17 @@
 			<% end %>
 		</div>
 		<div id="reco-binders">
-			<h4>HIT 바인더</h4>
-					<%= link_to "유저검색", '/user_search', remote: true %>
+			<h5><b>HIT 바인더</b></h5>
+			<div style="margin-top:25px;"></div>
+			<div>
+				<img class="reco-binder" src="http://placehold.it/200x100">
+				<img class="reco-binder" src="http://placehold.it/200x100">
+				<img class="reco-binder" src="http://placehold.it/200x100">
+				<img class="reco-binder" src="http://placehold.it/200x100">
+			</div>
 		</div>
 		<div id="reco-posts">
-			<h4>HIT 필디</h4>
+			<h5><b>HIT 필디</b></h5>
 			<% @fav_posts[0,5].each do |post| %>
 				<div class="reco-posts-item">
 					<% if post.user.use_photo %>
@@ -52,6 +58,7 @@
 
 	<div id="posts-container">
 		<%= render @posts %>
+		<%= link_to "유저검색", '/user_search', remote: true %>
 	</div>
 </div>
 

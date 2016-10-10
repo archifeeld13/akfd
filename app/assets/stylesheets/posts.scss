@@ -23,7 +23,9 @@
 	padding: 0; 
 
 	.cc-item{
-		padding: 5px 20px;
+		padding: 5px;
+		text-align: center;
+		width: 110px;
 		float:left;
 		border-left: 1px solid rgb(200,200,200);
 	}
@@ -62,6 +64,13 @@
 		height: 300px;
 		background: white;
 		border-radius: 5px;
+		padding: 1%;
+		padding-top: 0%;
+		img{
+			border-radius: 3px;
+			width: 47%;
+			margin:1%;
+		}
 	}
 	#reco-posts{
 		float: left;
@@ -403,21 +412,27 @@
 #user_info_panel{
 	background:white;
 	width:99%;
-	height: 200px;
+	height: 285px;
 	margin: 0.5%;
-	border-radius:5px;
+	border-radius:3px;
 	padding:3%;
+	padding-top:6.5%;
 	color: rgb(150,150,150);
+	a{
+	color: #333333;
+	}
 	img {
 		float:left;
 		margin-right: 3%;
+		margin-left: 35px;
 	}
 	#user_info_name_dept{
 		float: left;
-		width: 200px;
+		width: 220px;
 	}
 	#user_info_counts{
 		float: right;
+		margin-right: 80px;
 		width: 210px;
 		table{
 			width: 100%; 
@@ -442,7 +457,7 @@
 		float: left;
 		color: rgb(150,150,150);
 		background: white;
-		width:10%;
+		width: 80px;
 		border-radius: 0 0 5px 5px;
 		margin-right: 0.5%;
 		padding: 3px;;
@@ -451,7 +466,7 @@
 	.my_feeld_menu_item_right span{
 		float: right;
 		color: rgb(150,150,150);
-		width: 8%;
+		width: 80px;
 		border-radius: 5px;
 		padding: 3px;;
 	}

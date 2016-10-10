@@ -81,16 +81,72 @@
 	}
 }
 
+#search{
+	padding-left: 10px;
+	padding-right: 0;
+	span{
+		border-radius: 3px;
+		border: 1px solid gray;
+		padding: 5px 6px;
+		font-size: 1.1em;
+		color: rgb(200,200,200);
+	}
+	width: 45px;
+}
+
+#search_input{
+	position: relative;
+}
+
+#overlay{
+	position: absolute;
+	top: 0; left: 0;
+	background: rgba(0,0,0,0.5);
+	display: none;
+	z-index: 777;
+}
+
+#overlay input{
+	font-size: 5em;
+	width: 50%;
+}
+
+input[type="text"]{
+	 background: transparent;
+	 border: none;
+	 color: white;
+	 outline: none;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+	 color:    white;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	color:    white;
+	opacity:  1;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+	color:    white;
+	opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color:    white;
+}
+
+
 #msg_btn{
 	padding-left: 10px;
 	padding-right: 0;
 	span{
 		border-radius: 3px;
 		border: 1px solid gray;
-		padding: 5px;
+		padding: 5px 6px;
 		font-size: 1.1em;
 		color: rgb(200,200,200);
 	}
+	width: 45px;
 }
 
 #login_btn{
@@ -135,7 +191,6 @@
 		color: rgb(200,200,200);
 	}
 }
-
 
 #brand-image{
 	height:30px;
@@ -230,6 +285,7 @@ a.tag {
 
 	#contents-controllbar{
 		width: 100%;	
+		color: white;
 	}
 
 	.timeline-posts-item{

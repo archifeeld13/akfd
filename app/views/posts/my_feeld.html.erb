@@ -14,7 +14,7 @@
 		<% end %>
 
 		<div id="user_info_name_dept">
-			<span style="font-size: 1.3em;">
+			<span style="font-size: 1.8em;">
 				<%if @user.use_nick %>
 					<%= @user.nickname%>
 				<% else %>
@@ -50,7 +50,7 @@
 					<td>팔로워</td>
 					<td>팔로우</td>
 				</tr>
-				<tr style="font-weight:bold; font-size:1.2em;">
+				<tr style="font-weight:bold; font-size:1.8em;">
 					<td><%= @user.posts.count %></td>
 					<td><%= link_to @user.inverse_friends.count, "/friendships/#{@user.id}/follower", remote: true %></td>
 					<td><%= link_to @user.friendships.count, "/friendships/#{@user.id}/follow", remote: true %></td>
@@ -134,14 +134,16 @@
 		if (arrowCount >= arrowMaxCount ) return;
 		curr = parseInt($('#projects-container').css('left'))
 		console.log(curr)
-		$('#projects-container').css('left', curr - (300+ 5 + 5))
+		//$('#projects-container').css('left', curr - (300+ 5 + 5))
+		$('#projects-container').animate({left: curr - 310 }, 300)
 		arrowCount += 1;
 	})
 	$('#left-arrow').click(function(){
 		if (arrowCount <= 0) return;
 		curr = parseInt($('#projects-container').css('left'))
 		console.log(curr)
-		$('#projects-container').css('left', curr + (300+ 5 + 5))
+		//$('#projects-container').css('left', curr + (300+ 5 + 5))
+		$('#projects-container').animate({left: curr + 310 }, 300)
 		arrowCount -= 1;
 	})
 	// left-arrow, right-arrow

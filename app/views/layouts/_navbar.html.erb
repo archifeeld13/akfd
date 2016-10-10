@@ -6,8 +6,8 @@
 	#dropdown-search{
 		position: absolute;
 		top: 40px;
-		border-radius: 5px;
-		box-shadow: 5px 5px 5px #888888;
+		border-radius: 3px;
+		box-shadow: 5px 5px 5px #333333;
 		background: white;
 		display: none;
 		z-index: 2000;
@@ -25,7 +25,7 @@
 	})		
 </script>
 
-<nav class="navbar navbar-default navbar-fixed-top" style="padding: 2px">
+<nav class="navbar navbar-default navbar-fixed-top" style="padding: 2px", "background-color: white"> 
 <div class="container">
 	<!-- navbar header -->
 	<!-- navbar header -->
@@ -44,49 +44,6 @@
 	<!-- collapase -->
 	<!-- collapase -->
 	<div class="collapse navbar-collapse" id="nav-collapse">	
-		<!-- navbar-form -->
-		<!-- navbar-form -->
-		<form class="navbar-form navbar-left" onsubmit="return false" role="search">
-			<div class="input-group" id="holder-search">
-				<input id="nav_search_input" autocomplete="off" type="text" class="form-control" style="background-color:rgba(204,204,204,0.3)" placeholder="태그 검색" />
-				<div id="dropdown-search">
-					<div>추천 태그 검색 준비중</div>
-					<div>추천 태그 검색 준비중</div>
-					<div>추천 태그 검색 준비중</div>
-				</div>
-				<span class="input-group-btn">
-					<a id="nav_search_submit" href='#'>
-						<button type="button" class="btn btn-default" style="background:#333333; border-color:#333333">
-								<span style="color:#CBFD34" class="fa fa-search" aria-hidden="true"></span>
-						</button>
-					</a>
-				</span>
-			</div>
-			<%# 모바일에 한해서 네브바에 인기 태그 %>
-			<% if browser.device.mobile? %>
-				<div id="fav_tag_content">
-					<% @fav_tags[0..20].shuffle.each do |tag| %>
-						<div class="tag_div" style="margin:4px 2px;"><a href='/posts?tag=<%= tag %>' class='tag' style="background:transparent; color:white;"><%= tag %></a></div>
-					<% end %>
-				</div>
-				<div style="clear:both"></div>
-			<% end %>
-			<%# 모바일에 한해서 네브바에 인기 태그 %>
-		</form>
-		<script>
-			$(function(){ $('#nav_search_submit').click(function(){ // 일단 #제거, 태그엔 특수문자 허용하지 말까?  $('#nav_search_submit').attr('href', '/posts?tag=' + $("#nav_search_input").val())
-				})	
-
-				$('#nav_search_input').keyup(function(e){
-					if (e.keyCode == 13){
-						window.location = '/posts?tag=' + $("#nav_search_input").val();
-					}	
-				})
-			})
-		</script>
-		<!-- navbar-form -->
-		<!-- navbar-form -->
-
 
 		<!-- navbar-right -->
 		<!-- navbar-right -->
@@ -96,147 +53,128 @@
 		<ul class="nav navbar-nav navbar-right" >
 			<!-- 로그인상태일 때 -->
 			<% if current_user %>
-			<li>
-				<!-- feeldup icon -->
-				<a href="#" id="feeldup">
-					<span>+ UPLOAD</span>
-				</a>
-				<!-- feeldup icon -->
-			</li>
-			<li>
-				<!-- msg icon -->
-				<%= link_to raw("<span><i class='fa fa-bell-o' aria-hidden='true'></i></span>"), events_path, remote: true, id: 'msg_btn' %>
-				<!-- msg icon -->
-				
-				<!-- 삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정 -->
-				<!-- 삭삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정제예정
-				<a href="#" style="padding-right:0">
-					<span id="msg_btn" rel="popover" data-placement="bottom" >
-						<% if not browser.device.mobile? %>
-							<i class="fa fa-bell-o" aria-hidden="true"></i>
-							<div id="msg_icon_container" style="display:inline; padding:0;">
-							</div>
-						<% else %>
-							<%= link_to raw("<i class='fa fa-bell-o' aria-hidden='true'></i>"), events_path, remote: true %>
-						<% end %>
-					</span>
-				</a>
-				-->
-				<!-- n 표시 하려고 -->
-				<%# current_user.inverse_events.each do |event| %>
-					<%# if not event.check %>
-					<script>
-						//$("#msg_icon_container")
-								//.css('position', 'relative')
-								//.append('<span	style="background: white; color:black; border-radius: 5px; padding-left: 4px;  
-								// position:absolute; margin-left:10%; top:13px; right:5px; font-size:0.9em; width: 17px; height:18px;">N</span>')	
-								// 일단 이거 주석처리함 N 표시
-					</script>
-					<%# break %>
+				<li>
+					<!-- feeldup icon -->
+					<a href="#" id="feeldup">
+						<span>+ UPLOAD</span>
+					</a>
+					<!-- feeldup icon -->
+				</li>
+				<li>
+					<a href="#" id="search">
+						<span><i class='fa fa-search' aria-hidden='true'></i></span>
+					</a>
+				</li>
+				<li>
+					<!-- msg icon -->
+					<%= link_to raw("<span><i class='fa fa-bell-o' aria-hidden='true'></i></span>"), events_path, remote: true, id: 'msg_btn' %>
+					<!-- msg icon -->
+					<!-- 삭삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정제예정
+					<a href="#" style="padding-right:0">
+						<span id="msg_btn" rel="popover" data-placement="bottom" >
+							<% if not browser.device.mobile? %>
+								<i class="fa fa-bell-o" aria-hidden="true"></i>
+								<div id="msg_icon_container" style="display:inline; padding:0;">
+								</div>
+							<% else %>
+								<%= link_to raw("<i class='fa fa-bell-o' aria-hidden='true'></i>"), events_path, remote: true %>
+							<% end %>
+						</span>
+					</a>
+					<%# current_user.inverse_events.each do |event| %>
+						<%# if not event.check %>
+						<script>
+							//$("#msg_icon_container")
+									//.css('position', 'relative')
+									//.append('<span	style="background: white; color:black; border-radius: 5px; padding-left: 4px;  
+									// position:absolute; margin-left:10%; top:13px; right:5px; font-size:0.9em; width: 17px; height:18px;">N</span>')	
+						</script>
+						<%# break %>
+						<%# end %>
 					<%# end %>
-				<%# end %>
-				<!-- msg icon -->
-				<!-- msg icon -->
-				<!-- 바로 밑에 달리는삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정 -->
-				<!-- 바로 밑에 달리는삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정 -->
-				<!-- popover-msg-content -->
-				<!-- popover-msg-content -->
-				<div id="popover-msg-content" class="hide">
-					<% if current_user.inverse_events.any? %>
-						<% colorW = "white" %>
-						<% colorG = "rgba(50,50,50,0.1)" %>
-						<% current_user.inverse_events.reverse[0..7].each do |event| %>
-						<% if event.check %>
-							<div style="position: relative; width:235px; height:60px; background:<%= colorW %>; margin-bottom: 5px; padding:5px;; border-radius: 5px;">
-						<% else %>	
-							<div style="position: relative; width:235px; height:60px; background:<%= colorG %>; margin-bottom: 5px; padding:5px;; border-radius: 5px;">
-						<% end %>
-								<% if event.user.use_photo %>
-									<%= link_to image_tag(event.user.photo, class: "nav-event-img"), "/my_feeld?user_id=#{event.user.id}" %> 
-								<% else %>
-									<%= link_to image_tag(event.user.image_url, class: "nav-event-img"), "/my_feeld?user_id=#{event.user.id}" %> 
-								<% end %> 
-
-								<%= link_to event.user.name, "/my_feeld?user_id=#{event.user.id}" %> 님이
-
-								<% if event.event_type == 0 %>
-									 <strong>팔로우</strong>하셨습니다
-								<% elsif event.event_type == 1 %>
-									<%= link_to truncate(event.post.title, length:10), post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 <strong>댓글</strong>을 남기셨습니다
-								<% elsif event.event_type == 2 %>
-									<%= link_to truncate(event.post.title, length:10), post_path(event.post), remote:true, class: "event-post", onclick:"show_modal_bg_board(); showLoadingBG()" %>에 <strong>Feel'd!</strong> 를 누르셨습니다
-								<% else %>
-									이상한 값임.
-								<% end %>
-							</div>
-						<% end %>
-						<%= link_to "더 보기", events_path, id: "more-events", class: "btn btn-default btn-block", remote: true %>
+					-->
+					<!-- msg icon -->
+					<!-- msg icon -->
+				</li>
+				<li class="dropdown">
+					<!-- profile icon -->
+					<!-- profile icon -->
+					<a id="profile_img" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<% if current_user.use_photo %>
+						<!-- 여기 둥글게 스타일 입혀야댐 -->
+						<%= image_tag(current_user.photo) %>
 					<% else %>
-						새로운 이벤트가 없습니다 ;D
+						<img src="<%= current_user.image_url%>">
 					<% end %>
-				</div>
-				<script>
-					/*
-					$(function(){
-						$('#msg_btn').popover({
-							html: true,
-							content: function() {
-								return $('#popover-msg-content').html()
-							}
-						});
-					});
-					*/
-				</script>
-				<!-- popover-msg-content 삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정-->
-				<!-- popover-msg-content 삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정삭제예정-->
-			</li>
-			<li class="dropdown">
-				<!-- profile icon -->
-				<!-- profile icon -->
-				<a id="profile_img" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-				<% if current_user.use_photo %>
-					<!-- 여기 둥글게 스타일 입혀야댐 -->
-					<%= image_tag(current_user.photo) %>
-				<% else %>
-					<img src="<%= current_user.image_url%>">
-				<% end %>
-				</a>
-				<ul class="dropdown-menu">
-					<li>
-						<%= link_to '마이필드', my_feeld_path%>
-					</li>
-					<li>
-						<a href="users/<%=current_user.id%>/edit">정보수정</a>
-					</li>
-					<li role="separator" class="divider"></li>
-					<li>
-						<%= link_to '로그아웃', logout_path, method: :delete  %>
-					</li>
-				</ul>
-				<!-- profile icon -->
-				<!-- profile icon -->
-			</li>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<%= link_to '마이필디', my_feeld_path%>
+						</li>
+						<li>
+							<a href="users/<%=current_user.id%>/edit">정보수정</a>
+						</li>
+						<li role="separator" class="divider"></li>
+						<li>
+							<%= link_to '로그아웃', logout_path, method: :delete  %>
+						</li>
+					</ul>
+					<!-- profile icon -->
+					<!-- profile icon -->
+				</li>
+			<!-- 로그인 안되어 있으면 -->
+			<!-- 로그인 안되어 있으면 -->
 			<!-- 로그인 안되어 있으면 -->
 			<% else %>
-			<li>
-				<!-- login icon -->
-				<a href="/login" id="login_btn">
-					<span>Login</span>
-				</a>
-				<!-- login icon -->
-			</li>
-			<li>
-				<!-- join icon -->
-				<a href="<%=new_user_path%>" id="join_btn">
-					<span>Join</span>
-				</a>
-				<!-- join icon -->
-			</li>
+				<li>
+					<!-- login icon -->
+					<a href="/login" id="login_btn">
+						<span>Login</span>
+					</a>
+					<!-- login icon -->
+				</li>
+				<li>
+					<!-- join icon -->
+					<a href="<%=new_user_path%>" id="join_btn">
+						<span>Join</span>
+					</a>
+					<!-- join icon -->
+				</li>
 			<% end %>
 		</ul>
 	</div> 
 	<!-- collapase -->
 	<!-- collapase -->
 	<!-- collapase -->
+	<script>
+		$(function(){
+			 // search nav item
+			 // search nav item
+			$('#search').click(function(){
+				 $('#overlay').css('width', $(window).width())
+									.css('height', $(window).height())
+									.show()
+				 $('#overlay').click(function(){
+						$(this).hide()
+				 })
+				 $('#search_input').focus()
+			})
+
+		 // search input event
+		 // search input event
+			$('#search_input').css('margin-top', $(window).height()/3).click(function(){
+				 return false;
+
+			}).keyup(function(e){
+				 if (e.keyCode == 13) {
+					 //asterixQuery();
+					 $('#overlay').hide();
+					 //$('#queryResult').html("")
+					window.location = '/posts?tag=' + $('#search_input').val();
+				 } 
+			})
+	})
+	</script>
+	
 </div>
 </nav>
