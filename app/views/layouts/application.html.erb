@@ -112,8 +112,7 @@
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <script>
-	$('#my_modal').on('hidden.bs.modal', function (e) {
-		$('.modal-content').html("");
+	$('#my_modal').on('hidden.bs.modal', function (e) { $('.modal-content').html("");
 	})
 </script>
 <script>
@@ -129,7 +128,15 @@
 
 
 <div id="overlay">
-	<center><input id="search_input" type="text" placeholder="태그 검색..."></center>
+	<div id="search_container">
+		<input id="search_input" type="text" placeholder="태그 검색...">
+		<div id="search_reco">
+			<div>추천검색어 1</div>	
+			<div>추천검색어 2</div>	
+			<div>추천검색어 3</div>	
+			<div>추천검색어 4</div>	
+		</div>	
+	</div>
 </div>
 
 </body>

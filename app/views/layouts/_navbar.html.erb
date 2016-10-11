@@ -13,17 +13,6 @@
 		z-index: 2000;
 	}
 </style>
-<script>
-	$(function(){
-		$('#nav_search_input').focus(function(){
-			$('#dropdown-search').css('width', $('#holder-search').width() ).fadeIn()
-		})
-
-		$('#nav_search_input').focusout(function(){
-			$('#dropdown-search').fadeOut()
-		})
-	})		
-</script>
 
 <nav class="navbar navbar-default navbar-fixed-top" style="padding: 2px", "background-color: white"> 
 <div class="container">
@@ -53,13 +42,6 @@
 		<ul class="nav navbar-nav navbar-right" >
 			<!-- 로그인상태일 때 -->
 			<% if current_user %>
-				<li>
-					<!-- feeldup icon -->
-					<a href="#" id="feeldup">
-						<span>+ UPLOAD</span>
-					</a>
-					<!-- feeldup icon -->
-				</li>
 				<li>
 					<a href="#" id="search">
 						<span><i class='fa fa-search' aria-hidden='true'></i></span>
@@ -95,6 +77,13 @@
 					-->
 					<!-- msg icon -->
 					<!-- msg icon -->
+				</li>
+				<li>
+					<!-- feeldup icon -->
+					<a href="#" id="feeldup">
+						<span>+ UPLOAD</span>
+					</a>
+					<!-- feeldup icon -->
 				</li>
 				<li class="dropdown">
 					<!-- profile icon -->
@@ -154,15 +143,19 @@
 				 $('#overlay').css('width', $(window).width())
 									.css('height', $(window).height())
 									.show()
-				 $('#overlay').click(function(){
-						$(this).hide()
-				 })
 				 $('#search_input').focus()
 			})
 
+		  $('#overlay').click(function(){
+		 		$(this).hide()
+		  })
+
 		 // search input event
 		 // search input event
-			$('#search_input').css('margin-top', $(window).height()/3).click(function(){
+			$('#search_container')
+				.css('margin-top', $(window).height()/4).click(function(){return false;})
+
+			$('#search_input').click(function(){
 				 return false;
 
 			}).keyup(function(e){
