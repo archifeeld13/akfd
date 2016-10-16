@@ -105,6 +105,8 @@
 }
 
 #search_reco{
+	max-height: 400px;
+	overflow: auto;
 	div{
 		color: rgba(255,255,255,0.5);	
 		width: 40%;

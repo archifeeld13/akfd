@@ -131,14 +131,57 @@
 	<div id="search_container">
 		<input id="search_input" type="text" placeholder="태그 검색...">
 		<div id="search_reco">
-			<div>추천검색어 1</div>	
-			<div>추천검색어 2</div>	
-			<div>추천검색어 3</div>	
-			<div>추천검색어 4</div>	
+			<div>추천검색어</div>	
 		</div>	
 	</div>
 </div>
+<script>
+	$(function(){
+		 // search nav item
+		 // search nav item
+		$('#search').click(function(){
+			 $('#overlay').css('width', $(window).width())
+								.css('height', $(window).height())
+								.show()
+			 $('#search_input').focus()
+		})
 
+		$('#overlay').click(function(){
+			$(this).hide()
+		})
+
+	 // search input event
+	 // search input event
+		$('#search_container')
+			.css('margin-top', $(window).height()/4).click(function(){return false;})
+
+		$('#search_input').click(function(){
+			 return false;
+
+		}).keyup(function(e){
+				$.ajax({
+				 url: '/tag_search',
+				 type: 'GET',
+				 data: {
+					tag: $('#search_input').val(),
+				 },
+				 success: function(data){
+					h = ""
+					$.each(data, function(index, obj){
+						h += "<div>"+ obj.name +"</div>"	
+					})
+					$('#search_reco').html(h)
+				 }
+				})
+				if (e.keyCode == 13) {
+					//asterixQuery();
+					$('#overlay').hide();
+					//$('#queryResult').html("")
+					window.location = '/posts?tag=' + $('#search_input').val();
+				} 
+		})
+})
+</script>
 </body>
 </html>
 

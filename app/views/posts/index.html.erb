@@ -66,33 +66,6 @@
 	</div>
 </div>
 
-<style>
-	#posts_adder{
-		color:black; 
-		font-size:3.5em; 
-		font-weight: bold;
-	}
-	#posts_adder_container{
-		margin-bottom: 2%; 	
-		clear:both;
-		border-radius: 5px;
-		background: rgba(50,50,50,0.1);
-		width: 90px;
-	}
-	#posts_adder_container:hover{
-		background: #CBFD34; 
-	}
-</style>
-
-<!--
-<center>
-	<%#= link_to request.original_url, remote: true, id: "posts_adder" do%>
-		<div id="posts_adder_container">
-			+
-		</div>
-	<%# end %>
-</center>
--->
 
 <script >
 	// 페이지 새로 고침시 스크롤 초기화
@@ -114,35 +87,4 @@
 		 })
 	 }
 	})
-
-	/*
-	var page = 1;
-	var ori_url = "";
-	$(function(){
-		// 익스에서 여러 자바스크립트 못합쳐서 따로 써놓을게
-		//tag_truncate()
-		var result = ""
-		$('.tag_list').each(function(){	
-			tmp_arr = $(this).html().split(",").slice(0, 3);
-			result = tmp_arr.join();
-			//	result += " <strong> ...+</strong> "
-			if ($(this).html().split(",").length > 3)
-				$(this).html(result + '&nbsp; <i class="fa fa-ellipsis-h"></i>');
-		})
-		// tag_truncate end
-
-		ori_url = $('#posts_adder').attr('href')
-
-		$('#posts_adder').click(function(){
-			//$('body').LoadingOverlay("show")
-			if (ori_url.indexOf("?") == -1)
-				$('#posts_adder').attr('href', ori_url + "?page=" + page)
-			else
-				$('#posts_adder').attr('href', ori_url + "&page=" + page)
-			page ++;
-		})
-
-		
-	});
-	*/
 </script>

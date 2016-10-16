@@ -6,6 +6,12 @@ class PostsController < ApplicationController
 			render "/posts/notice", :layout => 'notice' 
 	end
 
+	def tag_search
+		@reco_tags = ActsAsTaggableOn::Tag.where("name like ?", "%#{params[:tag]}%")
+		@reco_tags= @reco_tags.sort_by{|p| p.taggings_count}.reverse
+		render json: @reco_tags
+	end
+
   def index
 		# default post type 1
 		p_t= 1
@@ -184,18 +190,22 @@ class PostsController < ApplicationController
 		# 다른 사람 페이지 볼 때, 비밀글 보이면 안돼
 		if params[:user_id]
 			@user = User.find(params[:user_id])
-			@posts = Post.where(user_id: User.find(params[:user_id]).id, is_secret: false).reverse
-			#flash[:notice] = "#{@user.name}의 마이필드입니다 ;D"
-			#
+			@posts = Post.where(user_id: User.find(params[:user_id]).id, is_secret: false)
+										.order(created_at: :desc)
+										.paginate(page: params[:page], per_page: 20)
 			@isMine = false
 			@projects = Project.where(user_id: @user.id).reverse
 		else
 			@user = User.find(current_user.id)
-			@posts = Post.where(user_id: current_user.id).reverse
-			#flash[:notice] = "나의 작품을 관리합니다;D"
-			#
+			@posts = Post.where(user_id: current_user.id)
+										.order(created_at: :desc)
+										.paginate(page: params[:page], per_page: 20)
 			@isMine = true 
 			@projects = Project.where(user_id: current_user.id).reverse
+		end
+		respond_to do |format|
+		 format.html
+		 format.js
 		end
 	end
 

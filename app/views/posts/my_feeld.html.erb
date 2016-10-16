@@ -108,10 +108,36 @@
 
 	<div style="clear:both"></div>
 
+	<div id="infinite-scrolling" style="display:none">
+		<%= will_paginate @posts %>
+	</div>
+
 	<div id="posts-container">
 		<%= render @posts %>
 	</div>
 </div>
+
+<script >
+	// 페이지 새로 고침시 스크롤 초기화
+	window.onbeforeunload = function(){ window.scrollTo(0,0); }
+
+	var canAddExtra = true
+	$(function(){
+	 if ($('#infinite-scrolling').size() > 0){
+		 $(window).on("scroll", function(){
+			 more_posts_url = $('.pagination a.next_page').attr('href') 
+			 if (canAddExtra && more_posts_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60){
+				 canAddExtra = false;
+				$('body').LoadingOverlay("show")
+				 $.getScript(more_posts_url,function(data, textStatus, jqxhr){
+					 console.log(data)
+					 canAddExtra = true
+				 })  
+			 }
+		 })
+	 }
+	})
+</script>
 
 <script >
 	//	tag_truncate()

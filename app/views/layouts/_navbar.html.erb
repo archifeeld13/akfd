@@ -135,39 +135,6 @@
 	<!-- collapase -->
 	<!-- collapase -->
 	<!-- collapase -->
-	<script>
-		$(function(){
-			 // search nav item
-			 // search nav item
-			$('#search').click(function(){
-				 $('#overlay').css('width', $(window).width())
-									.css('height', $(window).height())
-									.show()
-				 $('#search_input').focus()
-			})
-
-		  $('#overlay').click(function(){
-		 		$(this).hide()
-		  })
-
-		 // search input event
-		 // search input event
-			$('#search_container')
-				.css('margin-top', $(window).height()/4).click(function(){return false;})
-
-			$('#search_input').click(function(){
-				 return false;
-
-			}).keyup(function(e){
-				 if (e.keyCode == 13) {
-					 //asterixQuery();
-					 $('#overlay').hide();
-					 //$('#queryResult').html("")
-					window.location = '/posts?tag=' + $('#search_input').val();
-				 } 
-			})
-	})
-	</script>
 	
 </div>
 </nav>

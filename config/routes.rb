@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 	end
 	resources :projects
 
+	get '/tag_search' => "posts#tag_search"
+
 	get '/events' => "users#events"
 
 	get '/auth_user/:auth_key'=> "users#auth_user"
