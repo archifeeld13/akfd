@@ -1,8 +1,13 @@
 class ProjectsController < ApplicationController
 	before_action :project_params, only: [:create]
 
-
 	def new
+	end
+
+	def show
+		@project = Project.find(params[:id])
+		@user = @project.user
+		@posts = @project.posts 
 	end
 
 	# ajax로 프로젝트만 생성하는 곳이다

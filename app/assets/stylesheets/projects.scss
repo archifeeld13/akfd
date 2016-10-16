@@ -101,3 +101,55 @@
 		}
 	}
 }
+
+
+#project_info_panel{
+	background:white;
+	width:99%;
+	height: 285px;
+	margin: 0.5%;
+
+	padding:0;
+	color: rgb(150,150,150);
+
+	a{
+	color: #333333;
+	}
+	#project_photo{
+		position:relative;
+		float:left;
+		width: 40%;
+		height: 100%;
+		img{
+			height: 100%;
+			width: 100%;
+		}
+		#project_title{
+			position:absolute;
+			color: white;	
+			font-size: 1.5em;
+		}
+	}
+	#project_desc{
+		float:left;
+		width: 30%;
+		height: 100%;
+		padding: 3%;
+		border-right: 1px solid rgb(200,200,200);
+	}
+	#project_counts_info{
+		img{
+			width: 20%;	
+		}
+		float: left;
+		width: 30%;
+		padding :3%;
+		table{
+			width: 100%; 
+			text-align: center;
+		}
+	}
+	.follow-link{
+	 color:rgb(208,241,68); font-size: 1em; font-weight:bold;
+	}
+}

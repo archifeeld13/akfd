@@ -13,8 +13,10 @@ Rails.application.routes.draw do
 	get 'friendships/:id/:type' => 'friendships#show'
 
 	resources :users do
-		resources :projects, only: [:create, :new, :destroy]	
+		resources :projects
 	end
+	resources :projects
+
 	get '/events' => "users#events"
 
 	get '/auth_user/:auth_key'=> "users#auth_user"

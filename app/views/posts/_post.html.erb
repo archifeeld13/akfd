@@ -28,6 +28,32 @@
 		<% end %>
 	<% end %>
 
+	<div class="posts-item-writer">
+		<% if post.user.use_photo %>
+			<%= link_to image_tag(post.user.photo, class:"img-circle"), "/my_feeld?user_id=#{post.user.id}"%>
+		<% else %>
+			<%= link_to image_tag(post.user.image_url, class:"img-circle"), "/my_feeld?user_id=#{post.user.id}" %>
+		<% end %>
+
+		<% if post.user.use_nick %>
+			<%= link_to post.user.nickname, "/my_feeld?user_id=#{post.user.id}"%>
+		<% else %>
+			<%= link_to post.user.name, "/my_feeld?user_id=#{post.user.id}"%>
+		<% end %>
+		&nbsp;
+		<% if current_user and current_user.id == post.user.id%>
+			<span style="font-size: 0.8em ">
+			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
+			</span>
+		<%# 관리자 아이디라면 에딧 허용%>
+		<% elsif current_user and manager_list.include? current_user.id %>
+			<span style="font-size: 0.8em ">
+			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
+			</span>
+		<% end %>
+	</div>
+
+
 	<div class="posts-item-info">
 		<div class="posts-item-title" >
 			<%= link_to post.title, post %>
@@ -56,30 +82,6 @@
 		</div>
 	</div>
 
-	<div class="posts-item-writer">
-		<% if post.user.use_photo %>
-			<%= link_to image_tag(post.user.photo), "/my_feeld?user_id=#{post.user.id}"%>
-		<% else %>
-			<%= link_to image_tag(post.user.image_url), "/my_feeld?user_id=#{post.user.id}" %>
-		<% end %>
-
-		<% if post.user.use_nick %>
-			<%= link_to post.user.nickname, "/my_feeld?user_id=#{post.user.id}"%>
-		<% else %>
-			<%= link_to post.user.name, "/my_feeld?user_id=#{post.user.id}"%>
-		<% end %>
-		&nbsp;
-		<% if current_user and current_user.id == post.user.id%>
-			<span style="font-size: 0.8em ">
-			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
-			</span>
-		<%# 관리자 아이디라면 에딧 허용%>
-		<% elsif current_user and manager_list.include? current_user.id %>
-			<span style="font-size: 0.8em ">
-			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
-			</span>
-		<% end %>
-	</div>
 </div>
 
 <!-- 이거 꼭 여기서 해야하나 ? -->

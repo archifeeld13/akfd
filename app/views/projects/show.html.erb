@@ -1,0 +1,90 @@
+<% if not browser.device.mobile? %>
+	<%= render 'posts/contents_controllbar'%>
+<% end %>
+
+<div class="container">
+	<div id="project_info_panel">
+		 <div id="project_photo">
+			<%#= image_tag(@project.photo)%>
+			<%= image_tag("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5zMJSxs75XUMZo3qVrkCcJbMK11TyGph_BC0Z34UBPgDrT2Nj7Q")%>
+			<div id="project_title"><%= @project.name %></div>
+			<script>
+				$(function(){
+					_top = $('#project_photo').height()/2
+					_left = ($('#project_photo').width() - $('#project_title').width()) / 2
+					$('#project_title').css('top', _top).css('left', _left)	
+				})
+			</script>
+		</div>
+
+		<div id="project_desc">
+			프로젝트 설명 
+			프로젝트 설명 
+			프로젝트 설명 
+			프로젝트 설명 
+			프로젝트 설명 
+			프로젝트 설명 
+			프로젝트 설명 
+			프로젝트 설명 
+			프로젝트 설명 
+			프로젝트 설명 
+			<br>
+			<br>
+			<!-- 분야 -->
+			<div class="tag_div" style="margin:4px 2px;"><a href="#" class='tag' style="background:transparent; color:gray;">건축설계</a></div>
+			<div class="tag_div" style="margin:4px 2px;"><a href="#" class='tag' style="background:transparent; color:gray;">시각디자인</a></div>
+			<!-- 분야 -->
+		</div>
+
+		<div id="project_counts_info">
+			<% if !@user.use_photo %>
+				<%= image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130", class:"img-circle") %>
+			<% else %>
+				<%= image_tag(@user.photo, class: "my_feeld_profile_img img-circle", id: "message_box")%>
+			<% end %>
+			<span style="font-size: 1.3em;">
+			<%if @user.use_nick %>
+				<%= @user.nickname%>
+			<% else %>
+				<%= @user.name %>
+			<% end %>
+			</span>
+			<table>
+				<tr>
+					<td>게시글</td>
+					<td>구성원</td>
+					<td>추천</td>
+				</tr>
+				<tr style="font-weight:bold; font-size:1.8em;">
+					<td>???</td>
+					<td>???</td>
+					<td>???</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div style="clear:both"></div>
+
+	<div id="posts-container">
+		<%= render @posts %>
+	</div>
+</div>
+
+<script >
+
+	//	tag_truncate()
+	var result = ""
+	$('.tag_list').each(function(){	
+		tmp_arr = $(this).html().split(",").slice(0, 3);
+		result = tmp_arr.join();
+		//	result += " <strong> ...+</strong> "
+		if ($(this).html().split(",").length > 3)
+			$(this).html(result + '&nbsp; <i class="fa fa-ellipsis-h"></i>');
+	})
+	//	tag_truncate()
+	
+</script>
