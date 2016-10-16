@@ -56,6 +56,10 @@
 	</div>
 	<% end %>
 
+	<div id="infinite-scrolling" style="display:none">
+		<%= will_paginate @posts %>
+	</div>
+
 	<div id="posts-container">
 		<%= render @posts %>
 		<%= link_to "유저검색", '/user_search', remote: true %>
@@ -80,20 +84,38 @@
 	}
 </style>
 
-
+<!--
 <center>
-	<%= link_to request.original_url, remote: true, id: "posts_adder" do%>
+	<%#= link_to request.original_url, remote: true, id: "posts_adder" do%>
 		<div id="posts_adder_container">
 			+
 		</div>
-	<% end %>
+	<%# end %>
 </center>
+-->
 
 <script >
 	// 페이지 새로 고침시 스크롤 초기화
 	window.onbeforeunload = function(){ window.scrollTo(0,0); }
 
-	// 글의 마지막에 도달해도 계속 증가하지만 상관없지않나?
+	var canAddExtra = true
+	$(function(){
+	 if ($('#infinite-scrolling').size() > 0){
+		 $(window).on("scroll", function(){
+			 more_posts_url = $('.pagination a.next_page').attr('href') 
+			 if (canAddExtra && more_posts_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60){
+				 canAddExtra = false;
+				$('body').LoadingOverlay("show")
+				 $.getScript(more_posts_url,function(data, textStatus, jqxhr){
+					 console.log(data)
+					 canAddExtra = true
+				 })  
+			 }
+		 })
+	 }
+	})
+
+	/*
 	var page = 1;
 	var ori_url = "";
 	$(function(){
@@ -112,7 +134,7 @@
 		ori_url = $('#posts_adder').attr('href')
 
 		$('#posts_adder').click(function(){
-			$('body').LoadingOverlay("show")
+			//$('body').LoadingOverlay("show")
 			if (ori_url.indexOf("?") == -1)
 				$('#posts_adder').attr('href', ori_url + "?page=" + page)
 			else
@@ -120,14 +142,7 @@
 			page ++;
 		})
 
-		/*	
-		$(window).scroll(function() {
-			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-				alert('창 끝 도달시, 글 로드 기능 개발중');
-				//$('a#posts_adder').click()
-			}
-		});
-		*/
 		
 	});
+	*/
 </script>

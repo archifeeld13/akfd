@@ -1,7 +1,11 @@
-<% if @posts %>
-	$('<%=j render @posts %>').appendTo('#posts-container')
+$('#posts-container').append('<%= j render @posts %>');
+
+<% if @posts.next_page %>
+	<%# 이건 둘중 하나로 할까 남은거로 %>
+  $('.pagination').replaceWith('<%= j will_paginate @posts%>');
 <% else %>
-	alert('마지막 입니다')
+  $(window).off('scroll');
+  $('.pagination').remove();
 <% end %>
 
 // tag_trunctate()

@@ -151,10 +151,12 @@
 		position: relative;
 		padding:5%;
 		padding-bottom: 0;
+		//동윤이가 post-item-title 글씨색 수정함
 		.posts-item-title{
-			color: #a0a0a0;
+			font-size:0.9em;
+			color: #aaaaaa;
 			a{
-				color:rgb(100,100,100);	
+				color:rgb(170,170,170);	
 			}
 		}
 		.posts-item-counts{
@@ -238,7 +240,7 @@
 			color: 444444;
 			font-weight:bold;
 			a{
-				color:black;	
+				color:gray;	
 			}
 		}
 		.posts-item-image-content{
