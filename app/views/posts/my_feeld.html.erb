@@ -117,6 +117,12 @@
 	</div>
 </div>
 
+<center>
+	<div id="posts-loading" style="display:none">
+		<%= image_tag("loading.gif") %>
+	</div>
+</center>
+
 <script >
 	// 페이지 새로 고침시 스크롤 초기화
 	window.onbeforeunload = function(){ window.scrollTo(0,0); }
@@ -128,7 +134,7 @@
 			 more_posts_url = $('.pagination a.next_page').attr('href') 
 			 if (canAddExtra && more_posts_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60){
 				 canAddExtra = false;
-				$('body').LoadingOverlay("show")
+				 $('#posts-loading').show()
 				 $.getScript(more_posts_url,function(data, textStatus, jqxhr){
 					 console.log(data)
 					 canAddExtra = true

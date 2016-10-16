@@ -1,5 +1,7 @@
 <%= render 'contents_controllbar'%>
 
+<%#= link_to "유저검색", '/user_search', remote: true %>
+
 <div class="container">
 
 	<% if not browser.device.mobile? and request.original_fullpath == "/posts" %>
@@ -62,9 +64,15 @@
 
 	<div id="posts-container">
 		<%= render @posts %>
-		<%= link_to "유저검색", '/user_search', remote: true %>
 	</div>
 </div>
+
+
+<center>
+	<div id="posts-loading" style="display:none">
+		<%= image_tag("loading.gif") %>
+	</div>
+</center>
 
 
 <script >
@@ -73,18 +81,18 @@
 
 	var canAddExtra = true
 	$(function(){
-	 if ($('#infinite-scrolling').size() > 0){
-		 $(window).on("scroll", function(){
-			 more_posts_url = $('.pagination a.next_page').attr('href') 
-			 if (canAddExtra && more_posts_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60){
-				 canAddExtra = false;
-				$('body').LoadingOverlay("show")
-				 $.getScript(more_posts_url,function(data, textStatus, jqxhr){
-					 console.log(data)
-					 canAddExtra = true
-				 })  
-			 }
-		 })
-	 }
+		if ($('#infinite-scrolling').size() > 0){
+			$(window).on("scroll", function(){
+				more_posts_url = $('.pagination a.next_page').attr('href') 
+				if (canAddExtra && more_posts_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60){
+					canAddExtra = false;
+					$('#posts-loading').show()
+					$.getScript(more_posts_url,function(data, textStatus, jqxhr){
+						console.log(data)
+						canAddExtra = true
+					})  
+				}
+			})
+		}
 	})
 </script>
