@@ -105,12 +105,14 @@
 }
 
 #search_reco{
+	position: relative; // 이거 빼면 스크롤 멀리붙음
 	max-height: 400px;
 	overflow: auto;
-	div{
+	.search_reco_item{
 		color: rgba(255,255,255,0.5);	
 		width: 40%;
 		font-size: 3em;
+		cursor: pointer;
 	}
 }
 

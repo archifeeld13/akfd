@@ -38,9 +38,8 @@
 	<%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js" %>
 
 	<%# https://github.com/noraesae/perfect-scrollbar	%>	
-	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.10/js/min/perfect-scrollbar.jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.10/js/min/perfect-scrollbar.jquery.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.10/css/perfect-scrollbar.min.css" rel="stylesheet">
-	-->
 
 	<!-- overlay min js -->
 	<%= javascript_include_tag "loadingoverlay.min.js" %>
@@ -131,7 +130,7 @@
 	<div id="search_container">
 		<input id="search_input" type="text" placeholder="태그 검색...">
 		<div id="search_reco">
-			<div>추천검색어</div>	
+			<div class="search_reco_item">추천검색어</div>	
 		</div>	
 	</div>
 </div>
@@ -168,9 +167,12 @@
 				 success: function(data){
 					h = ""
 					$.each(data, function(index, obj){
-						h += "<div>"+ obj.name +"</div>"	
+						h += "<div class='search_reco_item'>"+ obj.name +"</div>"	
 					})
 					$('#search_reco').html(h)
+					$('.search_reco_item').click(function(){
+						$('#search_input').val($(this).text())
+					})
 				 }
 				})
 				if (e.keyCode == 13) {
@@ -180,6 +182,9 @@
 					window.location = '/posts?tag=' + $('#search_input').val();
 				} 
 		})
+
+
+		$('#search_reco').perfectScrollbar();
 })
 </script>
 </body>
