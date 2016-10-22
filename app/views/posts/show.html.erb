@@ -15,6 +15,10 @@
 		/*추가 마진 탑좀 주겠음*/
 		margin-top: 10px;
 	}
+	#related-posts{
+		position:relative; 
+		display:none;
+	}
 </style>
 
 <%# if not browser.device.mobile? %>
@@ -195,15 +199,6 @@
 
 			<div id="content-end" style="position:absolute"></div>
 
-			<!-- 다음글 추천 -->
-			<% if @isReco %>
-				<center><h3 style="color:darkgray">관련 필드업</h2></center>
-				<%= render @posts %>
-			<% else %>
-				<center><h3 style="color:darkgray" >최신 필드업</h2></center>
-				<%= render @posts %>
-			<% end %>
-			<!-- 다음글 추천 -->
 
 		</div>
 		<!-- show-container & container fluid-->
@@ -216,6 +211,7 @@
 			<h5><%= @post.title %></h5>
 			<p style="font-size:0.8em;"><%= auto_link(@post.content.gsub(/\n/, '<br/>'), :html => { :target => '_blank' })%></p>
 		</div>
+
 		<!-- show-controller 위치 업데이트 스크립트 -->
 		<!-- show-controller 위치 업데이트 스크립트 -->
 		<script>
@@ -229,8 +225,19 @@
 					updatePositionShowContainer();
 				})
 
+				// 컨트롤러에 스크롤
 				$('#show-controller').perfectScrollbar();
+
+				// 이미지가 다 로드된 이후에 추천 포스트를 넣어야함
+				// 이미지가 다 로드된 이후에 추천 포스트를 넣어야함
+				$('#show-container').imagesLoaded(function(){
+					// 강제로 밑으로 밀어버림 5줄을 위해서
+					$('#related-posts').show()
+								.css('margin-top', parseInt($('#show-container').css('height')) + 50);
+				})
+			
 			})
+
 
 			function updatePositionShowContainer(){
 				var left_offset = parseFloat($('#show-container').offset()["left"])
@@ -267,13 +274,16 @@
 				// + 추가 기능
 				// 오른쪽 메뉴 사라지게 하기
 				diff = parseInt($('#content-end').css('top')) - parseInt($('#show-controller').css('height'))
+
+				
 				if (diff + 50 < parseInt($(this).scrollTop())){
-					$('#show-controller').fadeOut();	
+					$('#show-controller').hide();	
 				}
 				else {
 					// 뭔가 깜빡 거려야 할거같은데 일단 안그럼..
-					$('#show-controller').fadeIn();	
+					$('#show-controller').show();	
 				}
+
 			});
 
 		</script>
@@ -301,7 +311,19 @@
 	//			return false;
 	//	}); 
 	</script>
-	<%= javascript_include_tag "lightbox.min.js" %>
+	<%#= javascript_include_tag "lightbox.min.js" %>
 
+
+	<!-- 다음글 추천 -->
+	<div id="related-posts">
+	<% if @isReco %>
+		<center><h3 style="color:darkgray">관련 필드업</h2></center>
+		<%= render @posts %>
+	<% else %>
+		<center><h3 style="color:darkgray" >최신 필드업</h2></center>
+		<%= render @posts %>
+	<% end %>
+	</div>
+	<!-- 다음글 추천 -->
 
 </div>
