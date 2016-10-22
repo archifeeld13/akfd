@@ -51,7 +51,7 @@ function showOptionContainer(){
 		.css('position', 'fixed')
 		.css('top', $(window).height()/2 - 75)
 		.css('margin-left', ($(window).width() - $('#option_container').width())/2 )
-		.fadeIn()
+		.show() // 이건 fadein 이 아닌 show로 빨리 뜨게 하니까 더 나음
 }
 
 // isModalBgShowed 변수는 화면 사이즈 조정시 요소의 사이즈를 다시 구하기 위해서

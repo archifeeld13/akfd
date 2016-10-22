@@ -43,12 +43,12 @@ $(function(){
 
 	textarea{
 		overflow:hidden;
-		font-size: 1.5em !important;
+		font-size: 1em !important;
 		width: 100%;
 	}
 
 	input[type="text"]{
-		font-size: 1.5em;
+		font-size: 1em;
 		width: 100%;
 	}
 	
@@ -94,7 +94,8 @@ $(function(){
 		<div style="margin-bottom: 10px"></div>
 
 		<center>
-		<h3>링크 제목 : <%= @object.title%></h3>
+		<strong>링크 제목 : <%= @object.title%></strong>
+		<br>
 		<%= hidden_field_tag :link_title, "#{@object.title}" %>	
 
 		<% if @object.images.any? %>
@@ -106,7 +107,7 @@ $(function(){
 		<% end %>
 
 		<br>
-		<h3>출처 : <%= @link %></h3>
+		<strong>출처 : <%= @link %></strong>
 		<%= hidden_field_tag :link_url , "#{@link}"%>	
 		</center>
 

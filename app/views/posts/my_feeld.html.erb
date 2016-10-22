@@ -80,9 +80,7 @@
 			<%= link_to raw('<div class="my_feeld_menu_item">바인더()</div>'), "/project_management", remote: true %>
 			<%= link_to raw('<div class="my_feeld_menu_item">아카이브()</div>'), "/archive_mine", remote: true %>
 			<%= link_to raw('<div class="my_feeld_menu_item">콜렉션()</div>'), "/archive_share", remote: true %>
-			<a href="#" id="add_binder" class="my_feeld_menu_item_right">
-				<span style="white-space:nowrap">+ 바인더</span>
-			</a>
+			<%= link_to raw('<span style="white-space:nowrap">+ 바인더</span>'), "/projects/new", id:"add_binder", class:"my_feeld_menu_item_right" %>
 		<% else %>
 			<%= link_to raw('<div class="my_feeld_menu_item">바인더()</div>'), "/project_management?user_id=#{@user.id}", remote: true %>
 			<%= link_to raw('<div class="my_feeld_menu_item">아카이브()</div>'), "/archive_mine?user_id=#{@user.id}", remote: true %>
