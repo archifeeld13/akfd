@@ -80,116 +80,120 @@
 					</div>
 				<% end %>
 
-				<!-- posts-item-info -->
-				<!-- posts-item-info -->
-				<!-- posts-item-info -->
-				<div class="posts-item-info">
-					<!-- posts-item-counts -->
-					<!-- posts-item-counts -->
-					<!-- posts-item-counts -->
-					<div class="posts-item-counts" >
-						<%# ======================================================================  %>
-						<% if current_user %>
-							<% if Like.find_by(post_id: @post.id, user_id: current_user.id) %>
-								<%= link_to image_tag('feeldrev.png'), post_likes_path(@post.id), class: "feeld feeld#{@post.id}" ,method: :post, remote: true %>
-							<% else %>
-								<%= link_to image_tag('feeld.png'), post_likes_path(@post.id), class: "feeld feeld#{@post.id}" ,method: :post, remote: true %>
-							<% end %>
-							<strong><a href="#" class="feeldcnt feeldcnt<%=@post.id%>" data-toggle="popover" data-trigger="focus"  data-placement="right" >x <%=@post.likes.count%></a></strong>
-							<div id="popover-content" class="hide">
-								<% if @post.likes.any? %>
-								<% @post.likes.each do |like| %>
-									<% if like.user.use_nick %>
-										<%= link_to like.user.nickname, "/my_feeld?user_id=#{like.user.id}", class: "like_user_list"%>
+				<% if browser.device.mobile? %>
+					<!-- posts-item-info -->
+					<!-- posts-item-info -->
+					<!-- posts-item-info -->
+					<div class="posts-item-info">
+						<!-- posts-item-counts -->
+						<!-- posts-item-counts -->
+						<!-- posts-item-counts -->
+						<div class="posts-item-counts" >
+							<%# ======================================================================  %>
+							<% if current_user %>
+								<% if Like.find_by(post_id: @post.id, user_id: current_user.id) %>
+									<%= link_to image_tag('feeldrev.png'), post_likes_path(@post.id), class: "feeld feeld#{@post.id}" ,method: :post, remote: true %>
+								<% else %>
+									<%= link_to image_tag('feeld.png'), post_likes_path(@post.id), class: "feeld feeld#{@post.id}" ,method: :post, remote: true %>
+								<% end %>
+								<strong><a href="#" class="feeldcnt feeldcnt<%=@post.id%>" data-toggle="popover" data-trigger="focus"  data-placement="right" >x <%=@post.likes.count%></a></strong>
+								<div id="popover-content" class="hide">
+									<% if @post.likes.any? %>
+									<% @post.likes.each do |like| %>
+										<% if like.user.use_nick %>
+											<%= link_to like.user.nickname, "/my_feeld?user_id=#{like.user.id}", class: "like_user_list"%>
+										<% else %>
+											<%= link_to like.user.name, "/my_feeld?user_id=#{like.user.id}", class: "like_user_list"%>
+										<% end %>
+									<% end %>
 									<% else %>
-										<%= link_to like.user.name, "/my_feeld?user_id=#{like.user.id}", class: "like_user_list"%>
+										첫 Feel'd 를 눌러주세요;D
+									<% end %>
+								</div>
+								<script>
+									$(function(){
+									 // http://jsfiddle.net/raving/2thfaxeu/
+										$('.feeldcnt').popover({
+											html: true,
+											content: function(){
+												return $('#popover-content').html()	
+											}
+										});
+										$('.feeldcnt').click(function(){
+											return false;	
+										})
+									});
+								</script>
+								&nbsp;
+								<% if current_user.id != @post.user.id %>
+									<%= link_to image_tag('feeldin.png'),  post_shares_path(@post.id), class: "feeldin feeldin#{@post.id}", method: :post, remote: true %>
+									x <strong class="feeldincnt feeldincnt<%=@post.id%>"><%=@post.shares.count%></strong>
+								<% else %>
+									<% if @post.post_type == 2 %>
+										<%= link_to image_tag('edit.png'), "", id:"edit" %>
+										<script>
+											$('#edit').click(function(){alert('링크타입의 글 수정기능은 준비중입니다')})
+										</script>
+									<% else %>
+										<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit" %>
 									<% end %>
 								<% end %>
-								<% else %>
-									첫 Feel'd 를 눌러주세요;D
+
+								<%# 관리자 아이디라면 에딧 허용%>
+								<% if manager_list.include? current_user.id %>
+										<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit" %>
+								<% end %>
+							<% end %>
+
+							<span style="position:absolute; right:0;"><%=image_tag "eye.png", class: "post-icon"%> <%= @post.view_count%></span>
+
+							
+							<hr style="margin: 15px 0">
+
+							<div class="posts-item-title" >
+								<%= @post.title %>
+								<% if @post.is_secret %>
+									<span class="text-danger">(<i class="fa fa-lock"></i>&nbsp;비공개)</span>
+								<% end %>
+								<span style="color:darkgray; font-size:.7em; white-space:nowrap">
+									 &nbsp; <%= @post.created_at.strftime("%Y년 %m월 %d일") %>
+								</span>
+							</div>
+
+							<div style="height:10px;"></div>
+
+							<%# 글 내용 부분 %>
+							<% if @post.post_type == 1 or @post.post_type == 2%>
+								<div class="posts-item-image-content">
+									<%#= @post.content.gsub(/\n/, '<br/>').html_safe%>
+									<%= auto_link(@post.content.gsub(/\n/, '<br/>'), :html => { :target => '_blank' })%>
+								</div>
+							<% end %>
+							<div class="posts-item-hashtags">
+								<% if @post.tag_list.size > 0 %>	
+									<div class='tag_list'><%= tag_icons(@post.tag_list) %> </div>
 								<% end %>
 							</div>
-							<script>
-								$(function(){
-								 // http://jsfiddle.net/raving/2thfaxeu/
-									$('.feeldcnt').popover({
-										html: true,
-										content: function(){
-											return $('#popover-content').html()	
-										}
-									});
-									$('.feeldcnt').click(function(){
-										return false;	
-									})
-								});
-							</script>
+
+							<hr style="margin: 20px 0">
+
+							<%= render "comments/comments" %>
 							&nbsp;
-							<% if current_user.id != @post.user.id %>
-								<%= link_to image_tag('feeldin.png'),  post_shares_path(@post.id), class: "feeldin feeldin#{@post.id}", method: :post, remote: true %>
-								x <strong class="feeldincnt feeldincnt<%=@post.id%>"><%=@post.shares.count%></strong>
-							<% else %>
-								<% if @post.post_type == 2 %>
-									<%= link_to image_tag('edit.png'), "", id:"edit" %>
-									<script>
-										$('#edit').click(function(){alert('링크타입의 글 수정기능은 준비중입니다')})
-									</script>
-								<% else %>
-									<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit" %>
-								<% end %>
-							<% end %>
-
-							<%# 관리자 아이디라면 에딧 허용%>
-							<% if manager_list.include? current_user.id %>
-									<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit" %>
-							<% end %>
-						<% end %>
-
-						<span style="position:absolute; right:0;"><%=image_tag "eye.png", class: "post-icon"%> <%= @post.view_count%></span>
-
-						
-						<hr style="margin: 15px 0">
-
-						<div class="posts-item-title" >
-							<%= @post.title %>
-							<% if @post.is_secret %>
-								<span class="text-danger">(<i class="fa fa-lock"></i>&nbsp;비공개)</span>
-							<% end %>
-							<span style="color:darkgray; font-size:.7em; white-space:nowrap">
-								 &nbsp; <%= @post.created_at.strftime("%Y년 %m월 %d일") %>
-							</span>
 						</div>
-
-						<div style="height:10px;"></div>
-
-						<%# 글 내용 부분 %>
-						<% if @post.post_type == 1 or @post.post_type == 2%>
-							<div class="posts-item-image-content">
-								<%#= @post.content.gsub(/\n/, '<br/>').html_safe%>
-								<%= auto_link(@post.content.gsub(/\n/, '<br/>'), :html => { :target => '_blank' })%>
-							</div>
-						<% end %>
-						<div class="posts-item-hashtags">
-							<% if @post.tag_list.size > 0 %>	
-								<div class='tag_list'><%= tag_icons(@post.tag_list) %> </div>
-							<% end %>
-						</div>
-
-						<hr style="margin: 20px 0">
-
-						<%= render "comments/comments" %>
-						&nbsp;
+						<!-- posts-item-counts -->
+						<!-- posts-item-counts -->
+						<!-- posts-item-counts -->
 					</div>
-					<!-- posts-item-counts -->
-					<!-- posts-item-counts -->
-					<!-- posts-item-counts -->
-				</div>
-				<!-- posts-item-info -->
-				<!-- posts-item-info -->
-				<!-- posts-item-info -->
+					<!-- posts-item-info -->
+					<!-- posts-item-info -->
+					<!-- posts-item-info -->
+				<% end %>
 			</div>
 			<!-- show-pots-item -->
 			<!-- show-pots-item -->
 			<!-- show-pots-item -->
+
+			<div id="content-end" style="position:absolute"></div>
 
 			<!-- 다음글 추천 -->
 			<% if @isReco %>
@@ -200,6 +204,7 @@
 				<%= render @posts %>
 			<% end %>
 			<!-- 다음글 추천 -->
+
 		</div>
 		<!-- show-container & container fluid-->
 		<!-- show-container & container fluid-->
@@ -215,13 +220,16 @@
 		<!-- show-controller 위치 업데이트 스크립트 -->
 		<script>
 			$(function(){
-				// 바로 호출하면 이전에 content container사이즈를 조정하는 시간? 때문에 left margin값이 -가 나와서 오류가있었다
+				// 바로 호출하면 이전에 content container사이즈를 조정하는 시간? 
+				// 때문에 left margin값이 -가 나와서 오류가있었다
 				// 일단 임시 처방으로 5ms의 딜레이를 주었다
 				setTimeout(updatePositionShowContainer, 5);
 
 				$( window ).resize(function() {
 					updatePositionShowContainer();
 				})
+
+				$('#show-controller').perfectScrollbar();
 			})
 
 			function updatePositionShowContainer(){
@@ -255,7 +263,17 @@
 						}
 				 }
 				 previousScroll2 = currentScroll2;
-
+				
+				// + 추가 기능
+				// 오른쪽 메뉴 사라지게 하기
+				diff = parseInt($('#content-end').css('top')) - parseInt($('#show-controller').css('height'))
+				if (diff + 50 < parseInt($(this).scrollTop())){
+					$('#show-controller').fadeOut();	
+				}
+				else {
+					// 뭔가 깜빡 거려야 할거같은데 일단 안그럼..
+					$('#show-controller').fadeIn();	
+				}
 			});
 
 		</script>
@@ -279,9 +297,9 @@
 	</script>
 
 	<script>
-		$('img').bind('contextmenu', function(e){
-				return false;
-		}); 
+	//$('img').bind('contextmenu', function(e){
+	//			return false;
+	//	}); 
 	</script>
 	<%= javascript_include_tag "lightbox.min.js" %>
 
