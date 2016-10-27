@@ -201,9 +201,14 @@ $(function(){
 			<%# 태그 필드 %>
 			<%# 태그 필드 %>
 			<div style="margin-bottom: 15px"></div>
-			<div style="background: white; border-radius: 5px;">
-				<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그는 쉼표로 구분해주세요! 예) 도면, 모델" %>
+			<div style="background: white; border-radius: 5px; position:relative; width:100%;">
+				<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그를 입력해 주세요 (쉼표로 구분)" %>
+				<div id="tag_search" style="position:absolute; top:0; right:0; margin-right: 10px; font-size: 1.5em; padding-top: 2px; padding-left: 6px; cursor:pointer;">
+					<i class='fa fa-search' aria-hidden='true'></i>
+				</div>
 			</div>
+
+			<div style="clear:both"></div>
 
 			<%# 이미지 업로드 버튼 %>
 			<%# 이미지 업로드 버튼 %>
@@ -355,3 +360,76 @@ $(function(){
 
 
 </div>
+<!-- ta : tag add -->
+<div id="ta_overlay">
+	<div id="ta_search_container">
+		<input id="ta_search_input" type="text" placeholder="태그 검색...">
+		<div id="ta_search_reco">
+			<div class="ta_search_reco_item">추천태그</div>	
+		</div>	
+	</div>
+</div>
+<script>
+	var tags = [];
+	$(function(){
+		if ($('#post_tag_list_fixed').val() == ""){
+			tags = [] 
+		}
+		else {
+			$('#post_tag_list_fixed').val().split(',')
+		}
+		//alert(tags.length)
+
+		// search nav item
+		// search nav item
+		$('#tag_search').click(function(){
+			 $('#ta_overlay').css('width', $(window).width())
+								.css('height', $(window).height())
+								.show()
+			 $('#ta_search_input').focus()
+		})
+
+		$('#ta_overlay').click(function(){
+			$(this).hide()
+			$('#ta_search_input').val("")
+			$('#ta_search_reco').html('<div class="ta_search_reco_item">추천태그</div>')
+		})
+
+	 // search input event
+	 // search input event
+		$('#ta_search_container')
+			.css('margin-top', $(window).height()/4).click(function(){return false;})
+
+		$('#ta_search_input').click(function(){
+			 return false;
+
+		}).keyup(function(e){
+				$.ajax({
+				 url: '/tag_search',
+				 type: 'GET',
+				 data: {
+					tag: $('#ta_search_input').val(),
+				 },
+				 success: function(data){
+					h = ""
+					$.each(data, function(index, obj){
+						h += "<div class='ta_search_reco_item'>"+ obj.name +"</div>"	
+					})
+					$('#ta_search_reco').html(h)
+					$('.ta_search_reco_item').click(function(){
+						$('#ta_search_input').val($(this).text())
+					})
+				 }
+				})
+				if (e.keyCode == 13) {
+					$('#ta_overlay').hide();
+					tags.push($('#ta_search_input').val())
+					$('#post_tag_list_fixed').val(tags.join(", "))
+
+					$('#ta_search_input').val("")
+				} 
+		})
+
+		$('#ta_search_reco').perfectScrollbar();
+})
+</script>

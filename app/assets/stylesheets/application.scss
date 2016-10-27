@@ -93,6 +93,8 @@
 	width: 45px;
 }
 
+// 여기 부터 저 overlay까지는 다른데서도 쓰임 posts.css
+// ta : tag add 용으로
 #search_container{
 	width: 50%;
 	margin:auto;
@@ -110,7 +112,7 @@
 	overflow: auto;
 	.search_reco_item{
 		color: rgba(255,255,255,0.5);	
-		width: 40%;
+		width: 100%;
 		font-size: 3em;
 		cursor: pointer;
 	}
