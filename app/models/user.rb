@@ -20,6 +20,19 @@ class User < ActiveRecord::Base
 	has_many :inverse_events, class_name: "Event", foreign_key: "target_id"
 
 	mount_uploader :photo, S3Uploader
+
+	# https://github.com/mbleigh/acts-as-taggable-on
+	"""
+	acts_as_taggable
+
+	def tag_list_fixed
+		tag_list.to_s
+	end
+
+	def tag_list_fixed=(tag_list_string)
+		self.tag_list = tag_list_string
+	end
+	"""
 	
 	# 페이스북 로그인시 유저 생성할 때도 관여하네..
 	EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\z/i

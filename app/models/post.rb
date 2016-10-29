@@ -19,8 +19,6 @@ class Post < ActiveRecord::Base
 
 	acts_as_taggable
 
-	#validates :title, presence: true
-
 	def tag_list_fixed
 		tag_list.to_s
 	end

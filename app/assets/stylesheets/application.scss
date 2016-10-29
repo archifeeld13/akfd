@@ -300,11 +300,21 @@ a.tag {
 }
 
 #contents-container-mobile {
-	// 모바일에선 포스트아이템이 꽉차야대서 %로 간다.
+	// posts item
 	.posts-item{
 		background:white;
 		width: 95%; 
+		height: 450px;
 		margin: 2.5%;
+		.posts-item-img{
+			height: 60%;
+		}
+		.posts-item-text{
+			height: 60%;
+		}
+		.posts-item-info{
+			height: 30%;
+		}
 	}
 
 	#contents-controllbar{
@@ -315,6 +325,12 @@ a.tag {
 	.timeline-posts-item{
 		width: 95%; 
 		margin: 2.5%;
+	}
+
+	#show-container{
+		padding:0; 
+		position:absolute; left:0; 
+		width:100%; margin-right:1%; margin-bottom:50px;
 	}
 
 	.show-posts-item{

@@ -25,7 +25,7 @@
 	.cc-item{
 		padding: 5px;
 		text-align: center;
-		width: 110px;
+		width: 105px;
 		float:left;
 		border-left: 1px solid rgb(200,200,200);
 	}
@@ -152,7 +152,6 @@
 		position: relative;
 		padding:5%;
 		padding-bottom: 0;
-		//동윤이가 post-item-title 글씨색 수정함
 		.posts-item-title{
 			font-size:0.9em;
 			color: #aaaaaa;
@@ -274,6 +273,28 @@
 // show.html
 // show.html
 // show.html
+
+#show-super-container{
+	position:relative;
+}	
+#show-container{
+	padding:0; 
+	position:absolute; left:0; width:70%; margin-right:1%; margin-bottom:50px;
+}
+#show-controller{
+	position:fixed; width:20%; 
+	height:550px; background:white; 
+	padding:1%; overflow-y: auto; overflow-x: hidden; 
+	font-size: 1.2em; border-radius: 5px 5px 5px 5px;
+
+	/*추가 마진 탑좀 주겠음*/
+	margin-top: 10px;
+}
+#related-posts{
+	position:relative; 
+	display:none;
+}
+
 .show-posts-item{
 	position: relative;
 	width:780px; 
