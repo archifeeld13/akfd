@@ -15,6 +15,15 @@ function postsColumnResize(){
 		$("#contents-controllbar")
 			.css('width', $('#contents-container').width())// contents container와 너비가 같게 해준다 
 	}
+
+
+	// 너무 작아지면 레코 사라지게
+	if ($(window).width() < 1000){
+		$('#reco-container').hide()	
+	}
+	else {
+		$('#reco-container').show()	
+	}
 }
 
 
