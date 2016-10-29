@@ -6,11 +6,11 @@
 // 브라우저 크기 조정시 불리는 함수
 function postsColumnResize(){
 	//var pWidth = $('.posts-item').width() // 없을 땐 너비를 못찾아서절대값 넣음 
-	var pWidth = 215;  
-	var pMargin = 5 * 2;
+	//var pWidth = 215;  
+	//var pMargin = 5 * 2;
 	if ($(window).width() > 400 ){
-		$('#posts-container')
-			.css('margin-left', ($('#posts-container').width() % (pWidth + pMargin))/2) 
+		//$('#posts-container')
+		//	.css('margin-left', ($('#posts-container').width() % (pWidth + pMargin))/2) 
 
 		$("#contents-controllbar")
 			.css('width', $('#contents-container').width())// contents container와 너비가 같게 해준다 
@@ -18,7 +18,7 @@ function postsColumnResize(){
 
 
 	// 너무 작아지면 레코 사라지게
-	if ($(window).width() < 1000){
+	if ($(window).width() < 1200){
 		$('#reco-container').hide()	
 	}
 	else {
