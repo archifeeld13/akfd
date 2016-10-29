@@ -116,9 +116,10 @@
 // user-info panel도 마찬가지로 분기할 수 있을 것 같다 
 .posts-item{
 	position: relative;
-	width:215px; height:350px; float:left; 
+	width:205px; height:350px; float:left; 
 	background:white; 
-	margin: 5px;
+	margin: 10px;
+
 	border-radius: 5px;
 
 	.post-icon{

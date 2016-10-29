@@ -10,43 +10,41 @@
 
 <div id="contents-controllbar">
 	<div class="container">
-			<%#= flash[:notice].html_safe %>
+		<%#= flash[:notice].html_safe %>
 
-			<!--
-			<div class="cc-item">
-				<% if @selected == "posts" %>
-					<a href="/posts" class="selected" >(메인)</a>
-				<% else %>
-					<a href="/posts" class="non-selected">(메인)</a>
-				<% end %>
-			</div>
-			-->
+		<!--
+		<div class="cc-item">
+			<% if @selected == "posts" %>
+				<a href="/posts" class="selected" >(메인)</a>
+			<% else %>
+				<a href="/posts" class="non-selected">(메인)</a>
+			<% end %>
+		</div>
+		-->
 
-			<div class="cc-item">
-				<% if @selected == "work" %>
-					<a href="#" class="selected" >작품</a>
-				<% else %>
-					<a href="#" class="non-selected">작품</a>
-				<% end %>
-			</div>
+		<div class="cc-item">
+			<% if @selected == "work" %>
+				<a href="#" class="selected" >작품</a>
+			<% else %>
+				<a href="#" class="non-selected">작품</a>
+			<% end %>
+		</div>
 
-			<div class="cc-item" >
-				<% if @selected == "txt" %>
-					<a href="/posts?type=txt" id="filter_only_text" class="selected">커뮤니티</a>
-				<% else %>
-					<a href="/posts?type=txt" id="filter_only_text" class="non-selected">커뮤니티</a>
-				<% end %>
-			</div>
+		<div class="cc-item" >
+			<% if @selected == "txt" %>
+				<a href="/posts?type=txt" id="filter_only_text" class="selected">커뮤니티</a>
+			<% else %>
+				<a href="/posts?type=txt" id="filter_only_text" class="non-selected">커뮤니티</a>
+			<% end %>
+		</div>
 
-			<div class="cc-item" style="border-right: 1px solid rgb(200,200,200);">
-				<% if @selected == "college" %>
-					<!--<a href="/posts?type=college" class="selected" >학교</a>-->
-					<a href="#" class="selected" >커넥트</a>
-				<% else %>
-					<a href="#" class="non-selected" >커넥트</a>
-				<% end %>
-			</div>
-
+		<div class="cc-item" style="border-right: 1px solid rgb(200,200,200);">
+			<% if @selected == "college" %>
+				<!--<a href="/posts?type=college" class="selected" >학교</a>-->
+				<a href="#" class="selected" >커넥트</a>
+			<% else %>
+				<a href="#" class="non-selected" >커넥트</a>
+			<% end %>
 		</div>
 	</div>
 </div>

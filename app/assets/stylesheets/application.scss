@@ -296,11 +296,13 @@ a.tag {
 
 // CC로 축약해 부를 것이다
 #contents-container {
+	// 이 안에 있는건 일단 posts쪽에 포함시키긴 했는데.. 
 }
 
 #contents-container-mobile {
 	// 모바일에선 포스트아이템이 꽉차야대서 %로 간다.
 	.posts-item{
+		background:white;
 		width: 95%; 
 		margin: 2.5%;
 	}
@@ -319,6 +321,7 @@ a.tag {
 		width: 95%; 
 		margin: 2.5%;
 	}
+
 	#user_edit_panel{
 		width: 99%;
 	}
