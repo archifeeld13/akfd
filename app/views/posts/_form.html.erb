@@ -354,7 +354,10 @@ $(function(){
 
 	<%= javascript_include_tag "autogrow.js" %>
 	<script>
-	$('textarea').autogrow({onInitialize: true});	
+		$(function(){
+			$('textarea').autogrow({onInitialize: true});	
+
+		})
 	</script>
 
 
