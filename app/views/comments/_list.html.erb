@@ -1,14 +1,7 @@
-<div class="col-md-12">
-	<%# size로 하면 에러나 %>
-
-	<div class="row">
-		<div class="col-md-12">
-				<section class="comment-list" id="comments_list">
-					<% if @post.comments.count> 0 %>
-						<%= render @post.comments.reverse %>
-					<% end %>
-				</section>
-		</div>
-	</div>
+<div id="comments_list">
+	<% if @post.comments.count > 0 %>
+		<%= render @post.comments%>
+	<% else %>
+		<div style="margin-bottom: 10px"> 첫번째 댓글을 남겨주세요 </div>	
+	<% end %>
 </div>
-

@@ -1,4 +1,7 @@
 <div class="comments">
+	<div class="comments_list">
+		<%= render "comments/list" %>
+	</div>
 	<% if current_user %>
 		<div class="comment_form">
 			<%= render "comments/form" %>
@@ -7,13 +10,11 @@
 		<span style="font-size:1.3em;">댓글을 남기려면 <a style="font-weight:bold" href="/login">로그인</a>이 필요합니다</span>
 		<div style="margin-bottom: 5px;"></div>
 	<% end %>
-	<div class="comments_list">
-		<%= render "comments/list" %>
-	</div>
+
 </div>
 
 <script>
-	$('#comment_body').keyup(function(e){
+	$('#comments_form').keyup(function(e){
 		if (e.keyCode == 13){
 			$('#comment_body').val($('#comment_body').val().trim())
 			if (!e.shiftKey) $('#comment-submit').click()

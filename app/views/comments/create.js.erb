@@ -1,8 +1,8 @@
 <% if @comment.errors.size == 0 %>
-	$('<%=j render @comment %>').prependTo($("#comments_list")).hide().fadeIn('slow')
+	$('<%=j render @comment %>').appendTo($("#comments_list")).hide().fadeIn('slow')
 	$('#comments_form form')[0].reset();
 	//$('#modal_board').scrollTop($('#modal_board')[0].scrollHeight);
-	$('#modal_board').scrollTo("#comment_<%=@comment.id%>", {
+	$('#show_controller').scrollTo("#comment_<%=@comment.id%>", {
 		offset: -100	,
 		duration: 200 ,
 	})

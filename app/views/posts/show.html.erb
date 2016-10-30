@@ -17,19 +17,10 @@
 			<!-- show-pots-item -->
 			<!-- show-pots-item -->
 			<div class="show-posts-item">
-				<div class="posts-item-writer">
-					<% if @post.user.use_photo %>
-						<%= image_tag(@post.user.photo) %>
-					<% else %>
-						<%= image_tag(@post.user.image_url) %>
-					<% end %>
-					<% if @post.user.use_nick %>
-						<%= link_to @post.user.nickname, "/my_feeld?user_id=#{@post.user.id}"%>
-					<% else %>
-						<%= link_to @post.user.name, "/my_feeld?user_id=#{@post.user.id}"%>
-					<% end %>
-				</div>
 
+				<div style="height:10px">
+					<!-- placeholder -->
+				</div>
 
 				<% if @post.post_type == 1 %>
 					<% if @post.photos.any? %>
@@ -131,6 +122,20 @@
 							
 							<hr style="margin: 15px 0">
 
+							<div class="posts-item-writer">
+								<% if @post.user.use_photo %>
+									<%= image_tag(@post.user.photo) %>
+								<% else %>
+									<%= image_tag(@post.user.image_url) %>
+								<% end %>
+
+								<% if @post.user.use_nick %>
+									<%= link_to @post.user.nickname, "/my_feeld?user_id=#{@post.user.id}"%>
+								<% else %>
+									<%= link_to @post.user.name, "/my_feeld?user_id=#{@post.user.id}"%>
+								<% end %>
+							</div>
+
 							<div class="posts-item-title" >
 								<%= @post.title %>
 								<% if @post.is_secret %>
@@ -186,8 +191,92 @@
 		<!-- show-controller -->
 		<% if not browser.device.mobile? %>
 			<div id="show-controller">
+				<div id="sc-writer-info">
+					<div style="float:left; margin-right:5px;">
+						<% if @post.user.use_photo %>
+							<%= link_to image_tag(@post.user.photo, class:"img-circle"), "/my_feeld?user_id=#{@post.user.id}"%>
+						<% else %>
+							<%= link_to image_tag(@post.user.image_url, class:"img-circle"), "/my_feeld?user_id=#{@post.user.id}" %>
+						<% end %>
+					</div>
+					<div style="float:left">
+						<% if @post.user.use_nick %>
+							<%= link_to @post.user.nickname, "/my_feeld?user_id=#{@post.user.id}"%>
+						<% else %>
+							<%= link_to @post.user.name, "/my_feeld?user_id=#{@post.user.id}"%>
+						<% end %>
+						<br>
+						<span class="company">@<%= @post.user.company %></span>
+					</div>
+				</div>
+				<div style="clear:both"></div>
+
 				<h5><%= @post.title %></h5>
 				<p style="font-size:0.8em;"><%= auto_link(@post.content.gsub(/\n/, '<br/>'), :html => { :target => '_blank' })%></p>
+
+				<!-- sc-posts-counts -->
+				<!-- sc-posts-counts -->
+				<div class="sc-posts-counts">
+					<% if current_user %>
+						<% if Like.find_by(post_id: @post.id, user_id: current_user.id) %>
+							<%= link_to image_tag('feeldrev.png'), post_likes_path(@post.id), class: "feeld feeld#{@post.id}" ,method: :post, remote: true %>
+						<% else %>
+							<%= link_to image_tag('feeld.png'), post_likes_path(@post.id), class: "feeld feeld#{@post.id}" ,method: :post, remote: true %>
+						<% end %>
+						<strong><a href="#" class="feeldcnt feeldcnt<%=@post.id%>" data-toggle="popover" data-trigger="focus"  data-placement="right" >x <%=@post.likes.count%></a></strong>
+						<div id="popover-content" class="hide">
+							<% if @post.likes.any? %>
+							<% @post.likes.each do |like| %>
+								<% if like.user.use_nick %>
+									<%= link_to like.user.nickname, "/my_feeld?user_id=#{like.user.id}", class: "like_user_list"%>
+								<% else %>
+									<%= link_to like.user.name, "/my_feeld?user_id=#{like.user.id}", class: "like_user_list"%>
+								<% end %>
+							<% end %>
+							<% else %>
+								첫 Feel'd 를 눌러주세요;D
+							<% end %>
+						</div>
+						<script>
+							$(function(){
+							 // http://jsfiddle.net/raving/2thfaxeu/
+								$('.feeldcnt').popover({
+									html: true,
+									content: function(){
+										return $('#popover-content').html()	
+									}
+								});
+								$('.feeldcnt').click(function(){
+									return false;	
+								})
+							});
+						</script>
+						&nbsp;
+						<% if current_user.id != @post.user.id %>
+							<%= link_to image_tag('feeldin.png'),  post_shares_path(@post.id), class: "feeldin feeldin#{@post.id}", method: :post, remote: true %>
+							x <strong class="feeldincnt feeldincnt<%=@post.id%>"><%=@post.shares.count%></strong>
+						<% else %>
+							<% if @post.post_type == 2 %>
+								<%= link_to image_tag('edit.png'), "", id:"edit" %>
+								<script>
+									$('#edit').click(function(){alert('링크타입의 글 수정기능은 준비중입니다')})
+								</script>
+							<% else %>
+								<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit" %>
+							<% end %>
+						<% end %>
+
+						<%# 관리자 아이디라면 에딧 허용%>
+						<% if manager_list.include? current_user.id %>
+								<%= link_to image_tag('edit.png'), edit_post_path(@post.id), id:"edit" %>
+						<% end %>
+					<% end %>
+
+				</div>
+				<!-- sc-posts-counts -->
+				<!-- sc-posts-counts -->
+				<hr>
+				<%= render "comments/comments" %>
 			</div>
 		<% end %>
 
@@ -210,9 +299,16 @@
 				// 이미지가 다 로드된 이후에 추천 포스트를 넣어야함
 				// 이미지가 다 로드된 이후에 추천 포스트를 넣어야함
 				$('#show-container').imagesLoaded(function(){
-					// 강제로 밑으로 밀어버림 5줄을 위해서
-					$('#related-posts').show()
-								.css('margin-top', parseInt($('#show-container').css('height')) + 50);
+					// 이미지가 다 로드되고 높이가 정해졌을 때,
+					// 관련 필드업을 추가해 준다.
+					if ($('#show-container').height() > $('#show-controller').height()){
+						$('#related-posts').show()
+									.css('margin-top', parseInt($('#show-container').css('height')) + 50);
+					}
+					else {
+						$('#related-posts').show()
+									.css('margin-top', parseInt($('#show-controller').css('height')) + 50);
+					}
 				})
 			
 			})
@@ -254,7 +350,6 @@
 				// 오른쪽 메뉴 사라지게 하기
 				diff = parseInt($('#content-end').css('top')) - parseInt($('#show-controller').css('height'))
 
-				
 				if (diff + 50 < parseInt($(this).scrollTop())){
 					$('#show-controller').hide();	
 				}

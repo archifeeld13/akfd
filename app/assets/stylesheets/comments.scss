@@ -5,6 +5,60 @@
 
 @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
 
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+
+
+.comment-user-img{
+	float:left;
+	width: 20%;
+	margin-right: 0.5%; 
+	img{
+		height:40px;
+		width:40px;
+	}
+}
+
+.comment-body{
+	width:79.5%;
+	float:left;
+	font-size: 0.9em;
+}
+
+
+.reverse-comment-body{
+	width:79.5%;
+	float:left;
+	font-size: 0.9em;
+	p{
+		float:right;	
+	}
+}
+
+.reverse-comment-user-img{
+	width: 20%;
+	float:left;
+	img{
+		float:right;
+		height:40px;
+		width:40px;
+	}
+}
+
+.comment-time{
+	color:gray; font-size:0.8em;
+}
+
+#comments_form{
+	background: rgba(200,200,200, 0.5);
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
 .comment-delete{
 	font-size: 0.7em;
 }

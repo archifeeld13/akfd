@@ -1,59 +1,11 @@
-<style>
-	textarea{
-		overflow:hidden;
-		width: 100%;
-	}
-	
-	input:focus,
-	textarea:focus{
-		outline: none;
-	}
-</style>
-<div id="comments_form" class="col-md-12">
+<div id="comments_form" >
 	<%= form_for([@post, @comment], remote: true) do |f| %>
-	<section class="comment-list">
-	<article class="row">
-			<div class="col-md-2 col-sm-3 col-xs-3">
-				<figure class="thumbnail" >
-					<% if current_user.use_photo %>
-						<%= image_tag current_user.photo, class:"img-responsive" %>
-					<% else %>
-						<%= image_tag current_user.image_url, class:"img-responsive" %>
-					<% end %>
-				</figure>
-			</div>
-			<div class="col-md-10 col-sm-9 col-xs-9">
-				<div class="panel panel-default arrow left">
-					<div class="panel-body panel-body-form">
-						<div class="comment-post">
-							<%#<div class="form-inputs col-md-10 col-sm-10 col-xs-10">%>
-							<div class="form-inputs col-md-12 col-sm-12 col-xs-12">
-								<%= f.text_area :body,  placeholder: "댓글을 입력하세요", rows: "3"%>
-							</div>
-							<style>
-								#comment-write{
-									color:gray;
-									font-weight: bold;
-								}
-							</style>
-							<%#<div class="form-actions col-md-2 col-sm-2 col-xs-2" style="padding: 0;">%>
-							<div class="form-actions col-md-2 col-sm-2 col-xs-2" class="hidden"style="padding: 0;">
-								<%= f.button :submit, class: "hidden", id: "comment-submit" %>
-								<span style="font-size:1.2em;">
-								<%#= link_to "댓글<br>쓰기".html_safe, "#", :onclick=>"$('#comment-submit').click()", id:"comment-write" %> 
-								<%# link_to raw("<i class='fa fa-pencil fa-3x' style='color:#363636'></i>"), "#", :onclick=>"$('#comment-submit').click()" %> 
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</article>
-	</section>
+		<%= f.text_area :body,  placeholder: "댓글을 입력하세요", rows: "2", class:"form-control"%>
+		<%= f.button :submit, class: "hidden", id: "comment-submit" %>
 	<% end %>
 </div>
 
-<%= javascript_include_tag "autogrow.js" %>
+<%#= javascript_include_tag "autogrow.js" %>
 <script>
-$('textarea').autogrow({onInitialize: true});	
+//$('textarea').autogrow({onInitialize: true});	
 </script>

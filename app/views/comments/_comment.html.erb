@@ -1,95 +1,49 @@
-<style>
-	figuare.thumbanail{
-		margin-bottom: 0
-	}
-	a{
-		color: gray;	
-	}
-</style>
-
 <% if comment.post.user.id != comment.user.id %>
-	<article id="comment_<%=comment.id %>" class="row">
-		<div class="col-md-2 col-sm-3 col-xs-3">
-			<figure class="thumbnail">
-				<%= link_to "/my_feeld?user_id=#{comment.user.id}" do%>
-					<% if comment.user.use_photo %>
-						<%= link_to image_tag(comment.user.photo, class: "img-responsive"), "/my_feeld?user_id=#{comment.user.id}" %> 
-					<% else %>
-						<%= link_to image_tag(comment.user.image_url, class: "img-responsive"), "/my_feeld?user_id=#{comment.user.id}" %> 
-					<% end %>
+	<div id="comment_<%=comment.id %>">
+		<div class="comment-user-img" >
+			<%= link_to "/my_feeld?user_id=#{comment.user.id}" do%>
+				<% if comment.user.use_photo %>
+					<%= link_to image_tag(comment.user.photo), "/my_feeld?user_id=#{comment.user.id}" %> 
+				<% else %>
+					<%= link_to image_tag(comment.user.image_url), "/my_feeld?user_id=#{comment.user.id}" %> 
 				<% end %>
-				<center><%#= comment.user.name %></center>
-			</figure>
+			<% end %>
+		</div> 
+		<div class="comment-body">					
+			<p>
+				<%= comment.body.gsub(/\n/, '<br/>').html_safe %>
+				<br>	
+				<i class="fa fa-clock-o"></i>&nbsp;
+				<span class="comment-time" ><%= time_ago_in_words(comment.created_at) %> 전에</span>
+				<% if current_user and current_user.id == comment.user.id  %>
+					<%= link_to "댓글삭제", [comment.post, comment], method: :delete, remote: true, data: { confirm: "Are you sure?" }, class: "comment-delete" %>
+				<% end %>
+			</p>
 		</div>
-		<div class="col-md-10 col-sm-9 col-xs-9">
-			<div class="panel panel-default arrow left">
-				<div class="panel-body">
-					<header class="text-left">
-						<time class="comment-date">
-							<i class="fa fa-clock-o"></i>&nbsp;
-							<span style="color:gray; font-size:0.9em;"><%= time_ago_in_words(comment.created_at) %> 전에</span>
-						<% if comment.user.use_nick %>
-							, <strong style="white-space: nowrap"><%= link_to comment.user.nickname, "/my_feeld?user_id=#{@post.user.id}"%></strong>
-						<% else %>
-							, <strong style="white-space: nowrap"><%= link_to comment.user.name, "/my_feeld?user_id=#{@post.user.id}"%></strong>
-						<% end %>
-						</time>
-					</header>
-					<div class="comment-post">
-						<p class="text-left">
-							<%= comment.body.gsub(/\n/, '<br/>').html_safe %>
-						</p>
-					</div>
-					<% if current_user and current_user.id == comment.user.id  %>
-						<p class="text-right">
-							<%= link_to "댓글삭제", [comment.post, comment], method: :delete, remote: true, data: { confirm: "Are you sure?" }, class: "comment-delete" %>
-						</p>
-					<% end %>
-				</div>
-			</div>
-		</div>
-	</article>
+	</div>
 <% else %>
-	<article id="comment_<%=comment.id %>" class="row">
-		<div class="col-md-10 col-sm-9 col-xs-9">
-			<div class="panel panel-default arrow right">
-				<div class="panel-body">
-					<header class="text-right">
-						<time class="comment-date">
-							<i class="fa fa-clock-o"></i>&nbsp;
-							<span style="color:gray; font-size:0.9em;"><%= time_ago_in_words(comment.created_at) %> 전에</span>
-						<% if comment.user.use_nick %>
-							, <strong style="white-space: nowrap"><%= link_to comment.user.nickname, "/my_feeld?user_id=#{@post.user.id}"%></strong>
-						<% else %>
-							, <strong style="white-space: nowrap"><%= link_to comment.user.name, "/my_feeld?user_id=#{@post.user.id}"%></strong>
-						<% end %>
-						</time>
-					</header>
-					<div class="comment-post">
-						<p class="text-right">
-							<%= comment.body.gsub(/\n/, '<br/>').html_safe %>
-						</p>
-					</div>
-					<% if current_user and current_user.id == comment.user.id %>
-						<p class="text-left">
-							<%= link_to "댓글삭제", [comment.post, comment], method: :delete, remote: true, data: { confirm: "Are you sure?" }, class: "comment-delete" %>
-						</p>
-					<% end %>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-2 col-sm-3 col-xs-3">
-			<figure class="thumbnail">
-				<%= link_to "/my_feeld?user_id=#{comment.user.id}" do%>
-					<% if comment.user.use_photo %>
-						<%= link_to image_tag(comment.user.photo, class: "img-responsive"), "/my_feeld?user_id=#{comment.user.id}" %> 
-					<% else %>
-						<%= link_to image_tag(comment.user.image_url, class: "img-responsive"), "/my_feeld?user_id=#{comment.user.id}" %> 
-					<% end %>
+	<div id="comment_<%=comment.id %>" >
+		<div class="reverse-comment-body" >					
+			<p>
+				<%= comment.body.gsub(/\n/, '<br/>').html_safe %>
+				<br>
+				<i class="fa fa-clock-o"></i>&nbsp;
+				<span class="comment-time" ><%= time_ago_in_words(comment.created_at) %> 전에</span>
+				<% if current_user and current_user.id == comment.user.id  %>
+					<%= link_to "댓글삭제", [comment.post, comment], method: :delete, remote: true, data: { confirm: "Are you sure?" }, class: "comment-delete" %>
 				<% end %>
-			<center><%#= comment.user.name %></center>
-			</figure>
+			</p>
 		</div>
-	</article>
+		<div class="reverse-comment-user-img" >
+			<%= link_to "/my_feeld?user_id=#{comment.user.id}" do%>
+				<% if comment.user.use_photo %>
+					<%= link_to image_tag(comment.user.photo), "/my_feeld?user_id=#{comment.user.id}" %> 
+				<% else %>
+					<%= link_to image_tag(comment.user.image_url), "/my_feeld?user_id=#{comment.user.id}" %> 
+				<% end %>
+			<% end %>
+		</div> 
+	</div>
 <% end %>
+<div style="clear:both"></div>
 
