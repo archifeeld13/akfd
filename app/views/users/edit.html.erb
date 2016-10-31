@@ -38,6 +38,10 @@
 			<%= f.text_field :company, placeholder: "소속을 입력해주세요", class: "form-control" %>
 
 			<div style="height:15px;"></div>
+			<%= f.label :mf_id, raw('마이필드 주소: feeeld.com/my/<span style="color:green">주소이름</span>')%>
+			<%= f.text_field :mf_id, placeholder: "주소이름을 입력해주세요", class: "form-control" %>
+
+			<div style="height:15px;"></div>
 			<%= f.label :photo, '프로필 사진 별도 설정'%>
 			<%= f.file_field :photo, class: "form-control", as: :file %>
 			<% if @user.user_type == 0 %>

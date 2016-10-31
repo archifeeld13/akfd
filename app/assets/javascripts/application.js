@@ -67,13 +67,13 @@ function showModalBG(){
 	$('#modal_bg')
 		.css('height', $(document).height())
 		.css('width', $(document).width())
-		.fadeIn()/*show()*/
+		.show()/*show()*/
 }
 
 // modal bg와options를 숨긴다. background 클릭시 호출한다
 function hideModalBGandBoard(){
-	$('#modal_bg').fadeOut()/*hide()*/
-	$('#option_container').fadeOut()
+	$('#modal_bg').hide()/*hide()*/
+	$('#option_container').hide()
 }
 
 // feeldup 눌렀을 때 나오는 배경 및 필드업 보드  숨겨놓기

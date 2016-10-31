@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
 		# 추천 필드업 
 		def set_fav_posts
-			@fav_posts = Post.where("created_at > ?", 1.week.ago.to_date) 
+			@fav_posts = Post.where(is_secret: false).where("created_at > ?", 1.week.ago.to_date) 
 			@fav_posts = @fav_posts.to_a
 			@fav_posts.sort! {|x, y| (y.likes.count * 100 + y.view_count) <=> (x.likes.count * 100 + x.view_count)}
 			#@fav_posts.sort! {|x, y| y.likes.count <=> x.likes.count }

@@ -300,6 +300,8 @@
 
 				// 이미지가 다 로드된 이후에 추천 포스트를 넣어야함
 				// 이미지가 다 로드된 이후에 추천 포스트를 넣어야함
+				<% if @post.photos.any? %>
+				<%# 근데 사실, 링크 타입에 대해서는 아직 대응이 안될 수도%>
 				$('#show-container').imagesLoaded(function(){
 					updatePositionShowController()
 
@@ -318,6 +320,25 @@
 									//.css('margin-top', parseInt($('#show-controller').css('height')) + 50);
 					}
 				})
+				<% else %>
+				<%# if문 내용 그대로 복사하되, 이미지가 없으므로 이미지 로트 이벤트만 제외 %>
+					updatePositionShowController()
+
+					// 이미지가 다 로드되고 높이가 정해졌을 때,
+					// 관련 필드업을 추가해 준다.
+					if ($('#show-container').height() > $('#show-controller').height()){
+						$('#related-posts').show()
+									.css('margin-top', parseInt($('#content-end').css('top')) + 50);
+									//.css('margin-top', parseInt($('#show-container').css('height')) + 50);
+					}
+					else {
+						// content-end 위치 강제 변경
+						$('#content-end').css('top', $('#show-controller').height() ) // controller의 height가 550
+						$('#related-posts').show()
+									.css('margin-top', parseInt($('#content-end').css('top')) + 50);
+									//.css('margin-top', parseInt($('#show-controller').css('height')) + 50);
+					}
+				<% end %>
 			
 			})
 

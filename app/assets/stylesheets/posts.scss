@@ -45,13 +45,15 @@
 		background: white ;
 		border-radius: 5px;
 		padding: 1%;
+		//50행 2.5%에서 5.5%로 변경(16-10-31동윤)
 		.reco-user{
-			margin: 2.5% 0;	
+			margin: 5.5% 0;	
 			white-space: nowrap;
 		}
+		//55~56행 40px에서 35px로 변경(16-10-31 동윤)
 		img{
-			width: 40px;	
-			height: 40px;	
+			width: 35px;	
+			height: 35px;	
 		}
 		a{
 			color: rgb(150,150,150);
@@ -66,10 +68,17 @@
 		border-radius: 5px;
 		padding: 1%;
 		padding-top: 0%;
+		//77행 3px에서 5px로 변경(16-10-31 동윤)
+		//78행 width 값 height도 함께 조정하기 위해 %에서 px로 변경
+		//78행 45% -> 193px로 변경
+		//79행 height: 105px; 추가 (16-10-31 동윤)
+		//81행 vertical-align 추가(16-10-31 동윤)
 		img{
-			border-radius: 3px;
-			width: 47%;
-			margin:1%;
+			border-radius: 5px;
+			width: 189px;
+			height: 105px; 
+			margin:1.5%;
+			vertical-align: middle;
 		}
 	}
 	#reco-posts{

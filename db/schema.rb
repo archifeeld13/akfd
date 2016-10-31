@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161019064927) do
+ActiveRecord::Schema.define(version: 20161031085750) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.string   "photo",      limit: 255
@@ -160,7 +160,10 @@ ActiveRecord::Schema.define(version: 20161019064927) do
     t.integer  "user_type",  limit: 4,   default: 0
     t.string   "salt",       limit: 255
     t.boolean  "my_auth",                default: false
+    t.string   "mf_id",      limit: 255
   end
+
+  add_index "users", ["mf_id"], name: "index_users_on_mf_id", unique: true, using: :btree
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"

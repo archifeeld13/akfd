@@ -14,7 +14,8 @@
 .comment-user-img{
 	float:left;
 	width: 20%;
-	margin-right: 0.5%; 
+	//18행 margin-right값 0.5%에서 -5.5%로 변경(16-10-31 동윤)
+	margin-right: -5.5%; 
 	img{
 		height:35px;
 		width:35px;

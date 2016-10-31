@@ -161,6 +161,7 @@ class PostsController < ApplicationController
 		render "index"	
 	end
 
+
 =begin
 	my_feeld 에 속하는 기능들
 		- message_box
@@ -168,6 +169,11 @@ class PostsController < ApplicationController
 		- archive_share
 		- project_management
 =end
+	def mf_redirect
+		user = User.where(mf_id: params[:mf_id])[0]
+		redirect_to "/my_feeld/#{user.id}" 
+	end
+
 	def my_feeld
 	"""
 		# 회원 이름을 클릭해서 들어오면 /my_feeld?user_id=유저아이디

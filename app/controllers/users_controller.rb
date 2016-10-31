@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	require 'digest/sha1'
+
 	def show
   end
 
@@ -100,7 +101,7 @@ class UsersController < ApplicationController
 
 private
 	def user_params
-		params.require(:user).permit(:email, :name, :password, :password_confirmation, :user_type, :nickname, :use_nick, :company, :photo, :use_photo)
+		params.require(:user).permit(:email, :name, :password, :password_confirmation, :user_type, :nickname, :use_nick, :company, :photo, :use_photo, :mf_id)
 	end
 
 	def search_params
