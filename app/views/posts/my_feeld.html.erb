@@ -64,8 +64,12 @@
 				<tr>
 					<td colspan="3" style="padding-left: 15px;">
 						<div style="width: 210px">
-							<% @fav_tags[0..6].shuffle.each do |tag| %>
-								<div class="tag_div" style="margin:4px 2px;"><a href='/posts?tag=<%= tag %>' class='tag' style="background:transparent; color:gray;"><%= tag %></a></div>
+							<% if @user.skill_list.count > 0 %>
+								<% @user.skill_list.each do |tag| %>
+									<div class="tag_div" style="margin:4px 2px;"><a href='/posts?tag=<%= tag %>' class='tag' style="background:transparent; color:gray;"><%= tag %></a></div>
+								<% end %>
+							<% else %>
+								<div style="float:left;">(스킬을 등록해주세요)</div>
 							<% end %>
 						</div>	
 					</td>

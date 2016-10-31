@@ -125,7 +125,7 @@
 // user-info panel도 마찬가지로 분기할 수 있을 것 같다 
 .posts-item{
 	position: relative;
-	width:205px; height:320px; float:left; 
+	width:355px; height:455px; float:left; 
 	background:white; 
 	margin: 10px;
 
@@ -143,29 +143,29 @@
 	.posts-item-img{
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
-		height: 50%;
+		height: 60%;
 		width: 100%;
 		object-fit: cover;
 	}
 	.posts-item-text{
-		height: 50%;
+		height: 60%;
 		width: 100%;
 		margin: 0;
-		padding: 2%;
+		padding: 3%;
 		color: black;
 		overflow: hidden;
 	}
 	// 글 제목 및 아이콘들 40%
 	.posts-item-info{
-		height: 40%;
+		height: 30%;
 		position: relative;
-		padding:5%;
+		padding:3%;
 		padding-bottom: 0;
 		.posts-item-title{
 			font-size:0.9em;
 			color: #aaaaaa;
 			a{
-				color:rgb(170,170,170);	
+				color:rgb(51,51,51);	
 			}
 		}
 		.posts-item-counts{
@@ -191,6 +191,7 @@
 		// 동윤 2016-10-25 오후12:57 a TAG Color -> #333333로 변경
 		a{
 			color: #333333;	
+			font-weight: 600;
 		}
 		img{
 			width:25px; height: 25px; margin:5px;

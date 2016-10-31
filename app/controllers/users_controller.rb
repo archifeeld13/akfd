@@ -101,7 +101,7 @@ class UsersController < ApplicationController
 
 private
 	def user_params
-		params.require(:user).permit(:email, :name, :password, :password_confirmation, :user_type, :nickname, :use_nick, :company, :photo, :use_photo, :mf_id)
+		params.require(:user).permit(:email, :name, :password, :password_confirmation, :user_type, :nickname, :use_nick, :company, :photo, :use_photo, :mf_id, :skill_list_fixed)
 	end
 
 	def search_params

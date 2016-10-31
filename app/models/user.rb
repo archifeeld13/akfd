@@ -22,18 +22,16 @@ class User < ActiveRecord::Base
 	mount_uploader :photo, S3Uploader
 
 	# https://github.com/mbleigh/acts-as-taggable-on
-	"""
-	acts_as_taggable
-
-	def tag_list_fixed
-		tag_list.to_s
+	acts_as_taggable_on :skills
+	def skill_list_fixed
+		skill_list.to_s
 	end
 
-	def tag_list_fixed=(tag_list_string)
-		self.tag_list = tag_list_string
+	def skill_list_fixed=(skill_list_string)
+		self.skill_list = skill_list_string
 	end
-	"""
-	
+
+
 	# 페이스북 로그인시 유저 생성할 때도 관여하네..
 	EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\z/i
 	# 일단 패스워드가 nil이 아니란 소리는 직접 가입한다는 소리니까..

@@ -38,8 +38,17 @@
 			<%= f.text_field :company, placeholder: "소속을 입력해주세요", class: "form-control" %>
 
 			<div style="height:15px;"></div>
-			<%= f.label :mf_id, raw('마이필드 주소: feeeld.com/my/<span style="color:green">주소이름</span>')%>
+			<%= f.label :mf_id, raw('마이필드 주소 설정: feeeld.com/my/<span style="color:green; background:yellow;">주소이름</span>')%>
 			<%= f.text_field :mf_id, placeholder: "주소이름을 입력해주세요", class: "form-control" %>
+
+			<div style="height:15px;"></div>
+			<%= f.label :skill_list_fixed, '스킬 등록'%>
+			<div style="background: white; border-radius: 5px; position:relative; width:100%;">
+				<%= f.text_field :skill_list_fixed, class: 'form-control', placeholder: "스킬을 입력해주세요(쉼표로 구분)" %>
+				<div id="tag_search" style="position:absolute; top:0; right:0; margin-right: 10px; font-size: 1.5em; padding-top: 2px; padding-left: 6px; cursor:pointer;">
+					<i class='fa fa-search' aria-hidden='true'></i>
+				</div>
+			</div>
 
 			<div style="height:15px;"></div>
 			<%= f.label :photo, '프로필 사진 별도 설정'%>
@@ -89,3 +98,80 @@
 	<% end %>
 	</div>
 </div>
+
+<!-- ta : tag add ; posts/_form 코드 재활용 -->
+<!-- ta : tag add ; posts/_form 코드 재활용 -->
+<!-- ta : tag add ; posts/_form 코드 재활용 -->
+<div id="ta_overlay">
+	<div id="ta_search_container">
+		<input id="ta_search_input" type="text" placeholder="스킬 검색...">
+		<div id="ta_search_reco">
+			<div class="ta_search_reco_item">추천스킬(태그)</div>	
+		</div>	
+	</div>
+</div>
+<script>
+	var tags = [];
+	$(function(){
+
+		if ($('#user_skill_list_fixed').val() == ""){
+			tags = [] 
+		}
+		else {
+			tags = $('#user_skill_list_fixed').val().split(',')
+		}
+		//alert(tags.length)
+
+		// search nav item
+		// search nav item
+		$('#tag_search').click(function(){
+			 $('#ta_overlay').css('width', $(window).width())
+								.css('height', $(window).height())
+								.show()
+			 $('#ta_search_input').focus()
+		})
+
+		$('#ta_overlay').click(function(){
+			$(this).hide()
+			$('#ta_search_input').val("")
+			$('#ta_search_reco').html('<div class="ta_search_reco_item">추천태그</div>')
+		})
+
+	 // search input event
+	 // search input event
+		$('#ta_search_container')
+			.css('margin-top', $(window).height()/4).click(function(){return false;})
+
+		$('#ta_search_input').click(function(){
+			 return false;
+
+		}).keyup(function(e){
+				$.ajax({
+				 url: '/tag_search',
+				 type: 'GET',
+				 data: {
+					tag: $('#ta_search_input').val(),
+				 },
+				 success: function(data){
+					h = ""
+					$.each(data, function(index, obj){
+						h += "<div class='ta_search_reco_item'>"+ obj.name +"</div>"	
+					})
+					$('#ta_search_reco').html(h)
+					$('.ta_search_reco_item').click(function(){
+						$('#ta_search_input').val($(this).text())
+					})
+				 }
+				})
+				if (e.keyCode == 13) {
+					$('#ta_overlay').hide();
+					tags.push($('#ta_search_input').val())
+					$('#user_skill_list_fixed').val(tags.join(", "))
+
+					$('#ta_search_input').val("")
+				} 
+		})
+
+		$('#ta_search_reco').perfectScrollbar();
+})
+</script>
