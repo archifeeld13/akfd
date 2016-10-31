@@ -10,12 +10,12 @@ class ProjectsController < ApplicationController
 		@posts = @project.posts 
 	end
 
-	# ajax로 프로젝트만 생성하는 곳이다
   def create
-		@type = params[:project][:type]
-		#@project = current_user.projects.new(project_params)
-		@project = current_user.projects.new(name: params[:project][:name])
+		#@type = params[:project][:type]
+		@project = current_user.projects.new(project_params)
+		#@project = current_user.projects.new(name: params[:project][:name])
 		@project.save
+		redirect_to my_feeld_path
   end
 
   def destroy
@@ -25,6 +25,6 @@ class ProjectsController < ApplicationController
 
 private
 	def project_params
-		params.require(:project).permit(:name, :type)
+		params.require(:project).permit(:name, :tag_list_fixed, :desc)
 	end
 end

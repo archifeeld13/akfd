@@ -9,21 +9,46 @@
 			<div id="project_photo">
 				<label>바인더 생성</label>
 				<br>
-				<%= image_tag("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5zMJSxs75XUMZo3qVrkCcJbMK11TyGph_BC0Z34UBPgDrT2Nj7Q")%>
+				<!-- https://jsfiddle.net/c5s42vdz/ -->
+				<label for="file-input">
+					<%= image_tag("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5zMJSxs75XUMZo3qVrkCcJbMK11TyGph_BC0Z34UBPgDrT2Nj7Q", id: 'input-preview')%>
+				</label>
+				<input id="file-input" type="file" onchange="loadFile(event)">
 			</div>
+			<script>
+				var loadFile = function(event) {
+					var reader = new FileReader();
+					reader.onload = function(){
+						var output = document.getElementById('input-preview');
+						output.src = reader.result;
+					};
+					reader.readAsDataURL(event.target.files[0]);
+				};	
+			</script>
 
 			<div id="project_title_desc">
 				<div class="form-group">
-					<label>바인더 제목</label>
+					<%= f.label :name, '바인더 제목'%>
 					<%= f.text_field :name, :placeholder => '바인더 제목을 입력해주세요', autofocus: true, class:"form-control" %>
-					<label>바인더 설명</label>
-					<%= f.text_area :desc, :placeholder => '바인더 설명을 입력해주세요', autofocus: true, class:"form-control", rows: "4" %>
+					<%= f.label :desc, '바인더 설명'%>
+					<%= f.text_area :desc, :placeholder => '바인더 설명을 입력해주세요', autofocus: true, class:"form-control", rows: "6" %>
 				</div>
 			</div>
 
+		
 			<div id="project_related_tags">
-					<span class="form-group-btn">
-						<button id="project-submit" type="submit" class="btn btn-default">
+					<%= f.label :tag_list_fixed, '관련 태그'%>
+					<div style="background: white; border-radius: 5px; position:relative; width:100%;">
+						<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "관련 태그를 입력해주세요(쉼표로 구분)" %>
+						<div id="tag_search" style="position:absolute; top:0; right:0; margin-right: 10px; font-size: 1.5em; padding-top: 2px; padding-left: 6px; cursor:pointer;">
+							<i class='fa fa-search' aria-hidden='true'></i>
+						</div>
+					</div>
+
+					<div style="height:10px;"></div>
+
+					<span class="form-group-btn" style="float:right">
+						<button id="project-submit" type="submit" class="btn btn-default" style="color:rgb(150,150,150)">
 								생성하기
 						</button>
 					</span>
@@ -31,3 +56,77 @@
 		</div>
 	<% end %>
 </div>
+
+<!-- ta : tag add -->
+<div id="ta_overlay">
+	<div id="ta_search_container">
+		<input id="ta_search_input" type="text" placeholder="태그 검색...">
+		<div id="ta_search_reco">
+			<div class="ta_search_reco_item">추천태그</div>	
+		</div>	
+	</div>
+</div>
+<script>
+	var tags = [];
+	$(function(){
+		if ($('#project_tag_list_fixed').val() == ""){
+			tags = [] 
+		}
+		else {
+			tags = $('#project_tag_list_fixed').val().split(',')
+		}
+		//alert(tags.length)
+
+		// search nav item
+		// search nav item
+		$('#tag_search').click(function(){
+			 $('#ta_overlay').css('width', $(window).width())
+								.css('height', $(window).height())
+								.show()
+			 $('#ta_search_input').focus()
+		})
+
+		$('#ta_overlay').click(function(){
+			$(this).hide()
+			$('#ta_search_input').val("")
+			$('#ta_search_reco').html('<div class="ta_search_reco_item">추천태그</div>')
+		})
+
+	 // search input event
+	 // search input event
+		$('#ta_search_container')
+			.css('margin-top', $(window).height()/4).click(function(){return false;})
+
+		$('#ta_search_input').click(function(){
+			 return false;
+
+		}).keyup(function(e){
+				$.ajax({
+				 url: '/tag_search',
+				 type: 'GET',
+				 data: {
+					tag: $('#ta_search_input').val(),
+				 },
+				 success: function(data){
+					h = ""
+					$.each(data, function(index, obj){
+						h += "<div class='ta_search_reco_item'>"+ obj.name +"</div>"	
+					})
+					$('#ta_search_reco').html(h)
+					$('.ta_search_reco_item').click(function(){
+						$('#ta_search_input').val($(this).text())
+					})
+				 }
+				})
+				if (e.keyCode == 13) {
+					$('#ta_overlay').hide();
+					tags.push($('#ta_search_input').val())
+					$('#project_tag_list_fixed').val(tags.join(", "))
+
+					$('#ta_search_input').val("")
+				} 
+		})
+
+		$('#ta_search_reco').perfectScrollbar();
+})
+</script>
