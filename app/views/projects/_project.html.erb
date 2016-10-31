@@ -3,7 +3,7 @@
 	<div class="project-img">
 		<!-- ajax 없어집니다 -->
 		<%#= link_to project.name, "/project_list_in?project_id=#{project.id}", class: "project_name", remote: true %>
-		<center><%= link_to image_tag("http://placehold.it/200x200"), project, class: "project_name" %></center>
+		<center><%= link_to image_tag(project.photo), project, class: "project_name" %></center>
 	</div>
 
 	<div class="project-img-in" >

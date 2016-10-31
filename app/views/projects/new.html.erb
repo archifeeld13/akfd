@@ -11,9 +11,10 @@
 				<br>
 				<!-- https://jsfiddle.net/c5s42vdz/ -->
 				<label for="file-input">
-					<%= image_tag("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5zMJSxs75XUMZo3qVrkCcJbMK11TyGph_BC0Z34UBPgDrT2Nj7Q", id: 'input-preview')%>
+					<%= image_tag("project_default.jpg", id: 'input-preview')%>
 				</label>
-				<input id="file-input" type="file" onchange="loadFile(event)">
+				<%= f.file_field :photo, onchange:"loadFile(event)", as: :file, id: "file-input" %>
+				<!--<input id="file-input" name="project[photo]" type="file" onchange="loadFile(event)">-->
 			</div>
 			<script>
 				var loadFile = function(event) {
@@ -37,21 +38,21 @@
 
 		
 			<div id="project_related_tags">
-					<%= f.label :tag_list_fixed, '관련 태그'%>
-					<div style="background: white; border-radius: 5px; position:relative; width:100%;">
-						<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "관련 태그를 입력해주세요(쉼표로 구분)" %>
-						<div id="tag_search" style="position:absolute; top:0; right:0; margin-right: 10px; font-size: 1.5em; padding-top: 2px; padding-left: 6px; cursor:pointer;">
-							<i class='fa fa-search' aria-hidden='true'></i>
-						</div>
+				<%= f.label :tag_list_fixed, '관련 태그'%>
+				<div style="background: white; border-radius: 5px; position:relative; width:100%;">
+					<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "관련 태그를 입력해주세요(쉼표로 구분)" %>
+					<div id="tag_search" style="position:absolute; top:0; right:0; margin-right: 10px; font-size: 1.5em; padding-top: 2px; padding-left: 6px; cursor:pointer;">
+						<i class='fa fa-search' aria-hidden='true'></i>
 					</div>
+				</div>
 
-					<div style="height:10px;"></div>
+				<div style="height:10px;"></div>
 
-					<span class="form-group-btn" style="float:right">
-						<button id="project-submit" type="submit" class="btn btn-default" style="color:rgb(150,150,150)">
-								생성하기
-						</button>
-					</span>
+				<span class="form-group-btn" style="float:right">
+					<button id="project-submit" type="submit" class="btn btn-default" style="color:rgb(150,150,150)">
+							생성하기
+					</button>
+				</span>
 			</div>
 		</div>
 	<% end %>

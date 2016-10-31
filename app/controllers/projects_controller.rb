@@ -21,10 +21,11 @@ class ProjectsController < ApplicationController
   def destroy
 		@project = current_user.projects.find(params[:id])
 		@project.destroy
+		redirect_to my_feeld_path
   end
 
 private
 	def project_params
-		params.require(:project).permit(:name, :tag_list_fixed, :desc)
+		params.require(:project).permit(:name, :tag_list_fixed, :desc, :photo )
 	end
 end

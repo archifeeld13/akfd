@@ -23,7 +23,8 @@ class S3Uploader < CarrierWave::Uploader::Base
     # For Rails 3.1+ asset pipeline compatibility:
     #ActionController::Base.helpers.asset_path("fallback/" + [:thumb, "default.png"].compact.join('_'))
     #"/images/fallback/" + [version_name, "default.png"].compact.join('_')
-    "default.png"
+    "default.png" if model.class.name == "User"
+		"project_default.jpg" if model.class.name == "Project"
   end
 
 	# 저장할 이미지 사이즈 조정
