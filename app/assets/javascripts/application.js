@@ -11,12 +11,16 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery.turbolinks
 //= require jquery.remotipart
 //= require turbolinks
+//= require turbolinks-compatibility
 //= require_tree .
 //
+
+// rails 5 , jquery turbolinks https://github.com/kossnocorp/jquery.turbolinks/issues/61#issuecomment-246404796
+
 
 // 여기 있으나 마나이다. 익스플로러나 모바일에선 다른곳에서 이거 못읽는다
 function tag_truncate(){
@@ -148,7 +152,6 @@ $(function(){
 		// modal board는
 		// option_item이 클릭 되었을 때 띄운다
 		return false;
-
 	})
 	// #feeldup click end
 

@@ -29,11 +29,13 @@
 				<% if @user.id == current_user.id %>
 					<a style="" href="users/<%=@user.id%>/edit">정보수정</a><br>
 				<% else %>
+					<div>
 					<% if @user.inverse_friends.include? current_user %>
 						<%= link_to "팔로우 끊기", friendship_path(Friendship.find_by(user_id: current_user.id, friend_id: @user.id)), :method => :delete, class: "follow-link"%>
 					<% else %>
 						<%= link_to "팔로우 하기", friendships_path(friend_id: @user.id), :method => :post, class: "follow-link" %>
 					<% end %>
+					</div>
 				<% end %>
 			<% end %>
 			<!-- 분야 -->

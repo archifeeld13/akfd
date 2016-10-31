@@ -349,15 +349,14 @@ class PostsController < ApplicationController
 		@post.save
 
 		# 이미지 타입 : 이미지 저장
-	#	if @post.post_type == 1 
-			if params[:images]
-				params[:images].each do |image|
-					#image.original_filename 
-					@post.photos.create(image: image)
-				end
+		#if @post.post_type == 1 
+		if params[:images]
+			params[:images].each do |image|
+				#image.original_filename 
+				@post.photos.create(image: image)
 			end
-	#	end
-
+		end
+		#end
 
 		if @post.post_type == 2
 			link = Link.new
