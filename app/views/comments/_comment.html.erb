@@ -1,49 +1,24 @@
-<% if comment.post.user.id != comment.user.id %>
-	<div id="comment_<%=comment.id %>">
-		<div class="comment-user-img" >
-			<%= link_to "/my_feeld?user_id=#{comment.user.id}" do%>
-				<% if comment.user.use_photo %>
-					<%= link_to image_tag(comment.user.photo), "/my_feeld?user_id=#{comment.user.id}" %> 
-				<% else %>
-					<%= link_to image_tag(comment.user.image_url), "/my_feeld?user_id=#{comment.user.id}" %> 
-				<% end %>
+<div id="comment_<%=comment.id %>">
+	<div class="comment-user-img" >
+		<%= link_to "/my_feeld?user_id=#{comment.user.id}" do%>
+			<% if comment.user.use_photo %>
+				<%= link_to image_tag(comment.user.photo), "/my_feeld?user_id=#{comment.user.id}" %> 
+			<% else %>
+				<%= link_to image_tag(comment.user.image_url), "/my_feeld?user_id=#{comment.user.id}" %> 
 			<% end %>
-		</div> 
-		<div class="comment-body">					
-			<p>
-				<%= comment.body.gsub(/\n/, '<br/>').html_safe %>
-				<br>	
-				<i class="fa fa-clock-o"></i>&nbsp;
-				<span class="comment-time" ><%= time_ago_in_words(comment.created_at) %> 전에</span>
-				<% if current_user and current_user.id == comment.user.id  %>
-					<%= link_to "댓글삭제", [comment.post, comment], method: :delete, remote: true, data: { confirm: "Are you sure?" }, class: "comment-delete" %>
-				<% end %>
-			</p>
-		</div>
-	</div>
-<% else %>
-	<div id="comment_<%=comment.id %>" >
-		<div class="reverse-comment-body" >					
-			<p>
-				<%= comment.body.gsub(/\n/, '<br/>').html_safe %>
-				<br>
-				<i class="fa fa-clock-o"></i>&nbsp;
-				<span class="comment-time" ><%= time_ago_in_words(comment.created_at) %> 전에</span>
-				<% if current_user and current_user.id == comment.user.id  %>
-					<%= link_to "댓글삭제", [comment.post, comment], method: :delete, remote: true, data: { confirm: "Are you sure?" }, class: "comment-delete" %>
-				<% end %>
-			</p>
-		</div>
-		<div class="reverse-comment-user-img" >
-			<%= link_to "/my_feeld?user_id=#{comment.user.id}" do%>
-				<% if comment.user.use_photo %>
-					<%= link_to image_tag(comment.user.photo), "/my_feeld?user_id=#{comment.user.id}" %> 
-				<% else %>
-					<%= link_to image_tag(comment.user.image_url), "/my_feeld?user_id=#{comment.user.id}" %> 
-				<% end %>
+		<% end %>
+	</div> 
+	<div class="comment-body">					
+		<p>
+			<%= comment.body.gsub(/\n/, '<br/>').html_safe %>
+			<br>	
+			<i class="fa fa-clock-o"></i>&nbsp;
+			<span class="comment-time" ><%= time_ago_in_words(comment.created_at) %> 전에</span>
+			<% if current_user and current_user.id == comment.user.id  %>
+				<%= link_to "댓글삭제", [comment.post, comment], method: :delete, remote: true, data: { confirm: "Are you sure?" }, class: "comment-delete" %>
 			<% end %>
-		</div> 
+		</p>
 	</div>
-<% end %>
+</div>
 <div style="clear:both"></div>
 

@@ -10,50 +10,30 @@
 
 //////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
-
-
+//21행 border-radius 50% 추가(16-10-30 동윤)
 .comment-user-img{
 	float:left;
 	width: 20%;
 	margin-right: 0.5%; 
 	img{
-		height:40px;
-		width:40px;
+		height:35px;
+		width:35px;
+		border-radius:50%
 	}
 }
-
+//28행 font-size: 1.0에서 0.8em으로 줄임(16-10-30동윤)
 .comment-body{
 	width:79.5%;
 	float:left;
-	font-size: 0.9em;
-}
-
-
-.reverse-comment-body{
-	width:79.5%;
-	float:left;
-	font-size: 0.9em;
-	p{
-		float:right;	
-	}
-}
-
-.reverse-comment-user-img{
-	width: 20%;
-	float:left;
-	img{
-		float:right;
-		height:40px;
-		width:40px;
-	}
+	font-size: 0.8em;
 }
 
 .comment-time{
 	color:gray; font-size:0.8em;
 }
-
+//36행 rgb값 200에서 245로 수정(16-10-30 동윤)
 #comments_form{
-	background: rgba(200,200,200, 0.5);
+	background: rgba(245,245,245, 0.5);
 }
 
 

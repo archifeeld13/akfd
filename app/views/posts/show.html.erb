@@ -187,10 +187,11 @@
 		<!-- show-container & container fluid-->
 		<!-- show-container & container fluid-->
 
-		<!-- show-controller ; 이름을 이렇게 진 이유는 _form에서 edit-controller와 비슷한 구조기 때문 -->
+		<!-- show-controller -->
+		<!-- show-controller -->
 		<!-- show-controller -->
 		<% if not browser.device.mobile? %>
-			<div id="show-controller">
+			<div id="show-controller" style="display:none">
 				<div id="sc-writer-info">
 					<div style="float:left; margin-right:5px;">
 						<% if @post.user.use_photo %>
@@ -283,14 +284,15 @@
 		<!-- show-controller 위치 업데이트 스크립트 -->
 		<!-- show-controller 위치 업데이트 스크립트 -->
 		<script>
+			
 			$(function(){
 				// 바로 호출하면 이전에 content container사이즈를 조정하는 시간? 
 				// 때문에 left margin값이 -가 나와서 오류가있었다
 				// 일단 임시 처방으로 5ms의 딜레이를 주었다
-				setTimeout(updatePositionShowContainer, 5);
+				//setTimeout(updatePositionShowController, 10);
 
 				$( window ).resize(function() {
-					updatePositionShowContainer();
+					updatePositionShowController();
 				})
 
 				// 컨트롤러에 스크롤
@@ -299,29 +301,36 @@
 				// 이미지가 다 로드된 이후에 추천 포스트를 넣어야함
 				// 이미지가 다 로드된 이후에 추천 포스트를 넣어야함
 				$('#show-container').imagesLoaded(function(){
+					updatePositionShowController()
+
 					// 이미지가 다 로드되고 높이가 정해졌을 때,
 					// 관련 필드업을 추가해 준다.
 					if ($('#show-container').height() > $('#show-controller').height()){
 						$('#related-posts').show()
-									.css('margin-top', parseInt($('#show-container').css('height')) + 50);
+									.css('margin-top', parseInt($('#content-end').css('top')) + 50);
+									//.css('margin-top', parseInt($('#show-container').css('height')) + 50);
 					}
 					else {
+						// content-end 위치 강제 변경
+						$('#content-end').css('top', $('#show-controller').height() ) // controller의 height가 550
 						$('#related-posts').show()
-									.css('margin-top', parseInt($('#show-controller').css('height')) + 50);
+									.css('margin-top', parseInt($('#content-end').css('top')) + 50);
+									//.css('margin-top', parseInt($('#show-controller').css('height')) + 50);
 					}
 				})
 			
 			})
 
 
-			function updatePositionShowContainer(){
+			function updatePositionShowController(){
 				var left_offset = parseFloat($('#show-container').offset()["left"])
 				var width = parseFloat($("#show-container").css('width'))
 				var extra_offset = 15 // show-container 와 show-controller사이의 10px정도의 오프셋 
-				$("#show-controller").css("left", left_offset + width + extra_offset)
+				$("#show-controller").css("left", left_offset + width + extra_offset).fadeIn()
 			}
 
-			// contents controllbar에도 이 변수가 있어서 _2추가함
+			// cf) contents controllbar에도 이 변수가 있어서 _2추가함
+			// cf) contents controllbar에도 이 변수가 있어서 _2추가함
 			var previousScroll2 = 0;
 			var changedByDown= false;
 			var changedByUP= false;
@@ -330,14 +339,14 @@
 				 var currentScroll2 = $(this).scrollTop();
 				 if (currentScroll2 > previousScroll2){
 					 // down flow
-				 		if (!changedByDown){
+						if (!changedByDown){
 							ori = parseInt($('#show-controller').css('margin-top'), 10	)
 							$('#show-controller').css('margin-top', ori - changeOffset)	
 							changedByUp = false;
 							changedByDown = true;
 						}
 				 } else {
-				 		if (!changedByUp){
+						if (!changedByUp){
 							ori = parseInt($('#show-controller').css('margin-top'), 10	)
 							$('#show-controller').css('margin-top', ori + changeOffset)	
 							changedByUp = true;
@@ -345,16 +354,22 @@
 						}
 				 }
 				 previousScroll2 = currentScroll2;
-				
+
 				// + 추가 기능
 				// 오른쪽 메뉴 사라지게 하기
+				// diff? content-end라고 show-container끝나는 부분에 표시해논게 있음
+				// 그거 위치에서 controller 높이를 뺀 것을 의미
+				// 즉 
 				diff = parseInt($('#content-end').css('top')) - parseInt($('#show-controller').css('height'))
+
+				//console.log("content-end : " + $('#content-end').css('top'))
+				//console.log("show-controller height : " + $('#show-controller').css('height'))
+				//console.log("scroll : " + $(this).scrollTop())
 
 				if (diff + 50 < parseInt($(this).scrollTop())){
 					$('#show-controller').hide();	
 				}
 				else {
-					// 뭔가 깜빡 거려야 할거같은데 일단 안그럼..
 					$('#show-controller').show();	
 				}
 
@@ -379,13 +394,6 @@
 		ga('create', 'UA-77436255-1', 'auto');
 		ga('send', 'pageview');
 	</script>
-
-	<script>
-	//$('img').bind('contextmenu', function(e){
-	//			return false;
-	//	}); 
-	</script>
-	<%#= javascript_include_tag "lightbox.min.js" %>
 
 
 	<!-- 다음글 추천 -->

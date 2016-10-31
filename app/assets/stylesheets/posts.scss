@@ -278,10 +278,13 @@
 	position:relative;
 }	
 #show-container{
+	z-index: 488;
 	padding:0; 
 	position:absolute; left:0; width:70%; margin-right:1%; margin-bottom:50px;
 }
 #show-controller{
+	z-index: 477;
+	padding:0; 
 	position:fixed; width:20%; 
 	height:550px; background:white; 
 	padding:1%; overflow-y: auto; overflow-x: hidden; 
