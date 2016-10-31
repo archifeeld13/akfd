@@ -12,9 +12,12 @@
 	overflow-x :  hidden;
 	position: relative;
 	height: 310px;
-	width: 99%; 
-	margin-left: 0.5%;
-	margin-right: 0.5%;
+	//width: 99%; 
+	//margin-left: 0.5%;
+	//margin-right: 0.5%;
+	width: 1105px;	
+	margin: 20px 10px;
+	margin-bottom: 0;
 
 	#projects-container{
 		position: absolute;
@@ -31,7 +34,7 @@
 		font-size: 3.5em;
 		font-weight: bold;
 		//text-shadow: -1px 0 green, 0 1px green, 1px 0 green, 0 -1px green;
-		text-shadow: 1px 2px 3px black;
+		text-shadow: 1px 2px 3px rgb(50,50,50);
 		cursor: pointer;
 	}
 	#right-arrow{
@@ -42,7 +45,7 @@
 		font-size: 3.5em;
 		font-weight: bold;
 	  //text-shadow: -1px 0 green, 0 1px green, 1px 0 green, 0 -1px green;
-		text-shadow: 1px 2px 3px black;
+		text-shadow: 1px 2px 3px gray;
 		cursor: pointer;
 	}
 
@@ -58,7 +61,7 @@
 	height: 300px;
 	width: 300px;
 	background: white;
-	margin-right: 10px;
+	margin-right: 20px; // 이걸 수정하면 projects-container의 width에도 반영해야됨 
 	padding: 0;
 	border-radius: 5px;
 
@@ -79,7 +82,7 @@
 		margin: 10px;
 		margin-top: 0;
 		img{
-			width: 66px;
+			width: 64px;
 			height: 65px;
 			border-radius: 5px;
 		}

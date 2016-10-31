@@ -93,17 +93,19 @@
 	</div>
 
 	<div id="projects-container-wrapper">
-		<div id="projects-container" style="width:<%=(@projects.length + 4) * (300+ 5 + 5) %>px">
-			<%= render @projects %>			
-			<%= render "projects/project_empty" %>
-			<%= render "projects/project_empty" %>
-			<%= render "projects/project_empty" %>
-			<%= render "projects/project_empty" %>
+		<div id="projects-container" style="width:<%=(@projects.length + 4) * (300+ 10 + 10) %>px">
+			<% if @projects.length > 0 %>
+				<%= render @projects %>			
+			<% else %>
+				<%= render "projects/project_empty" %>
+			<% end %>
 		</div>
 		<!-- pc에서만 보여주기 -->
 		<!-- pc에서만 보여주기 -->
-		<div href="" id="left-arrow">&lt;</div>
-		<div href="" id="right-arrow">&gt;</div>
+		<% if not browser.device.mobile? and @projects.length > 3 %>
+			<div href="" id="left-arrow">&lt;</div>
+			<div href="" id="right-arrow">&gt;</div>
+		<% end %>
 		<!-- pc에서만 보여주기 -->
 		<!-- pc에서만 보여주기 -->
 	</div>
