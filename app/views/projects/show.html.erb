@@ -11,6 +11,7 @@
 			<% else %>
 				<%= image_tag("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5zMJSxs75XUMZo3qVrkCcJbMK11TyGph_BC0Z34UBPgDrT2Nj7Q")%>
 			<% end %>
+			<div id="bgalpha" style="background:rgba(0,0,0,0.4); position:absolute; top:0; left:0; width:100%;"></div>
 			<div id="project_title"><%= @project.name %></div>
 			<% if current_user %>
 				<div id="project_like"> 
@@ -28,6 +29,8 @@
 			<% end %>
 			<script>
 				$(function(){
+					$('#bgalpha').css('height', $('#project_photo').height());
+
 					_top = $('#project_photo').height()/2 - 20
 					_left = ($('#project_photo').width() - $('#project_title').width()) / 2 - 5 
 					_left2 = ($('#project_photo').width() - $('#project_like').width()) / 2
