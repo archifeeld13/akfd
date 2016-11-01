@@ -143,18 +143,53 @@ class PostsController < ApplicationController
 		# 다른 사람 페이지 볼 때, 비밀글 보이면 안돼
 		if params[:user_id]
 			@user = User.find(params[:user_id])
-			@posts = Post.where(user_id: User.find(params[:user_id]).id, is_secret: false)
-										.order(created_at: :desc)
-										.paginate(page: params[:page], per_page: 20)
+
+			if params[:filter] == 'archive'
+				@posts = Post.where(user_id: User.find(params[:user_id]).id, is_secret: false, post_type: 1)
+											.order(created_at: :desc)
+											.paginate(page: params[:page], per_page: 20)
+
+			elsif params[:filter] == 'collection'
+				@posts = Post.where(user_id: User.find(params[:user_id]).id, is_secret: false, post_type: 2)
+											.order(created_at: :desc)
+											.paginate(page: params[:page], per_page: 20)
+
+			elsif params[:filter] == 'binder'
+				@projects = Project.where(user_id: @user.id).reverse
+
+			else 
+				@posts = Post.where(user_id: User.find(params[:user_id]).id, is_secret: false)
+											.order(created_at: :desc)
+											.paginate(page: params[:page], per_page: 20)
+				@projects = Project.where(user_id: @user.id).reverse
+			end
+
 			@isMine = false
-			@projects = Project.where(user_id: @user.id).reverse
 		else
 			@user = User.find(current_user.id)
-			@posts = Post.where(user_id: current_user.id)
-										.order(created_at: :desc)
-										.paginate(page: params[:page], per_page: 20)
+
+			if params[:filter] == 'archive'
+				@posts = Post.where(user_id: current_user.id, post_type: 1 )
+											.order(created_at: :desc)
+											.paginate(page: params[:page], per_page: 20)
+
+			elsif params[:filter] == "collection"
+				@posts = Post.where(user_id: current_user.id, post_type: 2 )
+											.order(created_at: :desc)
+											.paginate(page: params[:page], per_page: 20)
+
+
+			elsif params[:filter] == 'binder'
+				@projects = Project.where(user_id: current_user.id).reverse
+
+			else
+				@posts = Post.where(user_id: current_user.id)
+											.order(created_at: :desc)
+											.paginate(page: params[:page], per_page: 20)
+				@projects = Project.where(user_id: current_user.id).reverse
+			end
+
 			@isMine = true 
-			@projects = Project.where(user_id: current_user.id).reverse
 		end
 		respond_to do |format|
 		 format.html
@@ -166,48 +201,6 @@ class PostsController < ApplicationController
 		# 나중에 메시지 보내는 용도로 쓸 것임
 	end
 
-	#
-	# archive_mine, archive_share, project_management-> ajax
-	# in my_feeld
-	# 
-	def archive_mine
-		# 다른 사람 페이지 볼 때, 비밀글 보이면 안돼
-		if params[:user_id]
-			@posts = Post.where(user_id: User.find(params[:user_id]).id, is_secret: false).reverse
-		else
-			@posts = Post.where(user_id: current_user.id).reverse
-		end
-	end
-
-	def archive_share
-		if params[:user_id]
-			@posts = User.find(params[:user_id]).shared_posts.reverse
-		else
-			@posts = User.find(current_user.id).shared_posts.reverse
-		end
-	end
-
-	def project_management
-		# 내 페이지가 아닐 때, 현재 유저가 없거나 혹은 로긴하고 있는 유저의 페이지가 아닐 때
-		if params[:user_id] 
-		#if params[:user_id] and (!current_user or (User.find(params[:user_id]).id != current_user.id))
-			@isMine = false
-			@projects = Project.where(user_id: User.find(params[:user_id]).id).reverse
-		# 내 페이지 일 때
-		else
-			@isMine = true 
-			@projects = Project.where(user_id: current_user.id).reverse
-		end
-	end
-
-	# 특정 프로젝트를 눌렀을 때의 행동
-	def project_list_in
-		project = Project.find(params[:project_id])
-		@posts = project.posts.reverse
-		@projects = [project] 
-		# 1개짜리 배열, projects/_project.html.erb 재활용위해..
-		# 그 안에서 @projects에 대해 each문 돌림
-	end
 =begin	
 	 in my_feeld
 	 end 

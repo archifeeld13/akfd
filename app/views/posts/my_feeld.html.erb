@@ -5,6 +5,7 @@
 <div class="container">
 	<div id="user_info_panel">
 		<%# http://stackoverflow.com/questions/2821061/facebook-api-how-do-i-get-a-facebook-users-profile-image-through-the-facebook %>
+		<a href="/my_feeld?user_id=<%=@user.id%>">
 		<% if !@user.use_photo %>
 			<%#= link_to image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130", id: "message_box"), "/message_box/#{@user.id}", remote: true %>
 			<%= image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130", class:"img-circle") %>
@@ -12,6 +13,7 @@
 			<%#= link_to image_tag(@user.photo, class: "my_feeld_profile_img", id: "message_box"), "/message_box/#{@user.id}", remote: true %>
 			<%= image_tag(@user.photo, class: "my_feeld_profile_img img-circle", id: "message_box")%>
 		<% end %>
+		</a>
 
 		<div id="user_info_name_dept">
 			<span style="font-size: 1.8em;">
@@ -22,9 +24,18 @@
 				<% end %>
 			</span>
 			<br>
-			<span style="white-space: nowrap">
+			<span style="white-space: nowrap; font-size:1.3em;">
 				<%= @user.company %>
-			</span><br>
+			</span>
+
+			<div style="height:5px;"></div>
+
+			<!-- 분야 -->
+			<!-- 분야 -->
+			<div class="tag_div" style="margin:4px 2px;"><a href="#" class='tag' style="background:transparent; color:gray;">건축학</a></div>
+			<div style="clear:both;"></div>
+			<div style="height:5px;"></div>
+
 			<% if current_user %>
 				<% if @user.id == current_user.id %>
 					<a style="" href="users/<%=@user.id%>/edit">정보수정</a><br>
@@ -38,9 +49,7 @@
 					</div>
 				<% end %>
 			<% end %>
-			<!-- 분야 -->
-			<!-- 분야 -->
-			<div class="tag_div" style="margin:4px 2px;"><a href="#" class='tag' style="background:transparent; color:gray;">건축학</a></div>
+
 			<!-- 분야 -->
 			<!-- 분야 -->
 		</div>
@@ -82,45 +91,65 @@
 	</div>
 
 	<div id="my_feeld_menu">
+		<% collection_count = 0 %>
+		<% @user.posts.each do |p| %>
+			<% collection_count += 1 if p.post_type == 2 %>
+		<% end %>
 		<% if current_user and current_user.id == @user.id %>
-			<%= link_to raw('<div class="my_feeld_menu_item">바인더()</div>'), "/project_management", remote: true %>
-			<%= link_to raw('<div class="my_feeld_menu_item">아카이브()</div>'), "/archive_mine", remote: true %>
-			<%= link_to raw('<div class="my_feeld_menu_item">콜렉션()</div>'), "/archive_share", remote: true %>
+			<%= link_to "/my_feeld?filter=binder" do%>
+				<div class="my_feeld_menu_item">바인더(<%=@user.projects.count%>)</div>
+			<% end %>
+			<%= link_to "/my_feeld?filter=archive" do %>
+				<div class="my_feeld_menu_item">아카이브(<%=@user.posts.count - collection_count%>)</div>
+			<% end %>
+			<%= link_to "/my_feeld?filter=collection" do %>
+				<div class="my_feeld_menu_item">콜렉션(<%= collection_count%>)</div>
+			<% end %>
 			<%= link_to raw('<span style="white-space:nowrap">+ 바인더</span>'), "/projects/new", id:"add_binder", class:"my_feeld_menu_item_right" %>
 		<% else %>
-			<%= link_to raw('<div class="my_feeld_menu_item">바인더()</div>'), "/project_management?user_id=#{@user.id}", remote: true %>
-			<%= link_to raw('<div class="my_feeld_menu_item">아카이브()</div>'), "/archive_mine?user_id=#{@user.id}", remote: true %>
-			<%= link_to raw('<div class="my_feeld_menu_item">콜렉션()</div>'), "/archive_share?user_id=#{@user.id}", remote: true %>
+			<%= link_to "/my_feeld?filter=binder&user_id=#{@user.id}" do%>
+				<div class="my_feeld_menu_item">바인더(<%=@user.projects.count%>)</div>
+			<% end %>
+			<%= link_to "/my_feeld?filter=archive&user_id=#{@user.id}" do %>
+				<div class="my_feeld_menu_item">아카이브(<%=@user.posts.count - collection_count%>)</div>
+			<% end %>
+			<%= link_to "/my_feeld?filter=collection&user_id=#{@user.id}" do %>
+				<div class="my_feeld_menu_item">콜렉션(<%= collection_count%>)</div>
+			<% end %>
 		<% end %>
 	</div>
 
-	<div id="projects-container-wrapper">
-		<div id="projects-container" style="width:<%=(@projects.length + 4) * (300+ 10 + 10) %>px">
-			<% if @projects.length > 0 %>
-				<%= render @projects %>			
-			<% else %>
-				<%= render "projects/project_empty" %>
+	<% if @projects %>
+		<div id="projects-container-wrapper">
+			<div id="projects-container" style="width:<%=(@projects.length + 4) * (300+ 10 + 10) %>px">
+				<% if @projects.length > 0 %>
+					<%= render @projects %>			
+				<% else %>
+					<%= render "projects/project_empty" %>
+				<% end %>
+			</div>
+			<!-- pc에서만 보여주기 -->
+			<!-- pc에서만 보여주기 -->
+			<% if not browser.device.mobile? and @projects.length > 3 %>
+				<div href="" id="left-arrow">&lt;</div>
+				<div href="" id="right-arrow">&gt;</div>
 			<% end %>
+			<!-- pc에서만 보여주기 -->
+			<!-- pc에서만 보여주기 -->
 		</div>
-		<!-- pc에서만 보여주기 -->
-		<!-- pc에서만 보여주기 -->
-		<% if not browser.device.mobile? and @projects.length > 3 %>
-			<div href="" id="left-arrow">&lt;</div>
-			<div href="" id="right-arrow">&gt;</div>
-		<% end %>
-		<!-- pc에서만 보여주기 -->
-		<!-- pc에서만 보여주기 -->
-	</div>
+	<% end %>
 
 	<div style="clear:both"></div>
 
-	<div id="infinite-scrolling" style="display:none">
-		<%= will_paginate @posts %>
-	</div>
+	<% if @posts %>
+		<div id="infinite-scrolling" style="display:none">
+			<%= will_paginate @posts %>
+		</div>
 
-	<div id="posts-container">
-		<%= render @posts %>
-	</div>
+		<div id="posts-container">
+			<%= render @posts %>
+		</div>
+	<% end %>
 </div>
 
 <center>
@@ -164,26 +193,28 @@
 	//	tag_truncate()
 
 	
-	// left-arrow, right-arrow
-	// left-arrow, right-arrow
-	var arrowMaxCount= <%=@projects.length%> - 1;
-	var arrowCount = 0;
-	$('#right-arrow').click(function(){
-		if (arrowCount >= arrowMaxCount ) return;
-		curr = parseInt($('#projects-container').css('left'))
-		console.log(curr)
-		//$('#projects-container').css('left', curr - (300+ 5 + 5))
-		$('#projects-container').animate({left: curr - 310 }, 300)
-		arrowCount += 1;
-	})
-	$('#left-arrow').click(function(){
-		if (arrowCount <= 0) return;
-		curr = parseInt($('#projects-container').css('left'))
-		console.log(curr)
-		//$('#projects-container').css('left', curr + (300+ 5 + 5))
-		$('#projects-container').animate({left: curr + 310 }, 300)
-		arrowCount -= 1;
-	})
-	// left-arrow, right-arrow
-	// left-arrow, right-arrow
+	<% if @projects %>
+		// left-arrow, right-arrow
+		// left-arrow, right-arrow
+		var arrowMaxCount= <%=@projects.length%> - 1;
+		var arrowCount = 0;
+		$('#right-arrow').click(function(){
+			if (arrowCount >= arrowMaxCount ) return;
+			curr = parseInt($('#projects-container').css('left'))
+			console.log(curr)
+			//$('#projects-container').css('left', curr - (300+ 5 + 5))
+			$('#projects-container').animate({left: curr - 310 }, 300)
+			arrowCount += 1;
+		})
+		$('#left-arrow').click(function(){
+			if (arrowCount <= 0) return;
+			curr = parseInt($('#projects-container').css('left'))
+			console.log(curr)
+			//$('#projects-container').css('left', curr + (300+ 5 + 5))
+			$('#projects-container').animate({left: curr + 310 }, 300)
+			arrowCount -= 1;
+		})
+		// left-arrow, right-arrow
+		// left-arrow, right-arrow
+	<% end %>
 </script>
