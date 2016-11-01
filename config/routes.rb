@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 	end
 
 	get '/connects' => 'posts#connects'
+	get '/community' => 'posts#community'
 
 	resources :photos , only: [:destroy]
 

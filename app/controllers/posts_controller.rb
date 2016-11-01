@@ -28,10 +28,12 @@ class PostsController < ApplicationController
 			if params[:type]
 				if params[:type] == "works"
 					p_t = 1 
+				'''
 				elsif params[:type] == "community"
 					p_t = 0 
 				elsif params[:type] == "connect"
 					p_t = 3
+				'''
 				end
 				@posts = Post.where(post_type:p_t, is_secret: false)
 											.order(created_at: :desc)
@@ -53,6 +55,13 @@ class PostsController < ApplicationController
 
 	def connects
 		p_t = 3
+		@posts = Post.where(post_type:p_t, is_secret: false)
+									.order(created_at: :desc)
+									.paginate(page: params[:page], per_page: 20)
+	end
+
+	def community
+		p_t = 0 
 		@posts = Post.where(post_type:p_t, is_secret: false)
 									.order(created_at: :desc)
 									.paginate(page: params[:page], per_page: 20)

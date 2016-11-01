@@ -174,7 +174,12 @@
 			height: 60px;	
 		}
 		#user-info{
-			font-size: 1.5em;	
+			.name{
+				font-size: 1.5em;	
+			}
+			.company{
+				font-size: 1.2em;	
+			}
 		}
 		float: left;
 		width: 30%;

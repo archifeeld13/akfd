@@ -1,15 +1,14 @@
 <%= render 'contents_controllbar'%>
 
-<div class="container">
+<%#= link_to "유저검색", '/user_search', remote: true %>
 
+<div class="container">
 	<div id="infinite-scrolling" style="display:none">
 		<%= will_paginate @posts %>
 	</div>
 
 	<div id="posts-container">
-		<% @posts.each do |post| %>
-			<%= render 'connect', post: post %>
-		<% end %>
+		<%= render @posts %>
 	</div>
 </div>
 

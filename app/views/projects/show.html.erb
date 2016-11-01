@@ -76,9 +76,9 @@
 				</div>
 				<div style="float:left">
 					<% if @user.use_nick %>
-						<%= link_to @user.nickname, "/my_feeld?user_id=#{@user.id}"%>
+						<%= link_to @user.nickname, "/my_feeld?user_id=#{@user.id}", class: "name"%>
 					<% else %>
-						<%= link_to @user.name, "/my_feeld?user_id=#{@user.id}"%>
+						<%= link_to @user.name, "/my_feeld?user_id=#{@user.id}", class: "name"%>
 					<% end %>
 					<br>
 					<span class="company">@<%= @user.company %></span>
