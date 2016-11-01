@@ -2,11 +2,11 @@ class Post < ActiveRecord::Base
 	# post_type 0 : text, 1: image , 2: link
 	has_many :comments, dependent: :destroy
 	has_many :likes, dependent: :destroy
+
 	has_many :shares, dependent: :destroy
 	has_many :shared_users, class_name: 'User', through: :shares, source: :user
 
 	has_many :events, dependent: :destroy
-
 	has_one :link, dependent: :destroy
 
 	# Post has many photos

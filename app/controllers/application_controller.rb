@@ -5,7 +5,9 @@ class ApplicationController < ActionController::Base
 
 	#before_action :notice
 
+	# 여기의 연산은 다 cron으로 미리 계산해 두자
 	before_action :set_fav_posts
+	before_action :set_fav_projects
 	before_action :set_fav_tags
 	before_action :set_fav_users
 
@@ -33,6 +35,13 @@ class ApplicationController < ActionController::Base
 			@fav_tags = ActsAsTaggableOn::Tag.most_used(50)
 		end
 
+		def set_fav_projects
+			@fav_projects = []
+			Project.all.each do |p|
+				@fav_projects << p if p.plikes.count >= 1
+			end
+			@fav_projects.sort! {|x, y| (y.plikes.count <=> x.plikes.count)}
+		end
 
 		def set_fav_users
 			@fav_users = []

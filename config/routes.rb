@@ -15,7 +15,10 @@ Rails.application.routes.draw do
 	resources :users do
 		resources :projects
 	end
-	resources :projects
+
+	resources :projects do
+		resources :plikes, only: [:create]
+	end
 
 	get '/tag_search' => "posts#tag_search"
 

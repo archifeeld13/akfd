@@ -30,10 +30,11 @@
 			<h5><b>HIT 바인더</b></h5>
 			<div style="margin-top:15px;"></div>
 			<div>
-				<%= image_tag("project_default.jpg", class:"reco-binder") %>
-				<%= image_tag("project_default.jpg", class:"reco-binder") %>
-				<%= image_tag("project_default.jpg", class:"reco-binder") %>
-				<%= image_tag("project_default.jpg", class:"reco-binder") %>
+				<% @fav_projects.shuffle[0..4].each do |p| %>
+					<%= link_to p do %>
+						<%= image_tag(p.photo, class:"reco-binder") %>
+					<% end %>
+				<% end %>
 			</div>
 		</div>
 		<div id="reco-posts">

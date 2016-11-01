@@ -76,8 +76,19 @@
 					<td>&nbsp;</td>
 				</tr>
 			</table>
-				<%= link_to "바인더 삭제", @project, method: :delete, data: { confirm:	"바인더가 삭제됩니다! 정말 삭제하시겠습니까?" } %> <br>
-				<%= link_to "바인더 수정", edit_project_path(@project.id), id:"edit" %>
+				<% if current_user and current_user.id == @project.user.id %>
+					<%= link_to "바인더 삭제", @project, method: :delete, data: { confirm:	"바인더가 삭제됩니다! 정말 삭제하시겠습니까?" } %> <br>
+					<%= link_to "바인더 수정", edit_project_path(@project.id), id:"edit" %><br>
+				<% end %>
+
+				<% if current_user %>
+					<% if Plike.find_by(project_id: @project.id, user_id: current_user.id) %>
+						<%= link_to "좋아요 취소", project_plikes_path(@project.id), id: "project_plikes", method: :post, remote: true %>
+					<% else %>
+						<%= link_to "좋아연", project_plikes_path(@project.id), id: "project_plikes", method: :post, remote: true %>
+					<% end %>
+					x<strong id="plikes_count"> <%=@project.plikes.count%></strong>
+				<% end %>
 		</div>
 	</div>
 
