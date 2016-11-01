@@ -29,13 +29,25 @@
 		<!--31행 margin-top 25px 에서 15px로 변경(16-10-31 동윤)-->
 			<h5><b>HIT 바인더</b></h5>
 			<div style="margin-top:15px;"></div>
-			<div>
-				<% @fav_projects[0..4].each do |p| %>
+
+			<% @fav_projects[0..4].each do |p| %>
+				<div  class="reco-binder">
 					<%= link_to p do %>
 						<%= image_tag(p.photo, class:"reco-binder") %>
+						<div class="bgalpha"></div>
+						<div class="project_title"><%= p.name %></div>
 					<% end %>
-				<% end %>
-			</div>
+				</div>
+			<% end %>
+			<script>
+				$(function(){
+					$('.project_title').each(function(index){
+						_top = $('.bgalpha').height()/2 - 10 
+						_left = ($('.bgalpha').width() - $('.project_title').eq(index).width()) / 2
+						$('.project_title').eq(index).css('top', _top).css('left', _left)
+					})
+				})
+			</script>
 		</div>
 		<div id="reco-posts">
 			<h5><b>HIT 필디</b></h5>
@@ -46,7 +58,6 @@
 					<% else %>
 						<%= link_to image_tag(post.user.image_url, class:"img-circle"), "/my_feeld?user_id=#{post.user.id}" %> 
 					<% end %> 
-					
 					<div class="sub-title-company">
 						<% if post.title.size > 0 %>
 							<%= link_to truncate(post.title, length:45, separater: ' '), post, class: 'fav-posts' %></br>
@@ -57,7 +68,6 @@
 					</div>
 				</div>
 			<% end %>
-
 		</div>
 	</div>
 	<!-- 메인페이지 추천 영역 -->
