@@ -78,14 +78,25 @@
 	}
 
 	.project-img-in{
-		height: 65px;;	
+		height: 66px;;	
 		margin: 10px;
 		margin-top: 0;
+
 		img{
-			width: 64px;
+			width: 61px;
 			height: 65px;
+			margin: 3px 3px;
 			border-radius: 5px;
 		}
+		img:nth-child(1){
+			margin-left: 0px;
+			width:63px;
+		}
+		img:nth-child(4){
+			margin-right: 0px;
+			width:62px;
+		}
+
 	}
 
 	.project-info{
