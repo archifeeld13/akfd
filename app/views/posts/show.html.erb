@@ -410,7 +410,8 @@
 				// diff? content-end라고 show-container끝나는 부분에 표시해논게 있음
 				// 그거 위치에서 controller 높이를 뺀 것을 의미
 				// 즉 
-				diff = parseInt($('#content-end').css('top')) - parseInt($('#show-controller').css('height'))
+				//diff = parseInt($('#content-end').css('top')) - parseInt($('#show-controller').css('height'))
+				diff = parseInt($('#show-container').css('height')) - parseInt($('#show-controller').css('height'))
 
 				//console.log("content-end : " + $('#content-end').css('top'))
 				//console.log("show-controller height : " + $('#show-controller').css('height'))
