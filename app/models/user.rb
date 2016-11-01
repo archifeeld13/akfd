@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
 
 	mount_uploader :photo, S3Uploader
 
+	validates :mf_id, :uniqueness => {message: ' : 이미 존재하는 마이필드 주소입니다'}
+
 	# https://github.com/mbleigh/acts-as-taggable-on
 	acts_as_taggable_on :skills
 	def skill_list_fixed
@@ -38,7 +40,7 @@ class User < ActiveRecord::Base
 	with_options unless: 'password.nil?' do |ok|
 		ok.validates :name, :presence => true, :length => {:in => 2..15, message: '이름은 15자리 이하로 작성해 주세요'}
 		ok.validates :email, :presence => true, :uniqueness => { message: '이미 존재하는 이메일 주소입니다' }, format: {with: EMAIL_REGEX} 
-		ok.validates :password, :confirmation => {message: '비밀번호가 일치하지 않습니다'} 
+		ok.validates :password, :confirmation => {message: ' : 비밀번호가 일치하지 않습니다'} 
 		#ok.validates_length_of :password, :in => 1..20, :on => :create
 	end 
 

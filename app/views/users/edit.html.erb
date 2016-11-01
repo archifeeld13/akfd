@@ -3,6 +3,13 @@
 	//	$('#user_edit_panel').hide().slideDown()	
 	//})
 </script>
+<center>
+	<div style="color:red; margin-bottom: 2%;">
+		<% @user.errors.full_messages.each do |msg| %>
+			<div><%=msg %> </div>
+		<% end %>
+	</div>
+</center>
 
 <div id="user_edit_panel">
 	<%# http://stackoverflow.com/questions/2821061/facebook-api-how-do-i-get-a-facebook-users-profile-image-through-the-facebook %>
@@ -14,11 +21,7 @@
 			<%= @user.name %>
 		</span>
 	<%= form_for(@user) do |f| %>
-		<div style="color:white; background:rgba(20,20,20, 0.2); margin-bottom: 2%;">
-			<% @user.errors.full_messages.each do |msg| %>
-				<div><%=msg %> </div>
-			<% end %>
-		</div>
+		
 		<div class="form-inputs">
 			<% if @user.user_type == 0 %>
 			<%= f.label :password, '비밀번호'%>

@@ -76,7 +76,8 @@
 					<td>&nbsp;</td>
 				</tr>
 			</table>
-			<%= link_to "*프로젝트 삭제", @project, method: :delete, data: { confirm:	"프로젝트가 삭제됩니다! 정말 삭제하시겠습니까?" } %>
+				<%= link_to "바인더 삭제", @project, method: :delete, data: { confirm:	"바인더가 삭제됩니다! 정말 삭제하시겠습니까?" } %> <br>
+				<%= link_to "바인더 수정", edit_project_path(@project.id), id:"edit" %>
 		</div>
 	</div>
 
