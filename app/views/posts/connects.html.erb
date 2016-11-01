@@ -7,9 +7,7 @@
 	</div>
 
 	<div id="posts-container">
-		<% @posts.each do |post| %>
-			<%= render 'connect', post: post %>
-		<% end %>
+		<%= render 'connects', posts: @posts %>
 	</div>
 </div>
 

@@ -1,0 +1,18 @@
+<% posts.each do |post| %>
+	<div class="connect-item">
+		<%= link_to image_tag("project_default.jpg"), post %>
+		<div class="ci-info">
+			<div class="ci-title"><%= link_to post.title, post %></div>
+			<div class="ci-content"><%= post.content %></div>
+			<div style="height:40px;"></div>
+
+			<div class="ci-tags">
+				<% if post.tag_list.count > 0 %>
+					<% post.tag_list.each do |tag| %>
+						<div style="margin:4px 2px; float:left;"><a href='/posts?tag=<%= tag %>' class='tag' style="background:transparent; color:gray;"><%= tag %></a></div>
+					<% end %>
+				<% end %>
+			</div>	
+		</div>
+	</div>
+<% end %>
