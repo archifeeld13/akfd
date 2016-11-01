@@ -33,7 +33,7 @@ class PostsController < ApplicationController
 				@posts = @posts[0..19]
 			end
 			"""
-			# secret인건 따로 제거
+			# secret인건 따로 제거 보여줄때 제거?
 			@posts = Post.tagged_with(params[:tag])
 										.order(created_at: :desc)
 										.paginate(page: params[:page], per_page: 20)
