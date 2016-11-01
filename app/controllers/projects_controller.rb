@@ -28,6 +28,12 @@ class ProjectsController < ApplicationController
 	end
 
 	def update
+		@project = Project.find(params[:id])
+		if @project.update(project_params)
+			redirect_to "/projects/#{@project.id}" 
+		else
+			render "projects/#{@project.id}/edit"
+		end
 	end
 
   def destroy
