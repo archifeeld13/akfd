@@ -3,6 +3,7 @@
 	//	$('#user_edit_panel').hide().slideDown()	
 	//})
 </script>
+<% if @user.errors.count > 0 %>
 <center>
 	<div style="color:red; margin-bottom: 2%;">
 		<% @user.errors.full_messages.each do |msg| %>
@@ -10,6 +11,7 @@
 		<% end %>
 	</div>
 </center>
+<% end %>
 
 <div id="user_edit_panel">
 	<%# http://stackoverflow.com/questions/2821061/facebook-api-how-do-i-get-a-facebook-users-profile-image-through-the-facebook %>

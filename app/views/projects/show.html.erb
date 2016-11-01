@@ -12,11 +12,27 @@
 				<%= image_tag("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5zMJSxs75XUMZo3qVrkCcJbMK11TyGph_BC0Z34UBPgDrT2Nj7Q")%>
 			<% end %>
 			<div id="project_title"><%= @project.name %></div>
+			<% if current_user %>
+				<div id="project_like"> 
+					<center>
+						<span id="project_like_text">
+							<% if Plike.find_by(project_id: @project.id, user_id: current_user.id) %>
+								<%= link_to "추천 취소", project_plikes_path(@project.id), id: "project_plikes", method: :post, remote: true %>
+							<% else %>
+								<%= link_to "바인더 추천", project_plikes_path(@project.id), id: "project_plikes", method: :post, remote: true %>
+							<% end %>
+						</span>
+						<strong id="plikes_count"> <%=@project.plikes.count%></strong>
+					</center>
+				</div>
+			<% end %>
 			<script>
 				$(function(){
-					_top = $('#project_photo').height()/2
-					_left = ($('#project_photo').width() - $('#project_title').width()) / 2
+					_top = $('#project_photo').height()/2 - 20
+					_left = ($('#project_photo').width() - $('#project_title').width()) / 2 - 5 
+					_left2 = ($('#project_photo').width() - $('#project_like').width()) / 2
 					$('#project_title').css('top', _top).css('left', _left)	
+					$('#project_like').css('left', _left2)	
 				})
 			</script>
 		</div>
@@ -79,15 +95,6 @@
 				<% if current_user and current_user.id == @project.user.id %>
 					<%= link_to "바인더 삭제", @project, method: :delete, data: { confirm:	"바인더가 삭제됩니다! 정말 삭제하시겠습니까?" } %> <br>
 					<%= link_to "바인더 수정", edit_project_path(@project.id), id:"edit" %><br>
-				<% end %>
-
-				<% if current_user %>
-					<% if Plike.find_by(project_id: @project.id, user_id: current_user.id) %>
-						<%= link_to "좋아요 취소", project_plikes_path(@project.id), id: "project_plikes", method: :post, remote: true %>
-					<% else %>
-						<%= link_to "좋아연", project_plikes_path(@project.id), id: "project_plikes", method: :post, remote: true %>
-					<% end %>
-					x<strong id="plikes_count"> <%=@project.plikes.count%></strong>
 				<% end %>
 		</div>
 	</div>

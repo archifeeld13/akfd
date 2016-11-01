@@ -1,9 +1,13 @@
 <% if Plike.find_by(project_id: @project.id, user_id: current_user.id) %>
 	$('#project_plikes')
-		.html("<%=j link_to "좋아요 취소", project_plikes_path(@project.id), method: :post, remote: true %>")
+		.html("<%=j link_to "추천 취소", project_plikes_path(@project.id), method: :post, remote: true %>")
 <% else %>
 	$('#project_plikes')
-		.html("<%=j link_to "좋아요", project_plikes_path(@project.id), method: :post, remote: true %>")
+		.html("<%=j link_to "바인더 추천", project_plikes_path(@project.id), method: :post, remote: true %>")
 <% end %>
 
-$('#plikes_count').html("<%= @project.plikes.count%>")
+$('#plikes_count').html(" <%= @project.plikes.count%>")
+
+_left2 = ($('#project_photo').width() - $('#project_like').width()) / 2 
+$('#project_like').css('left', _left2)	
+

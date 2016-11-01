@@ -129,7 +129,7 @@
 // user-info panel도 마찬가지로 분기할 수 있을 것 같다 
 .posts-item{
 	position: relative;
-	width:355px; height:455px; float:left; 
+	width:261px; height:400px; float:left; 
 	background:white; 
 	margin: 10px;
 
@@ -304,7 +304,7 @@
 	position:fixed; width:20%; 
 	height:550px; background:white; 
 	padding:1%; overflow-y: auto; overflow-x: hidden; 
-	font-size: 1.2em; border-radius: 5px 5px 5px 5px;
+	font-size: 1.1em; border-radius: 5px 5px 5px 5px;
 
 	/*추가 마진 탑좀 주겠음*/
 	margin-top: 10px;
@@ -314,8 +314,10 @@
 			width: 50px;	
 			height: 50px;	
 		}	
+		//(16-11-01동윤)font-weight 추가 
 		a{
 			color: black;
+			font-weight: 600;
 		}
 		.company{
 			color:rgb(150,150,150);
