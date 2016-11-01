@@ -1,0 +1,7 @@
+<%= render 'contents_controllbar'%>
+
+<div class="container">
+	<% @posts.each do |post| %>
+		<%= render 'connect', post: post %>
+	<% end %>
+</div>

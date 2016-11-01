@@ -51,6 +51,13 @@ class PostsController < ApplicationController
 		end
   end
 
+	def connects
+		p_t = 3
+		@posts = Post.where(post_type:p_t, is_secret: false)
+									.order(created_at: :desc)
+									.paginate(page: params[:page], per_page: 20)
+	end
+
 	def timeline 
 		@selected = "timeline"
 		@posts = []

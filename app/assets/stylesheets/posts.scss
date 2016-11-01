@@ -661,3 +661,39 @@
 }
 
 
+
+// connect
+// connect
+// connect
+.connect-item{
+	width: 800px;
+	height: 250px;
+	background: white;
+	border-radius: 5px;
+	padding: 20px;
+	margin: 10px auto;
+	img{
+		float:left;
+		width: 350px;
+		height: 210px;
+		border-radius: 5px;
+	}
+	.ci-info{
+		float:left;
+		margin-left: 20px;
+		width: 350px;	
+		height: 210px;
+		padding: 20px;
+		color: rgb(150,150,150);
+		.ci-title{
+			font-size: 2em;
+			a{
+				color: rgb(150,150,150);
+			}
+		}
+		.ci-content{
+			font-size: 1.2em;
+		}
+	}
+}
+

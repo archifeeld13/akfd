@@ -35,6 +35,8 @@ Rails.application.routes.draw do
 		resources :shares, only: [:create]
 	end
 
+	get '/connects' => 'posts#connects'
+
 	resources :photos , only: [:destroy]
 
 	get '/timeline' => 'posts#timeline'
