@@ -18,21 +18,6 @@ class PostsController < ApplicationController
 
 		if params[:tag]
 		# 태그 검색
-			"""
-			@posts = []
-			@t_posts = Post.tagged_with(params[:tag]).reverse
-			@t_posts.each do |p|
-				if not p.is_secret 
-					@posts << p
-				end
-			end
-			if params[:page]
-				#page = params[:page].to_i
-				#@posts = @posts[(page * 20)..(page * 20) + 19]
-			else 
-				@posts = @posts[0..19]
-			end
-			"""
 			# secret인건 따로 제거 보여줄때 제거?
 			@posts = Post.tagged_with(params[:tag])
 										.order(created_at: :desc)
@@ -40,78 +25,24 @@ class PostsController < ApplicationController
 
 			#flash[:notice] = "<strong class='text-danger'>#{params[:tag]}</strong> 에 대한 검색결과 입니다."
 		else
-		# 태그 검색이 아닌 필터링의 경우
-			'''
 			if params[:type]
-				if params[:type] == "txt"
-					@selected = "txt"
-					p_t = 0
-					#flash[:notice] = "<strong>FEEL;D TALK</strong>(자유 게시판) 입니다."
-
-				elsif params[:type] == "link"
-					@selected = "link"
-					#flash[:notice] = "링크타입의 게시글을  보여줍니다;D"
-					p_t = 2
-
-				elsif params[:type] == "college"
-					@selected = "college"
-					#flash[:notice] = "각 대학교의 필드업을 보여줍니다;D"
-					# college list
-					clist = [117 ,119, 171, 228, 247, 253, 305, 782, 794, 831, 850, 1159, 1273]
+				if params[:type] == "works"
+					p_t = 1 
+				elsif params[:type] == "community"
+					p_t = 0 
+				elsif params[:type] == "connect"
+					p_t = 3
 				end
+				@posts = Post.where(post_type:p_t, is_secret: false)
+											.order(created_at: :desc)
+											.paginate(page: params[:page], per_page: 20)
 			else 
-				@selected = "posts"
-				flash[:notice] = "전체 필드업을 보여줍니다 :D"
+				# 타입이 없을 경우 실행되는 부분
+				p_t = 1
+				@posts = Post.where(post_type:p_t, is_secret: false)
+											.order(created_at: :desc)
+											.paginate(page: params[:page], per_page: 20)
 			end
-			'''
-
-				
-			@posts = Post.where(post_type:p_t, is_secret: false)
-										.order(created_at: :desc)
-										.paginate(page: params[:page], per_page: 20)
-			"""
-			if params[:page]
-				# 다음 글 가져오기 ajax
-				# 다음 글 가져오기 ajax
-				page = params[:page].to_i
-
-				if params[:type] == 'college'
-					# college type 일 경우엔 예외처리 (clist 리스트에 들어있는 것만 골라내야 해서)
-					@posts = []
-					# clist에 있는 학교 계정의 글만 포함
-					Post.all.reverse.each do |p|
-						if clist.include? p.user.id 
-							@posts << p	
-						end
-					end
-					@posts = @posts[(page * 20)..(page * 20) + 19].shuffle
-				else
-					# 나머지 경우(txt,all,link)
-					@posts = Post.where(post_type:p_t, is_secret: false).reverse[(page * 20)..(page * 20) + 19].shuffle
-				end
-			else
-				# 다음 글 가져오기가 아닌 최초 클릭시 
-				# 다음 글 가져오기가 아닌 최초 클릭시 
-				if params[:type] == 'college'
-					# college type 일 경우엔 예외처리 (clist 리스트에 들어있는 것만 골라내야 해서)
-					@posts = []
-					# clist에 있는 학교 계정의 글만 포함
-					Post.all.reverse.each do |p|
-						if clist.include? p.user.id 
-							@posts << p	
-						end
-					end
-					@posts = @posts[0..19].shuffle
-				else
-					# 나머지 경우(txt,all,link)
-					if p_t == 0 
-						@posts = Post.where(post_type:p_t, is_secret: false).reverse[0..19]
-					else
-						@posts = Post.where(post_type:p_t, is_secret: false).reverse[0..19].shuffle
-					end
-				end
-			end
-			"""
 		end
 
 		respond_to do |format|
@@ -342,14 +273,15 @@ class PostsController < ApplicationController
 
 	def create
 		# 
-		# post_type // 0:text, 1:img, 2:link
+		# post_type // 0:community , 1:works, 2:link, 3:connect
 		#
 		@post = Post.new(post_params)
 		@post.user_id = current_user.id
+		# 버그가 있어서? 따로 받아서 저장해줌 모델과 관계없는 파라미터 전달 방식으로
+		@post.post_type = params[:post_type]
 		@post.save
 
-		# 이미지 타입 : 이미지 저장
-		#if @post.post_type == 1 
+		# 이미지가 있다면 이미지 저장
 		if params[:images]
 			params[:images].each do |image|
 				#image.original_filename 
@@ -370,7 +302,6 @@ class PostsController < ApplicationController
 		# show 로 전환될 경우 필요
 		@comment = Comment.new 
 
-		#if @post.post_type == 1
 		if params[:images]
 			# 이미지 타입의 경우 수정으로 리다이렉트
 			render "edit"
@@ -382,22 +313,11 @@ class PostsController < ApplicationController
 	def update
 		# 현재는 링크업 수정 안됨
 		@post = Post.find(params[:id])
-		
-		# post_type이 실제로 1일 때만 해줘야지
-		# 0에서 1로 바뀌려는 찰나에 여기에 걸려버리면 안됌(강제로 바꿔놓은 1이 다시 0으로 바뀜)
-		if params[:post][:post_type] == "1" and @post.post_type == 1
-			# photo 타입이어도 사진이 삭제되면 텍스트타입으로
-			if @post.photos.length == 0
-				params[:post][:post_type] = "0"
-			end
-		end
+		@post.post_type = params[:post_type]
+		@post.save
 
-		if params[:post][:post_type] == "0"
-			@post.update(post_params)
-			# show 로 전환될 경우 필요
-			@comment = Comment.new 
-			redirect_to @post
-		else
+		# 사실 이미지가 없는 채로 여기 왔다는거 자체가 isFinished 0 아닌가?
+		if params[:images]
 			# 1이면 중간 사진 업로드를 위한 요청이 아닌, 완전히 끝낸다는 표시
 			@isFinished = params[:finish]
 
@@ -412,7 +332,6 @@ class PostsController < ApplicationController
 			end
 
 			# 그 이외의 수정 사항 반영
-			#if @post.update(params[:post].permit(:title, :content))
 			if @post.update(post_params)
 				# 추가적으로 넣은 이미지 저장하고
 				if params[:images]
@@ -420,9 +339,11 @@ class PostsController < ApplicationController
 						@post.photos.create(image: image)
 					end
 				end
+
+				render "edit"
+				'''
 				# 완전 끝내는 거면
 				if @isFinished == "1"
-					# update.js 실행됨
 					# show 로 전환될 경우 필요
 					@comment = Comment.new 
 					redirect_to @post
@@ -430,10 +351,16 @@ class PostsController < ApplicationController
 				# finish가 0이면 
 					render "edit"
 				end
+				'''
 			else
 			# 에러 있으면
 				render "edit"
 			end
+		else
+			@post.update(post_params)
+			# show 로 전환될 경우 필요
+			@comment = Comment.new 
+			redirect_to @post
 		end 
 	end
 	"""
@@ -450,7 +377,7 @@ class PostsController < ApplicationController
 	
 	private
 		def post_params
-			params.require(:post).permit(:title, :content, :post_type, :project_id, :tag_list_fixed, :is_secret)
+			params.require(:post).permit(:title, :content, :project_id, :tag_list_fixed, :is_secret)
 		end
 
 end

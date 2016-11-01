@@ -22,16 +22,10 @@
 					<!-- placeholder -->
 				</div>
 
-				<% if @post.post_type == 1 %>
-					<% if @post.photos.any? %>
-						<% @post.photos.each_with_index do |photo, idx| %>
-							<a href="<%=image_url(photo.image)%>" data-lightbox="showpostimg" data-title="<%=photo.caption%>"><%= image_tag(photo.image, class: 'posts-item-img') %></a></td>
-							<center><div style='font-size:1.1em;margin: 1% 3%;'><%= photo.caption %></div></center>
-						<% end %>
-					<% end %>
-
-
-				<% elsif @post.post_type == 2 %>
+				<%# 링크 타입 %>
+				<%# 링크 타입 %>
+				<%# 링크 타입 %>
+				<% if @post.post_type == 2 %>
 					<%# linkup type%>
 					<div class="posts-item-text">
 					<h5 class="text-success"><%= @post.link.link_title %></h5>
@@ -42,9 +36,21 @@
 						<h3>이미지를 가져올 수 없습니다;(</h3>
 					<% end %>
 					</div>
+				<% end %>
 
+				<%# 이미지가 있으면 %>
+				<%# 이미지가 있으면 %>
+				<% if @post.photos.count > 0%>
+					<% if @post.photos.any? %>
+						<% @post.photos.each_with_index do |photo, idx| %>
+							<a href="<%=image_url(photo.image)%>" data-lightbox="showpostimg" data-title="<%=photo.caption%>"><%= image_tag(photo.image, class: 'posts-item-img') %></a></td>
+							<center><div style='font-size:1.1em;margin: 1% 3%;'><%= photo.caption %></div></center>
+						<% end %>
+					<% end %>
 
-				<% else %>
+				<%# 이미지 없으면 %>
+				<%# 이미지 없으면 %>
+				<% else  %>
 					<div class="posts-item-text">
 						<%#= truncate(@post.content, length: 100) %>
 						<%#= @post.content.gsub(/\n/, '<br/>').html_safe%>
@@ -52,6 +58,9 @@
 					</div>
 				<% end %>
 
+
+				<!-- mobile -->
+				<!-- mobile -->
 				<% if browser.device.mobile? %>
 					<!-- posts-item-info -->
 					<!-- posts-item-info -->
@@ -174,6 +183,8 @@
 					<!-- posts-item-info -->
 					<!-- posts-item-info -->
 				<% end %>
+				<!-- mobile -->
+				<!-- mobile -->
 			</div>
 			<!-- show-pots-item -->
 			<!-- show-pots-item -->
@@ -211,9 +222,18 @@
 					</div>
 				</div>
 				<div style="clear:both"></div>
+				
+				<div style="height: 10px;"></div>
 
-				<h5><%= @post.title %></h5>
-				<p style="font-size:0.8em;"><%= auto_link(@post.content.gsub(/\n/, '<br/>'), :html => { :target => '_blank' })%></p>
+				<h4><%= @post.title %></h4>
+
+				<div style="height: 5px;"></div>
+
+				<%# 만약에 사진이 있고, 컨텐츠가 있다면 보여준다 %>	
+				<%# 그런데 텍스트만 있으면 어차피 왼쪽에 보여지기 때문에 숨긴다 %>	
+				<% if @post.photos.count > 0 %>
+					<p style="font-size:0.8em;"><%= auto_link(@post.content.gsub(/\n/, '<br/>'), :html => { :target => '_blank' })%></p>
+				<% end %>
 
 				<!-- sc-posts-counts -->
 				<!-- sc-posts-counts -->

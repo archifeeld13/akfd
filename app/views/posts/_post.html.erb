@@ -1,5 +1,5 @@
 <div class="posts-item">
-	<% if post.post_type == 1 %> <%# photoup type%>
+	<% if post.photos.count > 0%> 
 		<% if post.photos.any? %>
 			<%= link_to image_tag(post.photos[0].image.medium, class: 'posts-item-img'), post %>
 			<%# link_to image_tag(post.photos[0].image.medium, class: 'posts-item-img'), post, remote:true %>
@@ -18,7 +18,6 @@
 		<% end %>
 
 	<% else %>
-		<%# textup type %>
 		<%= link_to(post) do %>
 		<%# link_to(post, remote: true) do %>
 			<div class="posts-item-text">
@@ -42,7 +41,7 @@
 		<% end %>
 		&nbsp;
 		<% if current_user and current_user.id == post.user.id%>
-			<span style="font-size: 0.8em ">
+			<span style="font-size: 0.8em; float:right; margin-top: 5px; margin-right:5px;">
 			<%= link_to "*글 지우기", post, method: :delete, data: { confirm:	"글이 삭제됩니다! 정말 삭제하시겠습니까?" } %>
 			</span>
 		<%# 관리자 아이디라면 에딧 허용%>

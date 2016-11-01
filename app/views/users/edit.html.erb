@@ -25,6 +25,45 @@
 	<%= form_for(@user) do |f| %>
 		
 		<div class="form-inputs">
+			<div style="height:15px;"></div>
+			<table class="table table-striped table-bordered" style="width:35%">
+				<tr>
+					<% if @user.user_type == 1 %>
+					<td>
+						페이스북 프로필 사진  
+					</td>	
+					<% end %> 
+					<td>	
+					<% if @user.photo %>
+						아키필드 프로필 사진
+					<% end %>
+					</td>
+				</tr>
+				<tr>
+					<% if @user.user_type == 1 %>
+					<td>
+						<%= image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130", id: "message_box") %>
+					</td>
+					<% end %> 
+					<td>	
+					<% if @user.photo %>
+						<%=image_tag(@user.photo, class: "my_feeld_profile_img") %>
+					<% end %>
+					</td>
+				</tr>
+			</table>
+			<%= f.label :photo, '프로필 사진 별도 설정'%>
+			<%= f.file_field :photo, class: "form-control", as: :file %>
+			<% if @user.user_type == 0 %>
+				<%= f.hidden_field :use_photo, class: "form-control", value: true %>
+			<% else %>
+				<%= f.label :photo, '프로필 사진 노출 여부'%>
+				<%= f.check_box :use_photo %>
+			<% end %>
+
+			<div style="height:15px;"></div>
+
+
 			<% if @user.user_type == 0 %>
 			<%= f.label :password, '비밀번호'%>
 				<%= f.password_field :password, placeholder: "비밀번호 입력", class: "form-control" %>
@@ -55,50 +94,16 @@
 				</div>
 			</div>
 
-			<div style="height:15px;"></div>
-			<%= f.label :photo, '프로필 사진 별도 설정'%>
-			<%= f.file_field :photo, class: "form-control", as: :file %>
-			<% if @user.user_type == 0 %>
-				<%= f.hidden_field :use_photo, class: "form-control", value: true %>
-			<% else %>
-				<%= f.label :photo, '프로필 사진 노출 여부'%>
-				<%= f.check_box :use_photo %>
-			<% end %>
 		</div>
 
 		<br>
 
-		<table class="table table-striped table-bordered" style="width:30%">
-		<tr>
-			<% if @user.user_type == 1 %>
-			<td>
-				페이스북 프로필 사진  
-			</td>	
-			<% end %> 
-			<td>	
-			<% if @user.photo %>
-				아키필드 프로필 사진
-			<% end %>
-			</td>
-		</tr>
-		<tr>
-			<% if @user.user_type == 1 %>
-			<td>
-				<%= image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130", id: "message_box") %>
-			</td>
-			<% end %> 
-			<td>	
-			<% if @user.photo %>
-				<%=image_tag(@user.photo, class: "my_feeld_profile_img") %>
-			<% end %>
-			</td>
-		</tr>
-		</table>
+		
 
 	<br>
 	<br>
 		<div class="form-actions">
-			<%= f.submit "변경" , class:"form-control btn-info" %>
+			<button class="btn btn-block" style="background: transparent ; border: 1px solid black;  width:100%;" >정보 수정</button>
 		</div>
 	<% end %>
 	</div>

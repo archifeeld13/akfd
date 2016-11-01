@@ -3,7 +3,6 @@
 <%#= link_to "유저검색", '/user_search', remote: true %>
 
 <div class="container">
-
 	<% if not browser.device.mobile? and (request.original_fullpath == "/posts" or request.original_fullpath == "/") %>
 	<!-- 메인페이지 추천 영역 -->
 	<!-- 메인페이지 추천 영역 -->
@@ -30,7 +29,7 @@
 			<h5><b>HIT 바인더</b></h5>
 			<div style="margin-top:15px;"></div>
 
-			<% @fav_projects[0..4].each do |p| %>
+			<% @fav_projects[0..3].each do |p| %>
 				<div  class="reco-binder">
 					<%= link_to p do %>
 						<%= image_tag(p.photo, class:"reco-binder") %>

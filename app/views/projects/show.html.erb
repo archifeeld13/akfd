@@ -42,16 +42,24 @@
 
 		<div id="project_desc">
 			<div style="height: 50%">
-				<%= @project.desc %>
+				<% if @project.desc %>
+					<%= @project.desc %>
+				<% else %>
+					프로젝트 설명이 없습니다
+				<% end %>
 			</div>
 
 			<div style="height: 50%">
-				<% @project.tag_list.each do |tag| %>
-					<div class="tag_div" style="margin:4px 2px;">
-						<a href="#" class='tag' style="background:transparent; color:gray;">
-							<%=tag%>
-						</a>
-					</div>
+				<% if  @project.tag_list.count > 0 %>
+					<% @project.tag_list.each do |tag| %>
+						<div class="tag_div" style="margin:4px 2px;">
+							<a href="#" class='tag' style="background:transparent; color:gray;">
+								<%=tag%>
+							</a>
+						</div>
+					<% end %>
+				<% else %>
+					태그를 등록해주세요
 				<% end %>
 			</div>
 		</div>
@@ -95,10 +103,13 @@
 					<td>&nbsp;</td>
 				</tr>
 			</table>
+
+			<div style="float:right; margin-right: 10px; margin-top: 20px;">
 				<% if current_user and current_user.id == @project.user.id %>
 					<%= link_to "바인더 삭제", @project, method: :delete, data: { confirm:	"바인더가 삭제됩니다! 정말 삭제하시겠습니까?" } %> <br>
 					<%= link_to "바인더 수정", edit_project_path(@project.id), id:"edit" %><br>
 				<% end %>
+			</div>
 		</div>
 	</div>
 

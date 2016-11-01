@@ -184,17 +184,6 @@ $(function(){
 				<div style="margin-bottom: 10px"></div>
 				<%= f.text_area :content,  placeholder: "내용을 입력해주세요", rows: '5'%>
 
-				<%# 비밀글 필드 %>
-				<%# 비밀글 필드 %>
-				<%# 비밀글 필드 %>
-				<div class="has-error">
-					<div class="checkbox">
-						<label style="margin-left: 1%;">
-							<%= f.check_box :is_secret %>
-							<i class="fa fa-lock"></i>&nbsp;	비공개
-						</label>
-					</div>
-				</div>
 			</div>
 
 			<%# 태그 필드 %>
@@ -233,29 +222,23 @@ $(function(){
 			<div style="margin-bottom: 10px;"></div>
 
 			<div id="category-pikcer">
-				<select class="form-control">
-					<option disabled >카테고리 선택</option>
-					<option selected >작품</option>
-					<option>커뮤니티</option>
-					<option>커넥트</option>
-				</select>
+				<%# http://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html %>
+				<%# 자꾸 선택이 안되는 문제가 있어 %>
+				<%#= select :post, :post_type, [['작품', 1], ['커뮤니티',0], ['커넥트', 3]], {}, {class:"form-control"} %>
+				<%= select_tag 'post_type', options_for_select({'작품'=>1, '커뮤니티'=>0, '커넥트'=>3}, @post.post_type) ,{class:"form-control"} %>
+
 				<div style="margin-bottom: 5px;"></div>
 
 				<select class="form-control">
-					<option selected disabled >분야 선택</option>
-					<option>건축학</option>
-					<option>실내건축</option>
-					<option>산업디자인</option>
-					<option>시각디자인</option>
+					<option disabled >분야 선택</option>
+					<option selected>건축학</option>
+					<option disabled >실내건축</option>
 				</select>
+
 				<div style="margin-bottom: 5px;"></div>
 
-				<select class="form-control">
-					<option selected disabled >공개 범위 설정</option>
-					<option>전체공개</option>
-					<option>친구공개</option>
-					<option>비공개</option>
-				</select>
+				<%= select("post", "is_secret", [['전체공개', false], ['비공개', true]],{}, {class:"form-control"}) %>
+
 				<div style="margin-bottom: 5px;"></div>
 			</div>
 
@@ -285,7 +268,7 @@ $(function(){
 			</div>
 
 			<div style="position:absolute; bottom:0; width:90%; height:50px; margin-left: 1%; margin-bottom: 1%;">
-				<a href="#" id="feeldup-submit-link" class="btn btn-block" style="background: white; border: 1px solid black; font-size:1.2em"><strong>올리기</strong></a> 
+				<button id="feeldup-submit-link" class="btn btn-block" style="background: white; border: 1px solid black; font-size:1.2em"><strong>올리기</strong></button> 
 			</div>
 		</div>
 		<!-- edit-controller 위치 업데이트 스크립트 -->
