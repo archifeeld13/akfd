@@ -661,6 +661,69 @@
 	}
 }
 
+// _form.html
+// application.css의 search_* 스타일 가져옴 
+// 태그 추가할 때의 스타일이 매우 흡사하기 때문
+#pa_search_container{
+	width: 50%;
+	margin:auto;
+	background: rgba(0,0,0,0.1);
+	padding: 1%;
+}
+#pa_search_input{
+	position: relative;
+}
+
+#pa_search_reco{
+	position: relative; // 이거 빼면 스크롤 멀리붙음
+	max-height: 400px;
+	overflow: auto;
+	.ta_search_reco_item{
+		color: rgba(255,255,255,0.5);	
+		width: 100%;
+		font-size: 3em;
+		cursor: pointer;
+	}
+}
+
+#pa_overlay{
+	position: absolute;
+	top: 0; left: 0;
+	background: rgba(0,0,0,0.5);
+	display: none;
+	z-index: 777;
+
+	::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+		 color:    white;
+	}
+
+	:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+		color:    white;
+		opacity:  1;
+	}
+
+	::-moz-placeholder { /* Mozilla Firefox 19+ */
+		color:    white;
+		opacity:  1;
+	}
+	:-ms-input-placeholder { /* Internet Explorer 10-11 */
+	 color:    white;
+	}
+
+
+	input{
+		font-size: 5em;
+		width: 100%;
+	}
+
+	input[type="text"]{
+		 background: transparent;
+		 border: none;
+		 color: white;
+		 outline: none;
+	}
+}
+
 
 
 // connect

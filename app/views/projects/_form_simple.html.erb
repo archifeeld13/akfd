@@ -1,0 +1,18 @@
+<div class="modal-header" style="padding-left:2%; padding-bottom:1%;">
+	<h3>제목으로 바인더 생성</h3>
+</div>
+
+<%= form_for([current_user, @project], remote: true) do |f| %>
+<div class="modal-body">
+
+	<%= f.text_field :name, :placeholder => '바인더 제목을 입력해주세요', autofocus: true, class:"form-control",  autocomplete: :off %>
+	<div class="text-success" id="pa-result"></div>
+</div>
+
+<div class="modal-footer">
+		<button id="project-submit" type="submit" class="btn btn-default" style="color:rgb(150,150,150)">
+				생성하기
+		</button>
+</div>
+<% end %>
+

@@ -315,6 +315,7 @@
 					updatePositionShowController();
 				})
 
+
 				// 컨트롤러에 스크롤
 				$('#show-controller').perfectScrollbar();
 
@@ -370,6 +371,9 @@
 				var width = parseFloat($("#show-container").css('width'))
 				var extra_offset = 15 // show-container 와 show-controller사이의 10px정도의 오프셋 
 				$("#show-controller").css("left", left_offset + width + extra_offset).fadeIn()
+
+				// 버그 때문에 
+				$('#show-controller').css('margin-top', 10)
 			}
 
 			// cf) contents controllbar에도 이 변수가 있어서 _2추가함

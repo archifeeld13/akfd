@@ -15,12 +15,7 @@ class ProjectsController < ApplicationController
   def create
 		#@type = params[:project][:type]
 		@project = current_user.projects.new(project_params)
-		#@project = current_user.projects.new(name: params[:project][:name])
-		if @project.save
-			redirect_to my_feeld_path
-		else
-			render "projects/new"
-		end
+		@project.save
   end
 
 	def edit
@@ -39,7 +34,6 @@ class ProjectsController < ApplicationController
   def destroy
 		@project = current_user.projects.find(params[:id])
 		@project.destroy
-		redirect_to my_feeld_path
   end
 
 private
