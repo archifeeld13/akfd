@@ -590,11 +590,12 @@
 	padding:3%;
 }	
 
-.my_feeld_profile_img{
+#my_feeld_profile_img{
 	width: 130px;
 	height: 130px;
+	border-radius: 100px;
+	cursor:pointer;
 }
-
 
 
 // _form.html

@@ -11,7 +11,7 @@
 			<%= image_tag("//graph.facebook.com/#{@user.uid}/picture?type=large&width=130&height=130", class:"img-circle") %>
 		<% else %>
 			<%#= link_to image_tag(@user.photo, class: "my_feeld_profile_img", id: "message_box"), "/message_box/#{@user.id}", remote: true %>
-			<%= image_tag(@user.photo, class: "my_feeld_profile_img img-circle", id: "message_box")%>
+			<%= image_tag(@user.photo, id:"my_feeld_profile_img" )%>
 		<% end %>
 		</a>
 
