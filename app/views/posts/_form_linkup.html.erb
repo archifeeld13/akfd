@@ -47,9 +47,31 @@ $(function(){
 		width: 100%;
 	}
 
-	input[type="text"]{
+	#edit-super-container {
+		position:relative;
+	}
+
+	#edit-super-container input[type="text"]{
 		font-size: 1em;
 		width: 100%;
+	}
+
+	#edit-container{
+		position:absolute; left:0; width: 70%; margin-right:1%; margin-bottom:50px;
+	}
+	#edit-controller{
+		position:fixed; width:20%; 
+		height:550px; background:white; 
+		padding:1%; overflow-y: auto; overflow-x: hidden; 
+		font-size: 1.2em; border-radius: 5px 5px 5px 5px;
+	}
+
+	#project_radio_container{
+		border: 1px solid rgb(200,200,200);	
+		border-radius: 5px;
+		padding: 5px;
+		height: 210px;
+		overflow: auto;
 	}
 	
 	input:focus,
@@ -71,161 +93,176 @@ $(function(){
 <!-- 에디터 시작  -->
 <!-- 에디터 시작  -->
 <div class="container">
+	<!-- edit-super-container -->
+	<!-- edit-super-container -->
+	<!-- edit-super-container -->
+	<!-- 요소들의 절대 위치를 원활히 지정하기 위해선 부모가 relative여야만 하는것 같다 -->
+	<div id="edit-super-container" >
+		<%= form_for @post, html: {multipart: true}  do |f| %>
+			<!-- edit-container -->
+			<!-- edit-container -->
+			<!-- edit-container -->
+			<div id="edit-container" > 
+				<div style="background: white; border-radius: 5px; padding: 10px;">
+					<%# 제목 필드 %>
+					<%# 제목 필드 %>
+					<%# 제목 필드 %>
+					<%= f.text_field :title, :id => 'input_post_title', :placeholder => '제목을 입력해 주세요' %>
+					
+					<%# 사진 추가되는 필드 %>
+					<%# 사진 추가되는 필드 %>
+					<%# 사진 추가되는 필드 %>
+					<div style="margin-bottom: 10px"></div>
 
-<!-- edit-super-container -->
-<!-- edit-super-container -->
-<!-- edit-super-container -->
-<!-- 요소들의 절대 위치를 원활히 지정하기 위해선 부모가 relative여야만 하는것 같다 -->
-<div id="edit-super-container" style="position:relative">
-<%= form_for @post, html: {multipart: true}  do |f| %>
-<!-- edit-container -->
-<!-- edit-container -->
-<!-- edit-container -->
-<div id="edit-container" style="position:absolute; left:0; width: 70%; margin-right:1%; margin-bottom:50px; "> 
-	<div style="background: white; border-radius: 5px; padding: 10px;">
-		<%# 제목 필드 %>
-		<%# 제목 필드 %>
-		<%# 제목 필드 %>
-		<%= f.text_field :title, :id => 'input_post_title', :placeholder => '제목을 입력해 주세요' %>
-		
-		<%# 사진 추가되는 필드 %>
-		<%# 사진 추가되는 필드 %>
-		<%# 사진 추가되는 필드 %>
-		<div style="margin-bottom: 10px"></div>
+					<center>
+					<strong>링크 제목 : <%= @object.title%></strong>
+					<br>
+					<%= hidden_field_tag :link_title, "#{@object.title}" %>	
 
-		<center>
-		<strong>링크 제목 : <%= @object.title%></strong>
-		<br>
-		<%= hidden_field_tag :link_title, "#{@object.title}" %>	
+					<% if @object.images.any? %>
+						<img src="<%=@object.images.first.src.to_s%>" style="width:50%">
+						<%= hidden_field_tag :image_url, "#{@object.images.first.src.to_s}" %>	
+					<% else %>
+						<h2>얻어온 이미지가 없습니다</h2>
+						<%= hidden_field_tag :image_url, nil%>	
+					<% end %>
 
-		<% if @object.images.any? %>
-			<img src="<%=@object.images.first.src.to_s%>" style="width:50%">
-			<%= hidden_field_tag :image_url, "#{@object.images.first.src.to_s}" %>	
-		<% else %>
-			<h2>얻어온 이미지가 없습니다</h2>
-			<%= hidden_field_tag :image_url, nil%>	
-		<% end %>
+					<br>
+					<strong>출처 : <%= @link %></strong>
+					<%= hidden_field_tag :link_url , "#{@link}"%>	
+					</center>
 
-		<br>
-		<strong>출처 : <%= @link %></strong>
-		<%= hidden_field_tag :link_url , "#{@link}"%>	
-		</center>
+					<%# 내용 필드 %>
+					<%# 내용 필드 %>
+					<%# 내용 필드 %>
+					<div style="margin-bottom: 10px"></div>
+					<%= f.text_area :content,  placeholder: "내용을 입력해주세요", rows: '5'%>
 
-		<%# 내용 필드 %>
-		<%# 내용 필드 %>
-		<%# 내용 필드 %>
-		<div style="margin-bottom: 10px"></div>
-		<%= f.text_area :content,  placeholder: "내용을 입력해주세요", rows: '5'%>
+				</div>
 
-		<%# 비밀글 필드 %>
-		<%# 비밀글 필드 %>
-		<%# 비밀글 필드 %>
-		<div class="has-error">
-			<div class="checkbox">
-				<label style="margin-left: 1%;">
-					<%= f.check_box :is_secret %>
-					<i class="fa fa-lock"></i>&nbsp;	비공개
-				</label>
+				<%# 태그 필드 %>
+				<%# 태그 필드 %>
+				<%# 태그 필드 %>
+				<div style="margin-bottom: 15px"></div>
+				<div style="background: white; border-radius: 5px; position:relative; width:100%;">
+					<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그를 입력해 주세요 (쉼표로 구분)" %>
+					<div id="tag_search" style="position:absolute; top:0; right:0; margin-right: 10px; font-size: 1.5em; padding-top: 2px; padding-left: 6px; cursor:pointer;">
+						<i class='fa fa-search' aria-hidden='true'></i>
+					</div>
+				</div>
+				<div style="clear:both"></div>
+
 			</div>
-		</div>
-	</div>
+			<!-- edit-container end-->
+			<!-- edit-container end-->
+			<!-- edit-container end-->
 
-	<%# 태그 필드 %>
-	<%# 태그 필드 %>
-	<%# 태그 필드 %>
-	<div style="margin-bottom: 15px"></div>
-	<div style="background: white; border-radius: 5px;">
-		<%= f.text_field :tag_list_fixed, class: 'form-control', placeholder: "태그는 쉼표로 구분해주세요! 예) 도면, 모델" %>
-	</div>
-</div>
-<!-- edit-container end-->
-<!-- edit-container end-->
-<!-- edit-container end-->
+			<!-- edit-controller -->
+			<!-- edit-controller -->
+			<!-- edit-controller -->
+			<div id="edit-controller">
 
-<!-- edit-controller -->
-<!-- edit-controller -->
-<!-- edit-controller -->
-<div id="edit-controller" style="position:fixed; width:20%; height:425px; background:white; padding:1%; overflow-y: auto; overflow-x: hidden; font-size: 1.2em; border-radius: 5px 5px 5px 5px;">
-	<center><div style="color:#BBBBBB; font-size:1.1em;">바인더(프로젝트)관리</div></center>
-	<%# 프로젝트 리스트 아이템 %>
-	<%# 프로젝트 리스트 아이템 %>
-	<%# 프로젝트 리스트 아이템 %>
-	<div id="project_radio_container">
-		<div>
-			<%= f.radio_button(:project_id, "") %>
-			&nbsp;선택 안함
-		</div>
-		<% current_user.projects.each do |project| %>
-			<%= render 'projects/project_radio', project: project, f: f %>
+				<div style="color:#BBBBBB; font-size:1.1em;">세부 설정</div>
+				<div style="margin-bottom: 10px;"></div>
+
+				<div id="category-pikcer">
+
+					<%= select_tag 'post_type', options_for_select({'마이필드 콜렉션'=>2}, @post.post_type) ,{class:"form-control"} %>
+					<div style="margin-bottom: 5px;"></div>
+
+					<select class="form-control">
+						<option disabled >분야 선택</option>
+						<option selected>건축학</option>
+						<option disabled >실내건축</option>
+					</select>
+
+					<div style="margin-bottom: 5px;"></div>
+
+					<%= select("post", "is_secret", [['전체공개', false], ['비공개', true]],{}, {class:"form-control"}) %>
+
+					<div style="margin-bottom: 5px;"></div>
+				</div>
+
+				<div style="margin-bottom: 10px;"></div>
+				<div style="color:#BBBBBB; font-size:1.1em;">바인더관리</div>
+				<div style="margin-bottom: 10px;"></div>
+				<%# 프로젝트 리스트 아이템 %>
+				<%# 프로젝트 리스트 아이템 %>
+				<%# 프로젝트 리스트 아이템 %>
+				<div id="project_radio_container">
+					<div>
+						<%= f.radio_button(:project_id, "") %>
+						&nbsp;선택 안함
+					</div>
+					<% current_user.projects.each do |project| %>
+						<%= render 'projects/project_radio', project: project, f: f %>
+					<% end %>
+				</div>
+
+				<%# 바인더 만들기 버튼 %>
+				<%# 바인더 만들기 버튼 %>
+				<%# 바인더 만들기 버튼 %>
+				<div style="position:absolute; bottom:0; width:90%; height:50px; margin-left: 1%; margin-bottom: 55px;">
+					<%= link_to new_user_project_path(current_user.id), remote: true do%>
+						<button class="btn btn-block" style="background: white; border: 1px solid black; font-size:1.2em" >바인더 만들기</button>
+					<% end %>
+				</div>
+
+				<div style="position:absolute; bottom:0; width:90%; height:50px; margin-left: 1%; margin-bottom: 1%;">
+					<button href="#" id="feeldup-submit-link" class="btn btn-block" style="background: white; border: 1px solid black; font-size:1.2em"><strong>올리기</strong></button> 
+				</div>
+			</div>
+			<!-- edit-controller 위치 업데이트 스크립트 -->
+			<!-- edit-controller 위치 업데이트 스크립트 -->
+			<!-- edit-controller 위치 업데이트 스크립트 -->
+			<script>
+				$(function(){
+					// 바로 호출하면 이전에 content container사이즈를 조정하는 시간? 때문에 left margin값이 -가 나와서 오류가있었다
+					// 일단 임시 처방으로 5ms의 딜레이를 주었다
+					setTimeout(updatePositionEditContainer, 5);
+
+					$( window ).resize(function() {
+						updatePositionEditContainer();
+					})
+				})
+
+				function updatePositionEditContainer(){
+					var left_offset = parseFloat($('#edit-container').offset()["left"])
+					var width = parseFloat($("#edit-container").css('width'))
+					var extra_offset = 15 // edit-container 와 edit-controller사이의 10px정도의 오프셋 
+					$("#edit-controller").css("left", left_offset + width + extra_offset)
+				}
+				// app/assets/javascripts/posts.js의  function postsColumnResize()에 의존하는 함수
+				// app/assets/javascripts/posts.js의  function postsColumnResize()에 의존하는 함수
+				// app/assets/javascripts/posts.js의  function postsColumnResize()에 의존하는 함수
+				function getLeftMarginOfContentsContainer(){
+					//var pWidth = $('.posts-item').width() // 없을 땐 너비를 못찾아서절대값 넣음 
+					var pWidth = 260  // 290 -> 260
+					var rWidth = $('#right_fixed_menu').width()
+					var except_RFM = $(window).width() - (rWidth + 25) // 25 : RFM의 오른쪽 마진
+					return (except_RFM - $('#contents-container').width())/2
+				}
+			</script>
+			<!-- edit-controller end -->
+			<!-- edit-controller end -->
+			<!-- edit-controller end -->
+			
+
+			<%#= f.hidden_field(:post_type, value: 2, id: "post_type") %>
+
+			<%# 업로드 버튼 직접 클릭시 finish 1로 바뀜%>
+			<%= hidden_field_tag "finish", 0 %>
+
+			<%# 진짜 서브밋 버튼은 여기에 %>
+			<%= f.button :submit, class: "hidden", id: "feeldup-submit" %>
+
 		<% end %>
+		<%# form end %>
+		<%# form end %>
 	</div>
-
-	<%# 바인더 만들기 버튼 %>
-	<%# 바인더 만들기 버튼 %>
-	<%# 바인더 만들기 버튼 %>
-	<div style="position:absolute; bottom:0; width:90%; height:50px; margin-left: 1%; margin-bottom: 55px;">
-		<%= link_to new_user_project_path(current_user.id), remote: true do%>
-			<button class="btn btn-block" style="background: white; border: 1px solid black; font-size:1.2em" >바인더 만들기</button>
-		<% end %>
-	</div>
-
-	<div style="position:absolute; bottom:0; width:90%; height:50px; margin-left: 1%; margin-bottom: 1%;">
-		<button href="#" id="feeldup-submit-link" class="btn btn-block" style="background: white; border: 1px solid black; font-size:1.2em"><strong>올리기</strong></button> 
-	</div>
-</div>
-<!-- edit-controller 위치 업데이트 스크립트 -->
-<!-- edit-controller 위치 업데이트 스크립트 -->
-<!-- edit-controller 위치 업데이트 스크립트 -->
-<script>
-	$(function(){
-		// 바로 호출하면 이전에 content container사이즈를 조정하는 시간? 때문에 left margin값이 -가 나와서 오류가있었다
-		// 일단 임시 처방으로 5ms의 딜레이를 주었다
-		setTimeout(updatePositionEditContainer, 5);
-
-		$( window ).resize(function() {
-			updatePositionEditContainer();
-		})
-	})
-
-	function updatePositionEditContainer(){
-		var left_offset = parseFloat($('#edit-container').offset()["left"])
-		var width = parseFloat($("#edit-container").css('width'))
-		var extra_offset = 15 // edit-container 와 edit-controller사이의 10px정도의 오프셋 
-		$("#edit-controller").css("left", left_offset + width + extra_offset)
-	}
-	// app/assets/javascripts/posts.js의  function postsColumnResize()에 의존하는 함수
-	// app/assets/javascripts/posts.js의  function postsColumnResize()에 의존하는 함수
-	// app/assets/javascripts/posts.js의  function postsColumnResize()에 의존하는 함수
-	function getLeftMarginOfContentsContainer(){
-		//var pWidth = $('.posts-item').width() // 없을 땐 너비를 못찾아서절대값 넣음 
-		var pWidth = 260  // 290 -> 260
-		var rWidth = $('#right_fixed_menu').width()
-		var except_RFM = $(window).width() - (rWidth + 25) // 25 : RFM의 오른쪽 마진
-		return (except_RFM - $('#contents-container').width())/2
-	}
-</script>
-<!-- edit-controller end -->
-<!-- edit-controller end -->
-<!-- edit-controller end -->
-		
-
-<%= f.hidden_field(:post_type, value: 2, id: "post_type") %>
-
-<%# 업로드 버튼 직접 클릭시 finish 1로 바뀜%>
-<%= hidden_field_tag "finish", 0 %>
-
-<%# 진짜 서브밋 버튼은 여기에 %>
-<%= f.button :submit, class: "hidden", id: "feeldup-submit" %>
-
-<% end %>
-</div>
+	<!-- edit-super-container -->
+	<!-- edit-super-container -->
 <!-- edit-super-container -->
-<!-- edit-super-container -->
-<!-- edit-super-container -->
-
-
-<%# 이 큰 버튼은 모바일에서만 보이게 바꾸기 %>
-<%# <button id="feeldup-submit-link" class="btn btn-block" style="background: white; border: 1px solid black; font-size:1.2em">업로드</button> %>
 
 
 <%= javascript_include_tag "autogrow.js" %>
@@ -234,3 +271,78 @@ $('textarea').autogrow({onInitialize: true});
 </script>
 
 </div>
+
+
+<!-- ta : tag add -->
+<div id="ta_overlay">
+	<div id="ta_search_container">
+		<input id="ta_search_input" type="text" placeholder="태그 검색...">
+		<div id="ta_search_reco">
+			<div class="ta_search_reco_item">추천태그</div>	
+		</div>	
+	</div>
+</div>
+<script>
+	var tags = [];
+	$(function(){
+		if ($('#post_tag_list_fixed').val() == ""){
+			tags = [] 
+		}
+		else {
+			tags = $('#post_tag_list_fixed').val().split(',')
+		}
+		//alert(tags.length)
+
+		// search nav item
+		// search nav item
+		$('#tag_search').click(function(){
+			 $('#ta_overlay').css('width', $(window).width())
+								.css('height', $(window).height())
+								.show()
+			 $('#ta_search_input').focus()
+		})
+
+		$('#ta_overlay').click(function(){
+			$(this).hide()
+			$('#ta_search_input').val("")
+			$('#ta_search_reco').html('<div class="ta_search_reco_item">추천태그</div>')
+		})
+
+	 // search input event
+	 // search input event
+		$('#ta_search_container')
+			.css('margin-top', $(window).height()/4).click(function(){return false;})
+
+		$('#ta_search_input').click(function(){
+			 return false;
+
+		}).keyup(function(e){
+				$.ajax({
+				 url: '/tag_search',
+				 type: 'GET',
+				 data: {
+					tag: $('#ta_search_input').val(),
+				 },
+				 success: function(data){
+					h = ""
+					$.each(data, function(index, obj){
+						h += "<div class='ta_search_reco_item'>"+ obj.name +"</div>"	
+					})
+					$('#ta_search_reco').html(h)
+					$('.ta_search_reco_item').click(function(){
+						$('#ta_search_input').val($(this).text())
+					})
+				 }
+				})
+				if (e.keyCode == 13) {
+					$('#ta_overlay').hide();
+					tags.push($('#ta_search_input').val())
+					$('#post_tag_list_fixed').val(tags.join(", "))
+
+					$('#ta_search_input').val("")
+				} 
+		})
+
+		$('#ta_search_reco').perfectScrollbar();
+})
+</script>

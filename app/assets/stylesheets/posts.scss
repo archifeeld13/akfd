@@ -530,7 +530,7 @@
 	position: relative;
 	// 여기 너비가 위에 show-container와 연관있음
 	//width: 780px;
-	width: 80%;
+	width: 700px;
 	background:white; 
 	margin: 10px auto;
 	border-radius: 5px;
@@ -575,12 +575,14 @@
 
 		.posts-item-writer{
 			img{
-				width: 25px;	
-				height: 25px;	
+				width: 45px;	
+				height: 45px;	
+				border-radius:50%;
 			}	
 			a{
 				color: black;	
 				font-size: 1.2em;
+				font-weight: 600;
 			}
 			margin-bottom: 10px;
 		}

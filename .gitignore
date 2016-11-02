@@ -16,6 +16,8 @@
 !/log/.keep
 /tmp
 
+*.log
+
 data.yml
 
 *.swp

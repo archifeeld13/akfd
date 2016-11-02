@@ -241,7 +241,7 @@ class PostsController < ApplicationController
 		#@posts = Post.where(post_type: post_type, is_secret: false).reverse
 
 		respond_to do |format|
-			if @post.post_type == 1
+			if @post.post_type == 1 and (not @post.post_type == 2)
 				format.html { render :action => "show" }
 			else 
 				format.html { render :action => "show_simple" }
