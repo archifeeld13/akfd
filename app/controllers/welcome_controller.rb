@@ -179,7 +179,6 @@ class WelcomeController < ApplicationController
 	u.save
 	render text:"good"
 =end
-
 	end
 
 	def state

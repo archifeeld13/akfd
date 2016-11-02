@@ -16,6 +16,8 @@
 !/log/.keep
 /tmp
 
+shared/*
+
 *.log
 
 data.yml

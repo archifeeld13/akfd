@@ -3,7 +3,8 @@ class PostsController < ApplicationController
 	before_action :check_logined, only: [:new, :timeline, :message_box, :create, :edit, :update, :destroy]
 
 	def notice
-			render "/posts/notice", :layout => 'notice' 
+			render text: root_url
+			#render "/posts/notice", :layout => 'notice' 
 	end
 
 	def tag_search

@@ -21,8 +21,6 @@ class User < ActiveRecord::Base
 
 	mount_uploader :photo, S3Uploader
 
-	validates :mf_id, :uniqueness => {message: ' : 이미 존재하는 마이필드 주소입니다'}
-
 	# https://github.com/mbleigh/acts-as-taggable-on
 	acts_as_taggable_on :skills
 	def skill_list_fixed

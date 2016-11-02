@@ -47,19 +47,20 @@ a:hover{
 
 <div>
 	<%= form_for(:session, url: login_path, class: "form-signin") do |f| %>	
-		<div style="color:white; background:rgba(20,20,20, 0.2); margin-bottom: 2%;">
+		<div style="color:white; font-size: 1.5em; background:rgba(20,20,20, 0.5); margin-bottom: 2%;">
 		<% if flash[:notice] %>
 			<%= flash[:notice].html_safe %>
 		<% end %>
 		</div>
-		<%= f.email_field :email, class: 'form-control', required: true, placeholder: "이메일 주소" %>	
-		<%= f.password_field :password, class: 'form-control', required: true, placeholder: "비밀번호" %>	
+		<%= f.email_field :email, class: 'form-control',  placeholder: "이메일 주소" %>	
+		<%= f.password_field :password, class: 'form-control',  placeholder: "비밀번호" %>	
 		<%= f.submit id:"login-btn", class: "hidden" %>
 	<% end %>
 </div>
+
 <div style="margin-top: 5px">
 <div>
-	<%= link_to raw('<button class="btn btn-block" style="background: white; color:black;  width:300px;" >로그인</button>'), '#', onclick: '$("#login-btn").click()' %> 
+	<button class="btn btn-block" style="background: white; color:black;  width:300px;" onclick='$("#login-btn").click()'>로그인</button>
 </div>
 <div style="margin-top: 5px">
 	<%= link_to raw('<button class="btn btn-block" style="background: transparent ; border: 1px solid white;  width:300px;" >페이스북 로그인</button>'), '/auth/facebook'%> 
