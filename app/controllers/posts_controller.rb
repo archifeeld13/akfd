@@ -241,8 +241,12 @@ class PostsController < ApplicationController
 		#@posts = Post.where(post_type: post_type, is_secret: false).reverse
 
 		respond_to do |format|
-			format.html { render :action => "show" }
-			format.js { render :file => "posts/show.js.erb" }
+			if @post.post_type == 1
+				format.html { render :action => "show" }
+			else 
+				format.html { render :action => "show_simple" }
+			end
+			#format.js { render :file => "posts/show.js.erb" }
 		end
 	end
 

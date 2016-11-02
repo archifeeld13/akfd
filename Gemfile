@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '5.0.0.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+
 gem 'puma', '~> 3.0'
 
 # Use SCSS for stylesheets
@@ -74,7 +75,7 @@ gem 'rails_autolink'
 gem 'seed_dump'
 
 # mysql
-gem 'mysql2'
+gem 'mysql2', '~> 0.3.20'
 
 # https://github.com/yamldb/yaml_db
 gem 'yaml_db'

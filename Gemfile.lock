@@ -156,7 +156,7 @@ GEM
     multi_json (1.12.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    mysql2 (0.4.5)
+    mysql2 (0.3.21)
     net-http-persistent (2.9.4)
     net_http_timeout_errors (0.3.0)
     nio4r (1.2.1)
@@ -292,7 +292,7 @@ DEPENDENCIES
   link_thumbnailer
   listen (~> 3.0.5)
   mini_magick
-  mysql2
+  mysql2 (~> 0.3.20)
   omniauth-facebook
   puma (~> 3.0)
   rails (= 5.0.0.1)

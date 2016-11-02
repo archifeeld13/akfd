@@ -1,4 +1,4 @@
-<div id="comment_<%=comment.id %>">
+<div id="comment_<%=comment.id %>" class="comment-container">
 	<div class="comment-user-img" >
 		<%= link_to "/my_feeld?user_id=#{comment.user.id}" do%>
 			<% if comment.user.use_photo %>

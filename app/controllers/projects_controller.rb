@@ -8,7 +8,8 @@ class ProjectsController < ApplicationController
 	def show
 		@project = Project.find(params[:id])
 		@user = @project.user
-		@posts = @project.posts 
+		# 지금 조회자가 본인이라면
+		@posts = @project.posts
 	end
 
 	
@@ -34,6 +35,7 @@ class ProjectsController < ApplicationController
   def destroy
 		@project = current_user.projects.find(params[:id])
 		@project.destroy
+		redirect_to my_feeld_path
   end
 
 private

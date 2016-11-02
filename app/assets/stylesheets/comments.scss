@@ -6,16 +6,14 @@
 @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
 
 
-
-
 //////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
 //21행 border-radius 50% 추가(16-10-30 동윤)
 .comment-user-img{
 	float:left;
-	width: 20%;
+	width: 40px;;
 	//18행 margin-right값 0.5%에서 -5.5%로 변경(16-10-31 동윤)
-	margin-right: -5.5%; 
+	//margin-right: -5.5%; 
 	img{
 		height:35px;
 		width:35px;
@@ -24,13 +22,13 @@
 }
 //28행 font-size: 1.0에서 0.8em으로 줄임(16-10-30동윤)
 .comment-body{
-	width:79.5%;
 	float:left;
 	font-size: 0.8em;
 }
 
 .comment-time{
-	color:gray; font-size:0.8em;
+	color:gray; 
+	font-size:0.8em;
 }
 //36행 rgb값 200에서 245로 수정(16-10-30 동윤)
 #comments_form{
@@ -44,86 +42,3 @@
 	font-size: 0.7em;
 }
 
-/*Comment List styles*/
-.comment-list .row {
-  margin-bottom: 0px;
-}
-.comment-list .panel .panel-heading {
-  padding: 4px 15px;
-  position: absolute;
-  border:none;
-  /*Panel-heading border radius*/
-  border-top-right-radius:0px;
-  top: 1px;
-}
-.comment-list .panel .panel-heading.right {
-  border-right-width: 0px;
-  /*Panel-heading border radius*/
-  border-top-left-radius:0px;
-  right: 16px;
-}
-.comment-list .panel .panel-heading .panel-body {
-  padding-top: 6px;
-}
-
-
-// 폼에 적용되는..
-.panel-body-form{
-	padding: 0;
-}
-
-.comment-list figcaption {
-  /*For wrapping text in thumbnail*/
-  word-wrap: break-word;
-}
-/* Portrait tablets and medium desktops */
-@media (min-width: 768px) {
-  .comment-list .arrow:after, .comment-list .arrow:before {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-color: transparent;
-  }
-  .comment-list .panel.arrow.left:after, .comment-list .panel.arrow.left:before {
-    border-left: 0;
-  }
-  /*****Left Arrow*****/
-  /*Outline effect style*/
-  .comment-list .panel.arrow.left:before {
-    left: 0px;
-    top: 30px;
-    /*Use boarder color of panel*/
-    border-right-color: inherit;
-    border-width: 16px;
-  }
-  /*Background color effect*/
-  .comment-list .panel.arrow.left:after {
-    left: 1px;
-    top: 31px;
-    /*Change for different outline color*/
-    border-right-color: #FFFFFF;
-    border-width: 15px;
-  }
-  /*****Right Arrow*****/
-  /*Outline effect style*/
-  .comment-list .panel.arrow.right:before {
-    right: -16px;
-    top: 30px;
-    /*Use boarder color of panel*/
-    border-left-color: inherit;
-    border-width: 16px;
-  }
-  /*Background color effect*/
-  .comment-list .panel.arrow.right:after {
-    right: -14px;
-    top: 31px;
-    /*Change for different outline color*/
-    border-left-color: #FFFFFF;
-    border-width: 15px;
-  }
-}
-.comment-list .comment-post {
-  margin-top: 6px;
-}

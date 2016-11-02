@@ -1,6 +1,10 @@
 <% posts.each do |post| %>
 	<div class="connect-item">
-		<%= link_to image_tag("project_default.jpg"), post %>
+		<% if post.photos.count > 0 %>
+			<%= link_to image_tag(post.photos[0]), post %>
+		<% else %>
+			<%= link_to image_tag("project_default.jpg"), post %>
+		<% end %>
 		<div class="ci-info">
 			<div class="ci-title"><%= link_to post.title, post %></div>
 			<div class="ci-content"><%= post.content %></div>
