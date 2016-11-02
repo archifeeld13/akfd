@@ -1,12 +1,28 @@
 <% posts.each do |post| %>
 	<div class="connect-item">
-		<% if post.photos.count > 0 %>
-			<%= link_to image_tag(post.photos[0]), post %>
+		<%# 링크 타입이면 %>
+		<%# 링크 타입이면 %>
+		<% if post.post_type == 2 %>
+			<%= link_to post  do %>
+				<% if post.link and post.link.image_url %>
+					<%= image_tag(post.link.image_url) %>
+				<% else %>
+					<!--<h3>이미지를 가져올 수 없습니다;(</h3>-->
+				<% end %>
+			<% end %>
+		<% elsif post.photos.count > 0 %>
+			<%= link_to image_tag(post.photos[0].image), post %>
 		<% else %>
 			<%= link_to image_tag("project_default.jpg"), post %>
 		<% end %>
+
+
 		<div class="ci-info">
-			<div class="ci-title"><%= link_to post.title, post %></div>
+			<% if not browser.device.mobile? %>
+				<div class="ci-title"><%= link_to post.title, post %></div>
+			<% else %>
+				<div class="ci-title"><%= post.title %></div>
+			<% end %>
 			<div class="ci-content"><%= post.content %></div>
 			<div style="height:40px;"></div>
 

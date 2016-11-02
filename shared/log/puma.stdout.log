@@ -1238,3 +1238,436 @@ Exiting
 === puma startup: 2016-11-02 12:23:47 +0000 ===
 [6160] * Starting control server on unix:///tmp/puma-status-1478089427346-6160
 [6160] - Worker 0 (pid: 6200) booted, phase: 0
+[6160] - Gracefully shutting down workers...
+[6160] === puma shutdown: 2016-11-02 12:52:13 +0000 ===
+[6160] - Goodbye!
+=== puma startup: 2016-11-02 12:52:14 +0000 ===
+[6704] * Starting control server on unix:///tmp/puma-status-1478091134330-6704
+[6704] - Worker 0 (pid: 6744) booted, phase: 0
+[6704] - Gracefully shutting down workers...
+[6704] === puma shutdown: 2016-11-02 12:53:02 +0000 ===
+[6704] - Goodbye!
+=== puma startup: 2016-11-02 12:53:02 +0000 ===
+[6798] * Starting control server on unix:///tmp/puma-status-1478091182606-6798
+[6798] - Worker 0 (pid: 6838) booted, phase: 0
+[6798] - Gracefully shutting down workers...
+[6798] === puma shutdown: 2016-11-02 12:54:37 +0000 ===
+[6798] - Goodbye!
+=== puma startup: 2016-11-02 12:54:37 +0000 ===
+[6889] * Starting control server on unix:///tmp/puma-status-1478091277662-6889
+[6889] - Worker 0 (pid: 6929) booted, phase: 0
+[6889] - Gracefully shutting down workers...
+[6889] === puma shutdown: 2016-11-02 12:55:41 +0000 ===
+[6889] - Goodbye!
+=== puma startup: 2016-11-02 12:55:42 +0000 ===
+[7013] * Starting control server on unix:///tmp/puma-status-1478091342076-7013
+[7013] - Worker 0 (pid: 7053) booted, phase: 0
+[7013] - Gracefully shutting down workers...
+[7013] === puma shutdown: 2016-11-02 14:22:48 +0000 ===
+[7013] - Goodbye!
+=== puma startup: 2016-11-02 14:22:48 +0000 ===
+[7582] * Starting control server on unix:///tmp/puma-status-1478096568564-7582
+[7582] - Worker 0 (pid: 7622) booted, phase: 0
+[7582] - Gracefully shutting down workers...
+[7582] === puma shutdown: 2016-11-02 14:23:17 +0000 ===
+[7582] - Goodbye!
+=== puma startup: 2016-11-02 14:23:17 +0000 ===
+[7644] * Starting control server on unix:///tmp/puma-status-1478096597962-7644
+[7644] - Worker 0 (pid: 7684) booted, phase: 0
+[7644] - Gracefully shutting down workers...
+[7644] === puma shutdown: 2016-11-02 14:23:44 +0000 ===
+[7644] - Goodbye!
+=== puma startup: 2016-11-02 14:23:44 +0000 ===
+[7706] * Starting control server on unix:///tmp/puma-status-1478096624432-7706
+[7706] - Worker 0 (pid: 7746) booted, phase: 0
+[7706] - Gracefully shutting down workers...
+[7706] === puma shutdown: 2016-11-02 14:24:37 +0000 ===
+[7706] - Goodbye!
+=== puma startup: 2016-11-02 14:24:38 +0000 ===
+[7800] * Starting control server on unix:///tmp/puma-status-1478096678315-7800
+[7800] - Worker 0 (pid: 7840) booted, phase: 0
+[7800] - Gracefully shutting down workers...
+[7800] === puma shutdown: 2016-11-02 14:25:45 +0000 ===
+[7800] - Goodbye!
+=== puma startup: 2016-11-02 14:25:45 +0000 ===
+[7893] * Starting control server on unix:///tmp/puma-status-1478096745467-7893
+[7893] - Worker 0 (pid: 7933) booted, phase: 0
+[7893] - Gracefully shutting down workers...
+[7893] === puma shutdown: 2016-11-02 14:29:28 +0000 ===
+[7893] - Goodbye!
+=== puma startup: 2016-11-02 14:29:29 +0000 ===
+[8025] * Starting control server on unix:///tmp/puma-status-1478096969060-8025
+[8025] - Worker 0 (pid: 8065) booted, phase: 0
+[8025] - Gracefully shutting down workers...
+[8025] === puma shutdown: 2016-11-02 14:30:01 +0000 ===
+[8025] - Goodbye!
+=== puma startup: 2016-11-02 14:30:01 +0000 ===
+[8119] * Starting control server on unix:///tmp/puma-status-1478097001895-8119
+[8119] - Worker 0 (pid: 8159) booted, phase: 0
+[8119] - Gracefully shutting down workers...
+[8119] === puma shutdown: 2016-11-02 14:37:48 +0000 ===
+[8119] - Goodbye!
+=== puma startup: 2016-11-02 14:37:49 +0000 ===
+[8494] * Starting control server on unix:///tmp/puma-status-1478097469361-8494
+[8494] - Worker 0 (pid: 8534) booted, phase: 0
+[8494] - Gracefully shutting down workers...
+[8494] === puma shutdown: 2016-11-02 14:44:39 +0000 ===
+[8494] - Goodbye!
+=== puma startup: 2016-11-02 14:44:39 +0000 ===
+[8856] * Starting control server on unix:///tmp/puma-status-1478097879723-8856
+[8856] - Worker 0 (pid: 8896) booted, phase: 0
+[8856] - Gracefully shutting down workers...
+[8856] === puma shutdown: 2016-11-02 14:46:56 +0000 ===
+[8856] - Goodbye!
+=== puma startup: 2016-11-02 14:46:56 +0000 ===
+[8951] * Starting control server on unix:///tmp/puma-status-1478098016845-8951
+[8951] - Worker 0 (pid: 8991) booted, phase: 0
+[8951] - Gracefully shutting down workers...
+[8951] === puma shutdown: 2016-11-02 14:50:08 +0000 ===
+[8951] - Goodbye!
+=== puma startup: 2016-11-02 14:50:08 +0000 ===
+[9055] * Starting control server on unix:///tmp/puma-status-1478098208676-9055
+[9055] - Worker 0 (pid: 9095) booted, phase: 0
+[9055] - Gracefully shutting down workers...
+[9055] === puma shutdown: 2016-11-02 14:57:06 +0000 ===
+[9055] - Goodbye!
+=== puma startup: 2016-11-02 14:57:06 +0000 ===
+[9187] * Starting control server on unix:///tmp/puma-status-1478098626774-9187
+[9187] - Worker 0 (pid: 9227) booted, phase: 0
+[9187] - Gracefully shutting down workers...
+[9187] === puma shutdown: 2016-11-02 15:23:00 +0000 ===
+[9187] - Goodbye!
+=== puma startup: 2016-11-02 15:23:01 +0000 ===
+[9474] * Starting control server on unix:///tmp/puma-status-1478100181267-9474
+[9474] - Worker 0 (pid: 9514) booted, phase: 0
+[9474] - Gracefully shutting down workers...
+[9474] === puma shutdown: 2016-11-02 15:25:50 +0000 ===
+[9474] - Goodbye!
+=== puma startup: 2016-11-02 15:25:50 +0000 ===
+[9546] * Starting control server on unix:///tmp/puma-status-1478100350917-9546
+[9546] - Worker 0 (pid: 9586) booted, phase: 0
+[9546] - Gracefully shutting down workers...
+[9546] === puma shutdown: 2016-11-02 15:27:07 +0000 ===
+[9546] - Goodbye!
+=== puma startup: 2016-11-02 15:27:07 +0000 ===
+[9836] * Starting control server on unix:///tmp/puma-status-1478100427898-9836
+[9836] - Worker 0 (pid: 9876) booted, phase: 0
+[9836] - Gracefully shutting down workers...
+[9836] === puma shutdown: 2016-11-02 15:29:50 +0000 ===
+[9836] - Goodbye!
+=== puma startup: 2016-11-02 15:29:51 +0000 ===
+[9898] * Starting control server on unix:///tmp/puma-status-1478100591178-9898
+[9898] - Worker 0 (pid: 9938) booted, phase: 0
+[9898] - Gracefully shutting down workers...
+[9984] Early termination of worker
+[9898] === puma shutdown: 2016-11-02 15:36:14 +0000 ===
+[9898] - Goodbye!
+=== puma startup: 2016-11-02 15:36:15 +0000 ===
+[9996] * Starting control server on unix:///tmp/puma-status-1478100975346-9996
+[9996] - Worker 0 (pid: 10036) booted, phase: 0
+[9996] - Gracefully shutting down workers...
+[9996] === puma shutdown: 2016-11-02 15:36:27 +0000 ===
+[9996] - Goodbye!
+=== puma startup: 2016-11-02 15:36:27 +0000 ===
+[10088] * Starting control server on unix:///tmp/puma-status-1478100987784-10088
+[10088] - Worker 0 (pid: 10128) booted, phase: 0
+[10088] - Gracefully shutting down workers...
+[10088] === puma shutdown: 2016-11-02 15:37:27 +0000 ===
+[10088] - Goodbye!
+=== puma startup: 2016-11-02 15:37:27 +0000 ===
+[10149] * Starting control server on unix:///tmp/puma-status-1478101047514-10149
+[10149] - Worker 0 (pid: 10189) booted, phase: 0
+[10149] - Gracefully shutting down workers...
+[10149] === puma shutdown: 2016-11-02 15:40:04 +0000 ===
+[10149] - Goodbye!
+=== puma startup: 2016-11-02 15:40:05 +0000 ===
+[10228] * Starting control server on unix:///tmp/puma-status-1478101205040-10228
+[10228] - Worker 0 (pid: 10268) booted, phase: 0
+[10228] - Gracefully shutting down workers...
+[10228] === puma shutdown: 2016-11-02 15:40:12 +0000 ===
+[10228] - Goodbye!
+=== puma startup: 2016-11-02 15:40:12 +0000 ===
+[10321] * Starting control server on unix:///tmp/puma-status-1478101212878-10321
+[10321] - Worker 0 (pid: 10361) booted, phase: 0
+[10321] - Gracefully shutting down workers...
+[10321] === puma shutdown: 2016-11-02 15:41:31 +0000 ===
+[10321] - Goodbye!
+=== puma startup: 2016-11-02 15:41:31 +0000 ===
+[10416] * Starting control server on unix:///tmp/puma-status-1478101291761-10416
+[10416] - Worker 0 (pid: 10456) booted, phase: 0
+[10416] - Gracefully shutting down workers...
+[10416] === puma shutdown: 2016-11-02 15:41:57 +0000 ===
+[10416] - Goodbye!
+=== puma startup: 2016-11-02 15:41:58 +0000 ===
+[10477] * Starting control server on unix:///tmp/puma-status-1478101318308-10477
+[10477] - Worker 0 (pid: 10517) booted, phase: 0
+[10477] - Gracefully shutting down workers...
+[10477] === puma shutdown: 2016-11-02 15:42:05 +0000 ===
+[10477] - Goodbye!
+=== puma startup: 2016-11-02 15:42:06 +0000 ===
+[10570] * Starting control server on unix:///tmp/puma-status-1478101326238-10570
+[10570] - Worker 0 (pid: 10610) booted, phase: 0
+[10570] - Gracefully shutting down workers...
+[10570] === puma shutdown: 2016-11-02 15:42:58 +0000 ===
+[10570] - Goodbye!
+=== puma startup: 2016-11-02 15:42:58 +0000 ===
+[10632] * Starting control server on unix:///tmp/puma-status-1478101378745-10632
+[10632] - Worker 0 (pid: 10672) booted, phase: 0
+[10632] - Gracefully shutting down workers...
+[10632] === puma shutdown: 2016-11-02 15:43:09 +0000 ===
+[10632] - Goodbye!
+=== puma startup: 2016-11-02 15:43:09 +0000 ===
+[10694] * Starting control server on unix:///tmp/puma-status-1478101389527-10694
+[10694] - Worker 0 (pid: 10734) booted, phase: 0
+[10694] - Gracefully shutting down workers...
+[10694] === puma shutdown: 2016-11-02 15:43:49 +0000 ===
+[10694] - Goodbye!
+=== puma startup: 2016-11-02 15:43:49 +0000 ===
+[10788] * Starting control server on unix:///tmp/puma-status-1478101429502-10788
+[10788] - Worker 0 (pid: 10828) booted, phase: 0
+[10788] - Gracefully shutting down workers...
+[10788] === puma shutdown: 2016-11-02 15:44:12 +0000 ===
+[10788] - Goodbye!
+=== puma startup: 2016-11-02 15:44:12 +0000 ===
+[10882] * Starting control server on unix:///tmp/puma-status-1478101452516-10882
+[10882] - Worker 0 (pid: 10922) booted, phase: 0
+[10882] - Gracefully shutting down workers...
+[10882] === puma shutdown: 2016-11-02 15:45:20 +0000 ===
+[10882] - Goodbye!
+=== puma startup: 2016-11-02 15:45:21 +0000 ===
+[11015] * Starting control server on unix:///tmp/puma-status-1478101521250-11015
+[11015] - Worker 0 (pid: 11055) booted, phase: 0
+[11015] - Gracefully shutting down workers...
+[11015] === puma shutdown: 2016-11-02 15:47:33 +0000 ===
+[11015] - Goodbye!
+=== puma startup: 2016-11-02 15:47:34 +0000 ===
+[11110] * Starting control server on unix:///tmp/puma-status-1478101654353-11110
+[11110] - Worker 0 (pid: 11150) booted, phase: 0
+[11110] - Gracefully shutting down workers...
+[11110] === puma shutdown: 2016-11-02 15:48:35 +0000 ===
+[11110] - Goodbye!
+=== puma startup: 2016-11-02 15:48:35 +0000 ===
+[11173] * Starting control server on unix:///tmp/puma-status-1478101715763-11173
+[11173] - Worker 0 (pid: 11213) booted, phase: 0
+[11173] - Gracefully shutting down workers...
+[11173] === puma shutdown: 2016-11-02 15:51:23 +0000 ===
+[11173] - Goodbye!
+=== puma startup: 2016-11-02 15:51:23 +0000 ===
+[11275] * Starting control server on unix:///tmp/puma-status-1478101883721-11275
+[11275] - Worker 0 (pid: 11315) booted, phase: 0
+[11275] - Gracefully shutting down workers...
+[11275] === puma shutdown: 2016-11-02 15:53:17 +0000 ===
+[11275] - Goodbye!
+=== puma startup: 2016-11-02 15:53:18 +0000 ===
+[11369] * Starting control server on unix:///tmp/puma-status-1478101998276-11369
+[11369] - Worker 0 (pid: 11409) booted, phase: 0
+[11369] - Gracefully shutting down workers...
+[11369] === puma shutdown: 2016-11-02 15:55:21 +0000 ===
+[11369] - Goodbye!
+=== puma startup: 2016-11-02 15:55:22 +0000 ===
+[11476] * Starting control server on unix:///tmp/puma-status-1478102122290-11476
+[11476] - Worker 0 (pid: 11516) booted, phase: 0
+[11476] - Gracefully shutting down workers...
+[11476] === puma shutdown: 2016-11-02 15:56:32 +0000 ===
+[11476] - Goodbye!
+=== puma startup: 2016-11-02 15:56:33 +0000 ===
+[11538] * Starting control server on unix:///tmp/puma-status-1478102193361-11538
+[11538] - Worker 0 (pid: 11578) booted, phase: 0
+[11538] - Gracefully shutting down workers...
+[11538] === puma shutdown: 2016-11-02 15:57:00 +0000 ===
+[11538] - Goodbye!
+=== puma startup: 2016-11-02 15:57:00 +0000 ===
+[11600] * Starting control server on unix:///tmp/puma-status-1478102220430-11600
+[11600] - Worker 0 (pid: 11640) booted, phase: 0
+[11600] - Gracefully shutting down workers...
+[11600] === puma shutdown: 2016-11-02 15:57:52 +0000 ===
+[11600] - Goodbye!
+=== puma startup: 2016-11-02 15:57:52 +0000 ===
+[11662] * Starting control server on unix:///tmp/puma-status-1478102272815-11662
+[11662] - Worker 0 (pid: 11702) booted, phase: 0
+[11662] - Gracefully shutting down workers...
+[11662] === puma shutdown: 2016-11-02 15:58:47 +0000 ===
+[11662] - Goodbye!
+=== puma startup: 2016-11-02 15:58:47 +0000 ===
+[11724] * Starting control server on unix:///tmp/puma-status-1478102327778-11724
+[11724] - Worker 0 (pid: 11764) booted, phase: 0
+[11724] - Gracefully shutting down workers...
+[11724] === puma shutdown: 2016-11-02 15:59:28 +0000 ===
+[11724] - Goodbye!
+=== puma startup: 2016-11-02 15:59:28 +0000 ===
+[11786] * Starting control server on unix:///tmp/puma-status-1478102368563-11786
+[11786] - Worker 0 (pid: 11826) booted, phase: 0
+[11786] - Gracefully shutting down workers...
+[11786] === puma shutdown: 2016-11-02 16:00:59 +0000 ===
+[11786] - Goodbye!
+=== puma startup: 2016-11-02 16:00:59 +0000 ===
+[11890] * Starting control server on unix:///tmp/puma-status-1478102459675-11890
+[11890] - Worker 0 (pid: 11930) booted, phase: 0
+[11890] - Gracefully shutting down workers...
+[11890] === puma shutdown: 2016-11-02 16:02:06 +0000 ===
+[11890] - Goodbye!
+=== puma startup: 2016-11-02 16:02:06 +0000 ===
+[12001] * Starting control server on unix:///tmp/puma-status-1478102526670-12001
+[12001] - Worker 0 (pid: 12041) booted, phase: 0
+[12001] - Gracefully shutting down workers...
+[12001] === puma shutdown: 2016-11-02 16:02:26 +0000 ===
+[12001] - Goodbye!
+=== puma startup: 2016-11-02 16:02:27 +0000 ===
+[12088] * Starting control server on unix:///tmp/puma-status-1478102547193-12088
+[12088] - Worker 0 (pid: 12128) booted, phase: 0
+[12088] - Gracefully shutting down workers...
+[12088] === puma shutdown: 2016-11-02 16:02:50 +0000 ===
+[12088] - Goodbye!
+=== puma startup: 2016-11-02 16:02:50 +0000 ===
+[12150] * Starting control server on unix:///tmp/puma-status-1478102570503-12150
+[12150] - Worker 0 (pid: 12190) booted, phase: 0
+[12150] - Gracefully shutting down workers...
+[12150] === puma shutdown: 2016-11-02 16:04:00 +0000 ===
+[12150] - Goodbye!
+=== puma startup: 2016-11-02 16:04:01 +0000 ===
+[12285] * Starting control server on unix:///tmp/puma-status-1478102641111-12285
+[12285] - Worker 0 (pid: 12325) booted, phase: 0
+[12285] - Gracefully shutting down workers...
+[12285] === puma shutdown: 2016-11-02 16:06:53 +0000 ===
+[12285] - Goodbye!
+=== puma startup: 2016-11-02 16:06:53 +0000 ===
+[12422] * Starting control server on unix:///tmp/puma-status-1478102813700-12422
+[12422] - Worker 0 (pid: 12462) booted, phase: 0
+[12422] - Gracefully shutting down workers...
+[12422] === puma shutdown: 2016-11-02 16:10:50 +0000 ===
+[12422] - Goodbye!
+=== puma startup: 2016-11-02 16:10:50 +0000 ===
+[12520] * Starting control server on unix:///tmp/puma-status-1478103050639-12520
+[12520] - Worker 0 (pid: 12560) booted, phase: 0
+[12520] - Gracefully shutting down workers...
+[12520] === puma shutdown: 2016-11-02 16:11:10 +0000 ===
+[12520] - Goodbye!
+=== puma startup: 2016-11-02 16:11:10 +0000 ===
+[12613] * Starting control server on unix:///tmp/puma-status-1478103070468-12613
+[12613] - Worker 0 (pid: 12653) booted, phase: 0
+[12613] - Gracefully shutting down workers...
+[12613] === puma shutdown: 2016-11-02 16:14:28 +0000 ===
+[12613] - Goodbye!
+=== puma startup: 2016-11-02 16:14:29 +0000 ===
+[12719] * Starting control server on unix:///tmp/puma-status-1478103269329-12719
+[12719] - Worker 0 (pid: 12759) booted, phase: 0
+[12719] - Gracefully shutting down workers...
+[12719] === puma shutdown: 2016-11-02 16:16:20 +0000 ===
+[12719] - Goodbye!
+=== puma startup: 2016-11-02 16:16:21 +0000 ===
+[12821] * Starting control server on unix:///tmp/puma-status-1478103381240-12821
+[12821] - Worker 0 (pid: 12861) booted, phase: 0
+[12821] - Gracefully shutting down workers...
+[12821] === puma shutdown: 2016-11-02 16:19:03 +0000 ===
+[12821] - Goodbye!
+=== puma startup: 2016-11-02 16:19:03 +0000 ===
+[12918] * Starting control server on unix:///tmp/puma-status-1478103543418-12918
+[12918] - Worker 0 (pid: 12958) booted, phase: 0
+[12918] - Gracefully shutting down workers...
+[12918] === puma shutdown: 2016-11-02 16:19:32 +0000 ===
+[12918] - Goodbye!
+=== puma startup: 2016-11-02 16:19:32 +0000 ===
+[13012] * Starting control server on unix:///tmp/puma-status-1478103572598-13012
+[13012] - Worker 0 (pid: 13052) booted, phase: 0
+[13012] - Gracefully shutting down workers...
+[13012] === puma shutdown: 2016-11-02 16:19:55 +0000 ===
+[13012] - Goodbye!
+=== puma startup: 2016-11-02 16:19:55 +0000 ===
+[13106] * Starting control server on unix:///tmp/puma-status-1478103595765-13106
+[13106] - Worker 0 (pid: 13146) booted, phase: 0
+[13106] - Gracefully shutting down workers...
+[13106] === puma shutdown: 2016-11-02 16:20:25 +0000 ===
+[13106] - Goodbye!
+=== puma startup: 2016-11-02 16:20:26 +0000 ===
+[13200] * Starting control server on unix:///tmp/puma-status-1478103626289-13200
+[13200] - Worker 0 (pid: 13240) booted, phase: 0
+[13200] - Gracefully shutting down workers...
+[13200] === puma shutdown: 2016-11-02 16:21:19 +0000 ===
+[13200] - Goodbye!
+=== puma startup: 2016-11-02 16:21:20 +0000 ===
+[13305] * Starting control server on unix:///tmp/puma-status-1478103680043-13305
+[13305] - Worker 0 (pid: 13345) booted, phase: 0
+[13305] - Gracefully shutting down workers...
+[13305] === puma shutdown: 2016-11-02 16:22:02 +0000 ===
+[13305] - Goodbye!
+=== puma startup: 2016-11-02 16:22:03 +0000 ===
+[13399] * Starting control server on unix:///tmp/puma-status-1478103723066-13399
+[13399] - Worker 0 (pid: 13439) booted, phase: 0
+[13399] - Gracefully shutting down workers...
+[13399] === puma shutdown: 2016-11-02 16:22:13 +0000 ===
+[13399] - Goodbye!
+=== puma startup: 2016-11-02 16:22:14 +0000 ===
+[13491] * Starting control server on unix:///tmp/puma-status-1478103734343-13491
+[13491] - Worker 0 (pid: 13531) booted, phase: 0
+[13491] - Gracefully shutting down workers...
+[13491] === puma shutdown: 2016-11-02 16:23:10 +0000 ===
+[13491] - Goodbye!
+=== puma startup: 2016-11-02 16:23:11 +0000 ===
+[13585] * Starting control server on unix:///tmp/puma-status-1478103791007-13585
+[13585] - Worker 0 (pid: 13625) booted, phase: 0
+[13585] - Gracefully shutting down workers...
+[13585] === puma shutdown: 2016-11-02 16:23:37 +0000 ===
+[13585] - Goodbye!
+=== puma startup: 2016-11-02 16:23:38 +0000 ===
+[13680] * Starting control server on unix:///tmp/puma-status-1478103818333-13680
+[13680] - Worker 0 (pid: 13720) booted, phase: 0
+[13680] - Gracefully shutting down workers...
+[13680] === puma shutdown: 2016-11-02 16:24:12 +0000 ===
+[13680] - Goodbye!
+=== puma startup: 2016-11-02 16:24:13 +0000 ===
+[13773] * Starting control server on unix:///tmp/puma-status-1478103853301-13773
+[13773] - Worker 0 (pid: 13813) booted, phase: 0
+[13773] - Gracefully shutting down workers...
+[13773] === puma shutdown: 2016-11-02 16:26:27 +0000 ===
+[13773] - Goodbye!
+=== puma startup: 2016-11-02 16:26:27 +0000 ===
+[13941] * Starting control server on unix:///tmp/puma-status-1478103987438-13941
+[13941] - Worker 0 (pid: 13981) booted, phase: 0
+[13941] - Gracefully shutting down workers...
+[13941] === puma shutdown: 2016-11-02 16:28:19 +0000 ===
+[13941] - Goodbye!
+=== puma startup: 2016-11-02 16:28:19 +0000 ===
+[14040] * Starting control server on unix:///tmp/puma-status-1478104099875-14040
+[14040] - Worker 0 (pid: 14080) booted, phase: 0
+[14040] - Gracefully shutting down workers...
+[14040] === puma shutdown: 2016-11-02 16:30:00 +0000 ===
+[14040] - Goodbye!
+=== puma startup: 2016-11-02 16:30:00 +0000 ===
+[14134] * Starting control server on unix:///tmp/puma-status-1478104200762-14134
+[14134] - Worker 0 (pid: 14174) booted, phase: 0
+[14134] - Gracefully shutting down workers...
+[14134] === puma shutdown: 2016-11-02 16:31:01 +0000 ===
+[14134] - Goodbye!
+=== puma startup: 2016-11-02 16:31:02 +0000 ===
+[14228] * Starting control server on unix:///tmp/puma-status-1478104262204-14228
+[14228] - Worker 0 (pid: 14268) booted, phase: 0
+[14228] - Gracefully shutting down workers...
+[14228] === puma shutdown: 2016-11-02 16:31:47 +0000 ===
+[14228] - Goodbye!
+=== puma startup: 2016-11-02 16:31:47 +0000 ===
+[14321] * Starting control server on unix:///tmp/puma-status-1478104307987-14321
+[14321] - Worker 0 (pid: 14361) booted, phase: 0
+[14321] - Gracefully shutting down workers...
+[14321] === puma shutdown: 2016-11-02 16:32:33 +0000 ===
+[14321] - Goodbye!
+=== puma startup: 2016-11-02 16:32:33 +0000 ===
+[14414] * Starting control server on unix:///tmp/puma-status-1478104353987-14414
+[14414] - Worker 0 (pid: 14454) booted, phase: 0
+[14414] - Gracefully shutting down workers...
+[14414] === puma shutdown: 2016-11-02 16:33:07 +0000 ===
+[14414] - Goodbye!
+=== puma startup: 2016-11-02 16:33:08 +0000 ===
+[14508] * Starting control server on unix:///tmp/puma-status-1478104388267-14508
+[14508] - Worker 0 (pid: 14548) booted, phase: 0
+[14508] - Gracefully shutting down workers...
+[14508] === puma shutdown: 2016-11-02 16:37:46 +0000 ===
+[14508] - Goodbye!
+=== puma startup: 2016-11-02 16:37:47 +0000 ===
+[14872] * Starting control server on unix:///tmp/puma-status-1478104667017-14872
+[14872] - Worker 0 (pid: 14912) booted, phase: 0
+[14872] - Gracefully shutting down workers...
+[14872] === puma shutdown: 2016-11-02 16:38:04 +0000 ===
+[14872] - Goodbye!
+=== puma startup: 2016-11-02 16:38:05 +0000 ===
+[14934] * Starting control server on unix:///tmp/puma-status-1478104685384-14934
+[14934] - Worker 0 (pid: 14974) booted, phase: 0

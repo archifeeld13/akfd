@@ -319,6 +319,41 @@ a.tag {
 		}
 	}
 
+	// posts item 변형판들
+	// posts item 변형판들
+	.comm-posts-item{
+		width: 95%;
+		margin: 2.5%;
+	}
+
+	.connect-item{
+		width: 95%;
+		margin: 2.5%;
+		padding: 10px;
+		img{
+			object-fit: cover;
+		}
+		.ci-info {
+			margin-left: 2%;
+			width: 56%;
+			padding: 2%;
+			.ci-title{
+				color: rgb(150,150,150);
+				font-size: 1.2em;
+				font-weight: bold;
+			}
+			.ci-content{
+				font-size: 1em;
+			}
+			.ci-tags{
+				float:right;	
+			}
+		}
+
+	}
+	// posts item 변형판들
+	// posts item 변형판들
+
 	#contents-controllbar{
 		width: 100%;	
 		color: white;
@@ -344,6 +379,7 @@ a.tag {
 		width: 95%; 
 		margin: 2.5%;
 	}
+
 
 	#user_edit_panel{
 		width: 99%;

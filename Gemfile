@@ -75,7 +75,7 @@ gem 'rails_autolink'
 gem 'seed_dump'
 
 # mysql
-gem 'mysql2', '~> 0.3.20'
+gem 'mysql2'
 
 # https://github.com/yamldb/yaml_db
 gem 'yaml_db'

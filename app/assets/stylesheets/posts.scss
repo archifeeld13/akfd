@@ -144,6 +144,7 @@
 	}
 }
 
+
 #binders-container{
 	width: 100%;
 	background: blue;
@@ -152,6 +153,7 @@
 #posts-container{
 	width: 100%;
 }
+
 // 이걸 application.css의 contents-container / mobile 여기안에 포함시키면
 // 스타일을 모바일과 PC 따로 적용할 수 있을것 같다 (확인함)
 // user-info panel도 마찬가지로 분기할 수 있을 것 같다 
@@ -231,6 +233,75 @@
 		border-top: 1px solid #EEEEEE;
 	}
 }
+
+
+// community
+// community
+// community
+.comm-posts-item{
+	position: relative;
+	width:700px; height:165px; 
+	background:white; 
+	margin: 20px auto;
+
+	border-radius: 5px;
+
+	.post-icon{
+		width:18px;	
+		margin-top: -5px;
+	}
+
+	.dot {
+		width:15px;	
+	}
+
+	.posts-item-img{
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		height: 400px;
+		width: 100%;
+		object-fit: cover;
+	}
+	
+	.posts-item-info{
+		height: 165px;
+		position: relative;
+		padding:3%;
+
+		.posts-item-title{
+			font-size:1.1em;
+			color: #aaaaaa;
+			a{
+				color:rgb(51,51,51);	
+			}
+		}
+
+		.posts-item-counts{
+			float:right;
+			width: 100px;
+			table{
+				width: 100%;	
+				text-align: center;
+			}
+		}
+
+		.posts-item-writer{
+			a{
+				color: #333333;	
+				font-weight: 600;
+				font-size: 1.2em;
+			}
+			img{
+				width:50px; height: 50px; margin:5px;
+			}
+		}
+
+	}
+		
+}
+
+
+
 
 // timeline posts-item
 // timeline posts-item
@@ -446,6 +517,8 @@
 //show.html.erb
 
 
+// 커뮤니티, 커넥트에 조회기능으로
+// 커뮤니티, 커넥트에 조회기능으로
 //show_simple.html.erb
 //show_simple.html.erb
 //show_simple.html.erb
@@ -502,8 +575,8 @@
 
 		.posts-item-writer{
 			img{
-				width: 30px;	
-				height: 30px;	
+				width: 25px;	
+				height: 25px;	
 			}	
 			a{
 				color: black;	
@@ -830,17 +903,18 @@
 	background: white;
 	border-radius: 5px;
 	padding: 20px;
-	margin: 10px auto;
+	margin: 20px auto;
 	img{
 		float:left;
-		width: 350px;
+		width: 40%; 
 		height: 210px;
 		border-radius: 5px;
+		object-fit: cover;
 	}
 	.ci-info{
 		float:left;
 		margin-left: 20px;
-		width: 350px;	
+		width: 40%;	
 		height: 210px;
 		padding: 20px;
 		color: rgb(150,150,150);

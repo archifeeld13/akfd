@@ -36,8 +36,6 @@
 
 		<div style="height:10px;"></div>
 
-
-
 		<%# 링크 타입 %>
 		<%# 링크 타입 %>
 		<%# 링크 타입 %>
@@ -63,16 +61,13 @@
 					<center><div style='font-size:1.1em;margin: 1% 3%;'><%= photo.caption %></div></center>
 				<% end %>
 			<% end %>
-
-		<%# 이미지 없으면 %>
-		<%# 이미지 없으면 %>
-		<% else  %>
-			<div class="posts-item-text">
-				<%#= truncate(@post.content, length: 100) %>
-				<%#= @post.content.gsub(/\n/, '<br/>').html_safe%>
-				<%= auto_link(@post.content.gsub(/\n/, '<br/>'), :html => { :target => '_blank' })%>
-			</div>
 		<% end %>
+
+		<div class="posts-item-text">
+			<%#= truncate(@post.content, length: 100) %>
+			<%#= @post.content.gsub(/\n/, '<br/>').html_safe%>
+			<%= auto_link(@post.content.gsub(/\n/, '<br/>'), :html => { :target => '_blank' })%>
+		</div>
 
 		<!-- posts-item-info -->
 		<!-- posts-item-info -->

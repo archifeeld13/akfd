@@ -1,4 +1,4 @@
-$('#posts-container').append('<%= j render @posts %>');
+$('#posts-container').append('<%= j render "communities", posts: @posts %>');
 
 <% if @posts.next_page %>
 	<%# 이건 둘중 하나로 할까 남은거로 %>
