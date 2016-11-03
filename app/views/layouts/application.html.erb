@@ -133,6 +133,21 @@
 </script>
 
 
+
+<%# 모바일의 경우 검색 창에 추가 스타일 %>
+<% if browser.device.mobile? %>
+<style>
+	#search_container{
+		width: 90%;
+	}
+	#search_reco .search_reco_item{
+		font-size: 1.5em;	
+	}
+	#overlay input{
+		font-size: 2em;	
+	}
+</style>
+<% end %>
 <div id="overlay">
 	<div id="search_container">
 		<input id="search_input" type="text" placeholder="태그 검색...">

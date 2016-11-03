@@ -348,6 +348,22 @@ $(function(){
 
 
 </div>
+
+
+<%# 모바일의 경우 검색 창에 추가 스타일 %>
+<% if browser.device.mobile? %>
+<style>
+	#ta_search_container{
+		width: 90%;
+	}
+	#ta_search_reco .ta_search_reco_item{
+		font-size: 1.5em;	
+	}
+	#ta_overlay input{
+		font-size: 2em;	
+	}
+</style>
+<% end %>
 <!-- ta : tag add -->
 <div id="ta_overlay">
 	<div id="ta_search_container">

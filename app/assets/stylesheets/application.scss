@@ -98,7 +98,7 @@
 }
 
 // 여기 부터 저 overlay까지는 다른데서도 쓰임 posts.css
-// ta : tag add 용으로
+// ex) ta : tag add 용으로
 #search_container{
 	width: 50%;
 	margin:auto;
@@ -485,52 +485,6 @@ a.tag {
 }
 
 
-
-// width 15설정을 안해주고 jquery만으로 15%설정하면 
-// 로고 버튼눌러서 새로고침했을 때 적용이 안된다.
-// 자바스크립트에서 RFM으로 축약해 부를것이다
-#right_fixed_menu{
-	position:fixed; 
-	width:250px;  right:25px;
-	z-index: 500; 
-
-	#fav_feeldup_content{
-		overflow: hidden;	
-		height: 70px; // <-> 350
-	}
-	#fav_tag_content{
-		overflow: hidden;	
-		height: 60px;
-	}
-
-	.RFMPanel{
-		background:white; margin-top: 10px; border-radius: 5px; padding: 5%;
-		.RFMPanelTitle{
-			font-weight:bold; font-size:1.2em; 
-		}
-	}
-
-	.RFMPanelItem{
-		margin-bottom: 1%;
-		margin-left: 3%;
-		a{
-			color: grey;
-		}
-		.reco_myfeeld_img{	
-			width: 40px;
-			height: 40px;
-			border-radius: 3px;
-		}
-		.reco_myfeeld_plustbtn{
-			width: 20px;	
-			height: 20px;
-			margin-top: 8px;
-			margin-right: 3px;
-			float: right;
-		}
-	}
-	
-}
 
 // 이걸 안해주고 jquery만으로 hide해버리면 로고 눌러서 새로고침했을 때, 
 // 보인다. (버그)
