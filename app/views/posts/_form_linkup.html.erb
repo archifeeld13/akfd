@@ -47,25 +47,6 @@ $(function(){
 		width: 100%;
 	}
 
-	#edit-super-container {
-		position:relative;
-	}
-
-	#edit-super-container input[type="text"]{
-		font-size: 1em;
-		width: 100%;
-	}
-
-	#edit-container{
-		position:absolute; left:0; width: 70%; margin-right:1%; margin-bottom:50px;
-	}
-	#edit-controller{
-		position:fixed; width:20%; 
-		height:550px; background:white; 
-		padding:1%; overflow-y: auto; overflow-x: hidden; 
-		font-size: 1.2em; border-radius: 5px 5px 5px 5px;
-	}
-
 	#project_radio_container{
 		border: 1px solid rgb(200,200,200);	
 		border-radius: 5px;
@@ -102,7 +83,11 @@ $(function(){
 			<!-- edit-container -->
 			<!-- edit-container -->
 			<!-- edit-container -->
+	<% if not browser.device.mobile? %>
 			<div id="edit-container" > 
+	<% else %>
+			<div id="edit-container-mobile" > 
+	<% end %>
 				<div style="background: white; border-radius: 5px; padding: 10px;">
 					<%# 제목 필드 %>
 					<%# 제목 필드 %>
@@ -160,7 +145,11 @@ $(function(){
 			<!-- edit-controller -->
 			<!-- edit-controller -->
 			<!-- edit-controller -->
-			<div id="edit-controller">
+	<% if not browser.device.mobile? %>
+			<div id="edit-controller" >
+	<% else %>
+			<div id="edit-controller-mobile" >
+	<% end %>
 
 				<div style="color:#BBBBBB; font-size:1.1em;">세부 설정</div>
 				<div style="margin-bottom: 10px;"></div>

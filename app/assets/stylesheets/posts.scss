@@ -771,6 +771,47 @@
 
 
 // _form.html
+// _form.html
+
+
+#edit-super-container {
+	position:relative;
+}
+
+#edit-super-container input[type="text"]{
+	font-size: 1em;
+	width: 100%;
+}
+
+#edit-container{
+	position:absolute; left:0; width: 70%; margin-right:1%; margin-bottom:50px;
+}
+
+#edit-container-mobile{
+	width: 95%;
+	margin: auto;
+}
+
+#edit-controller{
+	position:fixed; width:20%; 
+	height:550px; background:white; 
+	padding:1%; overflow-y: auto; overflow-x: hidden; 
+	font-size: 1.2em; border-radius: 5px 5px 5px 5px;
+}
+
+#edit-controller-mobile{
+	width: 95%; 
+	height:550px; 
+	margin:auto;
+	margin-top: 20px;
+
+	background:white; 
+	padding:1%; overflow-y: auto; overflow-x: hidden; 
+	font-size: 1.2em; border-radius: 5px 5px 5px 5px;
+}
+
+
+// _form.html
 // application.css의 search_* 스타일 가져옴 
 // 태그 추가할 때의 스타일이 매우 흡사하기 때문
 #ta_search_container{
