@@ -27,21 +27,68 @@ form input[type="password"]
 {
 		margin-bottom: -1px;
 }
-.reg_cancel{
-	color: white;	
-}
 
 .form-btns{
 	width: 300px;
 }
 
+<% if browser.device.mobile? %>
+	input{
+		border: 1px solid black!important;
+	}
+<% end %>
+
 .policy {
 	white-space:nowrap;
 	font-weight: bold;
 	color: skyblue;
+	cursor: pointer;
 }
+
 a{
-	color: white;
+	color: #333333;
+}
+
+a:hover{
+	color: #333333;
+	text-decoration: none;
+}
+
+.login_btn{
+	<% if not browser.device.mobile? %>
+	background: transparent ; border: 1px solid white;  width:300px;
+	color:white;
+	<% else %>
+	background: transparent ; border: 1px solid #333333;  width:300px;
+	color:#333333;
+	<% end %>
+}
+
+.facebook_btn{
+	<% if not browser.device.mobile? %>
+	background: transparent ; border: 1px solid white;  width:300px;
+	color:white;
+	<% else %>
+	background: transparent ; border: 1px solid #333333;  width:300px;
+	color:#333333;
+	<% end %>
+}
+
+.register_btn{
+	<% if not browser.device.mobile? %>
+		background: white; color:black;  width:300px;
+	<% else %>
+		background: #333333; color:#f5f5f5;  width:300px;
+	<% end %>
+}
+
+
+.gray-and-white{
+	<% if not browser.device.mobile? %>
+		color:white;
+	<% else %>
+		color:#333333;
+	<% end %>
 }
 
 </style>
@@ -66,7 +113,7 @@ a{
 <% end %>
 </div>
 
-<div style="width:300px;margin-top: 10px">
+<div style="width:300px;margin-top: 10px" class="gray-and-white">
 	버튼을 클릭함으로써 아키필드의 <a class="policy" data-toggle="modal" data-target="#policyModal" href="#">약관</a>과 <a  class="policy" data-toggle="modal" data-target="#policyModal2" href="#">개인정보정책</a>에 동의합니다
 </div>
 
@@ -107,15 +154,13 @@ a{
 </div>
 
 
-
 <div style="margin-top: 10px">
-	<%= link_to raw('<button class="btn btn-block" style="background: white; color:black;  width:300px;" >가입하기</button>'), '#', onclick: "$('#register_btn').click()" %> 
+	<%= link_to raw('<button class="btn btn-block register_btn"  >가입하기</button>'), '#', onclick: "$('#register_btn').click()" %> 
 </div>
 <div style="margin-top: 5px">
-	<%= link_to raw('<button class="btn btn-block" style="background: transparent ; border: 1px solid white;  width:300px;" >페이스북 로그인</button>'), '/auth/facebook'%> 
+	<%= link_to raw('<button class="btn btn-block facebook_btn" >페이스북 로그인</button>'), '/auth/facebook'%> 
 </div>
 
 <div style="margin-top: 10px">
-
-	<%= link_to '취소', '/login', class: "reg_cancel" %>
+	<%= link_to '취소', '/login', class: "gray-and-white" %>
 </div>

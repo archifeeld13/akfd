@@ -27,6 +27,13 @@ form input[type="password"]
 {
 		margin-bottom: 0;
 }
+
+<% if browser.device.mobile? %>
+	input{
+		border: 1px solid black!important;
+	}
+<% end %>
+
 .reg_cancel{
 	color: white;	
 }
@@ -34,24 +41,63 @@ form input[type="password"]
 	white-space:nowrap;
 	font-weight: bold;
 	color: skyblue;
+	cursor: pointer;
 }
 
 a{
-	color: white;
+	color: #333333;
 }
+
 a:hover{
-	color: white;
+	color: #333333;
 	text-decoration: none;
+}
+
+.login_btn{
+	<% if not browser.device.mobile? %>
+	background: transparent ; border: 1px solid white;  width:300px;
+	color:white;
+	<% else %>
+	background: transparent ; border: 1px solid #333333;  width:300px;
+	color:#333333;
+	<% end %>
+}
+
+.facebook_btn{
+	<% if not browser.device.mobile? %>
+	background: transparent ; border: 1px solid white;  width:300px;
+	color:white;
+	<% else %>
+	background: transparent ; border: 1px solid #333333;  width:300px;
+	color:#333333;
+	<% end %>
+}
+
+.register_btn{
+	<% if not browser.device.mobile? %>
+		background: white; color:black;  width:300px;
+	<% else %>
+		background: #333333; color:#f5f5f5;  width:300px;
+	<% end %>
+}
+
+
+.gray-and-white{
+	<% if not browser.device.mobile? %>
+		color:white;
+	<% else %>
+		color:#333333;
+	<% end %>
 }
 </style>
 
 <div>
 	<%= form_for(:session, url: login_path, class: "form-signin") do |f| %>	
-		<div style="color:white; font-size: 1.5em; background:rgba(20,20,20, 0.5); margin-bottom: 2%;">
 		<% if flash[:notice] %>
-			<%= flash[:notice].html_safe %>
+			<div style="color:white; font-size: 1.3em; background:rgba(20,20,20, 0.5); margin-bottom: 2%; padding:3%;">
+					<%= flash[:notice].html_safe %>
+			</div>
 		<% end %>
-		</div>
 		<%= f.email_field :email, class: 'form-control',  placeholder: "이메일 주소" %>	
 		<%= f.password_field :password, class: 'form-control',  placeholder: "비밀번호" %>	
 		<%= f.submit id:"login-btn", class: "hidden" %>
@@ -60,24 +106,24 @@ a:hover{
 
 <div style="margin-top: 5px">
 <div>
-	<button class="btn btn-block" style="background: white; color:black;  width:300px;" onclick='$("#login-btn").click()'>로그인</button>
+	<button class="btn btn-block login_btn"  onclick='$("#login-btn").click()'>로그인</button>
+</div>
+
+<div style="margin-top: 5px">
+	<%= link_to raw('<button class="btn btn-block facebook_btn" >페이스북 로그인</button>'), '/auth/facebook'%> 
 </div>
 <div style="margin-top: 5px">
-	<%= link_to raw('<button class="btn btn-block" style="background: transparent ; border: 1px solid white;  width:300px;" >페이스북 로그인</button>'), '/auth/facebook'%> 
+	<%= link_to raw('<button class="btn btn-block register_btn">가입하기</button>'), new_user_path %> 
 </div>
-<div style="margin-top: 5px">
-	<%= link_to raw('<button class="btn btn-block" style="background: transparent ; border: 1px solid white;  width:300px;" >가입하기</button>'), new_user_path %> 
-</div>
+
 <div style="margin-top: 15px">
-	<a href="/posts" style="color:white"> 비회원 입장 </a> <br>
-	<a href="/#" style="color:white" onclick="alert('현재 비밀번호 찾기 기능 구현중에 있습니다.\n임시비밀번호 발급 문의는 \nwpdls6012@naver.com으로 부탁드리겠습니다.')"> 비밀번호 찾기</a> 
+	<a href="/posts" class="gray-and-white"> 비회원 입장 </a>
+	<div style="height:5px;"></div>
+	<span class="gray-and-white" style="cursor:pointer;" onclick="alert('임시비밀번호 발급 문의 \narchifeeld2013@gmail.com')"> 비밀번호 찾기</span> 
 </div>
-
-
-
 
 <div style="width:300px;margin-top: 10px">
-	<a class="policy" data-toggle="modal" data-target="#policyModal" href="#">이용약관</a> 및 <a  class="policy" data-toggle="modal" data-target="#policyModal2" href="#">개인정보정책</a>
+	<span class="policy" data-toggle="modal" data-target="#policyModal" href="#">이용약관</span> <span class="gray-and-white">및</span> <span  class="policy" data-toggle="modal" data-target="#policyModal2" href="#">개인정보정책</span>
 </div>
 
 <!-- Modal -->

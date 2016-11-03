@@ -31,29 +31,23 @@
 	<style>
 	body {
 		background-color: #fff;
-		color: white;
+		color: #333333;
+		<% if not browser.device.mobile? %>
 		background: url('<%= image_path(bg.photo)%>');
+		<% else %>
+		background: white; 
+		<% end %>
 		background-size: 100%;
-	}
-	.bgalpha {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width:100%;
-		background: rgba(0,0,0,0.4);
-		margin-top:0;
-		padding:0;
 	}
 
 	#logo {
-		width: 200px;
+		width: 250px;
 		margin-top:0;
 	}
 	</style>
 </head>
 
 <body>
-<div class="bgalpha"> 
 	<center>
 		<div id="formPanel" align="center">	
 			<%= image_tag "loginlogo.png", id: "logo" %>
@@ -65,27 +59,14 @@
 		<%= bg.author %>	
 	</div>
 	<% end %>
-</div>
 
-<script>
-	$(function(){
-		$('.bgalpha').css('height', $(window).height());
-		$('.bgalpha').css('width', $(window).width());
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-		$(window).resize(function(){
-			$('.bgalpha').css('height', $(window).height());
-			$('.bgalpha').css('width', $(window).width());
-		})
-	})	
-</script>
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-77436255-1', 'auto');
-  ga('send', 'pageview');
-</script>
+		ga('create', 'UA-77436255-1', 'auto');
+		ga('send', 'pageview');
+	</script>
 </body>

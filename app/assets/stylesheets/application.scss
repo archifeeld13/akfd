@@ -58,8 +58,10 @@
 	background-color: transparent !important;
 }
 
+
 #profile_img{
-	padding: 10px 10px;
+	height: 42px;
+	padding: 10px;
 	padding-right: 0;
 	img{
 		width: 30px;
@@ -71,6 +73,7 @@
 #feeldup {
 	padding-left: 10px;
 	padding-right: 0;
+	height:42px;
 	span{
 		border-radius: 20px;
 		border: 1px solid gray;

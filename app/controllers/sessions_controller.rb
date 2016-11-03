@@ -44,11 +44,11 @@ class SessionsController < ApplicationController
 				# ######
 				redirect_to posts_path 
 			else
-				flash[:notice] = "이메일 혹은 비밀번호가 잘못되었습니다"
+				flash[:notice] = "이메일 혹은 비밀번호가 <br>잘못되었습니다"
 				redirect_to :back		
 			end
 		else 
-			flash[:notice] = "이메일 혹은 비밀번호가 잘못되었습니다"
+				flash[:notice] = "이메일 혹은 비밀번호가 <br>잘못되었습니다"
 			redirect_to :back		
 		end
 	end

@@ -12,6 +12,21 @@
 		display: none;
 		z-index: 2000;
 	}
+
+	
+	<%# 모바일에서 가로 길이 강제 조정 %>
+	<% if browser.device.mobile? %>
+		<%# 어차피 다른 a에는 아이디 걸려있어서 너비 다르게 적용됨, 결국 feeeldup만 100px %>
+		<%# 어차피 다른 a에는 아이디 걸려있어서 너비 다르게 적용됨, 결국 feeeldup만 100px %>
+		.nav a {
+			width: 110px;	
+			float: left;
+			margin:0;
+		}
+		#profile_img{
+			padding: 5px;
+		}
+	<% end %>
 </style>
 
 <nav class="navbar navbar-default navbar-fixed-top" style="padding: 2px", "background-color: white"> 
@@ -115,6 +130,11 @@
 			<!-- 로그인 안되어 있으면 -->
 			<!-- 로그인 안되어 있으면 -->
 			<% else %>
+				<li>
+					<a href="#" id="search">
+						<span><i class='fa fa-search' aria-hidden='true'></i></span>
+					</a>
+				</li>
 				<li>
 					<!-- login icon -->
 					<a href="/login" id="login_btn">
