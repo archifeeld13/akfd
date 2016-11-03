@@ -394,6 +394,7 @@ a.tag {
 	}
 	// 마이필드의 유저 인포 패널
 	#user_info_panel{
+		position: relative;
 		width: 95%;
 		margin:2.5%;
 
@@ -401,22 +402,30 @@ a.tag {
 		border-radius:5px;
 		padding:3%;
 
-		img {
-			border-radius:5px;
+		#my_feeld_profile_img{
 			float:left;
-			margin-right: 3%;
+			width: 100px;
+			height: 100px;
+			border-radius: 100px;
+			cursor:pointer;
+			margin: 5% 3%;
 		}
 
 		#user_info_name_dept{
-			float: right;
+			float: left;
 			width: 50%;
+			margin: 5% 3%;
 		}
 		#user_info_counts{
-			float: right;
-			width: 50%;
+			float: left;
+			width: 90%;
+			margin: 5%;
 		}
+
 		.follow-link{
-		 color:rgb(208,241,68); font-size: 1.5em; font-weight:bold;
+		 color:rgb(208,241,68); 
+		 font-size: 1.5em; 
+		 font-weight:bold;
 		}
 	}
 
@@ -425,62 +434,19 @@ a.tag {
 		width: 95%; //diff with pc
 		margin: 2.5%; //diff with pc
 
-		padding: 0; font-size: 1em; font-weight: bold;
+		.my_feeld_menu_item{
+			width: 80px;	
+			font-size: 0.8em;
+		}
+
+		.my_feeld_menu_item_right span{
+			width: 70px;	
+			font-size: 0.8em;
+		}
+
+		padding: 0; 
+		font-weight: bold;
 		text-align: center;
-
-		#archive {
-			height:100%;
-			float: left;
-
-			background: #CFCFCF;
-			width:49.5%;
-			border-radius: 5px;
-			margin-right: 0.5%;
-			padding-top: 13px;
-		}
-		#archive_hover{
-			height:100%;
-			float: left;
-
-			width:49.5%;
-			margin-right: 0.5%;
-			padding: 0;
-
-			#archive_mine{
-				height:100%;
-				float: left;
-
-				background: #EAEAEA;
-				width:50%;
-				border-top-left-radius: 5px;
-				border-bottom-left-radius: 5px;
-				padding-top: 13px;
-			}
-			#archive_share{
-				height:100%;
-				float: left;
-
-				background:#EAEAEA;
-				width:50%;
-				border-top-right-radius: 5px;
-				border-bottom-right-radius: 5px;
-				padding-top: 13px;
-			}
-		}
-		#project_management{
-			height:100%;
-			float: left;
-
-			background: #CFCFCF;
-			width:49.5%;
-			border-radius: 5px;
-			margin-left: 0.5%;
-			padding-top: 13px;
-		}
-
-		a{
-			color: black	
-		}
 	}
 }
 

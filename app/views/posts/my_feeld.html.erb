@@ -105,7 +105,9 @@
 			<%= link_to "/my_feeld?filter=collection" do %>
 				<div class="my_feeld_menu_item">콜렉션(<%= collection_count%>)</div>
 			<% end %>
-			<%= link_to raw('<span style="white-space:nowrap">+ 바인더</span>'), "/projects/new", id:"add_binder", class:"my_feeld_menu_item_right" %>
+			<% if not browser.device.mobile? %>
+				<%= link_to raw('<span style="white-space:nowrap">+ 바인더</span>'), "/projects/new", id:"add_binder", class:"my_feeld_menu_item_right" %>
+			<% end %>
 		<% else %>
 			<%= link_to "/my_feeld?filter=binder&user_id=#{@user.id}" do%>
 				<div class="my_feeld_menu_item">바인더(<%=@user.projects.count%>)</div>
@@ -119,7 +121,7 @@
 		<% end %>
 	</div>
 
-	<% if @projects %>
+	<% if @projects and not browser.device.mobile?%>
 		<div id="projects-container-wrapper">
 			<div id="projects-container" style="width:<%=(@projects.length + 4) * (300+ 10 + 10) %>px">
 				<% if @projects.length > 0 %>
