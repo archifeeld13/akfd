@@ -40,6 +40,7 @@
 		background-size: 100%;
 	}
 
+	<% if not browser.device.mobile? %>
 	.bgalpha {
  		position: absolute;
  		top: 0;
@@ -49,6 +50,7 @@
  		margin-top:0;
  		padding:0;
  	}
+	<% end %>
 
 	#logo {
 		width: 250px;
@@ -58,7 +60,9 @@
 </head>
 
 <body>
+	<% if not browser.device.mobile? %>
 	<div class="bgalpha">
+	<% end %>
 		<center>
 			<div id="formPanel" align="center">	
 				<%= image_tag "loginlogo.png", id: "logo" %>
@@ -70,7 +74,9 @@
 			<%= bg.author %>	
 		</div>
 		<% end %>
+	<% if not browser.device.mobile? %>
 	</div>
+	<% end %>
 
 	<script>
  	$(function(){
