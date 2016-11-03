@@ -24,7 +24,7 @@
 				<div class="ci-title"><%= post.title %></div>
 			<% end %>
 
-			<div style="height:10px;"></div>
+			<div style="height:20px;"></div>
 
 			<div class="ci-tags">
 				<% if post.tag_list.count > 0 %>
@@ -34,5 +34,18 @@
 				<% end %>
 			</div>	
 		</div>
+
+		<div class="ci-counts">
+			<table>
+				<tr>
+					<td>조회수</td>
+				</tr>
+				<tr style="font-weight:bold;">
+					<td><%= post.view_count %></td>
+				</tr>
+			</table>
+		</div>
+
 	</div>
+
 <% end %>

@@ -1,5 +1,7 @@
 <% posts.each do |post| %>
-	<div class="comm-posts-item">
+	<%= link_to post, id: "comm_link_#{post.id}", onclick: "return true" do%>
+	<% end %>
+	<div class="comm-posts-item" data-id="<%= post.id %>">
 		<div class="posts-item-info">
 			<div class="posts-item-writer">
 				<% if post.user.use_photo %>
@@ -47,3 +49,11 @@
 		</div>
 	</div>
 <% end %>
+<script>
+	$(function(){
+		$('.comm-posts-item').click(function(){
+			id = $(this).attr('data-id')
+			document.getElementById('comm_link_' + id).click()
+		})	
+	})
+</script>

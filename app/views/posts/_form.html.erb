@@ -214,13 +214,13 @@ $(function(){
 			<div id="category-pikcer">
 				<%# http://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html %>
 				<%# 자꾸 선택이 안되는 문제가 있어 %>
-				<%#= select :post, :post_type, [['작품', 1], ['커뮤니티',0], ['커넥트', 3]], {}, {class:"form-control"} %>
+				<%#= select :post, :post_type, [['작업', 1], ['커뮤니티',0], ['커넥트', 3]], {}, {class:"form-control"} %>
 				<% if request.headers["HTTP_REFERER"].include? "community" %>
-					<%= select_tag 'post_type', options_for_select({'작품'=>1, '커뮤니티'=>0, '커넥트'=>3}, 0) ,{class:"form-control"} %>
+					<%= select_tag 'post_type', options_for_select({'작업'=>1, '커뮤니티'=>0, '커넥트'=>3}, 0) ,{class:"form-control"} %>
 				<% elsif request.headers["HTTP_REFERER"].include? "connect" %>
-					<%= select_tag 'post_type', options_for_select({'작품'=>1, '커뮤니티'=>0, '커넥트'=>3}, 3) ,{class:"form-control"} %>
+					<%= select_tag 'post_type', options_for_select({'작업'=>1, '커뮤니티'=>0, '커넥트'=>3}, 3) ,{class:"form-control"} %>
 				<% else %> 
-					<%= select_tag 'post_type', options_for_select({'작품'=>1, '커뮤니티'=>0, '커넥트'=>3}, @post.post_type) ,{class:"form-control"} %>
+					<%= select_tag 'post_type', options_for_select({'작업'=>1, '커뮤니티'=>0, '커넥트'=>3}, @post.post_type) ,{class:"form-control"} %>
 				<% end %>
 
 				<div style="margin-bottom: 5px;"></div>

@@ -114,8 +114,22 @@ a:hover{
 </div>
 
 <div style="width:300px;margin-top: 10px" class="gray-and-white">
-	버튼을 클릭함으로써 아키필드의 <a class="policy" data-toggle="modal" data-target="#policyModal" href="#">약관</a>과 <a  class="policy" data-toggle="modal" data-target="#policyModal2" href="#">개인정보정책</a>에 동의합니다
+	버튼을 클릭함으로써 필디의 <span class="policy" data-toggle="modal" data-target="#policyModal" href="#">약관</span>, <span class="policy" data-toggle="modal" data-target="#policyModal2" href="#">개인정보정책</span><span class="gray-and-white"> 및</span> <span  class="policy" data-toggle="modal" data-target="#policyModal3" href="#">콘텐츠가이드라인</span>에<br> 동의합니다
 </div>
+
+
+<div style="margin-top: 10px">
+	<%= link_to raw('<button class="btn btn-block register_btn"  >가입하기</button>'), '#', onclick: "$('#register_btn').click()" %> 
+</div>
+<div style="margin-top: 5px">
+	<%= link_to raw('<button class="btn btn-block facebook_btn" >페이스북 로그인</button>'), '/auth/facebook'%> 
+</div>
+
+<div style="margin-top: 10px">
+	<%= link_to '취소', '/login', class: "gray-and-white" %>
+</div>
+
+
 
 <!-- Modal -->
 <div style="color:black; text-align:left;" class="modal fade" id="policyModal" tabindex="-1" role="dialog" aria-labelledby="policyModalLabel" aria-hidden="true">
@@ -123,10 +137,11 @@ a:hover{
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong><h4 class="modal-title" id="policyModalLabel">아키필드 이용약관</h4></strong>
+        <strong><h4 class="modal-title" id="policyModalLabel">필디 이용약관</h4></strong>
       </div>
       <div class="modal-body">
 				<%= Post.find(1639).content.gsub(/\n/, '<br/>').html_safe%>
+				<%= auto_link(Post.find(1639).content.gsub(/\n/, '<br/>'))%>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
@@ -141,10 +156,11 @@ a:hover{
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong><h4 class="modal-title" id="policyModalLabel2">아키필드 개인정보취급방침</h4></strong>
+        <strong><h4 class="modal-title" id="policyModalLabel2">필디 개인정보취급방침</h4></strong>
       </div>
       <div class="modal-body">
-				<%= Post.find(1640).content.gsub(/\n/, '<br/>').html_safe%>
+				<%#= Post.find(1640).content.gsub(/\n/, '<br/>').html_safe%>
+				<%= auto_link(Post.find(1640).content.gsub(/\n/, '<br/>'))%>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
@@ -154,13 +170,23 @@ a:hover{
 </div>
 
 
-<div style="margin-top: 10px">
-	<%= link_to raw('<button class="btn btn-block register_btn"  >가입하기</button>'), '#', onclick: "$('#register_btn').click()" %> 
-</div>
-<div style="margin-top: 5px">
-	<%= link_to raw('<button class="btn btn-block facebook_btn" >페이스북 로그인</button>'), '/auth/facebook'%> 
+<!-- Modal -->
+<div style="color:black; text-align:left;" class="modal fade" id="policyModal3" tabindex="-1" role="dialog" aria-labelledby="policyModalLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong><h4 class="modal-title" id="policyModalLabel2">필디 콘텐츠가이드라인</h4></strong>
+      </div>
+      <div class="modal-body">
+				<%#= Post.find(1966).content.gsub(/\n/, '<br/>').html_safe%>
+				<%= auto_link(Post.find(1966).content.gsub(/\n/, '<br/>'))%>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div style="margin-top: 10px">
-	<%= link_to '취소', '/login', class: "gray-and-white" %>
-</div>
+
