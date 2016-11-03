@@ -1,5 +1,8 @@
 <% posts.each do |post| %>
-	<div class="connect-item">
+
+	<%= link_to post, id: "conn_link_#{post.id}", onclick: "return true" do%>
+	<% end %>
+	<div class="connect-item" data-id="<%= post.id %>">
 		<%# 링크 타입이면 %>
 		<%# 링크 타입이면 %>
 		<% if post.post_type == 2 %>
@@ -49,3 +52,11 @@
 	</div>
 
 <% end %>
+<script>
+	$(function(){
+		$('.connect-item').click(function(){
+			id = $(this).attr('data-id')
+			document.getElementById('conn_link_' + id).click()
+		})	
+	})
+</script>

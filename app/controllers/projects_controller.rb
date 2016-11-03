@@ -11,12 +11,15 @@ class ProjectsController < ApplicationController
 		# 지금 조회자가 본인이라면
 		@posts = @project.posts
 	end
-
 	
   def create
 		#@type = params[:project][:type]
 		@project = current_user.projects.new(project_params)
-		@project.save
+		if @project.save
+			redirect_to @project
+		else
+			render "projects/new" 
+		end
   end
 
 	def edit
